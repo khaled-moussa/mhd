@@ -1,0 +1,51 @@
+.dropdown-menu {
+    @apply z-10 max-h-96 max-w-80 min-w-44 !-mx-5 overflow-y-visible rounded-lg;
+    @apply bg-light dark:bg-current text-current;
+}
+.dropdown-menu ul {
+    @apply w-full px-3 py-1 space-y-2;
+}
+
+.dropdown-menu ul li {
+    @apply flex w-full;
+}
+
+.dropdown-menu ul li.active > * {
+    @apply text-light;
+    @apply hover:text-light;
+}
+
+.dropdown-menu ul li > button,
+.dropdown-menu ul li > form,
+.dropdown-menu ul li > a {
+    @apply w-full py-3 text-left;
+    @apply hover:text-current/80;
+}
+
+.dropdown-menu ul hr {
+    @apply my-1 border-black opacity-5;
+}
+
+.dropdown-menu ul li > .radio,
+.dropdown-menu ul li > .checkbox {
+    @apply w-full items-center;
+}
+
+.dropdown-menu ul li > .radio label,
+.dropdown-menu ul li > .checkbox label {
+    @apply text-dark/50 hover:text-dark/70 flex-auto py-2;
+}
+.dropdown-menu ul li > .radio input,
+.dropdown-menu ul li > .checkbox input {
+    @apply border-none;
+}
+
+.dropdown-menu ul li > .radio input:checked,
+.dropdown-menu ul li > .checkbox input:checked {
+    @apply border-none !bg-transparent bg-[length:70%] text-transparent;
+    background-image: url('data:image/svg+xml,<svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.33333L4.33333 7.66667L11 1" stroke="%23002B4F" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+}
+.dropdown-menu ul li > .radio input:checked + label,
+.dropdown-menu ul li > .checkbox input:checked + label {
+    @apply text-dark hover:text-dark;
+}

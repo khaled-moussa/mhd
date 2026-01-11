@@ -1,0 +1,19 @@
+/* -------------------------------  
+   Auth Content — Buttons  
+-------------------------------- */
+.auth-content button:not(.resend-btn, .show-password) {
+    @apply min-w-[200px];
+    @apply max-sm:w-full;
+}
+
+.auth-content .otp-inputs {
+    @apply max-sm:mx-auto;
+}
+
+/* -------------------------------  
+   Required Field Indicator  
+-------------------------------- */
+.auth-content .input-field:has(input:required) label::after,
+.auth-content .input-field:has(textarea:required) label::after {
+    content: "";
+}

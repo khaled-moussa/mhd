@@ -1,0 +1,75 @@
+/* Packages imports */
+@import "@css/common/vendors/_vendors.css";
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@import "@css/common/base/_base.css";
+@import "@css/common/components/_components.css";
+
+/* Config */
+@theme {
+    --breakpoint-xs: 480px;
+
+    --font-poppins: "Poppins", sans-serif;
+    --font-inter: "Inter", sans-serif;
+    --font-ibm: "IBM Plex Sans Arabic", sans-serif;
+
+    --color-light: #ffffff;
+    --color-dark: #000000;
+
+    --color-main-light: #841518;
+    --color-main-dark: #202020;
+
+    --color-primary: #631314;
+    --color-foreground: hsl(220 60% 15%);
+}
+
+/* Animation */
+@theme {
+    --animate-wiggle: wiggle 4s ease-in-out infinite;
+    @keyframes wiggle {
+        0%,
+        100% {
+            transform: translateY(5px);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+}
+
+@theme {
+    --animate-float: float 3s ease-out infinite;
+    @keyframes float {
+        0%,
+        100% {
+            opacity: 0.6;
+        }
+        50% {
+            opacity: 0.75;
+        }
+    }
+}
+@theme {
+    --animate-slide-down: float 3s ease-out infinite;
+    @keyframes slide-down {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Custom Variants */
+@custom-variant child {
+    & > * {
+        @slot;
+    }
+}
+
+
+/* @plugin "flowbite/plugin"; */

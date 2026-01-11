@@ -1,0 +1,22 @@
+.input-field select {
+    @apply text-dark w-full rounded-lg  border border-solid border-[#858C94]/20  bg-current/2 p-3 text-sm shadow-none ring-0 transition-all duration-150 ease-in-out outline-none;
+    @apply text-dark dark:text-light;
+    @apply placeholder:text-current/30;
+}
+.input-field:hover select {
+    @apply border-current/20;
+}
+
+.input-field select:active,
+.input-field select:focus-within,
+.input-field select:focus-visible,
+.input-field select:focus {
+    @apply bg-current/7;
+    @apply bg-light dark:bg-dark;
+}
+.input-field select:active + label,
+.input-field select:focus-within + label,
+.input-field select:focus-visible + label,
+.input-field select:focus + label {
+    @apply text-light;
+}

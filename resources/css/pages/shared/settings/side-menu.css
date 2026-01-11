@@ -1,0 +1,40 @@
+/* -------------------------------
+   Side Menu Container
+-------------------------------- */
+.side-menu {
+    @apply py-3 max-h-fit border-transparent bg-current/5 backdrop-blur-3xl rounded-xl;
+    @apply md:sticky top-[75px];
+    @apply lg:py-8 lg:border-current/10;
+}
+
+/* -------------------------------
+   Menu List
+-------------------------------- */
+.side-menu ul {
+    @apply w-full pl-5 gap-5 border-current/7;
+    @apply max-md:px-5 max-md:!flex max-md:!flex-wrap max-md:!justify-between;
+    @apply md:block md:!space-y-5 md:border-none;
+}
+
+/* -------------------------------
+   Menu List Item
+-------------------------------- */
+.side-menu li {
+    @apply flex;
+}
+
+/* -------------------------------
+   Menu Links
+-------------------------------- */
+.side-menu li a {
+    @apply w-full py-3 border-b-2 border-r-2 border-transparent text-current/80;
+    @apply hover:text-current/100;
+}
+
+/* -------------------------------
+   Active Link State
+-------------------------------- */
+.side-menu li a.active {
+    @apply text-current/100 border-current/70;
+    @apply max-md:border-r-transparent md:border-b-transparent;
+}

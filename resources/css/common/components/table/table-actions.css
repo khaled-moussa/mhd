@@ -1,0 +1,36 @@
+/* -------------------------------------------------
+| Table Row Actions
+-------------------------------------------------- */
+
+/* Container */
+.table-action-btn {
+    @apply w-fit p-1.5 px-3;
+}
+
+.table-row-actions {
+    @apply flex items-center justify-start gap-x-2 w-max relative;
+}
+
+.table-row-actions .dropdown-menu {
+    @apply absolute top-[30px] right-0;
+}
+
+/* Toggle button */
+.table-row-actions__toggle {
+    @apply py-1 px-2;
+}
+
+/* Dropdown menu */
+.table-row-actions__menu {
+    @apply min-w-fit;
+}
+
+/* Menu list */
+.table-row-actions__list {
+    @apply flex flex-col gap-2 py-2!;
+}
+
+/* Button */
+.table-row-actions__item .outline-btn {
+    @apply w-full justify-start! bg-transparent border-0 p-1 px-4;
+}

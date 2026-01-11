@@ -1,0 +1,47 @@
+/* -------------------------------------------------
+   Pagination Container
+-------------------------------------------------- */
+.table-pagination {
+    @apply flex items-center justify-center relative p-2.5 gap-3;
+    @apply max-sm:flex-col;
+}
+
+.table-pagination .pagination-elements {
+    @apply flex items-center justify-center gap-2 p-2 rounded-b-xl;
+}
+
+.table-pagination a {
+    @apply w-full h-full flex items-center justify-center;
+}
+
+.table-pagination .pagination-info {
+    @apply text-sm text-current/80;
+    @apply lg:absolute lg:left-10;
+    @apply max-sm:order-2 max-sm:text-xs;
+}
+
+/* -------------------------------------------------
+   Pagination Buttons
+-------------------------------------------------- */
+.table-pagination button {
+    @apply inline-flex w-8 h-5 p-0 rounded-lg;
+}
+
+.table-pagination .total-pages {
+    @apply flex items-center gap-3 flex-wrap;
+}
+
+/* Default button style (not active or disabled) */
+.table-pagination button:not(.active):not(:disabled) {
+    @apply bg-current/10 hover:bg-current/20 text-current;
+}
+
+/* Active button (current page) */
+.table-pagination button.active {
+    @apply bg-current/5 text-white;
+}
+
+/* Disabled buttons */
+.table-pagination button:disabled {
+    @apply bg-current/7 cursor-not-allowed;
+}

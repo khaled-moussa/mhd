@@ -1,0 +1,66 @@
+/* -------------------------------
+   Landing Navbar
+------------------------------- */
+.landing-navbar {
+    @apply sticky top-0 w-full h-fit px-5 flex items-center justify-between;
+    @apply border-b border-b-white/10 backdrop-blur-3xl z-40;
+    @apply transition-all duration-300;
+}
+
+/* -------------------------------
+   Layout
+------------------------------- */
+.landing-navbar-container {
+    @apply w-full  flex-1 flex items-center justify-between;
+}
+
+.branding {
+    @apply max-w-[110px] max-h-[110px];
+}
+
+/* -------------------------------
+   Navbar Menu (Desktop)
+------------------------------- */
+.landing-navbar-menu {
+    @apply hidden items-center gap-10;
+    @apply transition-all duration-500 ease-in-out;
+    @apply lg:flex;
+}
+
+.landing-navbar-link {
+    @apply text-gray-300 text-base font-medium tracking-wide;
+    @apply transition-colors duration-300 hover:text-white;
+}
+
+/* -------------------------------
+   Navbar Collapsed (Mobile)
+------------------------------- */
+.collapsed {
+    @apply w-full flex flex-col items-center gap-4 py-6;
+    @apply border-t border-white/10;
+}
+
+.collapsed li {
+    @apply w-full text-center py-3 rounded-lg;
+    @apply transition-all duration-300 hover:bg-white/10;
+}
+
+/* -------------------------------
+   Navbar Toggle (Mobile)
+------------------------------- */
+.landing-navbar-toggle {
+    @apply flex items-center space-x-4;
+    @apply lg:hidden;
+}
+
+.landing-toggle-button {
+    @apply p-3 px-4 text-white rounded-xl bg-white/10 backdrop-blur-md;
+    @apply hover:bg-white/20 transition-all duration-300;
+}
+
+/* -------------------------------
+   Navbar Expanded (Mobile)
+------------------------------- */
+.landing-navbar.expanded {
+    @apply flex flex-col;
+}

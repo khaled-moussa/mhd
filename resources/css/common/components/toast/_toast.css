@@ -1,0 +1,44 @@
+/* -------------------------------  
+   Toast Popup Base  
+------------------------------- */
+.swal2-popup.swal2-toast {
+    @apply relative !px-5 !py-4 !shadow-xl;
+    @apply border border-current/10 bg-current/5 backdrop-blur-2xl;
+    @apply text-dark dark:text-white;
+}
+
+/* -------------------------------  
+   Close Button  
+------------------------------- */
+.swal2-popup.swal2-toast .swal2-close.close-btn {
+    @apply absolute -top-[2px];
+}
+
+.swal2-popup.swal2-toast .swal2-close.close-btn i {
+    @apply text-base text-gray-300 transition-all duration-200 ease-in-out;
+    @apply hover:text-gray-700;
+}
+
+/* -------------------------------  
+   Title Section  
+------------------------------- */
+.swal2-popup.swal2-toast .swal2-title {
+    @apply !m-0 !flex items-baseline gap-2 break-words;
+    @apply !pr-8 !text-sm font-bold leading-5;
+}
+
+.swal2-popup.swal2-toast .swal2-title .ti {
+    @apply text-base leading-none;
+}
+
+/* -------------------------------  
+   HTML Content  
+------------------------------- */
+.swal2-popup.swal2-toast .swal2-html-container {
+    @apply !m-0 !pl-5 !pr-1 !pt-2 !text-sm font-medium;
+}
+
+.swal2-popup.swal2-toast .swal2-html-container a {
+    @apply font-semibold text-dark;
+    @apply hover:text-black;
+}

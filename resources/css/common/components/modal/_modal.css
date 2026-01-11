@@ -1,0 +1,128 @@
+.modal {
+    @apply hidden;
+}
+
+.modal.is-open {
+    @apply block;
+}
+
+.modal-overlay {
+    @apply fixed inset-0 z-[170] flex items-center justify-center bg-black/60;
+}
+
+.modal-container {
+    @apply box-border flex max-h-[98vh] max-w-lg min-w-[30%] flex-col gap-4 overflow-y-auto rounded p-8;
+    @apply bg-light dark:bg-main-dark;
+    @apply max-sm:min-w-[95%];
+}
+
+.modal-container.sm {
+    @apply max-w-[70vw];
+    @apply lg:max-w-[40vw];
+    @apply xl:max-w-[30vw];
+}
+
+.modal-container.lg {
+    @apply max-w-[80vw];
+    @apply lg:max-w-[40vw];
+    @apply xl:max-w-[30vw];
+}
+
+.modal-container.xl {
+    @apply w-[90vw] max-w-full;
+    @apply md:w-[60vw];
+}
+
+.modal-header {
+    @apply border-dark/5 flex items-center justify-between border-b border-solid pb-2;
+}
+
+.modal-title {
+    @apply my-0 text-base leading-none font-semibold;
+    @apply text-dark dark:text-light;
+}
+
+.modal-description {
+    @apply mb-5 !text-sm !font-light !text-current/70 !break-words !whitespace-pre-line;
+    @apply text-dark dark:text-light;
+}
+
+.modal-close {
+    @apply !p-2 !px-3;
+}
+
+.modal-header .modal-close:before {
+    @apply content-['\2715'];
+}
+.modal-content {
+    @apply bg-light dark:bg-main-dark;
+}
+
+.modal-footer {
+    @apply flex items-center justify-end gap-2;
+}
+
+.modal[aria-hidden="false"] .modal-overlay {
+    animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.modal[aria-hidden="false"] .modal-container {
+    animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.modal[aria-hidden="true"] .modal-overlay {
+    animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.modal[aria-hidden="true"] .modal-container {
+    animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.modal .modal-container,
+.modal .modal-overlay {
+    will-change: transform;
+}
+
+.modal-content > iframe {
+    @apply min-h-[80vh];
+}
+
+.modal .modal-actions {
+    @apply flex items-center justify-end gap-2 mt-7;
+}
+
+@keyframes mmfadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes mmfadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes mmslideIn {
+    from {
+        transform: translateY(15%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes mmslideOut {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-10%);
+    }
+}

@@ -1,0 +1,46 @@
+/* -------------------------------
+   Contact Section
+------------------------------- */
+.contact-section {
+    @apply py-24;
+}
+
+/* -------------------------------
+   Layout
+------------------------------- */
+.contact-container {
+    @apply container mx-auto px-4 relative z-10;
+    @apply !transition-all duration-300;
+}
+
+.contact-container .highlight {
+    @apply animate-pulse;
+}
+
+/* -------------------------------
+   Card
+------------------------------- */
+.contact-card {
+    @apply relative max-w-4xl mx-auto rounded-2xl p-8 text-center;
+    @apply md:p-12;
+    @apply bg-white/5 backdrop-blur-lg border border-current/10;
+}
+
+/* -------------------------------
+   Text
+------------------------------- */
+.contact-title {
+    @apply text-3xl font-bold mb-6;
+    @apply md:text-4xl;
+}
+
+.contact-subtitle {
+    @apply text-gray-300 text-lg mb-8 max-w-2xl mx-auto;
+}
+
+/* -------------------------------
+   Button
+------------------------------- */
+.form-button {
+    @apply w-full p-4 bg-transparent backdrop-blur-2xl text-current z-10;
+}

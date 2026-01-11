@@ -1,0 +1,129 @@
+.date-range-field {
+  @apply xs:flex-none relative flex flex-auto cursor-pointer items-center;
+}
+@media (max-width: 480px) {
+  .date-range-field input {
+    @apply !w-full;
+  }
+}
+.date-range-field input {
+  @apply flex h-full items-center justify-between gap-2 rounded-lg border-none bg-transparent px-0 py-2.5 pl-4 text-sm text-white;
+  @apply xs:w-auto xs:min-w-32;
+  @apply hover:cursor-pointer focus-visible:cursor-pointer;
+}
+
+.date-range-field input:hover,
+.date-range-field input:focus,
+.date-range-field input:focus-visible,
+.date-range-field input:focus-within {
+  @apply text-white;
+}
+.date-range-field i {
+  @apply pointer-events-none absolute text-white/80 transition-all duration-150 ease-in-out;
+}
+.date-range-field i:first-of-type {
+  @apply left-2.5 text-sm leading-none;
+}
+
+.date-range-field i:last-of-type {
+  @apply right-2.5;
+}
+
+.date-range-field:hover i,
+.date-range-field:focus i,
+.date-range-field:focus-within i,
+.date-range-field:focus-visible i {
+  @apply text-white;
+}
+/* -------------------------------------------------------- */
+.daterangepicker {
+  @apply max-h-96 !w-72 overflow-y-auto rounded-lg border-none bg-white p-4 shadow-[0_4px_22px_#0000000d];
+  @apply sm:max-h-none md:!w-auto;
+}
+
+.daterangepicker,
+.daterangepicker.show-calendar .ranges {
+  @apply mt-0;
+}
+
+.daterangepicker.opensright:before,
+.daterangepicker.opensright:after {
+  @apply !content-none;
+}
+
+.daterangepicker .ranges {
+  @apply mb-2 md:mb-4;
+}
+.daterangepicker .ranges ul {
+  @apply grid grid-cols-2 gap-1.5 md:!w-36;
+  @apply sm:flex sm:flex-col;
+}
+.daterangepicker .ranges ul li:last-child {
+  @apply col-span-full;
+}
+.daterangepicker .ranges li {
+  @apply font-poppins text-dark rounded-lg bg-[#f5f5f5]/40 font-medium transition-all duration-150 ease-in-out;
+  @apply hover:bg-[#f5f5f5]/90;
+}
+.daterangepicker .ranges li.active {
+  @apply bg-light/5 text-light;
+}
+
+.daterangepicker td.active,
+.daterangepicker td.active.start-date.available.in-range,
+.daterangepicker td.active.end-date.available.in-range,
+.daterangepicker td.active:hover {
+  @apply bg-light;
+}
+
+.daterangepicker td.in-range {
+  @apply bg-light/5;
+}
+
+.daterangepicker.show-ranges.ltr .drp-calendar.left {
+  @apply border-none;
+}
+.daterangepicker.show-calendar .drp-buttons {
+  @apply flex items-center;
+}
+.daterangepicker .drp-selected {
+  @apply font-poppins text-dark/40 mr-auto font-medium;
+}
+.daterangepicker .drp-buttons {
+  @apply border-[#DCE0E5]/50 p-0 pt-2.5;
+}
+.daterangepicker .drp-buttons .btn {
+  @apply font-poppins rounded-md py-2 font-medium;
+}
+.daterangepicker .drp-buttons .btn.cancelBtn {
+  @apply text-dark/70 hover:text-dark bg-[#f5f5f5]/50 px-3;
+}
+.daterangepicker .drp-buttons .btn.applyBtn {
+  @apply bg-light hover:bg-light px-4 text-white;
+}
+
+.daterangepicker th.month {
+  @apply font-poppins font-medium;
+}
+
+.daterangepicker select.monthselect {
+  @apply w-2/5;
+}
+
+.daterangepicker td.active.off,
+.daterangepicker td.active.off.in-range,
+.daterangepicker td.active.off.start-date,
+.daterangepicker td.active.off.end-date {
+  @apply text-white;
+}
+
+.daterangepicker select.monthselect,
+.daterangepicker select.yearselect {
+  @apply border-none shadow-none ring-0 outline-0 focus:!border-none focus:shadow-none focus:ring-0 focus:outline-0;
+}
+
+.main-btn.date-range-field,
+.outline-btn.date-range-field,
+.danger-btn.date-range-field {
+  @apply py-0;
+}

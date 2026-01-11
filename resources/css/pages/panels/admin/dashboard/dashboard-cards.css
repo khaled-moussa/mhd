@@ -1,0 +1,96 @@
+/* -------------------------------  
+   Dashboard Cards Grid Layout  
+-------------------------------- */
+.dashboard-cards {
+    @apply grid gap-5;
+    @apply 2xl:grid-cols-4;
+    @apply max-sm:grid-cols-2 sm:grid-cols-2 xl:grid-cols-4;
+}
+
+/* -------------------------------  
+   Individual Dashboard Card  
+-------------------------------- */
+.dashboard-card {
+    @apply relative flex flex-col gap-10 w-full h-48;
+    @apply p-4 rounded-4xl border border-current/5 bg-main-dark;
+}
+
+/* -------------------------------  
+   Card Icon  
+-------------------------------- */
+.dashboard-card-icon {
+    @apply grid place-items-center w-18 h-18 text-3xl;
+    @apply rounded-full bg-current/10;
+}
+
+/* -------------------------------  
+   Card Content  
+-------------------------------- */
+.dashboard-card-content {
+    @apply absolute bottom-5 flex items-center;
+    @apply text-[14px] font-medium text-current/75;
+}
+
+.dashboard-card-content h4 {
+    @apply text-[14px] font-medium text-current/60;
+}
+
+/* -------------------------------  
+   Card Main Value  
+-------------------------------- */
+.dashboard-card-value {
+    @apply mt-2 text-xl font-bold text-current;
+    @apply xl:text-2xl;
+}
+
+/* -------------------------------  
+   Card Trend Indicator  
+-------------------------------- */
+.dashboard-card-trend {
+    @apply text-[12px] px-2 py-1 rounded-full text-current;
+}
+
+/* -------------------------------  
+   Overview Section  
+-------------------------------- */
+.overview {
+    @apply w-full h-fit my-5 lg:my-0 p-5 sticky top-[70px];
+    @apply rounded-xl bg-current/5 backdrop-blur-2xl;
+}
+
+.overview-title {
+    @apply text-[16px] font-semibold mb-3;
+}
+
+.overview .chart-card {
+    @apply !bg-transparent border-b border-current/10 rounded-none !shadow-none;
+}
+
+.overview .chart-wrapper {
+    @apply relative max-w-[250px] h-[320px] !mx-auto;
+    @apply md:max-w-[300px] lg:max-w-full;
+}
+
+/* -------------------------------  
+   Overview Cards  
+-------------------------------- */
+.overview-cards {
+    @apply flex flex-col gap-10 my-8;
+}
+
+.overview-card {
+    @apply flex items-center gap-3 w-full h-fit rounded-2xl;
+}
+
+.overview-card-icon {
+    @apply grid place-items-center w-11 h-11 text-xl;
+    @apply rounded-xl bg-current/10;
+}
+
+.overview-card-title {
+    @apply text-base font-bold;
+}
+
+.overview-card-description {
+    @apply text-xs font-light;
+}

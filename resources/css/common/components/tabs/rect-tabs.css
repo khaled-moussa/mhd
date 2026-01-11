@@ -1,0 +1,14 @@
+.rect-tabs {
+  @apply flex w-fit flex-row gap-1.5 rounded-lg border border-solid border-white/40 bg-[#fafafa80] p-2 backdrop-blur-md;
+}
+
+.rect-tabs button {
+  @apply rounded-md bg-transparent px-5 py-2.5 font-medium text-dark/40 transition-all duration-200 ease-in-out;
+  @apply hover:bg-white/80 hover:text-dark/80;
+}
+
+.rect-tabs li button[aria-selected="true"] {
+  @apply bg-white/90 text-dark;
+  @apply hover:bg-white;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.04);
+}

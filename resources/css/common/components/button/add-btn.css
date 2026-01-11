@@ -1,0 +1,24 @@
+.add-btn {
+    @apply flex w-full flex-col items-center justify-center gap-4 rounded-lg border border-dashed border-[#dcdcdc] p-8 transition-all duration-200 ease-in-out;
+    @apply hover:border-black/20;
+}
+
+.add-btn .icon {
+    @apply bg-light/5 text-light flex h-10 w-10 items-center justify-center rounded-full transition-all duration-150 ease-in-out;
+}
+
+.add-btn .icon i {
+    @apply text-xl transition-all duration-150 ease-in-out;
+}
+
+.add-btn span {
+    @apply font-inter text-sm font-medium text-[#4A5565] transition-all duration-150 ease-in-out;
+}
+
+.add-btn:hover .icon {
+    @apply bg-light/10;
+}
+
+.add-btn:hover span {
+    @apply text-black;
+}

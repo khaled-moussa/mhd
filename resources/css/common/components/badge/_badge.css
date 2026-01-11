@@ -1,0 +1,24 @@
+[class*="badge"]:not([class*="badges"]),
+[class*="badge"].success:not([class*="badges"]),
+[class*="badge"].info:not([class*="badges"]),
+[class*="badge"].warning:not([class*="badges"]),
+[class*="badge"].danger:not([class*="badges"]) {
+  @apply font-inter flex h-fit w-fit items-center justify-center gap-1.5 rounded-lg px-2.5 py-2 text-center text-xs leading-none font-medium select-none first-letter:capitalize;
+}
+
+[class*="badge"]:not([class*="badges"]) {
+  @apply bg-[#959595]/5 text-current/70;
+}
+[class*="badge"].success:not([class*="badges"]) {
+  @apply bg-[#e5ffd538] text-current;
+}
+[class*="badge"].danger:not([class*="badges"]) {
+  @apply bg-[#964d4d] text-current;
+}
+[class*="badge"].warning:not([class*="badges"]) {
+  @apply bg-[#da6d14] text-current;
+}
+
+.dot-badge::before {
+  @apply block text-[0.6rem] content-['\25CF'];
+}

@@ -1,0 +1,52 @@
+body.swal2-shown > [aria-hidden="true"] {
+  filter: blur(4px);
+}
+
+div:where(.swal2-container) .swal2-html-container {
+  @apply !m-0 !mt-2;
+}
+
+.swal2-popup.swal2-modal {
+  @apply w-full items-center rounded-2xl p-8 py-6;
+}
+
+.swal2-popup.swal2-modal .swal2-title {
+  @apply mx-auto mt-0 mb-2 w-fit p-0 text-center text-xl leading-5 font-semibold break-all text-black select-none;
+}
+
+.swal2-popup.swal2-modal .input-field {
+  @apply mt-4 w-auto;
+}
+
+.swal2-validation-msg {
+  @apply items-start gap-x-2 rounded-md bg-[#fff6f6] font-normal;
+}
+.swal2-container .swal2-validation-message::before {
+  @apply m-0 min-w-min shrink-0 text-xs;
+}
+.swal2-popup.swal2-modal .swal2-html-container {
+  @apply p-0 text-left text-base;
+}
+
+.swal2-popup.swal2-modal .swal2-title {
+  @apply mx-0 text-left first-letter:capitalize;
+}
+
+.swal2-popup.swal2-modal .swal2-actions {
+  @apply w-full;
+}
+.swal2-popup.swal2-modal .swal2-confirm:focus-visible {
+  @apply outline-none;
+}
+.swal2-close.icon-btn {
+  @apply !hidden h-4 w-4 p-4 text-lg md:!flex;
+}
+
+.swal2-actions.action-buttons {
+  @apply justify-end gap-2;
+}
+
+.swal2-input.swal-input {
+  @apply !text-dark !mx-0 !w-full !gap-1 !rounded-lg !border !border-solid !border-[#ECECEC] !bg-white !p-3 !text-sm !shadow-none !ring-0 transition-all duration-150 ease-in-out !outline-none;
+  @apply placeholder:!text-dark/30;
+}

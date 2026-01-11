@@ -1,0 +1,25 @@
+.progress-info {
+  @apply text-dark/50 mb-2 flex justify-between gap-4 text-xs;
+}
+.progress-base {
+  @apply h-1 w-full rounded-full bg-[#EFEFEF];
+}
+.progress-base > div {
+  @apply h-1 rounded-full bg-[#EFEFEF];
+}
+
+.progress-base.success > div {
+  @apply bg-[#4EAA51];
+}
+.progress-base.semi-success > div {
+  @apply bg-[#C0E06D];
+}
+.progress-base.warning > div {
+  @apply bg-[#F5C131];
+}
+.progress-base.semi-danger > div {
+  @apply bg-[#F08A8A];
+}
+.progress-base.danger > div {
+  @apply bg-[#E52A2A];
+}

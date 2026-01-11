@@ -1,0 +1,19 @@
+/* -------------------------------  
+   Verify Section  
+-------------------------------- */
+.verify-section {
+    @apply flex flex-col gap-5;
+}
+
+.verify-section iframe {
+    @apply w-[200px] h-[200px] mx-auto;
+    @apply lg:w-[300px] lg:h-[300px];
+}
+
+.verify-section .description {
+    @apply text-center mx-auto my-0;
+}
+
+.verify-section .form-actions {
+    @apply space-y-2!;
+}

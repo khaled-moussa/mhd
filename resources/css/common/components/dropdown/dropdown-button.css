@@ -1,0 +1,28 @@
+.dropdown-btn {
+    @apply flex w-fit items-center justify-between gap-2 rounded-lg border border-solid border-[#a5a5a5]/15 px-3 py-2 text-sm font-medium;
+    @apply bg-current/5 text-current;
+    @apply hover:text-current/80;
+}
+
+.dropdown-btn > div {
+    @apply flex items-center gap-3;
+}
+
+.dropdown-btn > div i {
+    @apply text-light/70;
+}
+
+.dropdown-btn > div i.ti {
+    @apply text-lg leading-none;
+}
+.dropdown-btn > div i.fi {
+    @apply text-sm leading-none;
+}
+
+.dropdown-btn > i {
+    @apply text-[#534D59]/80 transition-all duration-150 ease-in-out;
+}
+
+.dropdown-btn:hover > i {
+    @apply text-dark;
+}

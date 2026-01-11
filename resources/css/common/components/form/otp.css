@@ -1,0 +1,23 @@
+.otp {
+    @apply space-y-5!;
+}
+
+.otp-wrapper {
+    @apply text-sm;
+}
+
+.otp-inputs {
+    @apply flex justify-center gap-3 w-fit;
+}
+
+.otp-input-slot {
+    @apply max-w-[75px];
+}
+
+.otp-merge {
+    @apply hidden;
+}
+
+.resend-otp {
+    @apply ml-auto flex items-center gap-5;
+}

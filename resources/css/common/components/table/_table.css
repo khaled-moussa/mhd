@@ -1,0 +1,123 @@
+/* -------------------------------------------------
+    Imports
+-------------------------------------------------- */
+@import "./pagination.css";
+@import "./table-actions.css";
+
+/* -------------------------------------------------
+    Table Container
+-------------------------------------------------- */
+.table-container {
+    @apply w-full h-full flex flex-col rounded-xl overflow-hidden bg-current/4;
+}
+
+.table-container .table-header {
+    @apply w-full flex items-center p-5 rounded-t-xl justify-between text-lg font-semibold;
+}
+
+.table-container:not(:has(.table-header)) {
+    @apply rounded-t-xl;
+}
+
+.table-container:not(:has(.table-pagination)) {
+    @apply rounded-b-xl;
+}
+
+.table-container .table-scroll::-webkit-scrollbar {
+    @apply bg-main-dark;
+}
+
+/* -------------------------------------------------
+    Scrollable Body
+-------------------------------------------------- */
+.table-scroll {
+    @apply flex-1 relative overflow-y-auto;
+}
+
+/* -------------------------------------------------
+    Table Base
+-------------------------------------------------- */
+.table {
+    @apply w-full border-collapse h-fit;
+    @apply lg:absolute;
+}
+
+/* -------------------------------------------------
+    Table Header
+-------------------------------------------------- */
+.table thead {
+    @apply hidden sticky top-0 bg-current/1 backdrop-blur-3xl z-1;
+    @apply 2xl:table-header-group;
+}
+
+.table th {
+    @apply px-4 py-3 text-left text-sm font-medium uppercase flex items-center justify-between cursor-pointer;
+    @apply 2xl:table-cell;
+}
+
+/* Arrow icon in header (inline SVG) */
+.table th svg {
+    @apply w-3 h-3 ml-1 text-gray-400 transition-transform duration-200;
+}
+
+.table th.sort-asc svg {
+    @apply rotate-180;
+}
+
+.table th.sort-asc::after {
+    @apply rotate-180;
+}
+
+/* Optional pseudo-element arrow (can remove if using inline SVG) */
+.table th.table-sortable::after {
+    content: "";
+    @apply inline-block w-3 h-3 ml-4 transition-transform duration-200;
+    @apply bg-contain bg-no-repeat bg-center;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>');
+}
+
+/* -------------------------------------------------
+    Table Body
+-------------------------------------------------- */
+.table tbody {
+    @apply divide-y divide-current/5;
+}
+
+/* -------------------------------------------------
+    Table Cells
+-------------------------------------------------- */
+.table tbody tr {
+    @apply block mb-4 p-4 shadow hover:bg-current/7 transition-colors border-b border-current/5;
+    @apply 2xl:table-row 2xl:mb-0 2xl:p-0 2xl:shadow-none;
+    @apply hover:bg-current/7 transition-colors;
+}
+
+.table td {
+    @apply block px-0 py-3 text-left relative pl-[40%];
+    @apply 2xl:table-cell 2xl:px-6 2xl:pl-6;
+}
+
+/* Labels for stacked layout */
+.table tbody td::before {
+    content: attr(data-label);
+    @apply absolute left-0 top-0 p-2.5 font-semibold text-gray-500 w-[45%] whitespace-nowrap;
+    @apply 2xl:hidden;
+}
+
+.table tbody td .column-link {
+    @apply hover:underline;
+}
+/* -------------------------------------------------
+    Empty Table
+-------------------------------------------------- */
+.empty-table {
+    @apply text-current/85 text-center! text-base!;
+}
+
+.table-container:has(.empty-table) {
+    @apply h-[300px]!;
+}
+
+.table-container:has(.empty-table) .table td {
+    @apply px-0!;
+}

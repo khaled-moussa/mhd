@@ -1,0 +1,76 @@
+/* -------------------------------
+   Footer Section
+------------------------------- */
+.footer {
+    @apply pt-16 pb-8 bg-primary;
+}
+
+/* -------------------------------
+   Layout
+------------------------------- */
+.footer-container {
+    @apply container mx-auto px-4;
+    @apply transition-all duration-300;
+}
+
+.footer-grid {
+    @apply grid grid-cols-1 gap-8 pb-8;
+    @apply md:grid-cols-2 lg:grid-cols-5;
+}
+
+/* -------------------------------
+   Brand
+------------------------------- */
+.footer-brand {
+    @apply lg:col-span-2;
+}
+
+.footer-logo {
+    @apply text-2xl font-bold text-white mb-4;
+}
+
+.footer-text {
+    @apply text-gray-400 mb-6 max-w-xs;
+}
+
+/* -------------------------------
+   Social Links
+------------------------------- */
+.footer-socials {
+    @apply flex space-x-4;
+}
+
+.social-link {
+    @apply text-gray-400 text-sm transition-colors hover:text-current/80;
+}
+
+/* -------------------------------
+   Columns
+------------------------------- */
+.footer-col {
+    @apply space-y-2;
+}
+
+.footer-title {
+    @apply text-white font-medium mb-4;
+}
+
+.footer-list {
+    @apply space-y-2;
+}
+
+.footer-link {
+    @apply text-gray-400 text-sm transition-colors hover:text-current/80;
+}
+
+/* -------------------------------
+   Bottom Bar
+------------------------------- */
+.footer-bottom {
+    @apply border-t border-white/10 pt-8 text-xs text-light/50;
+    @apply flex flex-col md:flex-row justify-between items-center;
+}
+
+.footer-bottom a {
+    @apply me-2 hover:text-light/80;
+}

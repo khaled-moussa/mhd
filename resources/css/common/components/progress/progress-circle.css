@@ -1,0 +1,13 @@
+.progress-circle {
+  --value: 0; /* default fallback */
+  @apply text-dark relative flex h-[120px] w-[120px] items-center justify-center rounded-full;
+  background: conic-gradient(#f5a623 calc(var(--value) * 1%), #F3F3F3 0);
+}
+
+.progress-circle::before {
+  @apply absolute h-[100px] w-[100px] rounded-full bg-white content-[''];
+}
+
+.progress-text {
+  @apply text-xl relative font-medium font-poppins;
+}

@@ -1,0 +1,15 @@
+.label-info {
+    @apply flex flex-col justify-center ;
+}
+
+.label-info label {
+    @apply text-current/80 font-semibold;
+}
+
+.label-info:has(.label-content) {
+    @apply lg:flex-row lg:items-center lg:justify-between;
+}
+
+.label-content{
+    @apply place-self-end;
+}

@@ -1,0 +1,10 @@
+@import "@css/common/vendors/_vendors.css";
+@import "tailwindcss";
+
+/*!* Common styles *!*/
+@import "@css/common/base/_base.css";
+@import "@css/common/components/_components.css";
+
+@reference "@css/reference.css";
+
+@source "../views";

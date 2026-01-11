@@ -1,0 +1,63 @@
+@import "./add-btn.css";
+@import "./main-button.css";
+@import "./outline-button.css";
+@import "./floating-button.css";
+@import "./link-button.css";
+
+a,
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+    @apply child:first-letter:capitalize cursor-pointer transition-all duration-200 ;
+}
+
+a i + span,
+button i + span,
+input[type="submit"] i + span,
+input[type="button"] i + span,
+input[type="reset"] i + span {
+    @apply pr-1;
+}
+
+button[disabled],
+input[type="button"][disabled],
+input[type="submit"][disabled],
+input[type="reset"][disabled] {
+    @apply !pointer-events-none cursor-default bg-current/15 text-current/40;
+}
+
+/* Loading state */
+.auth-button.spinner,
+a.main-btn.spinner,
+a.main-btn.spinner,
+button.icon-btn.spinner,
+button.main-btn.spinner {
+    @apply child:invisible !text-transparent;
+    @apply before:backdrop-blur-none;
+    @apply focus-within:!text-transparent focus:!text-transparent focus-visible:!text-transparent bg-current/5;
+}
+
+.auth-button.spinner::after,
+a.main-btn.spinner::after,
+button.main-btn.spinner::after,
+button.icon-btn.spinner::after {
+    @apply top-auto h-5 w-5;
+    filter: saturate(0) brightness(200);
+}
+
+.auth-button.spinner:disabled:after,
+a.main-btn.spinner:disabled:after,
+button.main-btn.spinner:disabled:after,
+.auth-button.spinner:disabled:after,
+a.main-btn.spinner:disabled:after,
+button.main-btn.spinner:disabled:after, 
+button.icon-btn.spinner::after:disabled:after {
+    @apply top-auto h-5 w-5;
+    filter: saturate(0);
+}
+
+/* Resend OTP button */
+.resend-btn {
+    @apply ml-auto text-xs!;
+}

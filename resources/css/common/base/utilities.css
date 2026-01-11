@@ -1,0 +1,47 @@
+/* ================================
+   Body
+================================ */
+body {
+    @apply min-w-[320px] min-h-fit m-0 box-border scroll-smooth font-poppins;
+    @apply bg-dark dark:bg-dark text-dark dark:text-light;
+}
+
+body.modal-open {
+    @apply overflow-hidden;
+}
+
+body.theme-transition {
+    @apply transition-colors duration-500 ease-in-out;
+}
+
+/* ================================
+   Spotlight Background
+================================ */
+.spotlight {
+    @apply absolute inset-0;
+    @apply bg-[radial-gradient(circle_at_center_left,rgba(0,0,0,0.075)_0%,rgba(255,255,255,0)_50%)]
+         dark:bg-[radial-gradient(circle_at_center_left,rgba(197,197,197,0.075)_0%,rgba(255,255,255,0)_50%)];
+}
+
+/* ================================
+   Branding
+================================ */
+.logo {
+    @apply flex items-center place-items-center gap-2 w-[100px] h-[40px] transition-[width_height] duration-500 drop-shadow-2xl;
+}
+
+/* ================================
+   Info
+================================ */
+.description {
+    @apply font-inter my-2.5 text-sm font-medium;
+    @apply text-current/60;
+}
+
+.empty {
+    @apply text-red-500 text-center!;
+}
+
+.row {
+    @apply flex items-center justify-between gap-3;
+}

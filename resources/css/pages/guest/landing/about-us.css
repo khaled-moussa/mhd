@@ -1,0 +1,25 @@
+/* -------------------------------
+   About Section
+------------------------------- */
+.about-section {
+    @apply py-24;
+}
+
+/* -------------------------------
+   Layout
+------------------------------- */
+.about-container {
+    @apply container mx-auto flex flex-col items-center gap-16;
+    @apply lg:flex-row;
+}
+
+/* -------------------------------
+   Content
+------------------------------- */
+.about-content {
+    @apply w-full flex flex-col gap-6;
+}
+
+.about-description {
+    @apply text-lg leading-relaxed text-current/60;
+}

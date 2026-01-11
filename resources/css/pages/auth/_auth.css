@@ -1,0 +1,81 @@
+@reference "@css/reference.css";
+@import "./utilities.css";
+@import "./verification.css";
+
+/* -------------------------------  
+   Auth Wrapper 
+-------------------------------- */
+.auth-wrapper {
+    @apply grid w-full h-full gap-4 overflow-y-hidden p-0 bg-current/5;
+}
+
+.auth-wrapper:has(.auth-bg) {
+    @apply md:grid-cols-[2fr_1.25fr];
+}
+
+.auth-wrapper:has(:not(.auth-bg)) .auth-content {
+    @apply lg:w-1/2 mx-auto;
+}
+
+.auth-wrapper:has(.auth-bg) .auth-content {
+    @apply w-full;
+}
+
+/* -------------------------------  
+   Auth Image 
+-------------------------------- */
+.auth-bg {
+    @apply relative hidden h-screen items-end justify-center;
+    @apply md:flex;
+}
+
+.auth-bg img {
+    @apply h-full w-full object-cover object-top;
+}
+
+/* -------------------------------  
+   Auth Content 
+-------------------------------- */
+.auth-content {
+    @apply h-screen place-content-center overflow-y-auto rounded-3xl p-4;
+    @apply sm:p-8;
+    @apply lg:px-24 lg:py-12 lg:justify-center;
+}
+
+.auth-content .header {
+    @apply mt-8 mb-3 -ml-1 flex flex-col items-center text-3xl font-semibold space-y-3!;
+    @apply md:items-start md:text-left md:text-4xl;
+}
+
+.auth-content .logo {
+    @apply mb-8 w-7 h-7;
+}
+
+/* -------------------------------  
+   Auth Forms 
+-------------------------------- */
+.auth-content .auth-form {
+    @apply mt-10 w-full gap-8;
+}
+
+.auth-content .row-input {
+    @apply w-full flex items-center flex-col gap-5;
+    @apply md:flex-row;
+}
+
+.auth-content .input-field {
+    @apply w-full;
+}
+
+.auth-content .row-end {
+    @apply items-end!;
+}
+
+.auth-content .form-actions {
+    @apply flex flex-col items-center gap-6;
+    @apply child:w-fit;
+}
+
+.auth-content .forget-password {
+    @apply flex-1 text-nowrap text-end underline;
+}

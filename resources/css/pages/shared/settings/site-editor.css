@@ -1,0 +1,48 @@
+/* -------------------------------  
+   Security Container  
+-------------------------------- */
+.site-editor {
+    @apply w-full;
+}
+
+/* -------------------------------  
+   Security Content  
+-------------------------------- */
+.site-editor-content {
+    @apply w-full h-full flex flex-col items-start gap-3;
+    @apply xl:flex-row;
+}
+
+.site-editor-section-header {
+    @apply text-lg my-5;
+}
+
+.section-block {
+    @apply !space-y-5 p-2.5 rounded-xl;
+}
+
+.site-editor-inputs {
+    @apply flex-1 !space-y-10 order-2 overflow-scroll;
+    @apply xl:order-1 xl:overflow-visible xl:px-0;
+}
+
+.site-editor-preview {
+    @apply w-full h-[350px] order-1 mb-10;
+    @apply xl:order-2 xl:w-1/2 xl:h-[500px] xl:sticky lg:top-[75px] border border-current/10 rounded-xl;
+}
+
+.site-editor-preview iframe {
+    @apply w-full h-full;
+}
+
+.site-editor-actions {
+    @apply flex items-center justify-end gap-3 my-5;
+}
+
+.extra-data{
+    @apply !space-y-3;
+}
+
+.dragging {
+    @apply border border-current/10;
+}

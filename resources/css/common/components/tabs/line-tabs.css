@@ -1,0 +1,23 @@
+.line-tabs {
+  @apply mb-4 flex w-full flex-wrap justify-between gap-6 border-b-2 border-solid border-[#aaaaaa1a];
+  @apply xs:px-4 xs:justify-start xs:gap-10;
+}
+
+.line-tabs li button {
+  @apply text-dark/60 flex translate-y-px rounded-t-lg border-b-2 border-transparent py-3 pt-0 text-center text-sm font-normal first-letter:capitalize;
+}
+
+.line-tabs li button:hover {
+  @apply text-dark/80 border-transparent;
+}
+
+.line-tabs li button[aria-selected="true"] {
+  @apply border-light text-dark font-medium;
+}
+.line-tabs li button[aria-selected="true"]:hover {
+  @apply border-light text-dark;
+}
+
+.line-tabs-content .value:last-of-type {
+  @apply m-0;
+}

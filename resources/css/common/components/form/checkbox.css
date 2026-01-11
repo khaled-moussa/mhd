@@ -1,0 +1,39 @@
+/* ---------------------------------------- */
+/* Checkbox */
+/* ---------------------------------------- */
+/* .checkbox {
+    @apply flex items-start;
+}
+
+.checkbox input {
+    @apply mt-[0.125rem] cursor-pointer;
+}
+
+.checkbox:hover input {
+    @apply border-light/30;
+}
+
+.checkbox input[type="checkbox"]:checked,
+.checkbox input[type="checkbox"]:checked:focus,
+[type="checkbox"]:checked,
+[type="checkbox"] input:checked:focus {
+    color: #202020 !important;
+}
+
+.checkbox input[type="checkbox"]:checked:hover,
+[type="checkbox"]:checked:hover {
+    color: #202020 !important;
+} */
+
+
+.checkbox {
+    @apply flex flex-row items-center gap-2.5 text-current cursor-pointer!;
+}
+
+.checkbox-icon {
+    @apply h-5 w-5 flex rounded-md border border-[#a2a1a833]  peer-checked:bg-[#f39d52] transition;
+}
+
+.checkbox-svg {
+    @apply w-5 h-5 stroke-[#e8e8e8] dark:stroke-[#212121];
+}

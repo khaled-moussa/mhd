@@ -1,0 +1,72 @@
+/**
+  Global Styles
+  - Shared utilities and resets applied across the project
+*/
+
+/* ================================
+   Reset & Base
+================================ */
+* {
+    @apply m-0 p-0 box-border scroll-smooth;
+    -webkit-tap-highlight-color: transparent;
+
+    /* Firefox Scrollbar */
+    scrollbar-width: 0.3rem;
+    scrollbar-color: theme("colors.gray.200");
+}
+
+/* Chrome, Edge, Safari Scrollbar */
+*::-webkit-scrollbar {
+    @apply h-[0.3rem] w-[0.4rem] rounded-lg scroll-smooth;
+}
+
+*::-webkit-scrollbar-track {
+    @apply bg-transparent rounded-lg;
+}
+
+*::-webkit-scrollbar-thumb {
+    @apply bg-gray-200 rounded-lg transition-all duration-150 ease-in-out;
+}
+
+/* RTL */
+*[dir="rtl"] {
+    @apply text-[0.95rem] font-normal;
+}
+
+/* ================================
+   Elements
+================================ */
+img {
+    @apply select-none pointer-events-none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+    @apply my-0;
+}
+
+p {
+    @apply leading-normal;
+}
+
+a:hover {
+    @apply no-underline;
+}
+
+i {
+    @apply flex h-fit;
+}
+
+strong {
+    @apply font-semibold;
+}
+
+hr {
+    @apply text-dark/12 dark:text-light/12;
+}

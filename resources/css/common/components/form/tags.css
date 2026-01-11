@@ -1,0 +1,51 @@
+@import "@yaireo/tagify/dist/tagify.css";
+
+/* -------------------------------
+   Tagify Variables
+-------------------------------- */
+.customLook {
+    --tag-bg: #2525258f !important;
+    --tag-hover: #303030 !important;
+    --tags-border-color: transparent;
+    --tag-text-color: #ffffff;
+}
+
+/* -------------------------------
+   Tagify Wrapper
+-------------------------------- */
+.tags-look {
+    @apply m-1 rounded-lg border-0 backdrop-blur-3xl;
+}
+
+.tags-look > * {
+    @apply rounded-lg border-0 p-2 bg-light/5;
+}
+
+/* -------------------------------
+   Dropdown Items
+-------------------------------- */
+.tags-look .tagify__dropdown__item {
+    @apply inline-block align-middle m-[0.2em] rounded-[3px] px-3 py-2 text-[0.85em] transition-none text-dark dark:text-light bg-dark/5 dark:bg-light/5;
+}
+
+.tags-look .tagify__dropdown__item--hidden {
+    @apply max-w-0 max-h-none py-[0.3em] my-[0.2em] whitespace-nowrap border-0 [text-indent:-20px];
+}
+
+/* -------------------------------
+   Tags & Input
+-------------------------------- */
+.tagify__input,
+.tagify__tag {
+    @apply mx-1;
+}
+
+.tagify--empty .tagify__input::before,
+.tagify__input::before {
+    @apply text-dark/30;
+}
+
+.tagify span,
+.tagify__input {
+    height: -webkit-fill-available;
+}

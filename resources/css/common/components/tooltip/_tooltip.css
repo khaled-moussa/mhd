@@ -1,0 +1,25 @@
+.tooltip {
+  @apply static mb-2 flex flex-col flex-wrap items-center sm:relative sm:flex-row;
+}
+.tooltip-btn {
+  @apply flex w-fit items-center gap-1 p-1 text-center text-sm font-medium;
+}
+
+.tooltip-btn i {
+  @apply mt-1 leading-none;
+}
+.tooltip-btn:hover {
+  @apply text-light;
+}
+
+.tooltip-body {
+  @apply pointer-events-none invisible absolute top-full left-0 z-10 inline-block w-max max-w-56 rounded-lg border border-solid border-gray-100 bg-white px-4 py-3 text-sm font-normal opacity-0 shadow-sm transition-opacity duration-300 sm:top-auto sm:left-auto sm:ml-6 sm:max-w-[21rem];
+}
+
+.tooltip-btn:hover + .tooltip-body {
+  @apply visible opacity-100;
+}
+
+.tooltip-body ul {
+  @apply flex flex-col gap-2;
+}

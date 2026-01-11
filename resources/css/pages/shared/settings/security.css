@@ -1,0 +1,17 @@
+/* -------------------------------  
+   Security Container  
+-------------------------------- */
+.security {
+    @apply w-full;
+}
+
+/* -------------------------------  
+   Security Content  
+-------------------------------- */
+.security-content {
+    @apply w-full !space-y-10;
+}
+
+.security-content .label-content {
+    @apply !flex items-center gap-3;
+}

@@ -1,0 +1,138 @@
+/* -------------------------------
+   Hero Section
+------------------------------- */
+.hero-section {
+    @apply p-5 relative flex flex-col justify-center overflow-hidden;
+}
+
+/* -------------------------------
+   Background
+------------------------------- */
+.hero-bg {
+    @apply absolute inset-0 overflow-hidden;
+}
+
+.hero-spotlight-top {
+    @apply absolute top-1/4 left-10 w-72 h-72 bg-main-light rounded-full;
+    @apply filter blur-3xl animate-float;
+}
+
+.hero-spotlight-bottom {
+    @apply absolute bottom-1/4 right-10 w-96 h-96 bg-main-light rounded-full;
+    @apply filter blur-3xl animate-float;
+}
+
+/* -------------------------------
+   Layout
+------------------------------- */
+.hero-container {
+    @apply container mx-auto px-4 py-20 relative z-10;
+    @apply !transition-all duration-400;
+}
+
+.hero-flex {
+    @apply flex flex-col items-center gap-5;
+    @apply lg:flex-row;
+}
+
+.hero-left {
+    @apply flex-1;
+}
+
+.hero-right {
+    @apply relative w-full mt-12 flex-1;
+}
+
+/* -------------------------------
+   Badge
+------------------------------- */
+.hero-badge {
+    @apply inline-flex items-center px-4 py-1.5 mb-6;
+    @apply !bg-current/10 backdrop-blur-sm border border-current/10 rounded-full;
+}
+
+.hero-badge-text {
+    @apply text-xs font-medium mr-2 !text-light/70;
+}
+
+/* -------------------------------
+   Title & Text
+------------------------------- */
+.hero-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight;
+    @apply !transition-all duration-500;
+}
+
+.hero-paragraph {
+    @apply text-lg mb-8 max-w-lg text-current/50;
+}
+
+/* -------------------------------
+   Actions
+------------------------------- */
+.hero-actions {
+    @apply flex flex-col items-center gap-3;
+    @apply md:flex-row;
+}
+
+.hero-actions a{
+    @apply w-full! p-3 border-current/20;
+}
+
+/* -------------------------------
+   Stats
+------------------------------- */
+.hero-stats {
+    @apply mt-8 flex items-center !space-x-6;
+}
+
+.hero-stats div > h1 {
+    @apply text-2xl font-bold text-white;
+}
+
+.hero-stats div > h1::after {
+    content: "+";
+}
+
+.hero-stats > p {
+    @apply text-sm text-gray-400;
+}
+
+.hero-divider {
+    @apply h-12 w-px bg-current/10;
+}
+
+/* -------------------------------
+   Video
+------------------------------- */
+.hero-video {
+    @apply w-full max-h-[500px] mx-auto bg-center bg-cover shadow-2xl;
+}
+
+.hero-video video {
+    @apply w-full h-full rounded-2xl;
+}
+
+/* -------------------------------
+   Floating Cards
+------------------------------- */
+.hero-card {
+    @apply absolute bg-current/10 backdrop-blur-md rounded-lg p-3;
+    @apply border border-current/10 shadow-lg;
+}
+
+.hero-card-bottom {
+    @apply -right-6 -bottom-6;
+}
+
+.hero-card-content {
+    @apply flex items-center gap-2;
+}
+
+.hero-card-content i {
+    @apply h-10 w-10 bg-green-500/20 rounded-full flex items-center justify-center;
+}
+
+.hero-card-content p {
+    @apply text-lg font-bold text-green-500;
+}

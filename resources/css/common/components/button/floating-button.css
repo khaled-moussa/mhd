@@ -1,0 +1,12 @@
+/* Back to top Button */
+.floating-btn {
+    @apply pointer-events-none fixed right-8 bottom-14 z-[15] rounded-xl p-2.5 opacity-100 shadow-xl transition-all duration-150;
+}
+
+.floating-btn i {
+    @apply text-dark text-2xl leading-none transition-colors duration-200 ease-in-out;
+}
+
+.floating-btn.visible {
+    @apply pointer-events-auto opacity-100;
+}

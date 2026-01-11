@@ -1,0 +1,132 @@
+/* -------------------------------------------------
+   Navbar (Base)
+-------------------------------------------------- */
+.navbar {
+    @apply max-h-[65px] sticky top-0 z-30 flex items-center justify-between px-6 py-3 border-b border-current/5 backdrop-blur-xl;
+}
+
+.navbar-brand {
+    @apply font-bold text-lg tracking-wide;
+}
+
+.navbar-actions {
+    @apply flex items-center gap-5;
+}
+
+.navbar .toggle-btn {
+    @apply xl:hidden;
+}
+
+/* -------------------------------------------------
+   Account Dropdown Card
+-------------------------------------------------- */
+.account-dropdown-btn .dropdown-btn {
+    @apply bg-transparent! p-0! border-0!;
+}
+
+.account-dropdown-btn .dropdown-btn img {
+    @apply w-8 h-8 rounded-full;
+}
+
+.account-dropdown {
+    @apply divide-y! divide-current/10!;
+}
+
+.account-dropdown form .link-btn {
+    @apply text-left! text-base;
+}
+
+.account-dropdown-info {
+    @apply text-sm p-3.5 space-y-2!;
+}
+
+.account-dropdown-info p:first-child {
+    @apply text-current/85! font-semibold!;
+}
+
+.account-dropdown-info p {
+    @apply max-w-[10rem] break-words whitespace-normal font-light text-current/50;
+}
+
+/* -------------------------------------------------
+   Notification Dropdown Card
+-------------------------------------------------- */
+.notification-btn {
+    @apply rounded-full w-10 h-10 place-content-center;
+}
+.notification-dropdown {
+    @apply absolute right-0 mt-2 w-80 overflow-hidden rounded-2xl;
+}
+.notification-dot {
+    @apply w-2 h-2 absolute top-2 right-2 bg-red-500 rounded-full;
+}
+
+
+.notification-card {
+    @apply flex flex-col max-h-96 overflow-hidden;
+}
+.notification-header {
+    @apply flex items-center justify-between p-4 border-b border-current/5 backdrop-blur-2xl;
+}
+.notification-list {
+    @apply overflow-y-auto flex flex-col !px-0 divide-y divide-current/5;
+}
+.notification-item {
+    @apply flex flex-col gap-1 my-1 py-2 px-3 hover:bg-current/7 transition;
+}
+
+
+.notification-item__header {
+    @apply flex gap-2 py-2;
+}
+.notification-item__icon {
+    @apply mt-0.5;
+}
+.notification-item__meta {
+    @apply flex flex-col;
+}
+.notification-item__title {
+    @apply text-sm font-medium text-current/80 text-ellipsis;
+}
+.notification-item__user {
+    @apply text-xs font-light text-current/60 text-ellipsis;
+}
+
+
+.notification-item__content {
+    @apply max-w-full overflow-hidden cursor-default;
+}
+.notification-item__url {
+    @apply cursor-pointer;
+}
+
+
+.notification-item__message {
+    @apply text-xs text-current/70 text-ellipsis;
+}
+.notification-item__state {
+    @apply my-2;
+}
+.notification-item__time {
+    @apply text-xs mt-2 text-current/60;
+}
+
+
+.notification-item__btn{
+    @apply w-full p-1 mt-2 rounded-md!;
+}
+
+.notification-item-unread {
+    @apply bg-current/7;
+}
+
+
+.notification-load-more,
+.notification-mark-all {
+    @apply text-sm hover:underline disabled:bg-transparent disabled:text-current/50;
+}
+
+
+.notification-footer {
+    @apply border-t border-current/5 py-2 flex justify-center;
+}

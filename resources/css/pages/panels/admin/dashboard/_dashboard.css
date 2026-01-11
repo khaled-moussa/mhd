@@ -1,0 +1,26 @@
+@reference "@css/reference.css";
+
+/* Impots */
+@import "@css/pages/_layouts/app-layouts.css";
+@import "@css_admin/dashboard/dashboard-cards.css";
+@import "@css_admin/dashboard/dashboard-charts.css";
+
+/* -------------------------------------------------
+   Dashboard Grid
+-------------------------------------------------- */
+.dashboard-grid {
+    @apply grid gap-5 lg:grid-cols-[1fr_350px];
+    @apply max-h-full;
+}
+
+.dashboard-grid > div {
+    @apply flex flex-col gap-5;
+}
+
+.dashboard-grid .table-container {
+    @apply min-h-[400px];
+}
+
+.dashboard-grid .table-container:has(.empty-table) {
+    @apply min-h-full;
+}

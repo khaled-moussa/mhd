@@ -1,0 +1,114 @@
+/* -------------------------------  
+   Sidebar Container  
+-------------------------------- */
+.sidebar {
+    @apply fixed -left-[250px] top-[65px] h-screen w-[85px] max-w-[250] row-span-2;
+    @apply px-4 py-5 border-current/5 backdrop-blur-2xl;
+    @apply rounded-tr-2xl rounded-br-2xl transition-all ease-in-out duration-300 z-20;
+    @apply lg:block lg:sticky lg:top-0 lg:border-r;
+    @apply flex shrink-0 flex-col;
+    @apply bg-white dark:bg-dark;
+}
+
+/* -------------------------------  
+   Toggle Button  
+-------------------------------- */
+.sidebar .toggle-btn {
+    @apply hidden absolute top-19 right-[-12px] w-7 h-7 min-h-0 p-1 rounded-full border-none;
+    @apply bg-current/15 text-current cursor-pointer hover:bg-current/5;
+    @apply xl:flex;
+}
+
+.sidebar .toggle-btn i {
+    @apply text-xs;
+}
+
+/* -------------------------------  
+   Brand Section  
+-------------------------------- */
+.sidebar-brand {
+    @apply flex items-center gap-3 mb-10 font-bold text-lg tracking-wide;
+}
+
+.sidebar-brand .logo {
+    @apply max-w-[40px] max-h-[40px];
+}
+
+.sidebar-brand .brand-name {
+    @apply truncate;
+}
+
+/* -------------------------------  
+   Sidebar Menu  
+-------------------------------- */
+.sidebar-menu {
+    @apply flex flex-col items-center justify-center gap-5 mt-8 p-0 transition-all duration-150 ease-in-out;
+}
+
+.sidebar-menu-scroll {
+    @apply w-full flex flex-col justify-between overflow-y-auto overflow-x-hidden;
+    scrollbar-width: none;
+    height: calc(100% - 135px);
+}
+
+.sidebar-menu li {
+    @apply flex items-center justify-center rounded-xl text-current/85;
+}
+
+.sidebar-menu li i {
+    @apply text-xl shrink-0;
+}
+
+.sidebar-menu:last-child li:last-child {
+    @apply !text-red-400;
+}
+
+.sidebar-menu a,
+.sidebar-menu form button {
+    @apply w-full p-3 flex items-center -me-1 rounded-xl text-current/80;
+    @apply transition-all duration-300 hover:bg-current/10 hover:text-current;
+}
+
+.sidebar-menu a.active,
+.sidebar-menu form button.active {
+    @apply bg-current/10 text-current;
+}
+
+.sidebar-menu a span,
+.sidebar-menu form button span {
+    @apply whitespace-nowrap transition-all duration-300;
+    @apply lg:w-0 lg:overflow-hidden lg:opacity-0;
+}
+
+/* -------------------------------  
+   Collapsed Sidebar  
+-------------------------------- */
+.sidebar.collapsed {
+    @apply w-[235px];
+    @apply max-lg:fixed max-lg:left-0;
+}
+
+.sidebar.collapsed .sidebar-menu li {
+    @apply w-full;
+}
+
+.sidebar.collapsed a {
+    @apply flex h-full gap-3;
+}
+
+.sidebar.collapsed a,
+.sidebar.collapsed form button {
+    @apply flex h-full gap-3;
+}
+
+.sidebar.collapsed .sidebar-menu a span {
+    @apply lg:w-auto lg:opacity-100;
+}
+
+.sidebar.collapsed .sidebar-menu form button span {
+    @apply lg:w-auto lg:opacity-100;
+}
+
+.sidebar.collapsed .toggle-btn i {
+    @apply rotate-90;
+}

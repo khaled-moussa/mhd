@@ -1,0 +1,9 @@
+.page-header {
+    @apply text-3xl font-semibold mb-5;
+}
+
+
+.page-header:has(button),
+.page-header:has(a){
+    @apply flex items-center justify-between;
+}

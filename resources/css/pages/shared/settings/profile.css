@@ -1,0 +1,91 @@
+/* -------------------------------  
+   Profile Info  
+-------------------------------- */
+.profile {
+    @apply w-full h-full;
+}
+
+/* -------------------------------  
+   Profile Form  
+-------------------------------- */
+.profile-form {
+    @apply m-0 gap-0;
+}
+
+/* -------------------------------  
+   Card  
+-------------------------------- */
+.profile .card {
+    @apply w-full h-fit p-4 px-5 rounded-xl border border-current/10 mb-4;
+}
+
+.profile .card > header {
+    @apply text-base font-semibold;
+}
+
+/* -------------------------------  
+   Card Header (Profile Info)  
+-------------------------------- */
+.card-profile {
+    @apply flex flex-col gap-5;
+    @apply lg:flex-row lg:items-center;
+}
+
+.card-profile > div {
+    @apply flex-1 flex items-center gap-5;
+    @apply max-sm:flex-col max-sm:items-start;
+}
+
+/* -------------------------------  
+   Profile Image  
+-------------------------------- */
+.card-profile-img {
+    @apply relative w-20 h-20;
+}
+
+.card-profile-img img {
+    @apply absolute w-full h-full rounded-full;
+}
+
+/* -------------------------------  
+   Profile Info Text  
+-------------------------------- */
+.card-profile-info {
+    @apply w-full flex flex-col;
+}
+
+.card-profile-info:has(.input-field) {
+    @apply gap-5;
+}
+
+.card-profile-info header {
+    @apply text-xl font-semibold;
+}
+
+.card-profile-info .description {
+    @apply text-sm font-semibold text-current/70;
+}
+
+.card-profile-info .sub-description {
+    @apply text-xs font-light text-current/70;
+}
+
+.card-profile .form-actions {
+    @apply ml-auto flex-1 flex-row!;
+}
+/* -------------------------------  
+   Personal Info  
+-------------------------------- */
+.personal-info {
+    @apply flex flex-col justify-center gap-5 py-5;
+}
+
+.personal-info .peronsal-content {
+    @apply flex flex-col items-start justify-between gap-5;
+    @apply lg:flex-row;
+}
+
+.personal-info .peronsal-content .label-info,
+.personal-info .peronsal-content .input-field {
+    @apply flex-1 w-full;
+}

@@ -1,0 +1,15 @@
+/* .card {
+    @apply rounded-4xl border border-current/5 bg-current/5;
+} */
+
+.card {
+    @apply w-fit h-fit p-4 rounded-xl bg-current/5;
+}
+
+.card-title {
+    @apply text-2xl font-semibold;
+}
+
+.card-sub-title {
+    @apply text-lg font-semibold;
+}

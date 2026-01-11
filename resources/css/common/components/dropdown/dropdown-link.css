@@ -1,0 +1,22 @@
+.dropdown-link {
+    @apply text-current flex w-fit items-center justify-between gap-2 py-1 font-medium;
+    @apply hover:text-current/80;
+}
+
+.dropdown-link > div {
+    @apply flex items-center gap-3;
+}
+
+.dropdown-link > div i {
+    @apply text-current relative transition-all duration-150 ease-in-out;
+}
+.dropdown-link.highlight > div i::after {
+    @apply absolute -top-[3px] -right-[2px] z-0 h-3.5 w-3.5 rounded-full bg-[#E52A2A] content-[''];
+}
+.dropdown-link > i {
+    @apply text-current transition-all duration-150 ease-in-out;
+}
+
+.dropdown-link:hover i {
+    @apply hover:text-current/80;
+}

@@ -1,0 +1,13 @@
+/* -------------------------------  
+   Notification Settings Container  
+-------------------------------- */
+.notification-settings {
+    @apply w-full;
+}
+
+/* -------------------------------  
+   Notification Settings Content  
+-------------------------------- */
+.notification-content {
+    @apply w-full my-10 !space-y-10;
+}

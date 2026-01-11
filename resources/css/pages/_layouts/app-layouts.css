@@ -1,0 +1,15 @@
+/* -------------------------------------------------
+   App Layout
+-------------------------------------------------- */
+.app-shell {
+    @apply grid grid-cols-1 lg:grid-cols-[70px_1fr] grid-rows-[65px_1fr];
+    @apply max-h-full transition-all duration-300 ease-in-out;
+}
+
+.app-shell.collapsed {
+    @apply grid-cols-[1fr] lg:grid-cols-[235px_1fr];
+}
+
+.app-content {
+    @apply max-h-full p-6;
+}

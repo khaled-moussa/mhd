@@ -1,0 +1,14 @@
+.main-btn {
+    @apply flex w-max min-h-8 px-5 py-2 gap-2 items-center justify-center rounded-lg text-sm font-medium;
+    @apply bg-dark dark:bg-light;
+    @apply text-light dark:text-dark;
+    @apply hover:bg-current/10 hover:text-current/90;
+}
+
+.main-btn.danger {
+    @apply text-light bg-[#ac3737] hover:bg-[#b01212];
+}
+
+.main-btn i {
+    @apply shrink-0;
+}

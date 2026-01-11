@@ -1,0 +1,36 @@
+@reference "@css/reference.css";
+
+/* Impots */
+@import "@css_pages/_layouts/app-layouts.css";
+@import "@css_pages/shared/settings/side-menu.css";
+@import "@css_pages/shared/settings/profile.css";
+@import "@css_pages/shared/settings/security.css";
+@import "@css_pages/shared/settings/notification.css";
+@import "@css_pages/shared/settings/site-editor.css";
+
+/* -------------------------------------------------
+   Settings Grid
+-------------------------------------------------- */
+.settings-grid {
+    @apply grid grid-cols-1 md:grid-cols-[300px_1fr] rounded-xl;
+}
+
+.settings-content {
+    @apply w-full h-full py-0 p-5 border-current/30 rounded-r-xl;
+    @apply max-md:py-5;
+}
+
+.settings-content .content-header {
+    @apply text-2xl font-bold mb-10;
+}
+
+/* -------------------------------  
+   Settings Card
+-------------------------------- */
+.card-header {
+    @apply flex items-center justify-between;
+}
+
+.card-header header {
+    @apply text-xl font-semibold;
+}
