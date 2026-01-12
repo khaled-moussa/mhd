@@ -5,16 +5,24 @@ use Illuminate\Support\Str;
 return [
     'sections' => [
         'hero' => [
-            'title' => 'Welcome to Our Site',
-            'description' => 'We craft amazing experiences.',
+            'title' => 'Find Your Dream Property',
+            'description' => 'Discover modern real estate solutions with cutting-edge architecture and sustainable developments.',
             'data' => [],
             'visible' => true,
             'order' => 1,
         ],
 
         'about-us' => [
-            'title' => 'About Us',
-            'description' => 'We love what we do.',
+            'title' => 'Discover who we are, what drives us.',
+            'description' => '“We are passionate about transforming ideas into impactful digital experiences.
+                Our team combines creativity, technology, and strategy to deliver exceptional
+                solutions that empower businesses to grow and innovate.
+                With a focus on user experience and cutting-edge design, we craft websites and digital
+                platforms that reflect your brand’s identity and connect with your audience.
+                Every project is approached with a commitment to quality, functionality, and long-term value.
+                Whether it’s building a brand from the ground up, developing custom web solutions,
+                or enhancing your online presence — we’re here to bring your vision to life with
+                precision, innovation, and care.”',
             'data' => [],
             'visible' => true,
             'order' => 2,
@@ -22,7 +30,7 @@ return [
 
         'services' => [
             'title' => 'Our Services',
-            'description' => 'What we offer.',
+            'description' => 'We provide professional real estate solutions to help you find, manage, and grow your investments with confidence..',
             'data' => [
                 [
                     'uuid' => 'srv-100',
@@ -66,8 +74,8 @@ return [
         ],
 
         'projects' => [
-            'title' => 'About Us',
-            'description' => 'We love what we do.',
+            'title' => 'Our Projects',
+            'description' => 'Explore some of our recent real estate developments — from modern apartments to commercial complexes.',
             'data' => [
                 [
                     'uuid' => 'pr-100',
@@ -106,7 +114,8 @@ return [
 
         'footer' => [
             'title' => 'Our Services',
-            'description' => 'What we offer.',
+            'description' => 'The most trusted real estate company, empowering clients with innovative solutions
+                    and top-quality developments.',
             'data' => [
                 'socials' => [
                     [

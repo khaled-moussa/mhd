@@ -24,7 +24,5 @@ class UserSeeder extends Seeder
         ]);
 
         $user->setting()->create();
-
-        $user->assignRole(CustomRole::first());
     }
 }

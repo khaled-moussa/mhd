@@ -7,8 +7,15 @@ window.addEventListener("message", (event) => {
 
     // Loop through each section key (hero, about, footer, etc.)
     Object.entries(data).forEach(([key, section]) => {
-        const sectionElement = document.querySelector(`.${key}-section`);
-        if (!sectionElement) return;
+
+        console.log(key);
+
+
+        const sectionElement = document.querySelector(`#${key}`);
+
+        if (!sectionElement) {
+            return;
+        }
 
         // --- Handle order
         if (section.order) {
@@ -25,7 +32,8 @@ window.addEventListener("message", (event) => {
 
         // --- Handle title & description
         const title = sectionElement.querySelector(".section-title");
-        const description = sectionElement.querySelector(".section-paragraph");
+        const description = sectionElement.querySelector(".section-description");
+
 
         if (title && section.title !== undefined) {
             title.textContent = section.title;
@@ -37,34 +45,37 @@ window.addEventListener("message", (event) => {
 
         // --- Handle footer socials
         if (key === "footer" && section.data?.socials) {
-            const socialsContainer =
-                sectionElement.querySelector(".footer-socials");
+            const socialsContainer = sectionElement.querySelector(".footer-socials");
 
-            if (socialsContainer) {
-                // Clear existing icons
-                socialsContainer.innerHTML = "";
-
-                section.data.socials.forEach((social) => {
-                    // Skip invalid socials
-                    if (!social?.link || !social?.icon) return;
-
-                    // Create new link element
-                    const a = document.createElement("a");
-                    a.href = social.link;
-                    a.target = "_blank";
-                    a.rel = "noopener noreferrer";
-
-                    // Create icon element
-                    const i = document.createElement("i");
-                    i.className = social.icon;
-
-                    // Append icon to link
-                    a.appendChild(i);
-
-                    // Add to container
-                    socialsContainer.appendChild(a);
-                });
+            if (!socialsContainer) {
+                return;
             }
+
+            // Clear existing icons
+            socialsContainer.innerHTML = "";
+
+            section.data.socials.forEach((social) => {
+                // Skip invalid socials
+                if (!social?.link || !social?.icon) {
+                    return;
+                }
+
+                // Create new link element
+                const a = document.createElement("a");
+                a.href = social.link;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+
+                // Create icon element
+                const i = document.createElement("i");
+                i.className = social.icon;
+
+                // Append icon to link
+                a.appendChild(i);
+
+                // Add to container
+                socialsContainer.appendChild(a);
+            });
         }
     });
 });

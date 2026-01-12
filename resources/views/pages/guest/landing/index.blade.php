@@ -28,6 +28,6 @@
 {{-- Footer --}}
 @section('footer')
     @if (isset($sections['footer']))
-        <x-navigation.footer.guest :footer="$sections['footer']" />
+        <x-navigation.footer.guest :section="$sections['footer']" />
     @endif
 @endsection

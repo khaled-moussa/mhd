@@ -1,144 +1,131 @@
 /* -------------------------------
    Projects Section
 ------------------------------- */
-.projects-section {
+.projects {
     @apply py-24;
 }
 
-/* -------------------------------
-   Container
-------------------------------- */
-.projects-container {
+.projects__container {
     @apply container mx-auto px-4;
     @apply !transition-all duration-300;
 }
 
-/* -------------------------------
-   Grid
-------------------------------- */
-.projects-grid {
+.projects__grid {
     @apply grid grid-cols-1 gap-6;
     @apply md:grid-cols-2 md:gap-8;
     @apply lg:grid-cols-3;
 }
 
-/* -------------------------------
-   Project Card
-------------------------------- */
-.project-card {
+/* Project Card */
+.projects__card {
     @apply bg-current/7 backdrop-blur-sm rounded-xl overflow-hidden shadow-md;
     @apply hover:bg-current/10 hover:shadow-xl hover:shadow-primary/50 cursor-pointer;
 }
 
-.project-image {
+.projects__image {
     @apply w-full;
 }
 
-.project-image img {
+.projects__image img {
     @apply rounded-xl object-cover;
 }
 
-.project-content {
+.projects__content {
     @apply p-6;
 }
 
-.project-title {
+.projects__title {
     @apply text-xl font-semibold mb-2 text-current;
 }
 
-.project-desc {
+.projects__desc {
     @apply text-current/70 text-sm;
 }
 
-/* -------------------------------
-   Load More Button
-------------------------------- */
-.load-more-btn {
+/* Load More */
+.projects__load-more {
     @apply my-5 grid place-items-center;
 }
 
-.load-more-btn > button {
+.projects__load-more > button {
     @apply p-3 !border-current/30;
 }
 
 /* -------------------------------
    Project Modal
 ------------------------------- */
-
-/* --- Modal Container --- */
-.project-modal .modal-container {
+.projects__modal .modal-container {
     @apply p-5;
 }
 
-.project-modal .modal-container.xl {
-    @apply w-full max-w-full;
-    @apply xl:w-[60vw];
+.projects__modal .modal-container.xl {
+    @apply w-full max-w-full xl:w-[60vw];
 }
 
-/* --- Modal Body --- */
-.project-modal-body {
-    @apply flex flex-col gap-6 px-6;
-    @apply lg:flex-row;
+.projects__modal-body {
+    @apply flex flex-col gap-6 px-6 lg:flex-row;
 }
 
-.project-modal-carousel {
-    @apply w-full max-h-[350px];
-    @apply lg:w-1/2 lg:max-h-[550px];
+.projects__modal-carousel {
+    @apply w-full max-h-[350px] lg:w-1/2 lg:max-h-[550px];
 }
 
-.project-modal-image {
-    @apply relative w-full h-[350px] rounded-xl overflow-hidden shadow-md;
-    @apply lg:h-[550px];
+.projects__modal-image {
+    @apply relative w-full h-[350px] rounded-xl overflow-hidden shadow-md lg:h-[550px];
 }
 
-.project-modal-image img {
+.projects__modal-image img {
     @apply absolute w-full h-full object-cover;
 }
 
-/* --- Modal Info --- */
-.project-modal-info {
+.projects__modal-info {
     @apply flex-1 !space-y-5;
 }
 
-.project-modal-title {
+.projects__modal-info-title {
     @apply text-2xl font-semibold;
 }
 
-/* --- Modal Footer --- */
-.project-modal-footer {
+.projects__modal-info-desc {
+    @apply text-current/70 text-sm;
+}
+
+.projects__modal-footer {
     @apply py-2 px-6 flex flex-col gap-3;
 }
 
-.project-modal-footer .card {
+.projects__modal-card {
     @apply w-full h-fit mt-5 p-5 rounded-xl border border-current/10;
 }
 
-.project-modal-footer .card > header {
+.projects__modal-card > header {
     @apply text-2xl font-semibold mb-5;
 }
 
-.project-modal-footer .project-content {
-    @apply flex flex-col !p-0;
-    @apply sm:flex-row;
+.projects__modal-row {
+    @apply flex flex-col !p-0 sm:flex-row;
 }
 
-.project-modal-footer .project-content .label-info {
+.projects__modal-details .label-info {
     @apply flex-1;
 }
 
-.project-modal-footer .details {
-    @apply flex items-center gap-2 py-3;
+.projects__modal-location {
+    @apply flex flex-col gap-3;
 }
 
-.project-modal-footer .details:has(i) {
-    @apply text-xl;
+.projects__modal-location-header {
+    @apply flex items-center gap-2 py-3 text-xl;
 }
 
-.project-modal-footer .location iframe {
+.projects__modal-location-title {
+    @apply font-semibold;
+}
+
+.projects__modal-location iframe {
     @apply rounded-2xl;
 }
 
-/* --- Modal Actions --- */
-.project-modal-actions {
+.projects__modal-actions {
     @apply flex justify-end gap-3 mt-5 border-t border-current/10 pt-4;
 }

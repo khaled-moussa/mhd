@@ -1,14 +1,14 @@
 /* -------------------------------
-   Features Section
+   Services Section
 ------------------------------- */
-.services-section {
+.services {
     @apply py-24;
 }
 
 /* -------------------------------
    Container
 ------------------------------- */
-.services-container {
+.services__container {
     @apply container mx-auto px-4 text-current/90;
     @apply !transition-all duration-200;
 }
@@ -16,7 +16,7 @@
 /* -------------------------------
    Grid
 ------------------------------- */
-.services-grid {
+.services__grid {
     @apply grid grid-cols-1 gap-6;
     @apply md:grid-cols-2 md:gap-8;
     @apply lg:grid-cols-3;
@@ -25,7 +25,7 @@
 /* -------------------------------
    Service Card
 ------------------------------- */
-.service-card {
+.services__card {
     @apply bg-current/5 backdrop-blur-sm border border-none rounded-xl p-6;
     @apply hover:bg-white/10 hover:shadow-xl hover:shadow-primary/50;
 }
@@ -33,23 +33,24 @@
 /* -------------------------------
    Icon
 ------------------------------- */
-.service-icon {
+.services__icon {
     @apply bg-current/10 rounded-lg w-12 h-12 flex items-center justify-center mb-5;
     @apply transition-colors duration-300 group-hover:text-red-400;
 }
 
-.service-icon i {
+.services__icon i {
     @apply text-2xl group-hover:text-current/90;
 }
 
 /* -------------------------------
    Content
 ------------------------------- */
-.service-title {
-    @apply text-xl font-semibold mb-3 text-white;
+.services__title,
+.service-data__title {
+    @apply text-xl font-semibold mb-3 text-current;
 }
 
-.service-desc {
-    @apply text-gray-400;
+.services__description,
+.service-data__description {
+    @apply text-current/70;
 }
-    

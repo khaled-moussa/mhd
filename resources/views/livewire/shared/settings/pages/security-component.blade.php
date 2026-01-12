@@ -52,23 +52,6 @@
             </x-button.outline>
         </x-label.info>
 
-        {{-- Google Sign --}}
-        <x-label.info
-            label="Google Sign"
-            description="Add an extra layer of security by requiring a verification code when signing in."
-            :badgelabel="$googleSignState->stateLabel()"
-            :badgecolor="$googleSignState->color()"
-        >
-            <x-button.outline
-                :label="$googleSignState->label()"
-                wire:loading.class='spinner'
-                wire:target='handleLinkingWithGoogle'
-                wire:click="handleLinkingWithGoogle"
-            >
-                <i class="fi fi-brands-google"></i>
-                </x-button.link>
-        </x-label.info>
-
         {{-- Delete Account --}}
         <x-label.info
             label="Delete Account"

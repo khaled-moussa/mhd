@@ -1,138 +1,141 @@
 /* -------------------------------
    Hero Section
 ------------------------------- */
-.hero-section {
+.hero {
     @apply p-5 relative flex flex-col justify-center overflow-hidden;
 }
 
 /* -------------------------------
    Background
 ------------------------------- */
-.hero-bg {
+.hero__bg {
     @apply absolute inset-0 overflow-hidden;
 }
 
-.hero-spotlight-top {
-    @apply absolute top-1/4 left-10 w-72 h-72 bg-main-light rounded-full;
-    @apply filter blur-3xl animate-float;
+.hero__spotlight {
+    @apply absolute w-72 h-72 bg-main-light rounded-full filter blur-3xl animate-float;
 }
 
-.hero-spotlight-bottom {
-    @apply absolute bottom-1/4 right-10 w-96 h-96 bg-main-light rounded-full;
-    @apply filter blur-3xl animate-float;
+.hero__spotlight--top {
+    @apply top-1/4 left-10;
+}
+
+.hero__spotlight--bottom {
+    @apply bottom-1/4 right-10 w-96 h-96;
 }
 
 /* -------------------------------
    Layout
 ------------------------------- */
-.hero-container {
+.hero__container {
     @apply container mx-auto px-4 py-20 relative z-10;
     @apply !transition-all duration-400;
 }
 
-.hero-flex {
-    @apply flex flex-col items-center gap-5;
+.hero__content {
+    @apply flex flex-col items-start gap-5;
     @apply lg:flex-row;
 }
 
-.hero-left {
+.hero__main {
     @apply flex-1;
 }
 
-.hero-right {
+.hero__media {
     @apply relative w-full mt-12 flex-1;
 }
 
 /* -------------------------------
    Badge
 ------------------------------- */
-.hero-badge {
+.hero__badge {
     @apply inline-flex items-center px-4 py-1.5 mb-6;
     @apply !bg-current/10 backdrop-blur-sm border border-current/10 rounded-full;
 }
 
-.hero-badge-text {
+.hero__badge-text {
     @apply text-xs font-medium mr-2 !text-light/70;
 }
 
 /* -------------------------------
    Title & Text
 ------------------------------- */
-.hero-title {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight;
+.hero__title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight max-w-[70%];
     @apply !transition-all duration-500;
 }
 
-.hero-paragraph {
+.hero__description {
     @apply text-lg mb-8 max-w-lg text-current/50;
 }
 
 /* -------------------------------
    Actions
 ------------------------------- */
-.hero-actions {
+.hero__actions {
     @apply flex flex-col items-center gap-3;
-    @apply md:flex-row;
+    @apply xl:w-1/2 md:flex-row;
 }
 
-.hero-actions a{
-    @apply w-full! p-3 border-current/20;
+.hero__actions .main-btn,
+.hero__actions .outline-btn {
+    @apply w-full p-3 border-current/20;
 }
 
 /* -------------------------------
    Stats
 ------------------------------- */
-.hero-stats {
+.hero__stats {
     @apply mt-8 flex items-center !space-x-6;
 }
 
-.hero-stats div > h1 {
+.hero__stats div > h1 {
     @apply text-2xl font-bold text-white;
 }
 
-.hero-stats div > h1::after {
+.hero__stats div > h1::after {
     content: "+";
 }
 
-.hero-stats > p {
+.hero__stats > p {
     @apply text-sm text-gray-400;
 }
 
-.hero-divider {
+.hero__divider {
     @apply h-12 w-px bg-current/10;
 }
 
 /* -------------------------------
    Video
 ------------------------------- */
-.hero-video {
+.hero__video-wrapper {
     @apply w-full max-h-[500px] mx-auto bg-center bg-cover shadow-2xl;
 }
 
-.hero-video video {
+.hero__video-wrapper video {
     @apply w-full h-full rounded-2xl;
 }
 
 /* -------------------------------
    Floating Cards
 ------------------------------- */
-.hero-card {
+.hero__card {
     @apply absolute bg-current/10 backdrop-blur-md rounded-lg p-3;
     @apply border border-current/10 shadow-lg;
 }
 
-.hero-card-bottom {
+.hero__card--bottom {
     @apply -right-6 -bottom-6;
 }
 
-.hero-card-content {
+.hero__card-content {
     @apply flex items-center gap-2;
 }
 
-.hero-card-content i {
+.hero__card-content i {
     @apply h-10 w-10 bg-green-500/20 rounded-full flex items-center justify-center;
 }
 
-.hero-card-content p {
+.hero__card-content p {
     @apply text-lg font-bold text-green-500;
 }

@@ -1,31 +1,37 @@
+@props([
+    'section' => [],
+])
+
 <section
     id="hero"
-    class="hero-section"
+    class="hero"
 >
-    <div class="hero-bg">
-        <div class="hero-spotlight-top"></div>
-        <div class="hero-spotlight-bottom"></div>
+    <div class="hero__bg">
+        <div class="hero__spotlight hero__spotlight--top"></div>
+        <div class="hero__spotlight hero__spotlight--bottom"></div>
     </div>
 
-    <div class="hero-container">
+    <div class="hero__container">
 
-        <div class="hero-flex">
+        <div class="hero__content">
             {{-- Left Side --}}
-            <div class="hero-left">
-                <div class="hero-badge">
-                    <span class="hero-badge-text">Build Dreams</span>
-                    <span class="hero-badge-text">Confidence & Innovation</span>
+            <div class="hero__main">
+                <div class="hero__badge">
+                    <span class="hero__badge-text">Build Dreams</span>
+                    <span class="hero__badge-text">Confidence & Innovation</span>
                 </div>
 
-                <h1 class="hero-title">
-                    <span class="text-gradient">Find Your Dream Property</span>
+                <h1 class="hero__title">
+                    <span class="text-gradient">
+                        {{ $section['title'] }}
+                    </span>
                 </h1>
 
-                <p class="hero-paragraph">
-                    Discover modern real estate solutions with cutting-edge architecture and sustainable developments.
+                <p class="hero__description">
+                    {{ $section['description'] }}
                 </p>
 
-                <div class="hero-actions">
+                <div class="hero__actions">
                     <x-button.link
                         class="main-btn"
                         label="Explore"
@@ -37,33 +43,32 @@
                     />
                 </div>
 
-                <div class="hero-stats">
+                <div class="hero__stats">
                     <div>
                         <h1 id="projects-number"></h1>
                         <p>Projects</p>
                     </div>
 
-                    <div class="hero-divider"></div>
+                    <div class="hero__divider"></div>
 
                     <div>
                         <h1 id="customers-number"></h1>
                         <p>Customers</p>
                     </div>
 
-                    <div class="hero-divider"></div>
+                    <div class="hero__divider"></div>
 
                     <div>
-                        <h1 id="years-of-experiences-number"></h1>
-                        <p>Years of Experiences</p>
+                        <h1 id="years-of-experience-number"></h1>
+                        <p>Years of Experience</p>
                     </div>
                 </div>
             </div>
 
             {{-- Right Side --}}
-            <div class="hero-right">
+            <div class="hero__media">
                 <div
-                    class="hero-video"
-                    alt=""
+                    class="hero__video-wrapper"
                     data-aos="zoom-in"
                 >
                     <x-asset.video
@@ -76,8 +81,8 @@
                 </div>
 
                 {{-- Bottom Card --}}
-                <div class="hero-card hero-card-bottom">
-                    <div class="hero-card-content">
+                <div class="hero__card hero__card--bottom">
+                    <div class="hero__card-content">
                         <i class="fi fi-ts-arrow-trend-up"></i>
 
                         <div>

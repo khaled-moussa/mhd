@@ -2,60 +2,63 @@
    Landing Navbar
 ------------------------------- */
 .landing-navbar {
-    @apply sticky top-0 w-full h-fit px-5 flex items-center justify-between;
-    @apply border-b border-b-white/10 backdrop-blur-3xl z-40;
-    @apply transition-all duration-300;
+    @apply fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-2;
+    @apply backdrop-blur-xl bg-white/5 border-b border-white/10;
+    @apply transition-all duration-300 shadow-sm;
+}
+
+/* Scroll effect */
+.landing-navbar.scrolled {
+    @apply bg-white/20 shadow-lg;
 }
 
 /* -------------------------------
-   Layout
+   Navbar Container
 ------------------------------- */
 .landing-navbar-container {
-    @apply w-full  flex-1 flex items-center justify-between;
+    @apply w-full flex items-center justify-between max-w-7xl mx-auto;
 }
 
-.branding {
-    @apply max-w-[110px] max-h-[110px];
+/* -------------------------------
+   Logo
+------------------------------- */
+.branding img {
+    @apply h-12 w-auto transition-all duration-300;
 }
 
 /* -------------------------------
    Navbar Menu (Desktop)
 ------------------------------- */
 .landing-navbar-menu {
-    @apply hidden items-center gap-10;
-    @apply transition-all duration-500 ease-in-out;
-    @apply lg:flex;
+    @apply hidden items-center gap-8 shadow-none! border-none;
+    @apply max-sm:w-full lg:flex;
 }
 
 .landing-navbar-link {
-    @apply text-gray-300 text-base font-medium tracking-wide;
-    @apply transition-colors duration-300 hover:text-white;
+    @apply text-current/80 text-base font-medium tracking-wide relative;
+    @apply transition-all duration-300 hover:text-current/100 text-nowrap!;
 }
 
 /* -------------------------------
-   Navbar Collapsed (Mobile)
-------------------------------- */
-.collapsed {
-    @apply w-full flex flex-col items-center gap-4 py-6;
-    @apply border-t border-white/10;
-}
-
-.collapsed li {
-    @apply w-full text-center py-3 rounded-lg;
-    @apply transition-all duration-300 hover:bg-white/10;
-}
-
-/* -------------------------------
-   Navbar Toggle (Mobile)
+   Mobile Menu Toggle
 ------------------------------- */
 .landing-navbar-toggle {
-    @apply flex items-center space-x-4;
-    @apply lg:hidden;
+    @apply flex items-center space-x-4 lg:hidden;
 }
 
 .landing-toggle-button {
-    @apply p-3 px-4 text-white rounded-xl bg-white/10 backdrop-blur-md;
-    @apply hover:bg-white/20 transition-all duration-300;
+    @apply p-3 text-white bg-white/10 backdrop-blur-md rounded-xl transition-all duration-300 hover:bg-white/20;
+}
+
+/* -------------------------------
+   Mobile Menu
+------------------------------- */
+.collapsed {
+    @apply flex flex-col items-center gap-4 py-6 mt-2 border-t border-white/10 rounded-b-xl shadow-lg;
+}
+
+.collapsed li {
+    @apply w-full text-center py-3 rounded-lg hover:bg-white/20 transition-all duration-300;
 }
 
 /* -------------------------------

@@ -1,25 +1,47 @@
 /* -------------------------------
    About Section
 ------------------------------- */
-.about-section {
-    @apply py-24;
+.about {
+    @apply py-24 bg-current/2;
 }
 
 /* -------------------------------
-   Layout
+   Container
 ------------------------------- */
-.about-container {
-    @apply container mx-auto flex flex-col items-center gap-16;
-    @apply lg:flex-row;
+.about__container {
+    @apply container mx-auto px-4;
 }
 
 /* -------------------------------
-   Content
+   Content Layout
 ------------------------------- */
-.about-content {
-    @apply w-full flex flex-col gap-6;
+.about__content {
+    @apply flex flex-col items-center gap-12 lg:flex-row lg:gap-16;
 }
 
-.about-description {
-    @apply text-lg leading-relaxed text-current/60;
+/* -------------------------------
+   Text Column
+------------------------------- */
+.about__text {
+    @apply flex-1 flex flex-col gap-6;
+}
+
+.about__text .section-description {
+    @apply max-w-full text-lg leading-relaxed text-current/70;
+}
+
+.about__stats {
+    @apply flex flex-wrap gap-6 mt-6;
+}
+
+.about__stat {
+    @apply bg-white/10 backdrop-blur-sm rounded-xl p-5 flex flex-col items-center justify-center w-32;
+}
+
+.about__stat h3 {
+    @apply text-2xl font-bold text-primary mb-1;
+}
+
+.about__stat p {
+    @apply text-sm text-current/70;
 }

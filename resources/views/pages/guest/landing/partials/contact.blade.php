@@ -1,4 +1,7 @@
-<section id="contact-us" class="contact-section">
+<section
+    id="contact-us"
+    class="contact-section"
+>
     <div class="contact-container">
         {{-- Header Section --}}
         <x-header.section
@@ -13,19 +16,28 @@
                 <span class="text-gradient">Get in Touch</span>
             </h2>
 
-            <p class="contact-subtitle" style="animation-delay: 0.2s;">
+            <p
+                class="contact-subtitle"
+                style="animation-delay: 0.2s;"
+            >
                 Have a question or want to collaborate?
             </p>
 
             <form action="">
                 <div class="input-field">
                     <label for="name">Name</label>
-                    <input id="name" type="text" />
+                    <input
+                        id="name"
+                        type="text"
+                    />
                 </div>
 
                 <div class="input-field">
                     <label for="email">Email</label>
-                    <input id="email" type="email" />
+                    <input
+                        id="email"
+                        type="email"
+                    />
                 </div>
 
                 <div class="input-field">
@@ -33,8 +45,8 @@
                     <textarea id="message"></textarea>
                 </div>
 
-                <x-button.main 
-                    label="Send Message" 
+                <x-button.main
+                    label="Send Message"
                     class="form-button"
                 />
             </form>

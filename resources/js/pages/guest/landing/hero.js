@@ -12,7 +12,7 @@ export default function initCountUp() {
             count: 870,
         },
         {
-            id: "years-of-experiences-number",
+            id: "years-of-experience-number",
             count: 17,
         },
     ];

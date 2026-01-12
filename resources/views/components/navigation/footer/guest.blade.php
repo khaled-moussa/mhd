@@ -1,37 +1,39 @@
 @props([
-    'footer' => [],
+    'section' => [],
 ])
 
-<footer class="footer">
+<footer
+    id="footer"
+    class="footer"
+>
     <div class="footer-container">
         <div class="footer-grid">
-
             <!-- Brand Section -->
             <div class="footer-brand">
-                <h2 class="footer-logo">
-                    <span>Real Estate</span>
-                </h2>
-                <p class="footer-text">
-                    The most trusted real estate company, empowering clients with innovative solutions
-                    and top-quality developments.
-                </p>
+                {{-- Header Section --}}
+                <x-header.section
+                    title="{{ $section['title'] }}"
+                    paragraph="{{ $section['description'] }}"
+                />
+
+                <!-- Socials -->
                 <div class="footer-socials">
-                    @foreach ($footer['data']['socials'] as $social)
-                        <a
-                            href="{{ $social['link'] }}"
+                    @foreach ($section['data']['socials'] as $social)
+                        <x-button.link
                             class="social-link"
+                            :path="$social['link']"
                         >
-                            {{ $social['label'] }}
-                        </a>
+                            <i class="{{ $social['icon'] }}"></i>
+                        </x-button.link>
                     @endforeach
                 </div>
             </div>
 
             <!-- Company -->
-            <div class="footer-col">
+            <div class="footer-company">
                 <h3 class="footer-title">Company</h3>
                 <ul class="footer-list">
-                    @foreach ($footer['data']['company'] as $company)
+                    @foreach ($section['data']['company'] as $company)
                         <li>
                             <x-button.link
                                 class="footer-link"

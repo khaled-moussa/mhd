@@ -1,24 +1,43 @@
-<section id="about-us" class="about-section">
-    {{-- Header Section --}}
-    <x-header.section 
-        title="About Us"
-        paragraph="Discover who we are, what drives us." 
-    />
+@props([
+    'section' => [],
+])
 
-    <div class="about-container">
-        {{-- Right: Text Content --}}
-        <div class="about-content">
-            <p class="about-description">
-                “We are passionate about transforming ideas into impactful digital experiences.
-                Our team combines creativity, technology, and strategy to deliver exceptional
-                solutions that empower businesses to grow and innovate.
-                With a focus on user experience and cutting-edge design, we craft websites and digital
-                platforms that reflect your brand’s identity and connect with your audience.
-                Every project is approached with a commitment to quality, functionality, and long-term value.
-                Whether it’s building a brand from the ground up, developing custom web solutions,
-                or enhancing your online presence — we’re here to bring your vision to life with
-                precision, innovation, and care.”
-            </p>
+<section
+    id="about-us"
+    class="about"
+>
+    <div class="about__container">
+        {{-- Header --}}
+        <x-header.section
+            class="about__header"
+            title="About Us"
+        />
+
+        {{-- Content --}}
+        <div class="about__content">
+
+            {{-- Left: Text --}}
+            <div class="about__text">
+                <p class="section-description">
+                    {{ $section['description'] }}
+                </p>
+
+                {{-- Optional: Highlight stats or feature points --}}
+                <div class="about__stats">
+                    <div class="about__stat">
+                        <h3>500+</h3>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="about__stat">
+                        <h3>200+</h3>
+                        <p>Satisfied Clients</p>
+                    </div>
+                    <div class="about__stat">
+                        <h3>10</h3>
+                        <p>Years Experience</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
