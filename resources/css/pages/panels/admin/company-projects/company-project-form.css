@@ -1,0 +1,15 @@
+/* -------------------------------  
+   Service form  
+-------------------------------- */
+.service-form {
+    @apply w-full h-full;
+}
+
+.company-project__form-row {
+    @apply flex flex-col justify-between gap-10;
+    @apply lg:flex-row lg:gap-3;
+}
+
+.company-project__form-row .input-field {
+    @apply flex-1;
+}

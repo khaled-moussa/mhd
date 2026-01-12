@@ -1,5 +1,6 @@
 <?php
 
+use App\App\Web\Controllers\Panels\Admin\CompanyProjects\CompanyProjectController;
 use App\App\Web\Controllers\Panels\Admin\Dashboard\DashboardController;
 use App\App\Web\Controllers\Panels\Admin\CompanyServices\CompanyServiceController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,17 @@ Route::middleware([
                     ->name('index');
             });
 
+        /*
+        |--------------------------------------------------------------------------
+        | Company Projects
+        |--------------------------------------------------------------------------
+        */
+        Route::prefix('company-projects')
+            ->as('company-projects.')
+            ->group(function () {
+                Route::get('/', CompanyProjectController::class)
+                    ->name('index');
+            });
         /*
         |--------------------------------------------------------------------------
         | Shared Admin Routes

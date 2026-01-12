@@ -1,9 +1,9 @@
 .dropdown-menu {
     @apply z-10 max-h-96 max-w-80 min-w-44 !-mx-5 overflow-y-visible rounded-lg;
-    @apply bg-light dark:bg-current text-current;
+    @apply bg-light dark:bg-main-dark text-current;
 }
 .dropdown-menu ul {
-    @apply w-full px-3 py-1 space-y-2;
+    @apply w-full px-3;
 }
 
 .dropdown-menu ul li {

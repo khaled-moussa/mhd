@@ -15,4 +15,10 @@ enum ModalIdsEnum: string
     case CREATE_COMPANY_SERVICE_MODAL = 'create-company-service-modal';
     case UPDATE_COMPANY_SERVICE_MODAL = 'update-company-service-modal';
     case DELETE_COMPANY_SERVICE_MODAL = 'delete-company-service-modal';
+
+    // Company Projects / Crud Modals
+    case VIEW_COMPANY_PROJECT_MODAL   = 'view-company-project-modal';
+    case CREATE_COMPANY_PROJECT_MODAL = 'create-company-project-modal';
+    case UPDATE_COMPANY_PROJECT_MODAL = 'update-company-project-modal';
+    case DELETE_COMPANY_PROJECT_MODAL = 'delete-company-project-modal';
 }

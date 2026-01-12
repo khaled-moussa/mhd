@@ -41,4 +41,10 @@ enum EventsEnum: string
     case COMPANY_SERVICE_UPDATED_EVENT = 'company-service-updated-event';
     case COMPANY_SERVICE_DELETED_EVENT = 'company-service-deleted-event';
     case COMPANY_SERVICE_ERROR_EVENT   = 'company-service-error-event';
+
+    // Company Projects / Crud Events
+    case COMPANY_PROJECT_CREATED_EVENT = 'company-project-created-event';
+    case COMPANY_PROJECT_UPDATED_EVENT = 'company-project-updated-event';
+    case COMPANY_PROJECT_DELETED_EVENT = 'company-project-deleted-event';
+    case COMPANY_PROJECT_ERROR_EVENT   = 'company-project-error-event';
 }

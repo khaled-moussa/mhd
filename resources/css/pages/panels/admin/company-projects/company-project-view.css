@@ -1,0 +1,15 @@
+.service-view {
+    @apply w-full flex flex-col justify-center gap-5;
+}
+
+.service-view-row {
+    @apply flex items-center justify-between;
+}
+
+.service-view-row:not(:last-child) {
+    @apply border-b border-current/5;
+}
+
+.service-view-row .label-info {
+    @apply flex-1;
+}
