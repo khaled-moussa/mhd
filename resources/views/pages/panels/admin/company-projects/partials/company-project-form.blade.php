@@ -1,4 +1,4 @@
-<x-form.upload />
+
 
 <x-form.input
     label="Title"

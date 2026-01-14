@@ -66,3 +66,57 @@
 .drag-drop-input__label.invalid > i {
     @apply text-red-500;
 }
+
+/* -------------------------------
+| File Upload Grid
+|------------------------------- */
+.file-wrapper {
+    @apply grid gap-5;
+    @apply grid-cols-1;
+    @apply sm:grid-cols-2;
+    @apply lg:grid-cols-3;
+}
+
+/* -------------------------------
+| File Card
+|------------------------------- */
+.file-upload {
+    @apply flex flex-col justify-between;
+    @apply h-fit p-4;
+    @apply bg-current/5;
+    @apply border border-current/10;
+    @apply rounded-xl;
+}
+
+/* -------------------------------
+| File Info
+|------------------------------- */
+.file-info {
+    @apply flex flex-col gap-3;
+}
+
+.file-name {
+    @apply text-sm font-medium truncate;
+}
+
+/* -------------------------------
+| Progress Bar
+|------------------------------- */
+.progress-text {
+    @apply text-xs! text-end font-bold;
+}
+
+.progress-text::after {
+    content: "%";
+}
+
+.progress-bar {
+    @apply relative w-full h-2 rounded-full overflow-hidden;
+    @apply bg-current/10;
+}
+
+.progress-bar .progress {
+    @apply absolute left-0 top-0 h-full;
+    @apply bg-current/50;
+    @apply transition-all duration-300 ease-linear;
+}

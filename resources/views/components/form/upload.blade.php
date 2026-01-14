@@ -5,32 +5,33 @@
     'multiple' => false,
 ])
 
-<div 
+<div
+    id="drag-area"
     class="drag-drop-input"
-    id="dragArea"
     wire:ignore
 >
-    <label 
+    <label
         id="{{ $attributes->get('id') }}"
-         class="drag-drop-input__label">
+        class="drag-drop-input__label"
+    >
 
         <i class="fi fi-rr-cloud-upload"></i>
 
         <div class="drag-drop-input__text">
             <p>{{ $description }}</p>
-            
+
             <p class="drag-drop-input__hint">
                 Supported File Types: {{ $accept }}
             </p>
         </div>
 
-        <input 
+        <input
             id="{{ $attributes->get('id') }}"
             name="{{ $name }}"
             type="file"
             class="hidden"
             accept="{{ $accept }}"
-            @if($multiple) multiple @endif
+            @if ($multiple) multiple @endif
             {{ $attributes->whereStartsWith('x-') }}
             {{ $attributes->whereStartsWith('@') }}
         />

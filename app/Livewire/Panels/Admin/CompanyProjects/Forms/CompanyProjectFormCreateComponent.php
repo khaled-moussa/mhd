@@ -7,9 +7,11 @@ use App\Domain\CompanyProjects\DTOs\CreateCompanyProjectDto;
 use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CompanyProjectFormCreateComponent extends Component
 {
+    use WithFileUploads;
     use WithLivewireExceptionHandling;
 
     /*
@@ -34,6 +36,8 @@ class CompanyProjectFormCreateComponent extends Component
     | Actions
     |-----------------------------
     */
+    public function photos() {}
+
     public function submit(): void
     {
         $this->form->validate();

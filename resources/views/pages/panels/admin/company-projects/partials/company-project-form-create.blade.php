@@ -11,7 +11,7 @@
 		data-micromodal-close
 	>
 		<div
-			class="modal-container lg"
+			class="modal-container xl"
 			role="dialog"
 			aria-modal="true"
 			aria-labelledby="{{ $modalId }}-title"
