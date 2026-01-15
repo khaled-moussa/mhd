@@ -16,6 +16,9 @@ document.addEventListener("alpine:init", () => {
         dragAreaElement: null,
         fileInputElement: null,
 
+        maxConcurrentUploads: 5,
+        activeUploads: 0,
+
         /* 
         |-------------------------------
         | Init
@@ -56,7 +59,7 @@ document.addEventListener("alpine:init", () => {
 
             this.files.push(...preparedFiles);
 
-            this.uploadPreparedFiles(preparedFiles);
+            this.processQueue();
 
             this.dragAreaElement.classList.add("has-files");
         },
@@ -67,31 +70,112 @@ document.addEventListener("alpine:init", () => {
                 file,
                 name: file.name,
                 size: file.size,
+                preview: URL.createObjectURL(file), // image preview
                 progress: 0,
-                status: "pending",
+                status: "pending", // pending | uploading | completed | error | cancelled
+                upload: null, // Livewire upload reference
             }));
         },
 
-        uploadPreparedFiles(files) {
-            files.forEach((fileItem) => {
-                fileItem.status = "uploading";
+        processQueue() {
+            while (
+                this.activeUploads < this.maxConcurrentUploads &&
+                this.hasPendingFiles()
+            ) {
+                const nextFile = this.getNextPendingFile();
+                if (!nextFile) return;
 
-                this.$wire.upload(
-                    "photos",
-                    fileItem.file,
-                    () => {
-                        fileItem.progress = 100;
-                        fileItem.status = "completed";
-                    },
-                    () => {
-                        fileItem.status = "error";
-                    },
-                    (event) => {
-                        fileItem.progress = event.detail.progress;
-                    },
-                );
-            });
+                this.uploadFile(nextFile);
+            }
         },
+
+        uploadFile(fileItem) {
+            this.activeUploads++;
+            fileItem.status = "uploading";
+
+            fileItem.upload = this.$wire.upload(
+                "form.images",
+                fileItem.file,
+
+                // Success
+                () => {
+                    fileItem.progress = 100;
+                    fileItem.status = "completed";
+                    this.activeUploads--;
+                    this.processQueue();
+                },
+
+                // Error
+                () => {
+                    fileItem.status = "error";
+                    this.activeUploads--;
+                    this.processQueue();
+                },
+
+                // Progress
+                (event) => {
+                    fileItem.progress = event.detail.progress;
+                },
+
+                // Cancelled
+                () => {
+                    fileItem.status = "cancelled";
+                    this.activeUploads--;
+                    this.processQueue();
+                },
+            );
+        },
+
+        cancelFile(fileId) {
+            const file = this.files.find((f) => f.id === fileId);
+            if (!file) return;
+
+            // Cancel active upload
+            if (file.status === "uploading" && file.upload) {
+                file.upload.cancel();
+            }
+
+            file.status = "cancelled";
+            file.progress = 0;
+
+            // Free memory
+            URL.revokeObjectURL(file.preview);
+
+            // Remove from list (optional)
+            this.files = this.files.filter((f) => f.id !== fileId);
+
+            this.processQueue();
+        },
+
+        resetFiles() {
+            // Revoke previews
+            this.files.forEach((file) => URL.revokeObjectURL(file.preview));
+
+            // Reset files array
+            this.files = [];
+
+            // Reset drag area state
+            if (this.dragAreaElement) {
+                this.dragAreaElement.classList.remove("has-files");
+            }
+
+            // Reset active uploads
+            this.activeUploads = 0;
+        },
+
+        /* 
+        |-------------------------------
+        | Helpers
+        |------------------------------- 
+        */
+        hasPendingFiles() {
+            return this.files.some((file) => file.status === "pending");
+        },
+
+        getNextPendingFile() {
+            return this.files.find((file) => file.status === "pending");
+        },
+
         /* 
         |-------------------------------
         | Listeners
@@ -108,7 +192,11 @@ document.addEventListener("alpine:init", () => {
                     closeModal({
                         modalId: MODALS.CREATE_COMPANY_PROJECT_MODAL,
                     });
+
                     MessageToast("created");
+
+                    // Reset uploaded files
+                    this.resetFiles();
                 },
             );
         },

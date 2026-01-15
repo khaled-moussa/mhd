@@ -13,28 +13,25 @@
     {{-- Uploaded files --}}
     <div class="uploaded-files">
         <div class="file-wrapper">
-            {{-- File item --}}
             <template
                 x-for="file in files"
-                x-key="file.id"
+                :key="file.id"
             >
                 <div class="file-upload">
+                    <!-- Image Preview -->
+                    <img
+                        :src="file.preview"
+                        class="file-preview"
+                        alt=""
+                    />
+
                     <div class="file-info">
-                        {{-- File name --}}
                         <p
                             class="file-name"
                             x-text="file.name"
-                        >
-                        </p>
+                        ></p>
 
-                        {{-- File state --}}
-                        <span
-                            class="badge"
-                            x-text="file.status"
-                        >
-                        </span>
-
-                        {{-- File progress --}}
+                        <!-- Progress -->
                         <span
                             class="progress-text"
                             x-text="file.progress"
@@ -46,12 +43,24 @@
                                 :style="`width: ${file.progress}%`"
                             ></div>
                         </div>
+
+                        <!-- Status -->
+                        <p
+                            class="badge"
+                            x-text="file.status"
+                        ></p>
+
+                        <!-- Cancel -->
+                        <x-button.outline
+                            class="cancel-btn danger"
+                            label="Cancel"
+                            @click="cancelFile(file.id)"
+                        />
                     </div>
                 </div>
             </template>
         </div>
     </div>
-
 
     @include('admin::company-projects.partials.company-project-form')
 

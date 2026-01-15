@@ -21,12 +21,12 @@ class CompanyProjectFormComponent extends Form
 
     public string $title = '';
     public string $description = '';
-    public ?string $delivered_at = null;
-    public float $price_start = 0;
+    public ?string $deliveredAt = null;
+    public float $priceStart = 0;
     public string $address = '';
     public ?string $location = null;
-    public ?array $images = null;
-    public string $visibility_state = '';
+    public array $images = [];
+    public string $visibilityState = '';
 
     /*
     |-----------------------------
@@ -49,12 +49,12 @@ class CompanyProjectFormComponent extends Form
                 'min:3',
             ],
 
-            'delivered_at' => [
+            'deliveredAt' => [
                 'nullable',
                 'date',
             ],
 
-            'price_start' => [
+            'priceStart' => [
                 'required',
                 'numeric',
                 'min:0',
@@ -72,13 +72,13 @@ class CompanyProjectFormComponent extends Form
                 'string',
             ],
 
-            'images' => [
-                'nullable',
-                'array',
-            ],
+            'images.*' => [
+                'image',
+                'max:5120'
+            ], // 5MB
 
-            'visibility_state' => [
-                'required',
+            'visibilityState' => [
+                'nullable',
                 'string',
                 'in:draft,visible,hidden',
             ],
@@ -98,12 +98,12 @@ class CompanyProjectFormComponent extends Form
         $this->companyProjectUuid = $companyProject->getUuid();
         $this->title              = $companyProject->getTitle();
         $this->description        = $companyProject->getDescription();
-        $this->delivered_at       = optional($companyProject->getDeliveredAt())->toDateString();
-        $this->price_start        = $companyProject->getPriceStart();
+        $this->deliveredAt        = optional($companyProject->getDeliveredAt())->toDateString();
+        $this->priceStart         = $companyProject->getPriceStart();
         $this->address            = $companyProject->getAddress();
         $this->location           = $companyProject->getLocation();
         $this->images             = $companyProject->getImages();
-        $this->visibility_state   = $companyProject->getVisibilityState();
+        $this->visibilityState    = $companyProject->getVisibilityState();
     }
 
     /*

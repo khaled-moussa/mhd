@@ -4,6 +4,7 @@ namespace App\Livewire\Panels\Admin\CompanyProjects\Forms;
 
 use App\Domain\CompanyProjects\Actions\CreateCompanyProjectAction;
 use App\Domain\CompanyProjects\DTOs\CreateCompanyProjectDto;
+use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectImagesJob;
 use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Component;
@@ -36,24 +37,29 @@ class CompanyProjectFormCreateComponent extends Component
     | Actions
     |-----------------------------
     */
-    public function photos() {}
-
     public function submit(): void
     {
         $this->form->validate();
 
-        $createDto = new CreateCompanyProjectDto(
-            title: $this->form->title,
-            description: $this->form->description,
-            deliveredAt: $this->form->delivered_at,
-            priceStart: $this->form->price_start,
-            address: $this->form->address,
-            location: $this->form->location,
-            images: $this->form->images,
+        $project = app(CreateCompanyProjectAction::class)->execute(
+            new CreateCompanyProjectDto(
+                title: $this->form->title,
+                description: $this->form->description,
+                deliveredAt: $this->form->deliveredAt,
+                priceStart: $this->form->priceStart,
+                address: $this->form->address,
+                location: $this->form->location,
+            )
         );
 
-        app(CreateCompanyProjectAction::class)
-            ->execute(dto: $createDto);
+        $imagePaths = collect($this->form->images)
+            ->map(fn($file) => $file->store('company-projects/tmp', 'public'))
+            ->toArray();
+
+        StoreCompanyProjectImagesJob::dispatch(
+            companyProject: $project,
+            imagePaths: $imagePaths,
+        );
 
         $this->resetForm();
         $this->dispatchCompanyProjectCreatedEvent();

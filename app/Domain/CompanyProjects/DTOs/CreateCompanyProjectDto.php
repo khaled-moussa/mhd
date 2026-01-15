@@ -14,7 +14,6 @@ class CreateCompanyProjectDto
         public string  $address,
         public ?string $location = null,
         public ?string $deliveredAt = null,
-        public ?array  $images = null,
     ) {}
 
     /**
@@ -30,7 +29,6 @@ class CreateCompanyProjectDto
                 'price_start'      => $this->priceStart,
                 'address'          => $this->address,
                 'location'         => $this->location,
-                'images'           => $this->images,
             ],
             fn($value) => ! is_null($value) && $value !== ''
         );

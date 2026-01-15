@@ -1,6 +1,7 @@
 
 
 <x-form.input
+    type="text"
     label="Title"
     wire:model="form.title"
     error="form.title"

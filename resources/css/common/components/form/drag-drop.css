@@ -71,28 +71,25 @@
 | File Upload Grid
 |------------------------------- */
 .file-wrapper {
-    @apply grid gap-5;
-    @apply grid-cols-1;
-    @apply sm:grid-cols-2;
-    @apply lg:grid-cols-3;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
 }
 
 /* -------------------------------
 | File Card
 |------------------------------- */
 .file-upload {
-    @apply flex flex-col justify-between;
-    @apply h-fit p-4;
-    @apply bg-current/5;
-    @apply border border-current/10;
-    @apply rounded-xl;
+    @apply relative p-3 rounded-xl border border-current/10 bg-current/5;
+}
+
+.file-preview {
+    @apply w-full h-32 object-cover rounded-lg mb-2;
 }
 
 /* -------------------------------
 | File Info
 |------------------------------- */
 .file-info {
-    @apply flex flex-col gap-3;
+    @apply flex flex-col gap-2;
 }
 
 .file-name {
@@ -119,4 +116,8 @@
     @apply absolute left-0 top-0 h-full;
     @apply bg-current/50;
     @apply transition-all duration-300 ease-linear;
+}
+
+.cancel-btn {
+    @apply self-end;
 }
