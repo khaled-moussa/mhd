@@ -41,15 +41,6 @@ return new class extends Migration
             $table->string('company_name')
                 ->nullable();
 
-            $table->string('country')
-                ->nullable();
-
-            $table->string('city')
-                ->nullable();
-
-            $table->string('postal_code')
-                ->nullable();
-
             $table->enum('panel_id', PanelEnum::values())
                 ->default('user');
 

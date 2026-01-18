@@ -3,22 +3,22 @@
 /* Impots */
 @import "@css/pages/_layouts/app-layouts.css";
 @import "@css_admin/dashboard/dashboard-cards.css";
-@import "@css_admin/dashboard/dashboard-charts.css";
+@import "@css_admin/projects/_projects.css";
 
 /* -------------------------------------------------
    Dashboard Grid
 -------------------------------------------------- */
 .dashboard-grid {
-    @apply grid gap-5 lg:grid-cols-[1fr_350px];
-    @apply max-h-full;
+    @apply grid gap-5 lg:grid-cols-[1fr];
+    @apply h-full;
 }
 
 .dashboard-grid > div {
     @apply flex flex-col gap-5;
 }
 
-.dashboard-grid .table-container {
-    @apply min-h-[400px];
+.dashboard-grid .projects .table-container .table-header .main-btn {
+    @apply block!;
 }
 
 .dashboard-grid .table-container:has(.empty-table) {

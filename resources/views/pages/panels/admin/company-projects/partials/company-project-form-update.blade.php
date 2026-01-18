@@ -11,7 +11,7 @@
 		data-micromodal-close
 	>
 		<div
-			class="modal-container lg"
+			class="modal-container xl"
 			role="dialog"
 			aria-modal="true"
 			aria-labelledby="{{ $modalId }}-title"
@@ -44,7 +44,7 @@
 				class="modal-content"
 				id="{{ $modalId }}-content"
 			>
-				{{-- Update service livewire component --}}
+				{{-- Update project livewire component --}}
 				<livewire:panels.admin.company-projects.forms.company-project-form-update-component />
 			</main>
 		</div>

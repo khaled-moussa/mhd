@@ -5,16 +5,19 @@ namespace App\Livewire\Panels\Admin\CompanyProjects\Forms;
 use App\Domain\CompanyProjects\Actions\GetCompanyProjectByUuidAction;
 use App\Domain\CompanyProjects\Actions\UpdateCompanyProjectAction;
 use App\Domain\CompanyProjects\DTOs\UpdateCompanyProjectDto;
+use App\Domain\CompanyProjects\Jobs\RemoveCompanyProjectImagesJob;
+use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectImagesJob;
 use App\Domain\CompanyProjects\Models\CompanyProject;
-use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CompanyProjectFormUpdateComponent extends Component
 {
-    use WithLivewireExceptionHandling;
+    use WithFileUploads;
+    // use WithLivewireExceptionHandling;
 
     /*
     |-----------------------------
@@ -25,6 +28,8 @@ class CompanyProjectFormUpdateComponent extends Component
     public string $companyProjectUuid;
 
     public CompanyProjectFormComponent $form;
+
+    public array $removedImageIds = [];
 
     /*
     |-----------------------------
@@ -55,6 +60,15 @@ class CompanyProjectFormUpdateComponent extends Component
     | Actions
     |-----------------------------
     */
+    public function handleSubmit(array $removedImageIds = [])
+    {
+        if (!empty($removedImageIds)) {
+            $this->removedImageIds = $removedImageIds;
+            $this->removeProjectImages();
+        }
+
+        $this->submit();
+    }
     public function submit(): void
     {
         $this->validate();
@@ -63,11 +77,11 @@ class CompanyProjectFormUpdateComponent extends Component
             uuid: $this->companyProjectUuid,
             title: $this->form->title,
             description: $this->form->description,
-            deliveredAt: $this->form->delivered_at,
-            priceStart: $this->form->price_start,
+            deliveredAt: $this->form->deliveredAt,
+            priceStart: $this->form->priceStart,
             address: $this->form->address,
             location: $this->form->location,
-            images: $this->form->images,
+            visible: $this->form->visible
         );
 
         app(UpdateCompanyProjectAction::class)
@@ -76,9 +90,30 @@ class CompanyProjectFormUpdateComponent extends Component
                 dto: $updateDto
             );
 
+        if (!empty($this->form->images)) {
+            $this->uploadProjectImages();
+        }
+
         $this->dispatchCompanyProjectUpdatedEvent();
     }
 
+    private function uploadProjectImages(): void
+    {
+        dispatch(new StoreCompanyProjectImagesJob(
+            companyProject: $this->companyProject,
+            tempPaths: collect($this->form->images)
+                ->map(fn($file) => $file->getRealPath())
+                ->toArray(),
+        ));
+    }
+
+    private function removeProjectImages(): void
+    {
+        dispatch(new RemoveCompanyProjectImagesJob(
+            companyProject: $this->companyProject,
+            removedImageIds: $this->removedImageIds
+        ));
+    }
     /*
     |-----------------------------
     | Computed

@@ -3,8 +3,7 @@
 -------------------------------- */
 .dashboard-cards {
     @apply grid gap-5;
-    @apply 2xl:grid-cols-4;
-    @apply max-sm:grid-cols-2 sm:grid-cols-2 xl:grid-cols-4;
+    @apply grid-cols-1 md:grid-cols-3;
 }
 
 /* -------------------------------  

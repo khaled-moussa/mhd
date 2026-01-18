@@ -26,7 +26,10 @@
                 <h2
                     id="{{ $id }}-title"
                     class="projects__modal-title"
-                >{{ $title }}</h2>
+                >
+                    {{ $title }}
+                </h2>
+
                 <x-button.outline
                     class="modal-close"
                     data-custom-close="{{ $id }}"
@@ -53,7 +56,6 @@
                                     class="splide__list"
                                     id="projects-modal-carousel-list"
                                 >
-                                    {{-- Leave empty: slides will be injected dynamically --}}
                                 </div>
                             </div>
                         </div>
@@ -86,16 +88,19 @@
                                     label="Delivered"
                                     description="August 2025"
                                 />
+
                                 <x-label.info
                                     label="Price Start"
                                     description="150,000 LE"
                                 />
                             </div>
+
                             <div class="projects__modal-row">
                                 <x-label.info
                                     label="Address"
                                     description="Masr Gdeda - Nozha"
                                 />
+
                                 <x-label.info
                                     label="Location"
                                     description="+20 1015571129"

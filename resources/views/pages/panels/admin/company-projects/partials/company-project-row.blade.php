@@ -4,6 +4,12 @@
     <td data-label="Title">{{ $item['title'] }}</td>
     <td data-label="Description"> {{ $item['description'] }} </td>
 
+    <td data-label="Visibilty State">
+        <div class="text-{{ $item['visible_color']}}">
+            <i class="fi {{ $item['visible_icon'] }}"></i>
+        </div>
+    </td>
+
     {{-- Table row actions --}}
     <td data-label="Actions">
         <x-table.row-actions :index="$item['uuid']">

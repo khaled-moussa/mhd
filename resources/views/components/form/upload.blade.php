@@ -3,7 +3,9 @@
     'description' => 'Drag & drop files here, or click to select files',
     'accept' => '.png,.jpg,.jpeg',
     'multiple' => false,
+    'error' => null,
 ])
+
 
 <div
     id="drag-area"
@@ -32,8 +34,13 @@
             class="hidden"
             accept="{{ $accept }}"
             @if ($multiple) multiple @endif
+            {{ $attributes->whereStartsWith('required') }}
+            {{ $attributes->whereStartsWith('wire') }}
             {{ $attributes->whereStartsWith('x-') }}
             {{ $attributes->whereStartsWith('@') }}
         />
     </label>
 </div>
+
+{{-- Validation --}}
+<x-alert.validation-input :error="$error" />

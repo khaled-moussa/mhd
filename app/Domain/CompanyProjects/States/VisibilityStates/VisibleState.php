@@ -14,8 +14,18 @@ class VisibleState extends VisibilityStates
         return true;
     }
 
-    public function colorClass(): string
+    public function badge(): string
     {
         return "success";
+    }
+
+    public function color(): string
+    {
+        return "green-500";
+    }
+
+    public function icon(): string
+    {
+        return 'fi-rr-check-circle';
     }
 }

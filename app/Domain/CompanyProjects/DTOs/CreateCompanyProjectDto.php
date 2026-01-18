@@ -2,6 +2,9 @@
 
 namespace App\Domain\CompanyProjects\DTOs;
 
+use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
+use App\Domain\CompanyProjects\States\VisibilityStates\VisibleState;
+
 class CreateCompanyProjectDto
 {
     /**
@@ -14,6 +17,7 @@ class CreateCompanyProjectDto
         public string  $address,
         public ?string $location = null,
         public ?string $deliveredAt = null,
+        public bool $visible = true,
     ) {}
 
     /**
@@ -29,6 +33,7 @@ class CreateCompanyProjectDto
                 'price_start'      => $this->priceStart,
                 'address'          => $this->address,
                 'location'         => $this->location,
+                'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
             ],
             fn($value) => ! is_null($value) && $value !== ''
         );

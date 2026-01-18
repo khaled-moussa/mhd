@@ -30,8 +30,8 @@ Route::middleware('guest')
         Route::get('login', LoginController::class)
             ->name('login');
 
-        Route::get('register', RegisterController::class)
-            ->name('register');
+        // Route::get('register', RegisterController::class)
+        //     ->name('register');
 
         Route::get('forgot-password', ForgetPasswordController::class)
             ->name('forgot-password');

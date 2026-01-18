@@ -1,12 +1,18 @@
 <div class="table-container">
     <x-table
-        :headers="['#', 'Title', 'Description', 'Actions']"
+        :headers="['#', 'Title', 'Description', 'Visiblity State', 'Actions']"
         :rows="$companyProjectsData"
         view="admin::company-projects.partials.company-project-row"
         row-name="item"
     >
         <x-slot:header>
             <h6>Projects ({{ $paginator->total() }})</h6>
+
+            <x-button.main
+                class="header-btn"
+                label="Create Project"
+                :data-custom-open="$modal['CREATE_COMPANY_PROJECT_MODAL']"
+            />
         </x-slot:header>
 
         <x-slot:pagination>
@@ -15,15 +21,9 @@
                 'startingPage' => $startingPage,
                 'endingPage' => $endingPage,
                 'lastPage' => $lastPage,
-            ])}}
+            ]) }}
         </x-slot:pagination>
     </x-table>
-
-    {{-- Company Project view modal --}}
-    @include('admin::company-projects.partials.company-project-view-modal', [
-        'modalId' => $modal['VIEW_COMPANY_PROJECT_MODAL'],
-        'modalTitle' => 'View Company Project',
-    ])
 
     {{-- Company Project view modal --}}
     <x-modal.delete

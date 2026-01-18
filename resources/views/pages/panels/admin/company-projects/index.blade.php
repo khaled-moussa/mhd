@@ -6,8 +6,8 @@
 
 {{-- Page assets --}}
 @push('head')
-    {{ Vite::adminStyle('company-projects/_company-projects.css') }}
-    {{ Vite::adminScript('company-projects/_company-projects.js') }}
+    {{ Vite::adminStyle('projects/_projects.css') }}
+    {{ Vite::adminScript('projects/_projects.js') }}
 @endpush
 
 {{-- Content --}}
@@ -21,11 +21,18 @@
     </x-header.page>
 
     <div
-        x-data="companyProjectsComponent"
-        class="services"
+        x-data="projectsComponent"
+        class="projects"
     >
         {{-- Projects table livewire component --}}
         <livewire:panels.admin.company-projects.pages.company-projects-component />
+
+        {{-- View project modal --}}
+        @include('admin::company-projects.partials.company-project-view-modal', [
+            'modalId' => $modal['VIEW_COMPANY_PROJECT_MODAL'],
+            'modalTitle' => 'View Project',
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, rem!',
+        ])
 
         {{-- Create project modal --}}
         @include('admin::company-projects.partials.company-project-form-create', [

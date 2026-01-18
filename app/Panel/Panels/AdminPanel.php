@@ -35,13 +35,13 @@ class AdminPanel implements PanelContract
             ),
 
             new SidebarItem(
-                label: 'Company Services',
+                label: 'Services',
                 routeName: 'admin.company-services.index',
                 icon: 'fi-tc-person-carry-box',
             ),
 
             new SidebarItem(
-                label: 'Company Projects',
+                label: 'Projects',
                 routeName: 'admin.company-projects.index',
                 icon: 'fi fi-tr-construction-location',
             ),

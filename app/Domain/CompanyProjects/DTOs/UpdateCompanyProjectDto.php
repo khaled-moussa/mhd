@@ -2,6 +2,9 @@
 
 namespace App\Domain\CompanyProjects\DTOs;
 
+use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
+use App\Domain\CompanyProjects\States\VisibilityStates\VisibleState;
+
 class UpdateCompanyProjectDto
 {
     /**
@@ -16,6 +19,7 @@ class UpdateCompanyProjectDto
         public ?string $address = null,
         public ?string $location = null,
         public ?array  $images = null,
+        public bool  $visible = true,
     ) {}
 
     /**
@@ -23,7 +27,7 @@ class UpdateCompanyProjectDto
      */
     public function toArray(): array
     {
-        return array_filter(
+        return
             [
                 'title'            => $this->title,
                 'description'      => $this->description,
@@ -32,8 +36,7 @@ class UpdateCompanyProjectDto
                 'address'          => $this->address,
                 'location'         => $this->location,
                 'images'           => $this->images,
-            ],
-            fn($value) => ! is_null($value) && $value !== ''
-        );
+                'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
+            ];
     }
 }

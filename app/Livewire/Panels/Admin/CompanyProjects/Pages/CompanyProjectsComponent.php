@@ -18,7 +18,7 @@ use Livewire\WithPagination;
 
 class CompanyProjectsComponent extends Component
 {
-    use WithLivewireExceptionHandling;
+    // use WithLivewireExceptionHandling;
     use WithPagination;
     use HandlePaginationButtons;
 

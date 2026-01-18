@@ -13,7 +13,7 @@ use Livewire\WithFileUploads;
 class CompanyProjectFormCreateComponent extends Component
 {
     use WithFileUploads;
-    use WithLivewireExceptionHandling;
+    // use WithLivewireExceptionHandling;
 
     /*
     |-----------------------------
@@ -37,11 +37,22 @@ class CompanyProjectFormCreateComponent extends Component
     | Actions
     |-----------------------------
     */
+    public function handleSubmit(): void
+    {
+        if (empty($this->form->images)) {
+            return;
+        }
+
+        $this->submit();
+    }
+
     public function submit(): void
     {
         $this->form->validate();
 
-        $project = app(CreateCompanyProjectAction::class)->execute(
+        $project = app(
+            CreateCompanyProjectAction::class
+        )->execute(
             new CreateCompanyProjectDto(
                 title: $this->form->title,
                 description: $this->form->description,
@@ -49,17 +60,16 @@ class CompanyProjectFormCreateComponent extends Component
                 priceStart: $this->form->priceStart,
                 address: $this->form->address,
                 location: $this->form->location,
+                visible: $this->form->visible
             )
         );
 
-        $imagePaths = collect($this->form->images)
-            ->map(fn($file) => $file->store('company-projects/tmp', 'public'))
-            ->toArray();
-
-        StoreCompanyProjectImagesJob::dispatch(
+        dispatch(new StoreCompanyProjectImagesJob(
             companyProject: $project,
-            imagePaths: $imagePaths,
-        );
+            tempPaths: collect($this->form->images)
+                ->map(fn($file) => $file->getRealPath())
+                ->toArray(),
+        ));
 
         $this->resetForm();
         $this->dispatchCompanyProjectCreatedEvent();

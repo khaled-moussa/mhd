@@ -8,13 +8,15 @@ export default function initSplideCarousel() {
     }
 
     const slidesCount = splideElement.querySelectorAll(".splide__slide").length;
-    
+
+    console.log(splideElement, slidesCount);
+
     if (splideElement && slidesCount != 0) {
         let options = {
             perPage: 1,
             rewind: true,
             autoWidth: false,
-            autoHeight: false,   
+            autoHeight: false,
             pagination: false,
             breakpoints: {
                 640: {

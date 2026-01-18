@@ -26,7 +26,9 @@ class CompanyProjectFormComponent extends Form
     public string $address = '';
     public ?string $location = null;
     public array $images = [];
-    public string $visibilityState = '';
+    public array $removedImages = [];
+    public array $existingImages = [];
+    public bool $visible = true;
 
     /*
     |-----------------------------
@@ -77,10 +79,9 @@ class CompanyProjectFormComponent extends Form
                 'max:5120'
             ], // 5MB
 
-            'visibilityState' => [
+            'visible' => [
                 'nullable',
-                'string',
-                'in:draft,visible,hidden',
+                'boolean'
             ],
         ];
     }
@@ -98,12 +99,13 @@ class CompanyProjectFormComponent extends Form
         $this->companyProjectUuid = $companyProject->getUuid();
         $this->title              = $companyProject->getTitle();
         $this->description        = $companyProject->getDescription();
-        $this->deliveredAt        = optional($companyProject->getDeliveredAt())->toDateString();
+        $this->deliveredAt        = $companyProject->getDeliveredAt();
         $this->priceStart         = $companyProject->getPriceStart();
         $this->address            = $companyProject->getAddress();
         $this->location           = $companyProject->getLocation();
-        $this->images             = $companyProject->getImages();
-        $this->visibilityState    = $companyProject->getVisibilityState();
+        $this->existingImages     = $companyProject->getImages();
+        $this->removedImages      = [];
+        $this->visible            = $companyProject->getVisibility()->value();
     }
 
     /*

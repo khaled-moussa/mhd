@@ -51,22 +51,4 @@
 			<div class="dashboard-card-trend">+5%</div>
 		</div>
 	</div>
-
-	{{-- Card: New Customers --}}
-	<div
-		class="dashboard-card"
-		data-aos="fade-up"
-		data-aos-delay="200"
-	>
-		<div class="dashboard-card-icon">
-			<i class="fi fi-tr-cards-blank"></i>
-		</div>
-		<div class="dashboard-card-content">
-			<div>
-				<h4>Total Users</h4>
-				<div class="dashboard-card-value">320</div>
-			</div>
-			<div class="dashboard-card-trend">+5%</div>
-		</div>
-	</div>
 </div>

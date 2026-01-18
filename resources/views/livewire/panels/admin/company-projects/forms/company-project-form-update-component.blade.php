@@ -1,8 +1,8 @@
 <form
-	x-data="companyProjectFormUpdateComponent"
+	x-data="projectFormUpdateComponent"
     id="{{ $formId['UPDATE_COMPANY_PROJECT_FORM'] }}"
 	class="service-form"
-	wire:submit.prevent="submit"
+	@submit.prevent="submit"
 >
 	@include('admin::company-projects.partials.company-project-form')
 
@@ -15,7 +15,7 @@
 
 		<x-button.main
 			label="Submit"
-			wire:target="submit"
+			wire:target="handleSubmit"
 			wire:loading.class="spinner"
 			wire:attr="disabled"
 		/>

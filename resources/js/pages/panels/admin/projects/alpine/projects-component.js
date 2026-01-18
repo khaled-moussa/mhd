@@ -1,13 +1,10 @@
 import MessageToast from "@js/utils/message-toast";
 import { deleteModal } from "@js/components/modal/delete-modal";
-import {
-    dispatchModalOpenedEvent,
-    showModal,
-} from "@js/components/modal/_modal";
+import { dispatchModalOpenedEvent } from "@js/components/modal/_modal";
 import { MODALS, UI_EVENTS } from "@js/utils/enums";
 
 document.addEventListener("alpine:init", () => {
-    Alpine.data("companyProjectsComponent", () => ({
+    Alpine.data("projectsComponent", () => ({
         /* 
         |-------------------------------
         | State
@@ -29,18 +26,16 @@ document.addEventListener("alpine:init", () => {
         | Actions
         |------------------------------- 
         */
-        async viewCompanyProject(companyProjectUuid) {
+        viewCompanyProject(companyProjectUuid) {
             if (!this.isValidUuid(companyProjectUuid)) {
                 return this.showError();
             }
 
             this.toggleSpinner(true);
 
-            await this.$wire.call("viewCompanyProject", companyProjectUuid);
-
-            showModal({
-                modalId: MODALS.VIEW_COMPANY_PROJECT_MODAL,
-                callback: () => this.toggleSpinner(false),
+            dispatchModalOpenedEvent(MODALS.VIEW_COMPANY_PROJECT_MODAL, {
+                companyProjectUuid,
+                triggerEl: this.$el,
             });
         },
 

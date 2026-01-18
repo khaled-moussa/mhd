@@ -12,7 +12,7 @@ class GetCompanyProjectByUuidAction
      */
     public function execute(string $companyProjectUuid): CompanyProject
     {
-        $companyProject =  CompanyProject::whereUuid($companyProjecteUuid)->first();
+        $companyProject =  CompanyProject::whereUuid($companyProjectUuid)->first();
 
         if (! $companyProject) {
             throw new ModelNotFoundException('Cannot delete: CompanyProject instance not found or already deleted.');

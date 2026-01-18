@@ -2,16 +2,14 @@
 
 namespace App\Domain\CompanyProjects\Jobs;
 
-use App\Domain\CompanyProjects\Actions\SaveCompanyProjectImagesAction;
 use App\Domain\CompanyProjects\Models\CompanyProject;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 
-class StoreCompanyProjectImagesJob implements ShouldQueue
+class RemoveCompanyProjectImagesJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -20,15 +18,14 @@ class StoreCompanyProjectImagesJob implements ShouldQueue
      */
     public function __construct(
         public CompanyProject $companyProject,
-        public array $tempPaths,
+        public array $removedImageIds,
     ) {}
 
     public function handle(): void
     {
-        foreach ($this->tempPaths as $path) {
-            $this->companyProject
-                ->addMedia($path)
-                ->toMediaCollection('images');
-        }
+        $this->companyProject
+            ->media()
+            ->whereIn('id', $this->removedImageIds)
+            ->delete();
     }
 }

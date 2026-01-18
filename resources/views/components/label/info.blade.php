@@ -31,6 +31,8 @@
                 {{ "No {$label}" }}
             </p>
         @endif
+
+        {{ $content ?? null }}
     </div>
 
     <div class="label-content">

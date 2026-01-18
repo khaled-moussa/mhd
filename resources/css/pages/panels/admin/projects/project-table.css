@@ -1,0 +1,6 @@
+/* -------------------------
+   Company Project form  
+--------------------------- */
+.projects {
+    @apply h-fit lg:h-[calc(100%-50px)];
+}
