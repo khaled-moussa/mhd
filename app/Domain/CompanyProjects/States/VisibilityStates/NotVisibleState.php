@@ -19,9 +19,9 @@ class NotVisibleState extends VisibilityStates
         return 'danger';
     }
 
-    public function color(): string
+    public function textColor(): string
     {
-        return "red-500";
+        return "text-red-500";
     }
 
     public function icon(): string

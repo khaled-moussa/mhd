@@ -33,28 +33,28 @@
         <li>
             <x-button.link
                 label="About Us"
-                path="#about-us"
+                :path="$currentRequest ? '#about-us' : url('/#about-us')"
                 class="landing-navbar-link"
             />
         </li>
         <li>
             <x-button.link
                 label="Services"
-                path="#services"
+                :path="$currentRequest ? '#services' : url('/#services')"
                 class="landing-navbar-link"
             />
         </li>
         <li>
             <x-button.link
                 label="Projects"
-                path="#projects"
+                :path="$currentRequest ? '#projects' : url('/#projects')"
                 class="landing-navbar-link"
             />
         </li>
         <li>
             <x-button.link
                 label="Contact"
-                path="#contact-us"
+                :path="$currentRequest ? '#contact-us' : url('/#contact-us')"
                 class="landing-navbar-link"
             />
         </li>

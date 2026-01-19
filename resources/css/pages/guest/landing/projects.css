@@ -23,7 +23,7 @@
 }
 
 .projects__image {
-    @apply w-full;
+    @apply w-full h-[calc(100%-120px)];
 }
 
 .projects__image img {

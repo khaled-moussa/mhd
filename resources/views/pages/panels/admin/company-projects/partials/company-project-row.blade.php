@@ -5,7 +5,7 @@
     <td data-label="Description"> {{ $item['description'] }} </td>
 
     <td data-label="Visibilty State">
-        <div class="text-{{ $item['visible_color']}}">
+        <div class="{{ $item['visible_text_color'] }}">
             <i class="fi {{ $item['visible_icon'] }}"></i>
         </div>
     </td>

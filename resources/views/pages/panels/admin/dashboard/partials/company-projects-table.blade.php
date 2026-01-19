@@ -1,6 +1,6 @@
 <div
     x-data="companyProjectsComponent"
-    class="company-projects"
+    class="projects"
 >
     {{-- Projects table livewire component --}}
     <livewire:panels.admin.company-projects.pages.company-projects-component />

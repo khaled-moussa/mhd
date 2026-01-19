@@ -10,7 +10,7 @@ abstract class VisibilityStates extends State
     abstract public function label(): string;
     abstract public function value(): bool;
     abstract public function badge(): string;
-    abstract public function color(): string;
+    abstract public function textColor(): string;
     abstract public function icon(): string;
 
     public static function config(): StateConfig

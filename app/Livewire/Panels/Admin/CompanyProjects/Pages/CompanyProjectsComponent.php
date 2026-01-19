@@ -52,7 +52,8 @@ class CompanyProjectsComponent extends Component
     #[Computed]
     public function companyProjects()
     {
-        return app(GetCompanyProjectsAction::class)->execute();
+        return app(GetCompanyProjectsAction::class)
+            ->execute();
     }
 
     #[Computed]

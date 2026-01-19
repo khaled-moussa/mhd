@@ -2,8 +2,9 @@
 
 namespace App\Domain\CompanyProjects\QueryBuilders;
 
-use App\Domain\CompanyServices\States\VisibilityStates\NotVisibleState;
-use App\Domain\CompanyServices\States\VisibilityStates\VisibleState;
+use App\Domain\CompanyProjects\States\VisibilityStates\VisibilityStates;
+use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
+use App\Domain\CompanyProjects\States\VisibilityStates\VisibleState;
 use Illuminate\Database\Eloquent\Builder;
 
 class CompanyProjectBuilder extends Builder
@@ -21,9 +22,9 @@ class CompanyProjectBuilder extends Builder
      *
      * @param class-string $stateClass
      */
-    public function whereVisibility(string $stateClass): self
+    public function whereVisibility(bool $visible): self
     {
-        return $this->where('visibility_state', $stateClass);
+        return $visible ? $this->visible() : $this->notVisible();
     }
 
     /**

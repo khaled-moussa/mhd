@@ -110,6 +110,59 @@ class CompanyProjectFormComponent extends Form
 
     /*
     |-----------------------------
+    | Resolve
+    |-----------------------------
+    */
+
+    public static function resolveEmbedUrl(?string $input = null): ?string
+    {
+        if (!$input) {
+            return null;
+        }
+
+        $input = trim($input);
+
+        // iframe pasted → extract src
+        if (preg_match('/src="([^"]+)"/i', $input, $match)) {
+            $input = $match[1];
+        }
+
+        // Already embed URL
+        if (str_contains($input, '/maps/embed')) {
+            return $input;
+        }
+
+        // Short URL (maps.app.goo.gl)
+        if (str_contains($input, 'maps.app.goo.gl')) {
+            $expanded = self::expandShortUrl($input);
+            return self::resolveEmbedUrl($expanded);
+        }
+
+        // Extract coordinates
+        if (preg_match('/@(-?\d+\.\d+),(-?\d+\.\d+)/', $input, $match)) {
+            return "https://www.google.com/maps?q={$match[1]},{$match[2]}&output=embed";
+        }
+
+        // Fallback search
+        return "https://www.google.com/maps?q=" . urlencode($input) . "&output=embed";
+    }
+
+    private static function expandShortUrl(string $url): string
+    {
+        $headers = get_headers($url, true);
+
+        if (isset($headers['Location'])) {
+            return is_array($headers['Location'])
+                ? end($headers['Location'])
+                : $headers['Location'];
+        }
+
+        return $url;
+    }
+
+
+    /*
+    |-----------------------------
     | Helpers
     |-----------------------------
     */

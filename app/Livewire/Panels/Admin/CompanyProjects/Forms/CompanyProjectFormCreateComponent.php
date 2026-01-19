@@ -59,7 +59,7 @@ class CompanyProjectFormCreateComponent extends Component
                 deliveredAt: $this->form->deliveredAt,
                 priceStart: $this->form->priceStart,
                 address: $this->form->address,
-                location: $this->form->location,
+                location: $this->form->resolveEmbedUrl($this->form->location),
                 visible: $this->form->visible
             )
         );

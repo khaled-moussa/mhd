@@ -58,7 +58,7 @@ class CompanyProjectViewComponent extends Component
             $this->companyProject
         ))->resolve();
     }
-
+    
     /*
     |-----------------------------
     | Computed

@@ -19,9 +19,9 @@ class VisibleState extends VisibilityStates
         return "success";
     }
 
-    public function color(): string
+    public function textColor(): string
     {
-        return "green-500";
+        return "text-green-500";
     }
 
     public function icon(): string

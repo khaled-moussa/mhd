@@ -116,7 +116,6 @@
     />
 </div>
 
-
 <x-form.toggle
     label="Visible"
     wire:model="form.visible"

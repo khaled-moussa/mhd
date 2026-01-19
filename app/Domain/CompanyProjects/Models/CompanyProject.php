@@ -2,8 +2,8 @@
 
 namespace App\Domain\CompanyProjects\Models;
 
+use App\Domain\CompanyProjects\QueryBuilders\CompanyProjectBuilder;
 use App\Domain\CompanyProjects\States\VisibilityStates\VisibilityStates;
-use App\Domain\CompanyServices\QueryBuilders\CompanyServiceBuilder;
 use App\Support\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,9 +34,9 @@ class CompanyProject extends Model implements HasMedia
     |  Query Builder
     |-------------------------------
     */
-    public function newEloquentBuilder($query): CompanyServiceBuilder
+    public function newEloquentBuilder($query): CompanyProjectBuilder
     {
-        return new CompanyServiceBuilder($query);
+        return new CompanyProjectBuilder($query);
     }
 
     /*
@@ -73,6 +73,11 @@ class CompanyProject extends Model implements HasMedia
                 'path' => $media->getUrl(),
             ];
         })->toArray();
+    }
+
+    public function getImageCover(): string
+    {
+        return $this->getFirstMediaUrl('images');
     }
 
     public function getTitle(): string

@@ -9,10 +9,10 @@ class GetCompanyProjectsAction
     /**
      * Get all company services.
      */
-    public function execute()
+    public function execute(int $perPage = 15)
     {
         return CompanyProject::query()
             ->latest('created_at')
-            ->paginate(20);
+            ->paginate($perPage);
     }
 }

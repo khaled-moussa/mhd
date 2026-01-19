@@ -3,17 +3,17 @@
 namespace App\Domain\CompanyProjects\Actions;
 
 use App\Domain\CompanyProjects\Models\CompanyProject;
-use Illuminate\Support\Collection;
 
-class GetCompanyProjectsVisibleAction
+class GetVisibleCompanyProjectsAction
 {
     /**
-     * Get company services that are visible.
+     * Get all company services.
      */
-    public function execute(): Collection
+    public function execute(int $perPage = 15)
     {
         return CompanyProject::query()
             ->visible()
-            ->get();
+            ->latest('created_at')
+            ->paginate($perPage);
     }
 }
