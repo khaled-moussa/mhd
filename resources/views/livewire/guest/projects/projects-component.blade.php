@@ -1,10 +1,10 @@
  {{-- Projects Grid --}}
  <div x-data="projectViewComponent">
      <div class="projects__grid">
-         @foreach ($projectsData as $project)
+         @forelse ($projectsData as $project)
              <div
                  class="projects__card"
-                @click="openProject(@js($project))"
+                 @click="openProject(@js($project))"
              >
                  <img
                      src="{{ $project['image_cover'] }}"
@@ -17,7 +17,11 @@
                      <p class="projects__desc">{{ $project['address'] }}</p>
                  </div>
              </div>
-         @endforeach
+         @empty
+             <div class="empty">
+                 No projects found
+             </div>
+         @endforelse
      </div>
 
      {{-- Load More Button --}}
@@ -34,7 +38,7 @@
      @endif
 
      {{-- View All Projects Button --}}
-     @if ($showViewAllProjectsBtn)
+     @if ($showViewAllProjectsBtn && !empty($projectsData))
          <div class="projects__load-more">
              <x-button.link
                  class="outline-btn"

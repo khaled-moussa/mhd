@@ -22,12 +22,18 @@
                 </div>
 
                 <h1 class="hero__title">
-                    <span class="text-gradient">
+                    <span
+                        id="section-title"
+                        class="text-gradient"
+                    >
                         {{ $section['title'] }}
                     </span>
                 </h1>
 
-                <p class="hero__description">
+                <p
+                    id="section-description"
+                    class="hero__description"
+                >
                     {{ $section['description'] }}
                 </p>
 
@@ -35,11 +41,13 @@
                     <x-button.link
                         class="main-btn"
                         label="Explore"
+                        path="#projects"
                     />
 
                     <x-button.link
                         class="outline-btn"
                         label="Contact"
+                        path="#contact"
                     />
                 </div>
 

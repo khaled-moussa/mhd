@@ -3,7 +3,7 @@
 ])
 
 <section
-    id="about-us"
+    id="about"
     class="about"
 >
     <div class="about__container">
@@ -18,7 +18,10 @@
 
             {{-- Left: Text --}}
             <div class="about__text">
-                <p class="section-description">
+                <p
+                    id="section-paragraph"
+                    class="section-description"
+                >
                     {{ $section['description'] }}
                 </p>
 

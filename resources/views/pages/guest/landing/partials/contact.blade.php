@@ -1,5 +1,5 @@
 <section
-    id="contact-us"
+    id="contact"
     class="contact-section"
 >
     <div class="contact-container">

@@ -2,7 +2,7 @@
    Projects Section
 ------------------------------- */
 .projects {
-    @apply py-24;
+    @apply relative py-24;
 }
 
 .projects__container {

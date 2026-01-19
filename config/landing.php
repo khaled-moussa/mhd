@@ -12,7 +12,7 @@ return [
             'order' => 1,
         ],
 
-        'about-us' => [
+        'about' => [
             'title' => 'Discover who we are, what drives us.',
             'description' => '“We are passionate about transforming ideas into impactful digital experiences.
                 Our team combines creativity, technology, and strategy to deliver exceptional
@@ -110,6 +110,15 @@ return [
                     'description' => 'A high-rise residential tower redefining modern urban living with breathtaking views.',
                 ],
             ]
+        ],
+
+        'contact' => [
+            'title' => 'Contact Us',
+            'description' => 'Stay Connected.',
+            'data' => [],
+
+            'visible' => true,
+            'order' => null,
         ],
 
         'footer' => [

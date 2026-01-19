@@ -27,7 +27,9 @@ body.theme-transition {
    Branding
 ================================ */
 .logo {
-    @apply flex items-center place-items-center gap-2 w-[100px] h-[40px] transition-[width_height] duration-500 drop-shadow-2xl;
+    @apply flex items-center place-items-center gap-2 p-1 w-full h-[50px] transition-[width_height] duration-500;
+    @apply bg-[url(@img/branding/logo-light.png)] bg-contain bg-center bg-no-repeat content-[''];
+    @apply dark:bg-[url(@img/branding/logo-dark.png)];
 }
 
 /* ================================
@@ -39,7 +41,7 @@ body.theme-transition {
 }
 
 .empty {
-    @apply text-red-500 text-center!;
+    @apply p-3 rounded-xl absolute left-1/2 transform -translate-x-1/2  text-base bg-current/5 backdrop-blur-xl mx-auto!;
 }
 
 .row {

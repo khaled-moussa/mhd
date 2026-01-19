@@ -3,10 +3,8 @@
 namespace App\Livewire\Guest\Projects;
 
 use App\App\Web\Resources\CompanyProjects\CompanyProjectsResource;
-use App\Domain\CompanyProjects\Actions\GetCompanyProjectsAction;
 use App\Domain\CompanyProjects\Actions\GetVisibleCompanyProjectsAction;
 use App\Support\Traits\HandlePaginationButtons;
-use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;

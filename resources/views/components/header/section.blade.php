@@ -1,13 +1,21 @@
 @props([
+    'id' => null,
     'title' => null,
     'paragraph' => null,
 ])
 
 <div @class(['section-header', $attributes->get('class')])>
-    <h2 class="section-title">
+    <h2
+        id="section-title"
+        class="section-title"
+    >
         {{ $title }}
     </h2>
-    <p class="section-description">
+
+    <p
+        id="section-description"
+        class="section-description"
+    >
         {{ $paragraph }}
     </p>
 </div>

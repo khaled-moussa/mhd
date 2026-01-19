@@ -31,8 +31,8 @@ window.addEventListener("message", (event) => {
         }
 
         // --- Handle title & description
-        const title = sectionElement.querySelector(".section-title");
-        const description = sectionElement.querySelector(".section-description");
+        const title = sectionElement.querySelector("#section-title");
+        const description = sectionElement.querySelector("#section-description");
 
 
         if (title && section.title !== undefined) {
