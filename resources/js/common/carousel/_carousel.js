@@ -1,13 +1,14 @@
 import Splide from "@splidejs/splide";
 
-export default function initSplideCarousel() {
-    const splideElement = document.querySelector("#splide");
+export default function initSplideCarousel({ splideElementId }) {
+    const splideElement = document.querySelector(splideElementId);
 
     if (!splideElement) {
         return;
     }
 
     const slidesCount = splideElement.querySelectorAll(".splide__slide").length;
+    console.log(splideElement, slidesCount);
 
     if (splideElement && slidesCount != 0) {
         let options = {
@@ -44,6 +45,6 @@ export default function initSplideCarousel() {
             options.gap = "2rem";
         }
 
-        new Splide("#splide", options).mount();
+        new Splide(splideElementId, options).mount();
     }
 }

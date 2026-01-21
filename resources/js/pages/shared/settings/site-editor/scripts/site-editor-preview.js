@@ -10,8 +10,6 @@ window.addEventListener("message", (event) => {
         .filter((section) => section.order !== undefined)
         .sort((a, b) => a.order - b.order);
 
-    console.log(sortedSections);
-
     sortedSections.forEach((section) => {
         const sectionElement = document.querySelector(`#${section.key}`);
 

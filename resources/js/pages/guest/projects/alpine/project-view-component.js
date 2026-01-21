@@ -1,5 +1,6 @@
 import { showModal } from "@js/components/modal/_modal";
 import { MODALS } from "@js/utils/enums";
+import initSplideCarousel from "@js/common/carousel/_carousel";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("projectViewComponent", () => ({
@@ -30,12 +31,18 @@ document.addEventListener("alpine:init", () => {
         */
         openProject(project) {
             const modalId = "projects-modal";
+            const splideElementId = "#project-modal-splide";
 
+            this.$nextTick(() => {
+                initSplideCarousel({ splideElementId: splideElementId });
+            });
 
             // Elements
             const titleEl = document.getElementById(`${modalId}-title`);
             const descEl = document.getElementById(`${modalId}-description`);
-            const carouselList = document.getElementById( "projects-modal-carousel-list");
+            const carouselList = document.getElementById(
+                "projects-modal-carousel-list",
+            );
 
             // Update text
             titleEl.textContent = project.title;
@@ -66,7 +73,7 @@ document.addEventListener("alpine:init", () => {
                 callback: () => this.reset(),
             });
         },
-     
+
         /* 
         |-------------------------------
         | Helpers

@@ -11,18 +11,23 @@ class LandingSectionViewService
 {
     public function boot(): void
     {
-        // View::composer('pages.guest.*', function ($view) {
-        //     $sectionsMerged = app(GetCurrentLandingSectionsAction::class)
-        //         ->execute();
+        View::composer('pages.guest.*', function ($view) {
 
-        //     $visibleSections = app(FilterVisibleLandingSectionsAction::class)
-        //         ->execute(sections: $sectionsMerged);
+            if (view()->shared('isPreview')) {
+                return;
+            }
 
-        //     $sections = LandingSectionsResource::collection($visibleSections)
-        //         ->resolve();
+            $sectionsMerged = app(GetCurrentLandingSectionsAction::class)
+                ->execute();
 
-        //     $view->with('sections', $sections);
-        // });
+            $visibleSections = app(FilterVisibleLandingSectionsAction::class)
+                ->execute(sections: $sectionsMerged);
+
+            $sections = LandingSectionsResource::collection($visibleSections)
+                ->resolve();
+
+            $view->with('sections', $sections);
+        });
 
         View::composer('components.navigation.navbar.guest', function ($view) {
             $view->with('currentRequest', request()->is('/'));

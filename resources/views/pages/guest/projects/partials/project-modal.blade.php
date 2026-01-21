@@ -48,7 +48,7 @@
                     {{-- Carousel --}}
                     <div class="projects__modal-carousel">
                         <div
-                            id="splide"
+                            id="project-modal-splide"
                             class="splide"
                         >
                             <div class="splide__track">
