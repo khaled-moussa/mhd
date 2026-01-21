@@ -4,7 +4,7 @@ import { MODALS, UI_EVENTS } from "@js/utils/enums";
 import { MODALS_EVENT } from "@js/utils/events";
 
 document.addEventListener("alpine:init", () => {
-    Alpine.data("companyServiceFormUpdateComponent", () => ({
+    Alpine.data("serviceFormUpdateComponent", () => ({
         /* 
         |-------------------------------
         | Init

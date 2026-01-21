@@ -127,9 +127,12 @@ document.addEventListener("alpine:init", () => {
             );
         },
 
-        cancelImage(imageId) {
+        cancelFile(imageId) {
             const imageItem = this.images.find((img) => img.id === imageId);
-            if (!imageItem) return;
+
+            if (!imageItem) {
+                return;
+            }
 
             if (imageItem.status === "uploading" && imageItem.upload) {
                 imageItem.upload.cancel();

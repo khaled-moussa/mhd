@@ -1,3 +1,7 @@
+@props([
+    'section' => [],
+])
+
 <section
     id="contact"
     class="contact-section"
@@ -5,8 +9,8 @@
     <div class="contact-container">
         {{-- Header Section --}}
         <x-header.section
-            title="Let's Connect"
-            paragraph="Have questions or ready to start your real estate journey? Reach out to us — our team is here to assist you every step of the way."
+            :title="$section['title']"
+            :description="$section['description']"
         />
 
         <div class="contact-card">

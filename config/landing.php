@@ -113,8 +113,8 @@ return [
         ],
 
         'contact' => [
-            'title' => 'Contact Us',
-            'description' => 'Stay Connected.',
+            'title' => 'Let\'s Connect',
+            'description' => 'Have questions or ready to start your real estate journey? Reach out to us — our team is here to assist you every step of the way.',
             'data' => [],
 
             'visible' => true,

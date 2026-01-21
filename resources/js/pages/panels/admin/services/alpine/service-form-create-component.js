@@ -3,7 +3,7 @@ import { closeModal } from "@js/components/modal/_modal";
 import { MODALS, UI_EVENTS } from "@js/utils/enums";
 
 document.addEventListener("alpine:init", () => {
-    Alpine.data("companyServiceFormCreateComponent", () => ({
+    Alpine.data("serviceFormCreateComponent", () => ({
         /* 
         |-------------------------------
         | Init

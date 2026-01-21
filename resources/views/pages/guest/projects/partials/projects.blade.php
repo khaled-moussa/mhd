@@ -15,8 +15,8 @@
 
         {{-- Header Section --}}
         <x-header.section
-            title="{{ $section['title'] }}"
-            paragraph="{{ $section['description'] }}"
+            :title="$section['title']"
+            :description="$section['description']"
         />
 
         {{-- Projects livewire component --}}

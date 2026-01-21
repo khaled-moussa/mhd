@@ -63,6 +63,7 @@ class CompanyServiceFormUpdateComponent extends Component
             uuid: $this->companyServiceUuid,
             title: $this->form->title,
             description: $this->form->description,
+            visible: $this->form->visible
         );
 
         app(UpdateCompanyServiceAction::class)

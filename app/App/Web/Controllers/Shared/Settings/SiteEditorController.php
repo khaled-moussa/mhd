@@ -14,7 +14,7 @@ class SiteEditorController
 
     public function view()
     {
-        $sectionsMerged = app(abstract: GetCurrentLandingSectionsAction::class)->execute();
+        $sectionsMerged = app(GetCurrentLandingSectionsAction::class)->execute();
         $sections = LandingSectionsResource::collection($sectionsMerged)->resolve();
 
         return view('pages.shared.settings.site-editor.view', compact('sections'));

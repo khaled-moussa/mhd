@@ -19,7 +19,7 @@
             {{-- Left: Text --}}
             <div class="about__text">
                 <p
-                    id="section-paragraph"
+                    id="section-description"
                     class="section-description"
                 >
                     {{ $section['description'] }}

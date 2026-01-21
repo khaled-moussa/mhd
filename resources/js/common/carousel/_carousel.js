@@ -9,8 +9,6 @@ export default function initSplideCarousel() {
 
     const slidesCount = splideElement.querySelectorAll(".splide__slide").length;
 
-    console.log(splideElement, slidesCount);
-
     if (splideElement && slidesCount != 0) {
         let options = {
             perPage: 1,

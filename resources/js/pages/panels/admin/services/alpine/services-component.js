@@ -7,7 +7,7 @@ import {
 import { MODALS, UI_EVENTS } from "@js/utils/enums";
 
 document.addEventListener("alpine:init", () => {
-    Alpine.data("companyServicesComponent", () => ({
+    Alpine.data("servicesComponent", () => ({
         /* 
         |-------------------------------
         | State

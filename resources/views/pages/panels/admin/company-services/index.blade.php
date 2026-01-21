@@ -21,7 +21,7 @@
     </x-header.page>
 
     <div
-        x-data="companyServicesComponent"
+        x-data="servicesComponent"
         class="services"
     >
         {{-- Services table livewire component --}}
