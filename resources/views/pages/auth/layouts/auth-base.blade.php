@@ -17,7 +17,9 @@
                 x-cloak
             >
                 {{-- Logo --}}
-                <div class="logo"></div>
+                <x-button.link :path="route('landing')">
+                    <div class="logo"></div>
+                </x-button.link>
 
                 {{-- Page Header --}}
                 <div class="header">

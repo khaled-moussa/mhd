@@ -5,7 +5,6 @@ namespace App\Livewire\Panels\Admin\CompanyProjects\Forms;
 use App\Domain\CompanyProjects\Actions\CreateCompanyProjectAction;
 use App\Domain\CompanyProjects\DTOs\CreateCompanyProjectDto;
 use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectImagesJob;
-use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Component;
 use Livewire\WithFileUploads;

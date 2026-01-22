@@ -3,7 +3,10 @@
 namespace App\Livewire\Guest\Projects;
 
 use App\App\Web\Resources\CompanyProjects\CompanyProjectsResource;
+use App\Domain\CompanyProjects\Actions\GetCompanyProjectByUuidAction;
 use App\Domain\CompanyProjects\Actions\GetVisibleCompanyProjectsAction;
+use App\Domain\CompanyProjects\Models\CompanyProject;
+use App\Support\Enums\EventsEnum;
 use App\Support\Traits\HandlePaginationButtons;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -23,8 +26,7 @@ class ProjectsComponent extends Component
     */
     public array $projectsData = [];
     public bool $hasMoreProjects = true;
-    public bool $showViewAllProjectsBtn = false;
-
+    public bool $isProjectSection = false;
     public int $perPage = 10;
 
     /*
@@ -35,7 +37,7 @@ class ProjectsComponent extends Component
     public function mount(int $perPage = 10, bool $showViewAllProjectsBtn = false): void
     {
         $this->perPage = $perPage;
-        $this->showViewAllProjectsBtn = $showViewAllProjectsBtn;
+        $this->isProjectSection = $showViewAllProjectsBtn;
 
         $this->syncState();
     }
@@ -50,9 +52,24 @@ class ProjectsComponent extends Component
     | Load Data
     |---------------------------------
     */
+    public function projects()
+    {
+        return app(GetVisibleCompanyProjectsAction::class)
+            ->execute(perPage: $this->perPage);
+    }
+
+    public function viewProject($projectUuid)
+    {
+        $project = $this->getProject($projectUuid);
+
+        $projectData = (new CompanyProjectsResource($project))->resolve();
+
+        $this->dispatchCompanyProjectLoadedEvent(projectData: $projectData);
+    }
+
     protected function syncState(): void
     {
-        $paginator = $this->companyProjects();
+        $paginator = $this->projects();
 
         $newData = CompanyProjectsResource::collection(
             $paginator->items()
@@ -66,12 +83,6 @@ class ProjectsComponent extends Component
         $this->hasMoreProjects = $paginator->hasMorePages();
     }
 
-    public function companyProjects()
-    {
-        return app(GetVisibleCompanyProjectsAction::class)
-            ->execute(perPage: $this->perPage);
-    }
-
     /*
     |---------------------------------
     | Actions
@@ -79,11 +90,39 @@ class ProjectsComponent extends Component
     */
     public function loadMore(): void
     {
-        if (! $this->companyProjects()->hasMorePages()) {
+        if (! $this->projects()->hasMorePages()) {
             return;
         }
 
         $this->nextPage();
         $this->syncState();
+    }
+
+    /*
+    |-----------------------------
+    | Helpers
+    |-----------------------------
+    */
+    public function getProject(string $projectUuid): ?CompanyProject
+    {
+        if (!$projectUuid) {
+            return null;
+        }
+
+        return app(GetCompanyProjectByUuidAction::class)
+            ->execute(companyProjectUuid: $projectUuid);
+    }
+
+    /* 
+    |-----------------------------
+    | Dispatchers
+    |----------------------------- 
+    */
+    private function dispatchCompanyProjectLoadedEvent(array $projectData)
+    {
+        $this->dispatch(
+            EventsEnum::COMPANY_PROJECT_LOADED_EVENT,
+            projectData: $projectData
+        );
     }
 }

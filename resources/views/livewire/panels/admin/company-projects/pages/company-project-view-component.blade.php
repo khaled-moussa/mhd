@@ -6,7 +6,7 @@
             {{-- Carousel --}}
             <div class="project-view__carousel">
                 <div
-                    id="splide"
+                    id="admin-project-view-splide"
                     class="splide"
                     wire:ignore
                 >

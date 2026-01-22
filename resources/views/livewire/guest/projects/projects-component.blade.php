@@ -1,10 +1,12 @@
  {{-- Projects Grid --}}
- <div x-data="projectViewComponent">
+ <div x-data="projectsComponent">
      <div class="projects__grid">
          @forelse ($projectsData as $project)
              <div
                  class="projects__card"
-                 @click="openProject(@js($project))"
+                 wire:target="viewProject"
+                 wire:loading.class="spinner"
+                 @click="viewProject(`{{ $project['uuid'] }}`)"
              >
                  <img
                      src="{{ $project['image_cover'] }}"
@@ -25,7 +27,7 @@
      </div>
 
      {{-- Load More Button --}}
-     @if (!$showViewAllProjectsBtn)
+     @if (!$isProjectSection)
          <div class="projects__load-more">
              <x-button.outline
                  label="Load more"
@@ -38,7 +40,7 @@
      @endif
 
      {{-- View All Projects Button --}}
-     @if ($showViewAllProjectsBtn && !empty($projectsData))
+     @if ($isProjectSection && !empty($projectsData))
          <div class="projects__load-more">
              <x-button.link
                  class="outline-btn"

@@ -1,13 +1,10 @@
-@props([
-    'id' => 'projects-modal',
-    'title' => '',
-    'description' => '',
-])
+@props(['modalId', 'title', 'description'])
 
 <div
-    id="{{ $id }}"
     class="modal projects__modal"
+    id="{{ $modalId }}"
     aria-hidden="true"
+    x-data="projectViewComponent"
 >
     <div
         class="modal-overlay"
@@ -18,13 +15,13 @@
             class="modal-container xl"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="{{ $id }}-title"
+            aria-labelledby="{{ $modalId }}-title"
         >
 
             {{-- Modal Header --}}
             <header class="modal-header">
                 <h2
-                    id="{{ $id }}-title"
+                    id="{{ $modalId }}-title"
                     class="projects__modal-title"
                 >
                     {{ $title }}
@@ -32,14 +29,14 @@
 
                 <x-button.outline
                     class="modal-close"
-                    data-custom-close="{{ $id }}"
+                    data-custom-close="{{ $modalId }}"
                 />
             </header>
 
             {{-- Modal Content --}}
             <main
                 class="projects__modal-content"
-                id="{{ $id }}-content"
+                id="{{ $modalId }}-content"
             >
 
                 {{-- Modal Body --}}
@@ -64,13 +61,13 @@
                     {{-- Info --}}
                     <div class="projects__modal-info">
                         <h3
-                            id="{{ $id }}-info-title"
+                            id="{{ $modalId }}-info-title"
                             class="projects__modal-info-title"
                         >
                             {{ $title }}
                         </h3>
                         <p
-                            id="{{ $id }}-description"
+                            id="{{ $modalId }}-description"
                             class="projects__modal-info-desc"
                         >
                             {{ $description }}
@@ -86,32 +83,33 @@
                             <div class="projects__modal-row">
                                 <x-label.info
                                     label="Delivered"
-                                    description="August 2025"
+                                    x-description="projectData.delivered_at"
                                 />
 
                                 <x-label.info
                                     label="Price Start"
-                                    description="150,000 LE"
+                                    x-description="projectData.price_start"
                                 />
                             </div>
 
                             <div class="projects__modal-row">
                                 <x-label.info
                                     label="Address"
-                                    description="Masr Gdeda - Nozha"
-                                />
-
-                                <x-label.info
-                                    label="Location"
-                                    description="+20 1015571129"
+                                    x-description="projectData.address"
                                 />
                             </div>
                         </div>
 
-                        <div class="projects__modal-location">
+                        <div
+                            class="projects__modal-location"
+                            x-show="projectData.location"
+                            x-transition
+                        >
                             <div class="projects__modal-location-header">
                                 <i class="fi fi-ss-map-marker-home"></i>
-                                <header class="projects__modal-location-title">Location</header>
+                                <header class="projects__modal-location-title">
+                                    Location
+                                </header>
                             </div>
 
                             <iframe
@@ -122,8 +120,9 @@
                                 allowfullscreen
                                 loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"
-                                src="https://www.google.com/maps/embed?pb=..."
-                            ></iframe>
+                                :src="projectData.location"
+                            >
+                            </iframe>
                         </div>
                     </div>
                 </div>

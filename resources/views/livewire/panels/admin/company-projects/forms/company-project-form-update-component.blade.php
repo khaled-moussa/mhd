@@ -1,7 +1,6 @@
 <form
 	x-data="projectFormUpdateComponent"
     id="{{ $formId['UPDATE_COMPANY_PROJECT_FORM'] }}"
-	class="service-form"
 	@submit.prevent="submit"
 >
 	@include('admin::company-projects.partials.company-project-form')

@@ -3,7 +3,7 @@ import { showModal } from "@js/components/modal/_modal";
 import { MODALS } from "@js/utils/enums";
 import { MODALS_EVENT } from "@js/utils/events";
 import { UI_EVENTS } from "../../../../../utils/enums";
-import initSplideCarousel from "@js/common/carousel/_carousel";
+import initSplideCarousel from "@js/common/carousel/_splide-carousel";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("projectViewComponent", () => ({
@@ -13,6 +13,8 @@ document.addEventListener("alpine:init", () => {
         |------------------------------- 
         */
         projectData: [],
+
+        splideElementId: "#admin-project-view-splide",
 
         /* 
         |-------------------------------
@@ -37,6 +39,23 @@ document.addEventListener("alpine:init", () => {
             await this.$wire.call("viewCompanyProject", projectUuid);
 
             triggerEl.classList.remove("spinner");
+        },
+
+        async openProject() {
+            if (!this.projectData.length === 0) {
+                MessageToast("error");
+                return;
+            }
+
+            this.$nextTick(() =>
+                initSplideCarousel({
+                    splideElementId: this.splideElementId,
+                }),
+            );
+
+            showModal({
+                modalId: MODALS.VIEW_COMPANY_PROJECT_MODAL,
+            });
         },
 
         /* 
@@ -66,12 +85,7 @@ document.addEventListener("alpine:init", () => {
                 UI_EVENTS.COMPANY_PROJECT_LOADED_EVENT,
                 ({ detail }) => {
                     this.projectData = detail.projectData;
-                    
-                    this.$nextTick(() => initSplideCarousel());
-
-                    showModal({
-                        modalId: MODALS.VIEW_COMPANY_PROJECT_MODAL,
-                    });
+                    this.openProject();
                 },
             );
         },

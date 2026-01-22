@@ -1,90 +1,94 @@
 import { showModal } from "@js/components/modal/_modal";
+import { UI_EVENTS } from "@js/utils/enums";
 import { MODALS } from "@js/utils/enums";
-import initSplideCarousel from "@js/common/carousel/_carousel";
+import initSplideCarousel from "@js/common/carousel/_splide-carousel";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("projectViewComponent", () => ({
         /* 
         |-------------------------------
-        | Properties
+        | Init
         |------------------------------- 
         */
-        isOpen: false,
-
-        project: {
-            title: "",
-            description: "",
-            images: [],
-        },
+        projectData: [],
+        splideElementId: "#project-modal-splide",
 
         /* 
         |-------------------------------
         | Init
         |------------------------------- 
         */
-        init() {},
+        init() {
+            this.registerListeners();
+        },
 
         /* 
         |-------------------------------
         | Actions
         |------------------------------- 
         */
-        openProject(project) {
-            const modalId = "projects-modal";
-            const splideElementId = "#project-modal-splide";
+        async openProject(projectData, triggerEl) {
+            if (projectData.length === 0) {
+                return this.showError();
+            }
 
+            this.projectData = projectData;
+
+            // Init images carousel
+            this.initImages(this.projectData.images);
+
+            // Show modal
+            showModal({
+                modalId: MODALS.VIEW_COMPANY_PROJECT_MODAL,
+            });
+        },
+
+        initImages(images) {
             this.$nextTick(() => {
-                initSplideCarousel({ splideElementId: splideElementId });
+                initSplideCarousel({
+                    splideElementId: this.splideElementId,
+                });
             });
 
             // Elements
-            const titleEl = document.getElementById(`${modalId}-title`);
-            const descEl = document.getElementById(`${modalId}-description`);
             const carouselList = document.getElementById(
                 "projects-modal-carousel-list",
             );
-
-            // Update text
-            titleEl.textContent = project.title;
-            descEl.textContent = project.description;
 
             // Clear old slides
             carouselList.innerHTML = "";
 
             // Add new slides
-            const images = project.images || [project.img]; // fallback
-
             images.forEach((img) => {
                 const slide = document.createElement("li");
                 slide.className = "splide__slide";
 
                 const image = document.createElement("img");
                 image.src = img.path;
-                image.alt = project.title;
+                image.alt = "project";
                 image.className = "projects__modal-img rounded-xl";
 
                 slide.appendChild(image);
                 carouselList.appendChild(slide);
             });
-
-            // Show modal
-            showModal({
-                modalId: modalId,
-                callback: () => this.reset(),
-            });
         },
 
         /* 
         |-------------------------------
-        | Helpers
+        | Events
         |------------------------------- 
         */
-        reset() {
-            this.project = {
-                title: "",
-                description: "",
-                images: [],
-            };
+        registerListeners() {
+            this.onProjectDataLoadedEvent();
+        },
+
+        onProjectDataLoadedEvent() {
+            window.addEventListener(
+                UI_EVENTS.COMPANY_PROJECT_LOADED_EVENT,
+                ({ detail }) => {
+                    this.openProject(detail.projectData);
+                },
+            );
         },
     }));
 });

@@ -1,5 +1,5 @@
 <div
-    x-data="companyProjectsComponent"
+    x-data="projectsComponent"
     class="projects"
 >
     {{-- Projects table livewire component --}}
