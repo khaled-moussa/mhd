@@ -2,7 +2,7 @@
 @extends('layouts.guest')
 
 {{-- Page title --}}
-@section('title', 'NAME OF TAB')
+@section('title', 'Home')
 
 {{-- Page assets --}}
 @push('head')

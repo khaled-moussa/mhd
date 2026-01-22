@@ -79,12 +79,16 @@
     label="Title"
     wire:model="form.title"
     error="form.title"
+    required
+    minlength="3"
 />
 
 <x-form.input
     label="Description"
     wire:model="form.description"
     error="form.description"
+    required
+    minlength="10"
 />
 
 <div class="project__form-row">
@@ -107,9 +111,11 @@
         label="Address"
         wire:model="form.address"
         error="form.address"
+        required
     />
 
     <x-form.input
+        type="url"
         label="Location"
         wire:model="form.location"
         error="form.location"

@@ -13,9 +13,12 @@ document.addEventListener("alpine:init", () => {
         |-------------------------------
         */
         images: [],
-
-        dragAreaElement: null,
+        dragImagesAreaElement: null,
         imageInputElement: null,
+
+        file: null,
+        dragFileAreaElement: null,
+        fileInputElement: null,
 
         maxConcurrentUploads: 5,
         activeUploads: 0,
@@ -33,11 +36,11 @@ document.addEventListener("alpine:init", () => {
         },
 
         initState() {
-            this.dragAreaElement = this.$el.querySelector("#drag-area");
+            this.dragImagesAreaElement = this.$el.querySelector("#drag-area");
             this.imageInputElement = this.$el.querySelector("#file-input");
 
             initDragFiles({
-                dragArea: this.dragAreaElement,
+                dragArea: this.dragImagesAreaElement,
                 fileInput: this.imageInputElement,
                 onDrop: (images) => this.validateImages(images),
             });
@@ -62,7 +65,7 @@ document.addEventListener("alpine:init", () => {
             this.images.push(...preparedImages);
 
             this.processQueue();
-            this.dragAreaElement.classList.add("has-files");
+            this.dragImagesAreaElement.classList.add("has-files");
         },
 
         prepareImages(rawImages) {
@@ -127,7 +130,7 @@ document.addEventListener("alpine:init", () => {
             );
         },
 
-        cancelFile(imageId) {
+        cancelImage(imageId) {
             const imageItem = this.images.find((img) => img.id === imageId);
 
             if (!imageItem) {
@@ -146,7 +149,7 @@ document.addEventListener("alpine:init", () => {
             this.images = this.images.filter((img) => img.id !== imageId);
 
             if (this.images.length === 0) {
-                this.dragAreaElement.classList.remove("has-files");
+                this.dragImagesAreaElement.classList.remove("has-files");
                 return;
             }
 
@@ -159,8 +162,108 @@ document.addEventListener("alpine:init", () => {
             this.images = [];
             this.activeUploads = 0;
 
-            if (this.dragAreaElement) {
-                this.dragAreaElement.classList.remove("has-files");
+            if (this.dragImagesAreaElement) {
+                this.dragImagesAreaElement.classList.remove("has-files");
+            }
+        },
+
+        /* 
+        |-------------------------------
+        | File Handling
+        |-------------------------------
+        */
+        validateFile(file) {
+            const result = validateImageFiles(file, {
+                maxSizeInMB: 10,
+            });
+
+            if (result.errors.invalidType || result.errors.oversize) {
+                MessageToast("error");
+                return;
+            }
+
+            this.file = this.prepareFile(result.validFiles);
+
+            this.dragFileAreaElement.classList.add("has-files");
+
+            this.uploadFile();
+        },
+
+        prepareImages(file) {
+            return {
+                id: generateUuid(),
+                file,
+                name: file.name,
+                size: file.size,
+                preview: URL.createObjectURL(file),
+                progress: 0,
+                status: "pending", // pending | uploading | completed | error | cancelled
+                upload: null,
+            };
+        },
+
+        uploadFile(fileItem) {
+            fileItem.status = "uploading";
+
+            fileItem.upload = this.$wire.upload(
+                "form.file",
+                fileItem.file,
+
+                // Success
+                () => {
+                    fileItem.progress = 100;
+                    fileItem.status = "completed";
+                },
+
+                // Error
+                () => {
+                    fileItem.status = "error";
+                },
+
+                // Progress
+                (event) => {
+                    fileItem.progress = event.detail.progress;
+                },
+
+                // Cancelled
+                () => {
+                    fileItem.status = "cancelled";
+                },
+            );
+        },
+
+        cancelFile() {
+            if (!this.file) {
+                return;
+            }
+
+            if (fileItem.status === "uploading" && fileItem.upload) {
+                imageItem.upload.cancel();
+            }
+
+            imageItem.status = "cancelled";
+            imageItem.progress = 0;
+
+            URL.revokeObjectURL(imageItem.preview);
+
+            this.images = this.images.filter((img) => img.id !== imageId);
+
+            if (this.images.length === 0) {
+                this.dragImagesAreaElement.classList.remove("has-files");
+                return;
+            }
+
+            this.processQueue();
+        },
+
+        resetImages() {
+            this.images.forEach((img) => URL.revokeObjectURL(img.preview));
+
+            this.images = [];
+            this.activeUploads = 0;
+
+            if (this.dragImagesAreaElement) {
+                this.dragImagesAreaElement.classList.remove("has-files");
             }
         },
 
