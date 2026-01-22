@@ -28,6 +28,8 @@ class CompanyProjectFormComponent extends Form
     public array $images = [];
     public array $removedImages = [];
     public array $existingImages = [];
+    public $file;
+    public array $existingFile = [];
     public bool $visible = true;
 
     /*
@@ -79,6 +81,13 @@ class CompanyProjectFormComponent extends Form
                 'max:5120'
             ], // 5MB
 
+            'file' => [
+                'required',
+                'file',
+                'mimes:pdf,doc,docx,xls,xlsx',
+                'max:5120', // 5 MB
+            ],
+
             'visible' => [
                 'nullable',
                 'boolean'
@@ -105,6 +114,7 @@ class CompanyProjectFormComponent extends Form
         $this->location           = $companyProject->getLocation();
         $this->existingImages     = $companyProject->getImages();
         $this->removedImages      = [];
+        $this->existingFile       = $companyProject->getBorchure();
         $this->visible            = $companyProject->getVisibility()->value();
     }
 

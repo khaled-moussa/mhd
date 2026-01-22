@@ -1,21 +1,54 @@
-export function initDragFiles({ dragArea, fileInput, onDrop }) {
-    dragArea.addEventListener("dragover", (e) => {
+export class DragFiles {
+    constructor({ dragArea, fileInput, onDrop }) {
+        this.dragArea = dragArea;
+        this.fileInput = fileInput;
+        this.onDrop = onDrop;
+
+        this.init();
+    }
+
+    init() {
+        this.handleDragOver = this.handleDragOver.bind(this);
+        this.handleDragLeave = this.handleDragLeave.bind(this);
+        this.handleDrop = this.handleDrop.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+
+        this.dragArea.addEventListener("dragover", this.handleDragOver);
+        this.dragArea.addEventListener("dragleave", this.handleDragLeave);
+        this.dragArea.addEventListener("drop", this.handleDrop);
+
+        this.fileInput.addEventListener("change", this.handleInputChange);
+    }
+
+    handleDragOver(e) {
         e.preventDefault();
-        dragArea.classList.add("focus");
-    });
+        this.dragArea.classList.add("focus");
+    }
 
-    dragArea.addEventListener("dragleave", () => {
-        dragArea.classList.remove("focus");
-    });
+    handleDragLeave() {
+        this.dragArea.classList.remove("focus");
+    }
 
-    dragArea.addEventListener("drop", (e) => {
+    handleDrop(e) {
         e.preventDefault();
-        dragArea.classList.remove("focus");
-        onDrop(Array.from(e.dataTransfer.files));
-    });
+        this.dragArea.classList.remove("focus");
 
-    fileInput.addEventListener("change", (e) => {
-        onDrop(Array.from(e.target.files));
-        fileInput.value = null;
-    });
+        const files = Array.from(e.dataTransfer.files);
+        this.onDrop?.(files);
+    }
+
+    handleInputChange(e) {
+        const files = Array.from(e.target.files);
+        this.onDrop?.(files);
+
+        // reset input to allow re-selecting same file
+        this.fileInput.value = null;
+    }
+
+    destroy() {
+        this.dragArea.removeEventListener("dragover", this.handleDragOver);
+        this.dragArea.removeEventListener("dragleave", this.handleDragLeave);
+        this.dragArea.removeEventListener("drop", this.handleDrop);
+        this.fileInput.removeEventListener("change", this.handleInputChange);
+    }
 }

@@ -1,8 +1,8 @@
 import MessageToast from "@js/utils/message-toast";
 import { closeModal } from "@js/components/modal/_modal";
 import { MODALS, UI_EVENTS } from "@js/utils/enums";
-import { initDragFiles } from "@js/utils/drag-files";
-import validateImageFiles from "@js/utils/validate-image-files";
+import { DragFiles } from "@js/utils/drag-files";
+import validateFileInput from "@js/utils/validate-file-input";
 import generateUuid from "@js/utils/generate-uuid";
 
 document.addEventListener("alpine:init", () => {
@@ -13,10 +13,12 @@ document.addEventListener("alpine:init", () => {
         |-------------------------------
         */
         images: [],
+
         dragImagesAreaElement: null,
         imageInputElement: null,
 
         file: null,
+
         dragFileAreaElement: null,
         fileInputElement: null,
 
@@ -36,13 +38,24 @@ document.addEventListener("alpine:init", () => {
         },
 
         initState() {
-            this.dragImagesAreaElement = this.$el.querySelector("#drag-area");
-            this.imageInputElement = this.$el.querySelector("#file-input");
+            this.dragImagesAreaElement =
+                this.$el.querySelector("#image-drag-area");
+            this.imageInputElement = this.$el.querySelector("#image-input");
 
-            initDragFiles({
+            const imagesDrag = new DragFiles({
                 dragArea: this.dragImagesAreaElement,
                 fileInput: this.imageInputElement,
                 onDrop: (images) => this.validateImages(images),
+            });
+
+            this.dragFileAreaElement =
+                this.$el.querySelector("#file-drag-area");
+            this.fileInputElement = this.$el.querySelector("#file-input");
+
+            const fileDrag = new DragFiles({
+                dragArea: this.dragFileAreaElement,
+                fileInput: this.fileInputElement,
+                onDrop: (file) => this.validateFile(file),
             });
         },
 
@@ -52,7 +65,8 @@ document.addEventListener("alpine:init", () => {
         |-------------------------------
         */
         validateImages(images) {
-            const result = validateImageFiles(images, {
+            const result = validateFileInput(images, {
+                allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif"],
                 maxSizeInMB: 5,
             });
 
@@ -169,11 +183,27 @@ document.addEventListener("alpine:init", () => {
 
         /* 
         |-------------------------------
+        | Image Uploading Helpers
+        |-------------------------------
+        */
+        hasPendingImages() {
+            return this.images.some((img) => img.status === "pending");
+        },
+
+        getNextPendingImage() {
+            return this.images.find((img) => img.status === "pending");
+        },
+
+        /* 
+        |-------------------------------
         | File Handling
         |-------------------------------
         */
         validateFile(file) {
-            const result = validateImageFiles(file, {
+            console.log(file);
+
+            const result = validateFileInput(file, {
+                allowedExtensions: ["pdf", "doc", "docx"],
                 maxSizeInMB: 10,
             });
 
@@ -182,20 +212,22 @@ document.addEventListener("alpine:init", () => {
                 return;
             }
 
-            this.file = this.prepareFile(result.validFiles);
+            const validFile = result.validFiles[0]; // Extract File
+
+            this.file = this.prepareFile(validFile);
+
+            this.uploadFile(this.file);
 
             this.dragFileAreaElement.classList.add("has-files");
-
-            this.uploadFile();
         },
 
-        prepareImages(file) {
+        prepareFile(file) {
             return {
                 id: generateUuid(),
                 file,
                 name: file.name,
                 size: file.size,
-                preview: URL.createObjectURL(file),
+                preview: file.url,
                 progress: 0,
                 status: "pending", // pending | uploading | completed | error | cancelled
                 upload: null,
@@ -203,6 +235,8 @@ document.addEventListener("alpine:init", () => {
         },
 
         uploadFile(fileItem) {
+            console.log(fileItem);
+
             fileItem.status = "uploading";
 
             fileItem.upload = this.$wire.upload(
@@ -232,38 +266,34 @@ document.addEventListener("alpine:init", () => {
             );
         },
 
-        cancelFile() {
-            if (!this.file) {
+        cancelFile(fileItem) {
+            if (!fileItem) {
                 return;
             }
 
             if (fileItem.status === "uploading" && fileItem.upload) {
-                imageItem.upload.cancel();
+                fileItem.upload.cancel();
             }
 
-            imageItem.status = "cancelled";
-            imageItem.progress = 0;
+            fileItem.status = "cancelled";
+            fileItem.progress = 0;
 
-            URL.revokeObjectURL(imageItem.preview);
+            URL.revokeObjectURL(fileItem.preview);
 
-            this.images = this.images.filter((img) => img.id !== imageId);
+            this.file = null;
 
-            if (this.images.length === 0) {
-                this.dragImagesAreaElement.classList.remove("has-files");
+            if (!this.file) {
+                this.dragFileAreaElement.classList.remove("has-files");
                 return;
             }
-
-            this.processQueue();
         },
 
-        resetImages() {
-            this.images.forEach((img) => URL.revokeObjectURL(img.preview));
+        resetFile() {
+            URL.revokeObjectURL(this.file.preview);
+            this.file = null;
 
-            this.images = [];
-            this.activeUploads = 0;
-
-            if (this.dragImagesAreaElement) {
-                this.dragImagesAreaElement.classList.remove("has-files");
+            if (this.dragFileAreaElement) {
+                this.dragFileAreaElement.classList.remove("has-files");
             }
         },
 
@@ -277,20 +307,8 @@ document.addEventListener("alpine:init", () => {
                 MessageToast("warning", "Images are required");
                 return;
             }
+
             this.$wire.call("handleSubmit");
-        },
-
-        /* 
-        |-------------------------------
-        | Helpers
-        |-------------------------------
-        */
-        hasPendingImages() {
-            return this.images.some((img) => img.status === "pending");
-        },
-
-        getNextPendingImage() {
-            return this.images.find((img) => img.status === "pending");
         },
 
         /* 
@@ -299,6 +317,10 @@ document.addEventListener("alpine:init", () => {
         |-------------------------------
         */
         registerListeners() {
+            this.onCreatedProjectEvent();
+        },
+
+        onCreatedProjectEvent() {
             this.$el.addEventListener(
                 UI_EVENTS.COMPANY_PROJECT_CREATED_EVENT,
                 () => {
@@ -307,7 +329,9 @@ document.addEventListener("alpine:init", () => {
                     });
 
                     MessageToast("created");
+
                     this.resetImages();
+                    this.resetFile();
                 },
             );
         },

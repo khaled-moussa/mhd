@@ -5,6 +5,7 @@ namespace App\Domain\CompanyProjects\Models;
 use App\Domain\CompanyProjects\QueryBuilders\CompanyProjectBuilder;
 use App\Domain\CompanyProjects\States\VisibilityStates\VisibilityStates;
 use App\Support\Traits\HasUuid;
+use App\Support\Traits\ResolveMediaToArray;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\ModelStates\HasStates;
@@ -13,9 +14,11 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class CompanyProject extends Model implements HasMedia
 {
-    use HasFactory, HasStates, HasUuid;
+    use HasFactory;
+    use HasStates;
+    use HasUuid;
     use InteractsWithMedia;
-
+    use ResolveMediaToArray;
 
     /*
     |-------------------------------
@@ -48,6 +51,8 @@ class CompanyProject extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images');
+        
+        $this->addMediaCollection('file')->singleFile();
     }
 
     /*
@@ -65,19 +70,19 @@ class CompanyProject extends Model implements HasMedia
         return $this->uuid;
     }
 
-    public function getImages(): ?array
+    public function getImages(): array
     {
-        return $this->media->map(function ($media) {
-            return [
-                'id' => $media->id,
-                'path' => $media->getUrl(),
-            ];
-        })->toArray();
+        return $this->mediaArray('images');
     }
 
     public function getImageCover(): string
     {
         return $this->getFirstMediaUrl('images');
+    }
+
+    public function getBorchure(): ?array
+    {
+        return $this->firstMediaData('file');
     }
 
     public function getTitle(): string
@@ -132,11 +137,11 @@ class CompanyProject extends Model implements HasMedia
     */
     public function isVisible(): bool
     {
-        return (bool) $this->visibility_state->getValue();
+        return $this->visibility_state->value();
     }
 
     public function isHidden(): bool
     {
-        return ! $this->isVisible();
+        return !$this->isVisible();
     }
 }

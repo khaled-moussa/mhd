@@ -25,18 +25,14 @@ return new class extends Migration
             $table->date('delivered_at')
                 ->nullable();
 
-            $table->decimal('price_start')
-                ->default(0);
+            $table->unsignedDecimal('price_start', 12, 2)->default(0);
 
             $table->string('address');
 
             $table->longText('location')
                 ->nullable();
 
-            $table->json('images')
-                ->nullable();
-
-            $table->string('visibility_state');
+            $table->string('visibility_state'); // Handlig with spatie pattern
 
             // Timestamps
             $table->timestamps();

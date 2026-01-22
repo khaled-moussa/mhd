@@ -1,13 +1,14 @@
 /**
  * Validate image files.
  */
-export default function validateImageFiles(
+export default function validateFileInput(
     filesInput,
     {
         allowedExtensions = ["jpg", "jpeg", "png", "webp", "gif"],
         maxSizeInMB = null,
     } = {},
 ) {
+
     let files = [];
 
     // Normalize input

@@ -4,7 +4,7 @@ namespace App\Livewire\Panels\Admin\CompanyProjects\Forms;
 
 use App\Domain\CompanyProjects\Actions\CreateCompanyProjectAction;
 use App\Domain\CompanyProjects\DTOs\CreateCompanyProjectDto;
-use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectImagesJob;
+use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectFilesJob;
 use App\Support\Enums\EventsEnum;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -63,11 +63,13 @@ class CompanyProjectFormCreateComponent extends Component
             )
         );
 
-        dispatch(new StoreCompanyProjectImagesJob(
+        dispatch(new StoreCompanyProjectFilesJob(
             companyProject: $project,
-            tempPaths: collect($this->form->images)
-                ->map(fn($file) => $file->getRealPath())
-                ->toArray(),
+            tempImagesPaths: collect($this->form->images)->map->getRealPath()->all(),
+            tempFileData: $this->form->file ? [
+                'name' => $this->form->file->getClientOriginalName(),
+                'path' => $this->form->file->getRealPath(),
+            ] : null,
         ));
 
         $this->resetForm();

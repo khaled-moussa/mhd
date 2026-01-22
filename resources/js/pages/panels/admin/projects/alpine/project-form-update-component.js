@@ -2,8 +2,8 @@ import MessageToast from "@js/utils/message-toast";
 import { closeModal, showModal } from "@js/components/modal/_modal";
 import { MODALS, UI_EVENTS } from "@js/utils/enums";
 import { MODALS_EVENT } from "@js/utils/events";
-import { initDragFiles } from "@js/utils/drag-files";
-import validateImageFiles from "@js/utils/validate-image-files";
+import { DragFiles } from "@js/utils/drag-files";
+import validateFileInput from "@js/utils/validate-file-input";
 import generateUuid from "@js/utils/generate-uuid";
 
 document.addEventListener("alpine:init", () => {
@@ -17,8 +17,14 @@ document.addEventListener("alpine:init", () => {
         existingImages: [],
         removedImageIds: [],
 
-        dragAreaElementement: null,
+        dragImagesAreaElement: null,
         imageInputElement: null,
+
+        file: null,
+        existingfile: [],
+
+        dragFileAreaElement: null,
+        fileInputElement: null,
 
         maxConcurrentUploads: 5,
         activeUploads: 0,
@@ -31,18 +37,29 @@ document.addEventListener("alpine:init", () => {
         |------------------------------- 
         */
         init() {
-            this.setupElements();
+            this.initState();
             this.registerListeners();
         },
 
-        setupElements() {
-            this.dragAreaElement = this.$el.querySelector("#drag-area");
-            this.imageInputElement = this.$el.querySelector("#file-input");
+        initState() {
+            this.dragImagesAreaElement =
+                this.$el.querySelector("#image-drag-area");
+            this.imageInputElement = this.$el.querySelector("#image-input");
 
-            initDragFiles({
-                dragArea: this.dragAreaElement,
+            const imagesDrag = new DragFiles({
+                dragArea: this.dragImagesAreaElement,
                 fileInput: this.imageInputElement,
-                onDrop: (files) => this.validateImages(files),
+                onDrop: (images) => this.validateImages(images),
+            });
+
+            this.dragFileAreaElement =
+                this.$el.querySelector("#file-drag-area");
+            this.fileInputElement = this.$el.querySelector("#file-input");
+
+            const fileDrag = new DragFiles({
+                dragArea: this.dragFileAreaElement,
+                fileInput: this.fileInputElement,
+                onDrop: (file) => this.validateFile(file),
             });
         },
 
@@ -60,8 +77,10 @@ document.addEventListener("alpine:init", () => {
             await this.$wire.call("editCompanyProject", projectUuid);
 
             this.existingImages = this.$wire.get("form.existingImages");
+            this.existingfile = this.$wire.get("form.existingFile");
 
             this.hydrateExistingImages();
+            this.hydrateExistingFile();
 
             showModal({
                 modalId: MODALS.UPDATE_COMPANY_PROJECT_MODAL,
@@ -81,22 +100,44 @@ document.addEventListener("alpine:init", () => {
                     status: "completed",
                     isExisting: true,
                     serverId: image.id,
-                    uploadRequest: null,
+                    upload: null,
                 });
             });
 
             if (this.images.length) {
-                this.dragAreaElement.classList.add("has-files");
+                this.dragImagesAreaElement.classList.add("has-files");
+            }
+        },
+
+        hydrateExistingFile() {
+            this.file = null;
+
+            this.file = {
+                id: generateUuid(),
+                name: this.existingfile.name ?? "file",
+                preview: this.existingfile.path,
+                progress: 100,
+                status: "completed",
+                isExisting: true,
+                serverId: this.existingfile.id,
+                upload: null,
+            };
+
+            if (this.file) {
+                this.dragFileAreaElement.classList.add("has-files");
             }
         },
 
         /* 
         |-------------------------------
-        | Upload Flow
+        | Upload Images Flow
         |------------------------------- 
         */
         validateImages(files) {
-            const result = validateImageFiles(files, { maxSizeInMB: 5 });
+            const result = validateFileInput(files, {
+                allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif"],
+                maxSizeInMB: 5,
+            });
 
             if (result.errors.invalidType || result.errors.oversize) {
                 MessageToast("error");
@@ -113,14 +154,14 @@ document.addEventListener("alpine:init", () => {
                     status: "pending",
                     isExisting: false,
                     serverId: null,
-                    uploadRequest: null,
+                    upload: null,
                 }),
             );
 
             this.images.push(...newImages);
 
             if (this.images.length) {
-                this.dragAreaElement.classList.add("has-files");
+                this.dragImagesAreaElement.classList.add("has-files");
             }
 
             this.processQueue();
@@ -144,7 +185,7 @@ document.addEventListener("alpine:init", () => {
             this.activeUploads++;
             imageItem.status = "uploading";
 
-            imageItem.uploadRequest = this.$wire.upload(
+            imageItem.upload = this.$wire.upload(
                 "form.images",
                 imageItem.file,
 
@@ -173,11 +214,6 @@ document.addEventListener("alpine:init", () => {
             );
         },
 
-        /* 
-        |-------------------------------
-        | Remove Image
-        |------------------------------- 
-        */
         removeImage(imageId) {
             const image = this.images.find((i) => i.id === imageId);
 
@@ -196,8 +232,8 @@ document.addEventListener("alpine:init", () => {
             }
 
             // Cancel upload if active
-            if (image.uploadRequest) {
-                image.uploadRequest.cancel();
+            if (image.upload) {
+                image.upload.cancel();
             }
 
             // Cleanup preview
@@ -209,7 +245,7 @@ document.addEventListener("alpine:init", () => {
             this.images = this.images.filter((i) => i.id !== imageId);
 
             if (this.images.length === 0) {
-                this.dragAreaElement.classList.remove("has-files");
+                this.dragImagesAreaElement.classList.remove("has-files");
             }
 
             this.processQueue();
@@ -217,22 +253,8 @@ document.addEventListener("alpine:init", () => {
 
         /* 
         |-------------------------------
-        | Submit
-        |------------------------------- 
-        */
-        submit() {
-            if (this.existingImages.length === 0 && this.images.length === 0) {
-                MessageToast("warning", "Images are required");
-                return;
-            }
-
-            this.$wire.call("handleSubmit", this.removedImageIds);
-        },
-
-        /* 
+        | Image Uploading Helpers
         |-------------------------------
-        | Helpers
-        |------------------------------- 
         */
         hasPendingImages() {
             return this.images.some((i) => i.status === "pending");
@@ -254,6 +276,121 @@ document.addEventListener("alpine:init", () => {
             this.activeUploads = 0;
 
             this.dragAreaElement?.classList.remove("has-files");
+        },
+
+        /* 
+        |-------------------------------
+        | File Handling
+        |-------------------------------
+        */
+        validateFile(file) {
+            const result = validateFileInput(file, {
+                allowedExtensions: ["pdf", "doc", "docx"],
+                maxSizeInMB: 10,
+            });
+
+            if (result.errors.invalidType || result.errors.oversize) {
+                MessageToast("error");
+                return;
+            }
+
+            // Remove existing file first
+            if (this.file) {
+                this.removeFile(this.file);
+            }
+
+            const validFile = result.validFiles[0];
+
+            this.file = this.prepareFile(validFile);
+
+            this.dragFileAreaElement.classList.add("has-files");
+
+            this.uploadFile(this.file);
+        },
+
+        prepareFile(file) {
+            return {
+                id: generateUuid(),
+                file: file,
+                name: file.name,
+                preview: null,
+                progress: 0,
+                status: "pending",
+                isExisting: false,
+                serverId: null,
+                upload: null,
+            };
+        },
+
+        uploadFile(fileItem) {
+            fileItem.status = "uploading";
+
+            fileItem.upload = this.$wire.upload(
+                "form.file",
+                fileItem.file,
+
+                // Success
+                () => {
+                    fileItem.progress = 100;
+                    fileItem.status = "completed";
+                },
+
+                // Error
+                () => {
+                    fileItem.status = "error";
+                },
+
+                // Progress
+                (event) => {
+                    fileItem.progress = event.detail.progress;
+                },
+
+                // Cancelled
+                () => {
+                    fileItem.status = "cancelled";
+                },
+            );
+        },
+
+        removeFile(fileItem) {
+            if (!fileItem) return;
+
+            // Existing file → mark for deletion
+            if (fileItem.isExisting) {
+                this.removedFileId = fileItem.serverId;
+            }
+
+            // Cancel upload if active
+            if (fileItem.upload) {
+                fileItem.upload.cancel();
+            }
+
+            this.file = null;
+
+            this.dragFileAreaElement.classList.remove("has-files");
+        },
+
+        resetFile() {
+            URL.revokeObjectURL(this.file.preview);
+            this.file = null;
+
+            if (this.dragFileAreaElement) {
+                this.dragFileAreaElement.classList.remove("has-files");
+            }
+        },
+
+        /* 
+        |-------------------------------
+        | Submit
+        |------------------------------- 
+        */
+        submit() {
+            if (this.existingImages.length === 0 && this.images.length === 0) {
+                MessageToast("warning", "Images are required");
+                return;
+            }
+
+            this.$wire.call("handleSubmit", this.removedImageIds);
         },
 
         /* 
@@ -282,13 +419,14 @@ document.addEventListener("alpine:init", () => {
             this.$el.addEventListener(
                 UI_EVENTS.COMPANY_PROJECT_UPDATED_EVENT,
                 () => {
-                    this.resetImages();
-
                     closeModal({
                         modalId: MODALS.UPDATE_COMPANY_PROJECT_MODAL,
                     });
 
                     MessageToast("updated");
+
+                    this.resetImages();
+                    this.resetFile();
                 },
             );
         },

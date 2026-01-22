@@ -6,7 +6,7 @@ use App\Domain\CompanyProjects\Actions\GetCompanyProjectByUuidAction;
 use App\Domain\CompanyProjects\Actions\UpdateCompanyProjectAction;
 use App\Domain\CompanyProjects\DTOs\UpdateCompanyProjectDto;
 use App\Domain\CompanyProjects\Jobs\RemoveCompanyProjectImagesJob;
-use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectImagesJob;
+use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectFilesJob;
 use App\Domain\CompanyProjects\Models\CompanyProject;
 use App\Support\Enums\EventsEnum;
 use Livewire\Attributes\Computed;
@@ -69,6 +69,7 @@ class CompanyProjectFormUpdateComponent extends Component
 
         $this->submit();
     }
+
     public function submit(): void
     {
         $this->validate();
@@ -90,7 +91,7 @@ class CompanyProjectFormUpdateComponent extends Component
                 dto: $updateDto
             );
 
-        if (!empty($this->form->images)) {
+        if (!empty($this->form->images) || !empty($this->form->file)) {
             $this->uploadProjectImages();
         }
 
@@ -99,11 +100,13 @@ class CompanyProjectFormUpdateComponent extends Component
 
     private function uploadProjectImages(): void
     {
-        dispatch(new StoreCompanyProjectImagesJob(
+        dispatch(new StoreCompanyProjectFilesJob(
             companyProject: $this->companyProject,
-            tempPaths: collect($this->form->images)
-                ->map(fn($file) => $file->getRealPath())
-                ->toArray(),
+            tempImagesPaths: collect($this->form->images)->map->getRealPath()->all(),
+            tempFileData: $this->form->file ? [
+                'name' => $this->form->file->getClientOriginalName(),
+                'path' => $this->form->file->getRealPath(),
+            ] : null,
         ));
     }
 

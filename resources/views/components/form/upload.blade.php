@@ -1,4 +1,6 @@
 @props([
+    'inputId',
+    'dragId',
     'name' => 'file',
     'description' => 'Drag & drop files here, or click to select files',
     'accept' => '.png,.jpg,.jpeg',
@@ -6,14 +8,13 @@
     'error' => null,
 ])
 
-
 <div
-    id="drag-area"
+    id="{{ $dragId }}"
     class="drag-drop-input"
     wire:ignore
 >
     <label
-        id="{{ $attributes->get('id') }}"
+        id="{{ $inputId }}"
         class="drag-drop-input__label"
     >
 
@@ -28,7 +29,7 @@
         </div>
 
         <input
-            id="{{ $attributes->get('id') }}"
+            id="{{ $inputId }}"
             name="{{ $name }}"
             type="file"
             class="hidden"
