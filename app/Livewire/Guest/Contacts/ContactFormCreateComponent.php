@@ -45,7 +45,7 @@ class ContactFormCreateComponent extends Component
                 'min:3',
                 'max:255'
             ],
-            'emaissl'   => [
+            'email'   => [
                 'required',
                 'email',
                 'max:255'

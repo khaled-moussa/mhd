@@ -4,10 +4,7 @@
         <div>
             <div class="card-profile-info">
                 <div class="card-profile-img">
-                    <x-asset.img
-                        folder="mockups"
-                        img="profile.jpg"
-                    />
+                    <img src="{{ $avatar }}" />
                 </div>
 
                 <header>
