@@ -4,12 +4,15 @@ namespace App\Livewire\Shared\Settings\Pages;
 
 use App\App\Web\Resources\Users\UsersResource;
 use App\Livewire\Shared\Settings\Bases\BaseSettingComponent;
+use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 
 class SecurityComponent extends BaseSettingComponent
 {
+    use WithLivewireExceptionHandling;
+
     /* 
     |-----------------------------
     | Properties

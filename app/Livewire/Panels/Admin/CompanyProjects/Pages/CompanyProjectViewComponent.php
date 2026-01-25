@@ -5,6 +5,7 @@ namespace App\Livewire\Panels\Admin\CompanyProjects\Pages;
 use App\App\Web\Resources\CompanyProjects\CompanyProjectsResource;
 use App\Domain\CompanyProjects\Actions\GetCompanyProjectByUuidAction;
 use App\Domain\CompanyProjects\Models\CompanyProject;
+use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
@@ -12,6 +13,8 @@ use Livewire\Component;
 
 class CompanyProjectViewComponent extends Component
 {
+    use WithLivewireExceptionHandling;
+
     /*
     |-----------------------------
     | Properties

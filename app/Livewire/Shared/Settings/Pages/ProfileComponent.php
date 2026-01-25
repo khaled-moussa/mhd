@@ -5,10 +5,13 @@ namespace App\Livewire\Shared\Settings\Pages;
 use App\Domain\Users\Actions\UpdateUserAction;
 use App\Domain\Users\DTOs\UpdateUserDto;
 use App\Livewire\Shared\Settings\Bases\BaseSettingComponent;
+use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 
 class ProfileComponent extends BaseSettingComponent
 {
+    use WithLivewireExceptionHandling;
+    
     /*
     |-----------------------------
     | State
