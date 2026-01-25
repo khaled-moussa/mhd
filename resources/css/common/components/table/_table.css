@@ -15,6 +15,10 @@
     @apply w-full flex items-center p-5 rounded-t-xl justify-between text-lg font-semibold;
 }
 
+.table-container .table-header .header-btn {
+    @apply hidden;
+}
+
 .table-container:not(:has(.table-header)) {
     @apply rounded-t-xl;
 }

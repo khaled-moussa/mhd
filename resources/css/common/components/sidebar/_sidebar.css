@@ -31,7 +31,7 @@
 }
 
 .sidebar-brand .logo {
-    @apply max-w-[40px] max-h-[40px];
+    @apply bg-left;
 }
 
 .sidebar-brand .brand-name {

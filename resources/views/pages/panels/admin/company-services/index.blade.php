@@ -7,7 +7,7 @@
 {{-- Page assets --}}
 @push('head')
     {{ Vite::adminStyle('services/_services.css') }}
-    {{ Vite::adminScript('company-services/_company-services.js') }}
+    {{ Vite::adminScript('services/_services.js') }}
 @endpush
 
 {{-- Content --}}
@@ -21,7 +21,7 @@
     </x-header.page>
 
     <div
-        x-data="companyServicesComponent"
+        x-data="servicesComponent"
         class="services"
     >
         {{-- Services table livewire component --}}

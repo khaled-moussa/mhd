@@ -65,7 +65,7 @@
 			>
 				<i class="fi fi-tr-entrance"></i>
 			</x-button.main>
-
+{{-- 
 			<x-button.link
 				class="link-btn"
 				label="No account?"
@@ -74,7 +74,7 @@
 				wire:current="active"
 			>
 				<span class="underline">Create an account</span>
-			</x-button.link>
+			</x-button.link> --}}
 		</div>
 	</form>
 </div>

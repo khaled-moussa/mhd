@@ -48,7 +48,7 @@
 }
 
 .auth-content .logo {
-    @apply mb-8 w-7 h-7;
+    @apply mb-8 bg-left;
 }
 
 /* -------------------------------  

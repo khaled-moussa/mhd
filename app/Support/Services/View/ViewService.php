@@ -10,5 +10,7 @@ class ViewService
         app(PanelViewService::class)->boot();
         app(UserViewService::class)->boot();
         app(ViewNamespaceRegistrarService::class)->boot();
+        app(LandingSectionViewService::class)->boot();
+
     }
 }

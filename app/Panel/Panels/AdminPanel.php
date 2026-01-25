@@ -33,11 +33,17 @@ class AdminPanel implements PanelContract
                 routeName: 'admin.dashboard',
                 icon: 'fi-tr-chart-tree-map',
             ),
-      
+
             new SidebarItem(
-                label: 'Company Services',
+                label: 'Services',
                 routeName: 'admin.company-services.index',
                 icon: 'fi-tc-person-carry-box',
+            ),
+
+            new SidebarItem(
+                label: 'Projects',
+                routeName: 'admin.company-projects.index',
+                icon: 'fi fi-tr-construction-location',
             ),
         ];
     }

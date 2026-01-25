@@ -2,7 +2,7 @@
    Projects Section
 ------------------------------- */
 .projects {
-    @apply py-24;
+    @apply relative py-24;
 }
 
 .projects__container {
@@ -23,7 +23,7 @@
 }
 
 .projects__image {
-    @apply w-full;
+    @apply w-full h-[calc(100%-120px)];
 }
 
 .projects__image img {

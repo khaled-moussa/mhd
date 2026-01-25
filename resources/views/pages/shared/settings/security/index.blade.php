@@ -34,9 +34,9 @@
 @endpush
 
 {{-- Delete account form modal --}}
-@push('setting-component')
+{{-- @push('setting-component')
     @include('pages.shared.settings.security.partials.account-form-delete-modal', [
         'modalId' => $modal['DELETE_ACCOUNT_MODAL'],
         'modalTitle' => 'Delete account',
     ])
-@endpush
+@endpush --}}

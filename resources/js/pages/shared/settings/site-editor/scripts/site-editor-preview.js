@@ -5,24 +5,28 @@ window.addEventListener("message", (event) => {
         return;
     }
 
-    // Loop through each section key (hero, about, footer, etc.)
-    Object.entries(data).forEach(([key, section]) => {
+    // Sort sections by order
+    const sortedSections = Object.values(data)
+        .filter((section) => section.order !== undefined)
+        .sort((a, b) => a.order - b.order);
 
-        console.log(key);
-
-
-        const sectionElement = document.querySelector(`#${key}`);
+    sortedSections.forEach((section) => {
+        const sectionElement = document.querySelector(`#${section.key}`);
 
         if (!sectionElement) {
             return;
         }
 
-        // --- Handle order
-        if (section.order) {
-            sectionElement.style.order = section.order;
+        const parent = sectionElement.parentElement;
+
+        if (!parent) {
+            return;
         }
 
-        // --- Handle visibility
+        // Move node (THIS reorders the DOM)
+        parent.appendChild(sectionElement);
+
+        // Visibility
         if (section.visible === false) {
             sectionElement.classList.add("!hidden");
             return;
@@ -30,10 +34,11 @@ window.addEventListener("message", (event) => {
             sectionElement.classList.remove("!hidden");
         }
 
-        // --- Handle title & description
-        const title = sectionElement.querySelector(".section-title");
-        const description = sectionElement.querySelector(".section-description");
-
+        // Title & description
+        const title = sectionElement.querySelector("#section-title");
+        const description = sectionElement.querySelector(
+            "#section-description",
+        );
 
         if (title && section.title !== undefined) {
             title.textContent = section.title;
@@ -43,9 +48,9 @@ window.addEventListener("message", (event) => {
             description.textContent = section.description;
         }
 
-        // --- Handle footer socials
-        if (key === "footer" && section.data?.socials) {
-            const socialsContainer = sectionElement.querySelector(".footer-socials");
+        if (section.key === "footer" && section.data?.socials) {
+            const socialsContainer =
+                sectionElement.querySelector(".footer-socials");
 
             if (!socialsContainer) {
                 return;

@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.6",
         "pusher/pusher-php-server": "^7.2",
+        "spatie/laravel-medialibrary": "^11.17",
         "spatie/laravel-model-states": "^2.12",
         "spatie/laravel-one-time-passwords": "^1.0",
         "spatie/laravel-permission": "^6.24"

@@ -1,5 +1,5 @@
 <form 
-    x-data="companyServiceFormCreateComponent" 
+    x-data="serviceFormCreateComponent" 
     id="create-service-form" 
     class="service-form" 
     wire:submit.prevent="submit"

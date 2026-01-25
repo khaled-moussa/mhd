@@ -1,7 +1,0 @@
-@reference "@css/reference.css";
-
-/* Impots */
-@import "@css_pages/_layouts/app-layouts.css";
-@import "@css_pages/shared/roles/roles-table.css";
-@import "@css_pages/shared/roles/role-view.css";
-@import "@css_pages/shared/roles/role-form.css";

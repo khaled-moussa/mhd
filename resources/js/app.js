@@ -1,5 +1,4 @@
 import "./bootstrap";
-import initSplideCarousel from "./common/carousel/_carousel";
 import initTheme from "./common/theme/_theme";
 import initSidebarCollapse from "./components/sidebar/sidebar-collapse.js";
 import { initMicroModal } from "./components/modal/_modal.js";
@@ -12,7 +11,6 @@ import { initFlowbite } from "flowbite";
 */
 const initCommonScripts = () => {
     initMicroModal();
-    initSplideCarousel();
     initTheme();
 };
 

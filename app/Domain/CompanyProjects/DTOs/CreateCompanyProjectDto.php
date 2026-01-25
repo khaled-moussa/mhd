@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Domain\CompanyProjects\DTOs;
+
+use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
+use App\Domain\CompanyProjects\States\VisibilityStates\VisibleState;
+
+class CreateCompanyProjectDto
+{
+    /**
+     * Create a new DTO instance.
+     */
+    public function __construct(
+        public string  $title,
+        public string  $description,
+        public float   $priceStart = 0,
+        public string  $address,
+        public ?string $location = null,
+        public ?string $deliveredAt = null,
+        public bool $visible = true,
+    ) {}
+
+    /**
+     * Convert the DTO to an array.
+     */
+    public function toArray(): array
+    {
+        return array_filter(
+            [
+                'title'            => $this->title,
+                'description'      => $this->description,
+                'delivered_at'     => $this->deliveredAt,
+                'price_start'      => $this->priceStart,
+                'address'          => $this->address,
+                'location'         => $this->location,
+                'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
+            ],
+            fn($value) => ! is_null($value) && $value !== ''
+        );
+    }
+}

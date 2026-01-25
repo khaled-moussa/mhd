@@ -12,7 +12,7 @@ return [
             'order' => 1,
         ],
 
-        'about-us' => [
+        'about' => [
             'title' => 'Discover who we are, what drives us.',
             'description' => '“We are passionate about transforming ideas into impactful digital experiences.
                 Our team combines creativity, technology, and strategy to deliver exceptional
@@ -110,6 +110,15 @@ return [
                     'description' => 'A high-rise residential tower redefining modern urban living with breathtaking views.',
                 ],
             ]
+        ],
+
+        'contact' => [
+            'title' => 'Let\'s Connect',
+            'description' => 'Have questions or ready to start your real estate journey? Reach out to us — our team is here to assist you every step of the way.',
+            'data' => [],
+
+            'visible' => true,
+            'order' => null,
         ],
 
         'footer' => [

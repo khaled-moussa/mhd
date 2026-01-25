@@ -2,6 +2,9 @@
 
 namespace App\Domain\CompanyServices\DTOs;
 
+use App\Domain\CompanyServices\States\VisibilityStates\NotVisibleState;
+use App\Domain\CompanyServices\States\VisibilityStates\VisibleState;
+
 class CreateCompanyServiceDto
 {
     /**
@@ -10,6 +13,7 @@ class CreateCompanyServiceDto
     public function __construct(
         public string $title,
         public ?string $description = null,
+        public bool $visible = true,
     ) {}
 
     /**
@@ -21,6 +25,7 @@ class CreateCompanyServiceDto
             [
                 'title'       => $this->title,
                 'description' => $this->description,
+                'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
             ],
             fn($value) => ! is_null($value) && $value !== ''
         );

@@ -19,8 +19,10 @@ class CompanyServiceFormComponent extends Form
     #[Locked]
     public string $companyServiceUuid = '';
 
+    public string $icon = '';
     public string $title = '';
     public string $description = '';
+    public bool $visible = true;
 
     /*
     |-----------------------------
@@ -30,6 +32,11 @@ class CompanyServiceFormComponent extends Form
     protected function rules(): array
     {
         return [
+            'icon' => [
+                'required',
+                'string',
+            ],
+
             'title' => [
                 'required',
                 'string',
@@ -59,6 +66,7 @@ class CompanyServiceFormComponent extends Form
         $this->companyServiceUuid  = $companyService->getUuid();
         $this->title = $companyService->getTitle();
         $this->description  = $companyService->getDescription();
+        $this->visible = $companyService->getVisibility()->value();
     }
 
     /*

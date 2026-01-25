@@ -7,6 +7,12 @@
     >
         <x-slot:header>
             <h6>Services ({{ $paginator->total() }})</h6>
+
+            <x-button.main
+                class="hidden!"
+                label="Create Service"
+                :data-custom-open="$modal['CREATE_COMPANY_SERVICE_MODAL']"
+            />
         </x-slot:header>
 
         <x-slot:pagination>

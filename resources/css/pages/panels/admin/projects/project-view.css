@@ -1,0 +1,97 @@
+/* -------------------------------
+   Project View Modal
+------------------------------- */
+
+.project-view__modal-content {
+    @apply flex flex-col;
+}
+
+/* Body */
+.project-view__modal-body {
+    @apply flex flex-col gap-6 px-6;
+    @apply lg:flex-row;
+}
+
+/* Carousel */
+.project-view__carousel {
+    @apply w-full max-h-[350px];
+    @apply lg:w-1/2 lg:max-h-[550px];
+}
+
+.project-view__image {
+    @apply relative w-full h-[350px] rounded-xl overflow-hidden shadow-md;
+    @apply lg:h-[550px];
+}
+
+.project-view__image img {
+    @apply absolute w-full h-full object-cover;
+}
+
+/* Info */
+.project-view__info {
+    @apply flex-1 space-y-5;
+}
+
+.project-view__title {
+    @apply text-2xl font-semibold;
+}
+
+.project-view__description {
+    @apply text-current/70 text-sm;
+}
+
+/* Footer */
+.project-view__footer {
+    @apply py-2 px-6 flex flex-col gap-3;
+}
+
+.project-view__card {
+    @apply w-full mt-5 p-5 rounded-xl border border-current/10;
+}
+
+.project-view__card > header {
+    @apply text-2xl font-semibold mb-5;
+}
+
+/* Details */
+.project-view__details {
+    @apply space-y-3;
+}
+
+.project-view__row {
+    @apply flex flex-col gap-3;
+    @apply sm:flex-row;
+}
+
+.project-view__details .label-info {
+    @apply flex-1;
+}
+
+/* Location */
+.project-view__location {
+    @apply flex flex-col gap-3;
+}
+
+.project-view__location-header {
+    @apply flex items-center gap-2 py-3 text-xl;
+}
+
+.project-view__location-title {
+    @apply font-semibold;
+}
+
+.project-view__location iframe {
+    @apply rounded-2xl;
+}
+
+.project-view__no-location {
+    @apply flex items-center justify-center gap-2;
+    @apply h-[300px] rounded-xl border border-current/10;
+    @apply text-sm text-current/60 bg-current/5;
+}
+
+/* Actions */
+.project-view__actions {
+    @apply flex justify-end gap-3 mt-5 pt-4;
+    @apply border-t border-current/10;
+}

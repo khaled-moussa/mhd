@@ -2,7 +2,7 @@
 @extends('layouts.guest')
 
 {{-- Page title --}}
-@section('title', 'NAME OF TAB')
+@section('title', 'Home')
 
 {{-- Page assets --}}
 @push('head')
@@ -20,6 +20,12 @@
         @foreach ($sections as $key => $section)
             @if ($key !== 'footer')
                 @includeIf("pages.guest.landing.partials.$key", ['section' => $section])
+
+                @includeWhen($key === 'projects', 'pages.guest.projects.partials.projects', [
+                    'section' => $section,
+                    'perPage' => 6,
+                    'showViewAllProjectsBtn' => true,
+                ])
             @endif
         @endforeach
     </div>

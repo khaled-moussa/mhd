@@ -4,6 +4,7 @@ namespace App\Domain\Landing\QueryBuilders;
 
 use App\Domain\CompanyServices\States\VisibilityStates\NotVisibleState;
 use App\Domain\CompanyServices\States\VisibilityStates\VisibleState;
+use App\Domain\Landing\VisibilityStates\VisibilityStates;
 use Illuminate\Database\Eloquent\Builder;
 
 class LandingSectionBuilder extends Builder
@@ -13,9 +14,9 @@ class LandingSectionBuilder extends Builder
      *
      * @param class-string $stateClass
      */
-    public function whereVisibility(string $stateClass): self
+    public function whereVisibility(VisibilityStates $visibilityState): self
     {
-        return $this->where('visibility_state', $stateClass);
+        return $this->where('visibility_state', $visibilityState);
     }
 
     /**

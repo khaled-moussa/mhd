@@ -66,3 +66,71 @@
 .drag-drop-input__label.invalid > i {
     @apply text-red-500;
 }
+
+/* -------------------------------
+| File Upload Grid
+|------------------------------- */
+.file-wrapper {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+}
+
+/* -------------------------------
+| File Card
+|------------------------------- */
+.file-upload {
+    @apply relative p-3 rounded-xl border border-current/10 bg-current/5;
+}
+
+.file-preview {
+    @apply w-full h-32 object-cover rounded-lg mb-2;
+}
+
+/* -------------------------------
+| File Info
+|------------------------------- */
+.file-info {
+    @apply flex flex-col gap-2;
+}
+
+.file-name {
+    @apply text-sm font-medium truncate;
+}
+
+/* -------------------------------
+| Progress Bar
+|------------------------------- */
+.progress-text {
+    @apply text-xs! text-end font-bold;
+}
+
+.progress-text::after {
+    content: "%";
+}
+
+.progress-bar {
+    @apply relative w-full h-2 rounded-full overflow-hidden;
+    @apply bg-current/10;
+}
+
+.progress-bar .progress {
+    @apply absolute left-0 top-0 h-full;
+    @apply bg-current/50;
+    @apply transition-all duration-300 ease-linear;
+}
+
+.cancel-btn {
+    @apply self-end;
+}
+
+/* -------------------------------
+| Add more files
+|------------------------------- */
+
+.add-files {
+    @apply min-h-[250px] border-2 border-dashed border-current/30 rounded-lg flex items-center justify-center gap-2 bg-current/5;
+    @apply hover:bg-current/3 cursor-pointer;
+}
+
+.add-files > * {
+    @apply text-base;
+}

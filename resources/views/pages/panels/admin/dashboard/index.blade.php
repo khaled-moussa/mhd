@@ -12,23 +12,16 @@
 
 {{-- Content --}}
 @section('component')
-    {{-- Page header --}}
-    <x-header.page title="Dashboard" />
-
     <div class="dashboard-grid">
-        {{-- Left Column --}}
         <div>
+            {{-- Page header --}}
+            <x-header.page title="Dashboard" />
+
             {{-- KPI cards section --}}
             @include('admin::dashboard.partials.cards')
 
-            {{-- Chart section --}}
-            @include('admin::dashboard.partials.charts')
-
             {{-- Users table section --}}
-            @include('admin::dashboard.partials.company-services-table')
+            @include('admin::dashboard.partials.company-projects-table')
         </div>
-
-        {{-- Right Column (Overview) --}}
-        @include('admin::dashboard.partials.overview')
     </div>
 @endsection

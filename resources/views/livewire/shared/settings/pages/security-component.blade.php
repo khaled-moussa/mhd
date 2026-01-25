@@ -53,7 +53,7 @@
         </x-label.info>
 
         {{-- Delete Account --}}
-        <x-label.info
+        {{-- <x-label.info
             label="Delete Account"
             description="Permanently remove your account and all associated data from our system."
         >
@@ -62,6 +62,6 @@
                 label="Delete Account"
                 data-modal-id="delete-account-modal"
             />
-        </x-label.info>
+        </x-label.info> --}}
     </div>
 </div>

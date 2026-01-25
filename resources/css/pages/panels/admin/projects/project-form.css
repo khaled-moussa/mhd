@@ -1,0 +1,15 @@
+/* -------------------------------  
+   Company Project form  
+-------------------------------- */
+.project__form-row {
+    @apply flex flex-col justify-between gap-10;
+    @apply lg:flex-row lg:gap-3;
+}
+
+.project__form-row .input-field {
+    @apply flex-1;
+}
+
+.upload-section .drag-drop-input:not(.has-files) + .uploaded-files {
+    @apply hidden;
+}

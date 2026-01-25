@@ -1,0 +1,7 @@
+@reference "@css/reference.css";
+
+/* Impots */
+@import "@css_pages/_layouts/app-layouts.css";
+@import "./project-table.css";
+@import "./project-form.css";
+@import "./project-view.css";

@@ -1,5 +1,5 @@
 <form
-	x-data="companyServiceFormUpdateComponent"
+	x-data="serviceFormUpdateComponent"
 	id="update-service-form"
 	class="service-form"
 	wire:submit.prevent="submit"

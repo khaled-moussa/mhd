@@ -5,7 +5,7 @@
     <div class="landing-navbar-container">
         {{-- Logo --}}
         <a
-            href="#hero"
+          href="{{ $currentRequest ? '#hero' : url('/#hero') }}"
             class="branding"
         >
             <x-asset.img
@@ -33,28 +33,28 @@
         <li>
             <x-button.link
                 label="About Us"
-                path="#about-us"
+                :path="$currentRequest ? '#about' : url('/#about')"
                 class="landing-navbar-link"
             />
         </li>
         <li>
             <x-button.link
                 label="Services"
-                path="#services"
+                :path="$currentRequest ? '#services' : url('/#services')"
                 class="landing-navbar-link"
             />
         </li>
         <li>
             <x-button.link
                 label="Projects"
-                path="#projects"
+                :path="$currentRequest ? '#projects' : url('/#projects')"
                 class="landing-navbar-link"
             />
         </li>
         <li>
             <x-button.link
                 label="Contact"
-                path="#contact-us"
+                :path="$currentRequest ? '#contact' : url('/#contact')"
                 class="landing-navbar-link"
             />
         </li>
