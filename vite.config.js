@@ -8,13 +8,39 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                // -- App
+                // App
                 "resources/css/app.css",
                 "resources/js/app.js",
 
-                // -- Landing
-                "resources/css/pages/landing/_landing.css",
-                "resources/js/pages/landing/_landing.js",
+                // Auth
+                "resources/css/pages/auth/_auth.css",
+                "resources/js/pages/auth/_auth.js",
+
+                // Landing
+                "resources/css/pages/guest/landing/_landing.css",
+                "resources/js/pages/guest/landing/_landing.js",
+
+                // -- Panels / Admin
+
+                // Dashboard
+                "resources/css/pages/panels/admin/dashboard/_dashboard.css",
+                "resources/js/pages/panels/admin/dashboard/_dashboard.js",
+
+                // Projects
+                "resources/css/pages/panels/admin/projects/_projects.css",
+                "resources/js/pages/panels/admin/projects/_projects.js",
+
+                // Services
+                "resources/css/pages/panels/admin/services/_services.css",
+                "resources/js/pages/panels/admin/services/_services.js",
+
+                // Contacts
+                "resources/css/pages/panels/admin/contacts/_contacts.css",
+                "resources/js/pages/panels/admin/contacts/_contacts.js",
+
+                // -- Shared
+                "resources/css/pages/shared/settings/_settings.css",
+                "resources/js/pages/shared/settings/_settings.js",
             ],
             refresh: true,
         }),
@@ -38,7 +64,10 @@ export default defineConfig({
             "@css_pages": resolve(__dirname, "resources/css/pages"),
 
             "@js_admin": resolve(__dirname, "resources/js/pages/panels/admin"),
-            "@css_admin": resolve( __dirname, "resources/css/pages/panels/admin"),
+            "@css_admin": resolve(
+                __dirname,
+                "resources/css/pages/panels/admin",
+            ),
 
             "@js_user": resolve(__dirname, "resources/js/pages/panels/user"),
             "@css_user": resolve(__dirname, "resources/css/pages/panels/user"),
