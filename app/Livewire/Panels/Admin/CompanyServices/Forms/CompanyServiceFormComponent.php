@@ -9,8 +9,6 @@ use Livewire\Form;
 
 class CompanyServiceFormComponent extends Form
 {
-    use WithLivewireExceptionHandling;
-
     /*
     |-----------------------------
     | Properties
@@ -33,8 +31,9 @@ class CompanyServiceFormComponent extends Form
     {
         return [
             'icon' => [
-                'required',
+                'nullable',
                 'string',
+                'max:255'
             ],
 
             'title' => [
@@ -47,7 +46,7 @@ class CompanyServiceFormComponent extends Form
             'description'  => [
                 'required',
                 'string',
-                'min:3',
+                'min:10',
                 'max:255'
             ],
         ];
@@ -64,6 +63,7 @@ class CompanyServiceFormComponent extends Form
         $this->resetForm();
 
         $this->companyServiceUuid  = $companyService->getUuid();
+        $this->icon = $companyService->getIcon();
         $this->title = $companyService->getTitle();
         $this->description  = $companyService->getDescription();
         $this->visible = $companyService->getVisibility()->value();
@@ -76,12 +76,7 @@ class CompanyServiceFormComponent extends Form
     */
     public function resetForm()
     {
-        $this->reset([
-            'companyServiceUuid',
-            'title',
-            'description',
-        ]);
-
+        $this->reset();
         $this->resetValidation();
         $this->resetErrorBag();
     }

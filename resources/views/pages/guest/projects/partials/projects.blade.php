@@ -29,7 +29,7 @@
 
 {{-- Project Modal --}}
 @include('pages.guest.projects.partials.project-modal', [
-    'modalId' => $modal['VIEW_COMPANY_PROJECT_MODAL'],
+    'modalId' => $modalId['VIEW_COMPANY_PROJECT_MODAL'],
     'title' => 'Modern Apartment Project',
     'description' => 'A modern apartment complex in Masr Gdeda.',
 ])

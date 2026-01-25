@@ -2,6 +2,8 @@
 
 namespace App\Domain\CompanyProjects\Jobs;
 
+use App\Domain\CompanyProjects\Actions\AttemptToStoreBrochureAction;
+use App\Domain\CompanyProjects\Actions\AttemptToStoreImagesAction;
 use App\Domain\CompanyProjects\Models\CompanyProject;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,33 +15,28 @@ class StoreCompanyProjectFilesJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * @param array<int, string> $imagePaths
-     */
     public function __construct(
         public CompanyProject $companyProject,
-        public array $tempImagesPaths,
-        public ?array $tempFileData = null, // single file data
+        public array $tempImagesPaths = [],
+        public ?array $tempFileData = null, // single file (brochure)
     ) {}
 
     public function handle(): void
     {
-        // Store images normally
-        foreach ($this->tempImagesPaths as $imagePath) {
-            $this->companyProject
-                ->addMedia($imagePath)
-                ->toMediaCollection('images');
+        // Store images
+        if (!empty($this->tempImagesPaths)) {
+            app(AttemptToStoreImagesAction::class)->execute(
+                project: $this->companyProject,
+                tempImagesPaths: $this->tempImagesPaths
+            );
         }
 
-        // Store single file with original name
-        if ($this->tempFileData) {
-            // Clear existing file first
-            $this->companyProject->clearMediaCollection('file');
-
-            $this->companyProject
-                ->addMedia($this->tempFileData['path'])
-                ->usingName($this->tempFileData['name'])
-                ->toMediaCollection('file');
+        // Store brochure (single file)
+        if (!is_null($this->tempFileData)) {
+            app(AttemptToStoreBrochureAction::class)->execute(
+                project: $this->companyProject,
+                tempFileData: $this->tempFileData
+            );
         }
     }
 }

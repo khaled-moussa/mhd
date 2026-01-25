@@ -18,10 +18,14 @@
 @section('content')
     <div class="landing-content">
         @foreach ($sections as $key => $section)
-            @if ($key !== 'footer')
-                @includeIf("pages.guest.landing.partials.$key", ['section' => $section])
+            @continue($key === 'footer')
 
-                @includeWhen($key === 'projects', 'pages.guest.projects.partials.projects', [
+            {{-- Default landing section --}}
+            @includeIf("pages.guest.landing.partials.$key", compact('section'))
+
+            {{-- Projects section extra rendering --}}
+            @if ($key === 'projects')
+                @include('pages.guest.projects.partials.projects', [
                     'section' => $section,
                     'perPage' => 6,
                     'showViewAllProjectsBtn' => true,

@@ -8,6 +8,7 @@ use App\Domain\CompanyProjects\DTOs\UpdateCompanyProjectDto;
 use App\Domain\CompanyProjects\Jobs\RemoveCompanyProjectImagesJob;
 use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectFilesJob;
 use App\Domain\CompanyProjects\Models\CompanyProject;
+use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
@@ -91,24 +92,49 @@ class CompanyProjectFormUpdateComponent extends Component
                 dto: $updateDto
             );
 
-        if (!empty($this->form->images) || !empty($this->form->file)) {
-            $this->uploadProjectImages();
-        }
+        $this->uploadProjectFiles();
 
+        $this->resetForm();
         $this->dispatchCompanyProjectUpdatedEvent();
     }
 
-    private function uploadProjectImages(): void
+    /*
+    |-----------------------------
+    | Helpers
+    |-----------------------------
+    */
+    private function uploadProjectFiles(): void
     {
-        dispatch(new StoreCompanyProjectFilesJob(
-            companyProject: $this->companyProject,
-            tempImagesPaths: collect($this->form->images)->map->getRealPath()->all(),
-            tempFileData: $this->form->file ? [
+        $tempImagesPaths = [];
+        $tempFileData = null;
+
+        // Multiple images
+        if (!empty($this->form->images)) {
+            $tempImagesPaths = collect($this->form->images)
+                ->map(fn($image) => $image->getRealPath())
+                ->all();
+        }
+
+        // Single file
+        if (!empty($this->form->file)) {
+            $tempFileData = [
                 'name' => $this->form->file->getClientOriginalName(),
                 'path' => $this->form->file->getRealPath(),
-            ] : null,
+            ];
+        }
+
+        // Nothing to upload
+        if (empty($tempImagesPaths) && is_null($tempFileData)) {
+            return;
+        }
+
+        dispatch(new StoreCompanyProjectFilesJob(
+            companyProject: $this->companyProject,
+            tempImagesPaths: $tempImagesPaths,
+            tempFileData: $tempFileData,
         ));
     }
+
 
     private function removeProjectImages(): void
     {
@@ -117,6 +143,12 @@ class CompanyProjectFormUpdateComponent extends Component
             removedImageIds: $this->removedImageIds
         ));
     }
+
+    private function resetForm(): void
+    {
+        $this->form->resetForm();
+    }
+
     /*
     |-----------------------------
     | Computed

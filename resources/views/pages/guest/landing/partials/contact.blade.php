@@ -27,33 +27,9 @@
                 Have a question or want to collaborate?
             </p>
 
-            <form action="">
-                <div class="input-field">
-                    <label for="name">Name</label>
-                    <input
-                        id="name"
-                        type="text"
-                    />
-                </div>
 
-                <div class="input-field">
-                    <label for="email">Email</label>
-                    <input
-                        id="email"
-                        type="email"
-                    />
-                </div>
-
-                <div class="input-field">
-                    <label for="message">Message</label>
-                    <textarea id="message"></textarea>
-                </div>
-
-                <x-button.main
-                    label="Send Message"
-                    class="form-button"
-                />
-            </form>
+            {{-- Contact form create livewire --}}
+            <livewire:guest.contacts.contact-form-create-component />
         </div>
     </div>
 </section>

@@ -54,6 +54,11 @@ class LandingSection extends Model
         return $this->key;
     }
 
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
     public function getTitle(): string
     {
         return $this->title;
@@ -62,6 +67,11 @@ class LandingSection extends Model
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
     }
 
     public function getVisibility(): VisibilityStates
@@ -86,6 +96,6 @@ class LandingSection extends Model
     */
     public function isVisible(): bool
     {
-        return (bool) $this->visibility_state->getValue();
+        return $this->visibility_state->value();
     }
 }

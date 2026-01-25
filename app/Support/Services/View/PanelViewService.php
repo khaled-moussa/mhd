@@ -11,31 +11,46 @@ class PanelViewService
 {
     public function boot(): void
     {
+        $this->composeSidebar();
+        $this->composeUserPanel();
+    }
+
+    /**
+     * Share sidebar data with app sidebar view.
+     */
+    protected function composeSidebar(): void
+    {
         View::composer(
             'components.navigation.sidebar.app',
             function ($view) {
                 $panel   = app(PanelManager::class)->current();
-                $builder = app(SidebarBuilder::class);
+                $sidebar = app(SidebarBuilder::class);
 
                 $view->with([
-                    'panel'                 => $panel,
-                    'primarySidebarItems'   => $builder->buildPrimary($panel),
-                    'secondarySidebarItems' => $builder->buildSecondary($panel),
+                    'panel'       => $panel,
+                    'primaryMenu' => $sidebar->buildPrimary($panel),
+                    'secondaryMenu' => $sidebar->buildSecondary($panel),
                 ]);
             }
         );
+    }
 
+    /**
+     * Share current user panel id.
+     */
+    protected function composeUserPanel(): void
+    {
         View::composer(
             [
                 'pages.shared.*',
-                'components.dropdown.profile'
+                'components.dropdown.profile',
             ],
             function ($view) {
-                $user = app(GetCurrentUserAction::class)->execute();
+                $panelId = app(GetCurrentUserAction::class)
+                    ->execute()
+                    ->getPanelId();
 
-                $view->with([
-                    'panel' => $user->getPanelId(),
-                ]);
+                $view->with('panel', $panelId);
             }
         );
     }

@@ -2,7 +2,7 @@
 
 namespace App\Support\Enums;
 
-enum LabelsEnum: string
+enum LabelEnum: string
 {
     // Steps
     case CONFIRM_PASSWORD = 'Confirm Password';

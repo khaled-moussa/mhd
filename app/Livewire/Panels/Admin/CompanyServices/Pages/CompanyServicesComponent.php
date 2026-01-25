@@ -74,7 +74,7 @@ class CompanyServicesComponent extends Component
         $companyService = $this->getCompanyService($companyServiceUuid);
 
         if ($companyService) {
-            $this->form->fillCompanyService(companyService: $companyService);
+            $this->form->fillCompanyService($companyService);
         }
     }
 
@@ -83,7 +83,7 @@ class CompanyServicesComponent extends Component
         $companyService = $this->getCompanyService($companyServiceUuid);
 
         app(DeleteCompanyServiceAction::class)
-            ->execute(companyService: $companyService);
+            ->execute($companyService);
 
         // If current page becomes empty → go back
         if ($this->companyServices->count() === 0 && $this->currentPage > 1) {
@@ -118,7 +118,7 @@ class CompanyServicesComponent extends Component
     private function getCompanyService(string $companyServiceUuid): ?CompanyService
     {
         return app(GetCompanyServiceByUuidAction::class)
-            ->execute(companyServiceUuid: $companyServiceUuid);
+            ->execute($companyServiceUuid);
     }
 
     /* 

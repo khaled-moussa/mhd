@@ -66,7 +66,7 @@ document.addEventListener("alpine:init", () => {
                 const image = document.createElement("img");
                 image.src = img.path;
                 image.alt = "project";
-                image.className = "projects__modal-img rounded-xl";
+                image.className = "projects__modal-image rounded-xl";
 
                 slide.appendChild(image);
                 carouselList.appendChild(slide);

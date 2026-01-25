@@ -5,7 +5,7 @@
     <div class="landing-navbar-container">
         {{-- Logo --}}
         <a
-          href="{{ $currentRequest ? '#hero' : url('/#hero') }}"
+            href="{{ $currentRequest ? '#hero' : url('/#hero') }}"
             class="branding"
         >
             <x-asset.img
@@ -30,33 +30,16 @@
         id="landing-navbar-menu"
         class="landing-navbar-menu"
     >
-        <li>
-            <x-button.link
-                label="About Us"
-                :path="$currentRequest ? '#about' : url('/#about')"
-                class="landing-navbar-link"
-            />
-        </li>
-        <li>
-            <x-button.link
-                label="Services"
-                :path="$currentRequest ? '#services' : url('/#services')"
-                class="landing-navbar-link"
-            />
-        </li>
-        <li>
-            <x-button.link
-                label="Projects"
-                :path="$currentRequest ? '#projects' : url('/#projects')"
-                class="landing-navbar-link"
-            />
-        </li>
-        <li>
-            <x-button.link
-                label="Contact"
-                :path="$currentRequest ? '#contact' : url('/#contact')"
-                class="landing-navbar-link"
-            />
-        </li>
+        @foreach ($headers as $key => $header)
+            @if ($key !== 'footer' || !$header['visible'])
+                <li>
+                    <x-button.link
+                        label="{{ $header['label'] }}"
+                        :path="$currentRequest ? $header['url'] : '/' . url($header['url'])"
+                        class="landing-navbar-link"
+                    />
+                </li>
+            @endif
+        @endforeach
     </ul>
 </nav>

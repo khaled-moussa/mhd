@@ -1,18 +1,13 @@
 @props([
-    'type' => 'text',
     'label' => null,
-    'options' => [],
+    'error' => null,
 ])
 
-<div   
-    @class([
-        'input-field',
-        $attributes->get('class'),
-    ])>
+<div @class(['input-field', $attributes->get('class')])>
 
     <div>
         {{-- Label --}}
-        @if($label)
+        @if ($label)
             <label for="{{ $attributes->get('id') }}">
                 {{ $label }}
             </label>
@@ -24,15 +19,21 @@
 
     <div class="input-wrapper">
         <textarea
-            id="{{ $attributes->get('id') }}"
-            name="{{ $attributes->get('name') }}"
+            {{ $attributes->whereStartsWith('id') }}
+            {{ $attributes->whereStartsWith('name') }}
             {{ $attributes->whereStartsWith('value') }}
             {{ $attributes->whereStartsWith('wire') }}
-            {{ $attributes->whereStartsWith('x-model') }}
+            {{ $attributes->whereStartsWith('x-') }}
+            {{ $attributes->whereStartsWith('required') }}
+            {{ $attributes->whereStartsWith('minlength') }}
+            {{ $attributes->whereStartsWith('maxlength') }}
         >
         </textarea>
 
         {{-- Slot element --}}
         {{ $slot }}
     </div>
+
+    {{-- Validation --}}
+    <x-alert.validation-input :error="$error" />
 </div>

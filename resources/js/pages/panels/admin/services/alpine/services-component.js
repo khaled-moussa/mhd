@@ -1,9 +1,6 @@
 import MessageToast from "@js/utils/message-toast";
 import { deleteModal } from "@js/components/modal/delete-modal";
-import {
-    dispatchModalOpenedEvent,
-    showModal,
-} from "@js/components/modal/_modal";
+import { dispatchModalOpenedEvent, showModal,} from "@js/components/modal/_modal";
 import { MODALS, UI_EVENTS } from "@js/utils/enums";
 
 document.addEventListener("alpine:init", () => {
@@ -81,23 +78,6 @@ document.addEventListener("alpine:init", () => {
 
         /* 
         |-------------------------------
-        | Listeners
-        |------------------------------- 
-        */
-        registerListeners() {
-            this.$el.addEventListener(
-                UI_EVENTS.COMPANY_SERVICE_DELETED_EVENT,
-                this.handleCompanyServiceDeleted.bind(this),
-            );
-        },
-
-        handleCompanyServiceDeleted() {
-            MessageToast("deleted");
-            this.canDelete = true;
-        },
-
-        /* 
-        |-------------------------------
         | Helpers
         |------------------------------- 
         */
@@ -111,6 +91,26 @@ document.addEventListener("alpine:init", () => {
 
         showError() {
             MessageToast("error");
+        },
+
+        /* 
+        |-------------------------------
+        | Listeners
+        |------------------------------- 
+        */
+        registerListeners() {
+            this.onServiceDeletedEvent();
+        },
+
+        onServiceDeletedEvent() {
+            this.$el.addEventListener(
+                UI_EVENTS.COMPANY_SERVICE_DELETED_EVENT,
+                () => {
+                    this.canDelete = true;
+
+                    MessageToast("deleted");
+                },
+            );
         },
     }));
 });

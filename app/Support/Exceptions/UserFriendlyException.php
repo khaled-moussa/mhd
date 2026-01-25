@@ -10,7 +10,11 @@ class UserFriendlyException extends Exception
 
     public function __construct(string $userMessage, string $internalMessage = '', int $code = 0)
     {
-        parent::__construct($internalMessage ?: $userMessage, $code);
+        parent::__construct(
+            $internalMessage ?: $userMessage,
+            $code
+        );
+
         $this->userMessage = $userMessage;
     }
 

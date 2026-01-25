@@ -61,6 +61,7 @@ class CompanyServiceFormUpdateComponent extends Component
 
         $updateDto = new UpdateCompanyServiceDto(
             uuid: $this->companyServiceUuid,
+            icon: $this->form->icon,
             title: $this->form->title,
             description: $this->form->description,
             visible: $this->form->visible

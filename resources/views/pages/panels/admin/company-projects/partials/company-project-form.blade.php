@@ -5,6 +5,9 @@
         drag-id="image-drag-area"
         description="'Drag & drop images here, or click to select images"
         accept="jpg, jpeg, png, webp, jpeg, gif"
+        :multiple="true"
+        error="form.images*"
+        @click="resetFileBeforeUpload($event)"
     />
 
     <div class="uploaded-files">
@@ -84,8 +87,10 @@
         input-id="file-input"
         drag-id="file-drag-area"
         description="'Drag & drop brochure here, or click to select brochure"
-        :multiple="false"
         accept="pdf, doc, docx"
+        :multiple="false"
+        error="form.file"
+        @click="resetFileBeforeUpload($event)"
     />
 
     <div class="uploaded-files">
@@ -175,6 +180,7 @@
         label="Price Start"
         wire:model="form.priceStart"
         error="form.priceStart"
+        required
     />
 </div>
 

@@ -2,7 +2,7 @@
 
 namespace App\Support\Enums;
 
-enum FormIdsEnum: string
+enum FormEnum: string
 {
     // Auth 
     case LOGIN_FORM = 'login-form';
@@ -25,8 +25,14 @@ enum FormIdsEnum: string
     case DELETE_COMPANY_SERVICE_FORM = 'delete-company-service-form';
 
     // Company Projects / Crud Modals
-    case VIEW_COMPANY_PROJECT_FORM   = 'view-company-project-modal';
-    case CREATE_COMPANY_PROJECT_FORM = 'create-company-project-modal';
-    case UPDATE_COMPANY_PROJECT_FORM = 'update-company-project-modal';
-    case DELETE_COMPANY_PROJECT_FORM = 'delete-company-project-modal';
+    case VIEW_COMPANY_PROJECT_FORM   = 'view-company-project-form';
+    case CREATE_COMPANY_PROJECT_FORM = 'create-company-project-form';
+    case UPDATE_COMPANY_PROJECT_FORM = 'update-company-project-form';
+    case DELETE_COMPANY_PROJECT_FORM = 'delete-company-project-form';
+
+    // Company Projects / Crud Modals
+    case VIEW_CONTACT_FORM   = 'view-contact-form';
+    case CREATE_CONTACT_FORM = 'create-contact-form';
+    case UPDATE_CONTACT_FORM = 'update-contact-form';
+    case DELETE_CONTACT_FORM = 'delete-contact-form';
 }

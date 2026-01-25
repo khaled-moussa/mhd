@@ -25,7 +25,8 @@ return new class extends Migration
             $table->date('delivered_at')
                 ->nullable();
 
-            $table->unsignedDecimal('price_start', 12, 2)->default(0);
+            $table->decimal('price_start', 12, 2)
+                ->default(0);
 
             $table->string('address');
 

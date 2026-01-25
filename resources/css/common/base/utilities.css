@@ -47,3 +47,7 @@ body.theme-transition {
 .row {
     @apply flex items-center justify-between gap-3;
 }
+
+.link-url {
+    @apply underline text-current/85;
+}

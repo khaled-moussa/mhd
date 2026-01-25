@@ -1,9 +1,11 @@
 import MessageToast from "@js/utils/message-toast";
-import { closeModal } from "@js/components/modal/_modal";
-import { MODALS, UI_EVENTS } from "@js/utils/enums";
-import { DragFiles } from "@js/utils/drag-files";
-import validateFileInput from "@js/utils/validate-file-input";
 import generateUuid from "@js/utils/generate-uuid";
+import validateFileInput from "@js/utils/validate-file-input";
+import { closeModal } from "@js/components/modal/_modal";
+import { MODALS, FORMS, UI_EVENTS } from "@js/utils/enums";
+import { DragFiles } from "@js/utils/drag-files";
+import { MODALS_EVENT } from "@js/utils/events";
+import resetFormValidation from "@js/utils/reset-form-validation";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("projectFormCreateComponent", () => ({
@@ -38,8 +40,7 @@ document.addEventListener("alpine:init", () => {
         },
 
         initState() {
-            this.dragImagesAreaElement =
-                this.$el.querySelector("#image-drag-area");
+            this.dragImagesAreaElement = this.$el.querySelector("#image-drag-area");
             this.imageInputElement = this.$el.querySelector("#image-input");
 
             const imagesDrag = new DragFiles({
@@ -48,8 +49,7 @@ document.addEventListener("alpine:init", () => {
                 onDrop: (images) => this.validateImages(images),
             });
 
-            this.dragFileAreaElement =
-                this.$el.querySelector("#file-drag-area");
+            this.dragFileAreaElement = this.$el.querySelector("#file-drag-area");
             this.fileInputElement = this.$el.querySelector("#file-input");
 
             const fileDrag = new DragFiles({
@@ -64,6 +64,10 @@ document.addEventListener("alpine:init", () => {
         | Image Handling
         |-------------------------------
         */
+        resetFileBeforeUpload(event) {
+            event.target.value = "";
+        },
+
         validateImages(images) {
             const result = validateFileInput(images, {
                 allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif"],
@@ -200,8 +204,6 @@ document.addEventListener("alpine:init", () => {
         |-------------------------------
         */
         validateFile(file) {
-            console.log(file);
-
             const result = validateFileInput(file, {
                 allowedExtensions: ["pdf", "doc", "docx"],
                 maxSizeInMB: 10,
@@ -235,8 +237,6 @@ document.addEventListener("alpine:init", () => {
         },
 
         uploadFile(fileItem) {
-            console.log(fileItem);
-
             fileItem.status = "uploading";
 
             fileItem.upload = this.$wire.upload(
@@ -272,13 +272,11 @@ document.addEventListener("alpine:init", () => {
             }
 
             if (fileItem.status === "uploading" && fileItem.upload) {
+                fileItem.status = "cancelled";
+                fileItem.progress = 0;
+                URL.revokeObjectURL(fileItem.preview);
                 fileItem.upload.cancel();
             }
-
-            fileItem.status = "cancelled";
-            fileItem.progress = 0;
-
-            URL.revokeObjectURL(fileItem.preview);
 
             this.file = null;
 
@@ -308,6 +306,11 @@ document.addEventListener("alpine:init", () => {
                 return;
             }
 
+            if (!this.file) {
+                MessageToast("warning", "Borchure are required");
+                return;
+            }
+
             this.$wire.call("handleSubmit");
         },
 
@@ -317,7 +320,20 @@ document.addEventListener("alpine:init", () => {
         |-------------------------------
         */
         registerListeners() {
+            this.onModalClosedEvent();
             this.onCreatedProjectEvent();
+        },
+
+        onModalClosedEvent() {
+            window.addEventListener(
+                MODALS_EVENT.closed(MODALS.CREATE_COMPANY_PROJECT_MODAL),
+                () => {
+                    this.resetImages();
+                    this.resetFile();
+
+                    resetFormValidation(FORMS.CREATE_COMPANY_PROJECT_FORM);
+                },
+            );
         },
 
         onCreatedProjectEvent() {

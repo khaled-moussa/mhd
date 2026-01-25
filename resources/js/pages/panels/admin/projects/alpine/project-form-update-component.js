@@ -21,7 +21,8 @@ document.addEventListener("alpine:init", () => {
         imageInputElement: null,
 
         file: null,
-        existingfile: [],
+        existingFile: [],
+        removedFileId: null,
 
         dragFileAreaElement: null,
         fileInputElement: null,
@@ -77,7 +78,7 @@ document.addEventListener("alpine:init", () => {
             await this.$wire.call("editCompanyProject", projectUuid);
 
             this.existingImages = this.$wire.get("form.existingImages");
-            this.existingfile = this.$wire.get("form.existingFile");
+            this.existingFile = this.$wire.get("form.existingFile");
 
             this.hydrateExistingImages();
             this.hydrateExistingFile();
@@ -114,12 +115,12 @@ document.addEventListener("alpine:init", () => {
 
             this.file = {
                 id: generateUuid(),
-                name: this.existingfile.name ?? "file",
-                preview: this.existingfile.path,
+                name: this.existingFile.name ?? "file",
+                preview: this.existingFile.path,
                 progress: 100,
                 status: "completed",
                 isExisting: true,
-                serverId: this.existingfile.id,
+                serverId: this.existingFile.id,
                 upload: null,
             };
 
@@ -133,6 +134,10 @@ document.addEventListener("alpine:init", () => {
         | Upload Images Flow
         |------------------------------- 
         */
+        resetFileBeforeUpload(event) {
+            event.target.value = "";
+        },
+
         validateImages(files) {
             const result = validateFileInput(files, {
                 allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif"],
@@ -251,19 +256,6 @@ document.addEventListener("alpine:init", () => {
             this.processQueue();
         },
 
-        /* 
-        |-------------------------------
-        | Image Uploading Helpers
-        |-------------------------------
-        */
-        hasPendingImages() {
-            return this.images.some((i) => i.status === "pending");
-        },
-
-        nextPendingImage() {
-            return this.images.find((i) => i.status === "pending");
-        },
-
         resetImages() {
             this.images.forEach((img) => {
                 if (!img.isExisting) {
@@ -276,6 +268,19 @@ document.addEventListener("alpine:init", () => {
             this.activeUploads = 0;
 
             this.dragAreaElement?.classList.remove("has-files");
+        },
+
+        /* 
+        |-------------------------------
+        | Image Uploading Helpers
+        |-------------------------------
+        */
+        hasPendingImages() {
+            return this.images.some((i) => i.status === "pending");
+        },
+
+        nextPendingImage() {
+            return this.images.find((i) => i.status === "pending");
         },
 
         /* 
@@ -358,6 +363,7 @@ document.addEventListener("alpine:init", () => {
             // Existing file → mark for deletion
             if (fileItem.isExisting) {
                 this.removedFileId = fileItem.serverId;
+                this.existingFile = [];
             }
 
             // Cancel upload if active
@@ -373,6 +379,8 @@ document.addEventListener("alpine:init", () => {
         resetFile() {
             URL.revokeObjectURL(this.file.preview);
             this.file = null;
+            this.removedFileId = null;
+            this.existingFile = [];
 
             if (this.dragFileAreaElement) {
                 this.dragFileAreaElement.classList.remove("has-files");
@@ -387,6 +395,11 @@ document.addEventListener("alpine:init", () => {
         submit() {
             if (this.existingImages.length === 0 && this.images.length === 0) {
                 MessageToast("warning", "Images are required");
+                return;
+            }
+
+            if (this.existingFile.length === 0 && !this.file) {
+                MessageToast("warning", "Borchure are required");
                 return;
             }
 

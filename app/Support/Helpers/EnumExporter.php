@@ -9,9 +9,11 @@ class EnumExporter
     public static function export(string $enum): array
     {
         return collect($enum::cases())
-            ->mapWithKeys(fn (BackedEnum $case) => [
-                $case->name => $case->value,
-            ])
+            ->mapWithKeys(
+                fn(BackedEnum $case) => [
+                    $case->name => $case->value,
+                ]
+            )
             ->toArray();
     }
 }

@@ -60,7 +60,7 @@
 		<x-button.outline
 			class="modal-close"
 			label="Close"
-			:data-modal-id="$modal['DELETE_ACCOUNT_MODAL']"
+			:data-modal-id="$modalId['DELETE_ACCOUNT_MODAL']"
 		/>
 
 		<x-button.main

@@ -10,7 +10,7 @@
         <x-button.outline
             class="modal-close"
             label="Cancel"
-            :data-custom-close="$modal['CREATE_COMPANY_PROJECT_MODAL']"
+            :data-modal-id="$modalId['CREATE_COMPANY_PROJECT_MODAL']"
         />
 
         <x-button.main

@@ -18,7 +18,15 @@ class UpsertLandingSectionsAction
         LandingSection::upsert(
             $data,
             ['key'], // match existing rows
-            ['title', 'description', 'order', 'visibility_state', 'data']
+            [
+                'label',
+                'title',
+                'description',
+                'url',
+                'visibility_state',
+                'order',
+                'data'
+            ]
         );
     }
 }

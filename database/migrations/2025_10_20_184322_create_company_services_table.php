@@ -21,11 +21,9 @@ return new class extends Migration
             $table->string('icon')
                 ->nullable();
 
-            $table->string('title')
-                ->nullable();
+            $table->string('title');
 
-            $table->text('description')
-                ->nullable();
+            $table->string('description');
 
             $table->string('visibility_state');
 

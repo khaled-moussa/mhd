@@ -18,7 +18,7 @@
         <x-button.outline
             class="modal-close"
             label="Cancel"
-            :data-modal-id="$modal['UPDATE_USER_MODAL']"
+            :data-modal-id="$modalId['UPDATE_USER_MODAL']"
         />
 
         <x-button.main
