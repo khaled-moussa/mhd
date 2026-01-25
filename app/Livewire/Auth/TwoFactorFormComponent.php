@@ -17,9 +17,9 @@ use Throwable;
 
 class TwoFactorFormComponent extends Component
 {
-    use WithLivewireExceptionHandling,
-        WithRateLimiting,
-        WithOtp;
+    use WithLivewireExceptionHandling;
+    use WithRateLimiting;
+    use WithOtp;
 
     /* 
     |-------------------------------

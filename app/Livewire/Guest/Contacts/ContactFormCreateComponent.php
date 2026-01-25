@@ -4,12 +4,13 @@ namespace App\Livewire\Guest\Contacts;
 
 use App\Domain\Contacts\Actions\CreateContactAction;
 use App\Domain\Contacts\DTOs\CreateContactDto;
+use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Component;
 
 class ContactFormCreateComponent extends Component
 {
-    // use WithLivewireExceptionHandling;
+    use WithLivewireExceptionHandling;
     /*
     |-----------------------------
     | Properties
@@ -44,7 +45,7 @@ class ContactFormCreateComponent extends Component
                 'min:3',
                 'max:255'
             ],
-            'email'   => [
+            'emaissl'   => [
                 'required',
                 'email',
                 'max:255'

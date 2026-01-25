@@ -7,6 +7,6 @@ class DashboardDto
     public function __construct(
         public int $projectsCount,
         public int $servicesCount,
-        public int $usersVisitCount,
+        public int $contactsCount,
     ) {}
 }

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Domain\Landing\Actions\UpsertLandingSectionsAction;
-use App\Domain\Landing\DTOs\LandingSectionDto;
+use App\Domain\Landing\DTOs\CreateLandingSectionDto;
 use Illuminate\Database\Seeder;
 
 class LandingSectionSeeder extends Seeder
@@ -23,7 +23,7 @@ class LandingSectionSeeder extends Seeder
         $index = 1;
 
         foreach ($defaultSections as $key => $section) {
-            $dto = new LandingSectionDto(
+            $dto = new CreateLandingSectionDto(
                 key: $key,
                 label: $section['label'],
                 title: $section['title'],

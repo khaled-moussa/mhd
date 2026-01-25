@@ -3,7 +3,7 @@
 namespace App\Domain\Landing\Actions;
 
 use App\App\Web\Resources\CompanyServices\CompanyServicesResource;
-use App\Domain\Landing\DTOs\LandingSectionDto;
+use App\Domain\Landing\DTOs\CreateLandingSectionDto;
 use App\Domain\Landing\Models\LandingSection;
 use App\Domain\CompanyServices\Actions\GetCompanyServicesVisibleAction;
 use Illuminate\Support\Collection;
@@ -23,7 +23,7 @@ class GetCurrentLandingSectionsAction
         foreach ($configSections as $key => $defaults) {
             $section = $dbSections->get($key);
 
-            $dto = new LandingSectionDto(
+            $dto = new CreateLandingSectionDto(
                 key: $key,
                 label: $section?->getTitle() ?? $defaults['label'],
                 title: $section?->getTitle() ?? $defaults['title'],
@@ -49,7 +49,7 @@ class GetCurrentLandingSectionsAction
     /**
      * Attach Services section data.
      */
-    protected function attachServices(LandingSectionDto $dto, array $defaults): void
+    protected function attachServices(CreateLandingSectionDto $dto, array $defaults): void
     {
         $services = app(GetCompanyServicesVisibleAction::class)
             ->execute();
