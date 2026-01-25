@@ -3,6 +3,7 @@
 namespace App\App\Web\Controllers\Shared\Settings;
 
 use App\App\Web\Resources\Landing\LandingSectionsResource;
+use App\Domain\Landing\Actions\BuildLandingHeadersAction;
 use App\Domain\Landing\Actions\GetCurrentLandingSectionsAction;
 use Illuminate\Support\Facades\View;
 
@@ -17,8 +18,11 @@ class SiteEditorController
     {
         View::share('isPreview', true);
 
-        $sectionsMerged = app(GetCurrentLandingSectionsAction::class)->execute();
-        $sections = LandingSectionsResource::collection($sectionsMerged)->resolve();
+        $sectionsMerged = app(GetCurrentLandingSectionsAction::class)
+            ->execute();
+
+        $sections = LandingSectionsResource::collection($sectionsMerged)
+            ->resolve();
 
         return view('pages.shared.settings.site-editor.view', [
             'sections' => $sections,

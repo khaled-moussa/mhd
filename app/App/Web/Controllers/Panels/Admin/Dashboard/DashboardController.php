@@ -11,7 +11,7 @@ class DashboardController extends Controller
     public function __invoke(GetCountsKpiCardsAction $action)
     {
         $kpis = $action->execute();
-        
+
         $dashboardData = (new DashboardResource($kpis))->resolve();
 
         return view('pages.panels.admin.dashboard.index', [

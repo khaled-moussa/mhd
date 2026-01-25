@@ -4,9 +4,9 @@ namespace App\Livewire\Shared\Settings\Pages;
 
 use App\App\Web\Resources\SiteEditors\SiteEditorsResource;
 use App\Domain\Landing\Actions\GetLandingSectionsAction;
+use App\Domain\Landing\Actions\UpdateLandingSectionAction;
 use App\Domain\Landing\Actions\UpsertLandingSectionsAction;
-use App\Domain\Landing\DTOs\LandingSectionDto;
-use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
+use App\Domain\Landing\DTOs\UpdateLandingSectionDto;
 use App\Support\Enums\EventsEnum;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -71,12 +71,10 @@ class SiteEditorComponent extends Component
         }
 
         foreach ($sections as $section) {
-            $dto = new LandingSectionDto(
+            $dto = new UpdateLandingSectionDto(
                 key: $section['key'],
-                label: $section['label'] ?? null,
                 title: $section['title'] ?? null,
                 description: $section['description'] ?? null,
-                url: $section['url'] ?? null,
                 visible: $section['visible'],
                 order: $section['order'] ?? null,
                 data: $section['data'] ?? [],
@@ -85,7 +83,7 @@ class SiteEditorComponent extends Component
             $dtos[] = $dto->toArray();
         }
 
-        app(UpsertLandingSectionsAction::class)
+        app(UpdateLandingSectionAction::class)
             ->execute($dtos);
 
         $this->dispatchSiteUpdatedEvent();

@@ -27,9 +27,9 @@ class DashboardResource extends JsonResource
                     'color' => 'green',
                 ],
                 [
-                    'title' => 'Users Visits',
-                    'value' => $this->usersVisitCount,
-                    'icon'  => 'fi fi-tr-users-alt',
+                    'title' => 'Contacts',
+                    'value' => $this->contactsCount,
+                    'icon'  => 'fi fi-tr-customer-service',
                     'color' => 'orange',
                 ],
             ],

@@ -18,9 +18,11 @@ class LandingSectionViewService
             'components.navigation.navbar.guest',
         ], function ($view) {
 
- 
+
             static $sections = null;
             static $headers  = null;
+
+
 
             if ($sections === null) {
 
@@ -35,6 +37,13 @@ class LandingSectionViewService
 
                 $headers = app(BuildLandingHeadersAction::class)
                     ->execute(sections: $sections, excluded: ['footer']);
+            }
+
+            if (view()->shared('isPreview')) {
+                $view->with([
+                    'headers'  => $headers,
+                ]);
+                return;
             }
 
             $view->with([

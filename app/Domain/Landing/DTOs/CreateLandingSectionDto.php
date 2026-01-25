@@ -6,7 +6,7 @@ use App\Domain\Landing\VisibilityStates\VisibleState;
 use App\Domain\Landing\VisibilityStates\NotVisibleState;
 use Illuminate\Support\Str;
 
-final class LandingSectionDto
+final class CreateLandingSectionDto
 {
     public function __construct(
         public string $key,
@@ -24,20 +24,17 @@ final class LandingSectionDto
 
     public function toArray(): array
     {
-        return array_filter(
-            [
-                'uuid'              => $this->resolveUuid(),
-                'key'               => $this->key,
-                'label'             => $this->label,
-                'title'             => $this->title,
-                'description'       => $this->description,
-                'url'               => $this->url,
-                'visibility_state'  => $this->resolveVisiblity(),
-                'order'             => $this->order,
-                'data'              => $this->resolveData(),
-            ],
-            fn($value) => ! is_null($value) && $value !== ''
-        );
+        return [
+            'uuid'              => $this->resolveUuid(),
+            'key'               => $this->key,
+            'label'             => $this->label,
+            'title'             => $this->title,
+            'description'       => $this->description,
+            'url'               => $this->url,
+            'visibility_state'  => $this->resolveVisiblity(),
+            'order'             => $this->order,
+            'data'              => $this->resolveData(),
+        ];
     }
 
 
