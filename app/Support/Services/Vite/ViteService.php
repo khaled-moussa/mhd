@@ -23,7 +23,7 @@ class ViteService
         Vite::macro(
             'video',
             fn(string $asset) =>
-            $this->asset("resources/assets/videos/{$asset}")
+            Vite::asset("resources/assets/videos{$asset}")
         );
 
         // Default style path
