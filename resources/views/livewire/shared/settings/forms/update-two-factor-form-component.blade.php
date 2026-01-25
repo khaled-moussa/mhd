@@ -22,7 +22,7 @@
 		<x-button.outline
 			class="modal-close"
 			label="Close"
-			:data-modal-id="$modal['UPDATE_TWO_FACTOR_MODAL']"
+			:data-modal-id="$modalId['UPDATE_TWO_FACTOR_MODAL']"
 		/>
 
 		<x-button.main

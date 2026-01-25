@@ -46,7 +46,7 @@
 		<x-button.outline
 			class="modal-close"
 			label="Close"
-			:data-modal-id="$modal['UPDATE_EMAIL_MODAL']"
+			:data-modal-id="$modalId['UPDATE_EMAIL_MODAL']"
 		/>
 
 		<x-button.main

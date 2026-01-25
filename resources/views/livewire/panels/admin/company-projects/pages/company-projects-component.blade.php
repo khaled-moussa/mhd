@@ -11,7 +11,7 @@
             <x-button.main
                 class="header-btn"
                 label="Create Project"
-                :data-custom-open="$modal['CREATE_COMPANY_PROJECT_MODAL']"
+                :data-custom-open="$modalId['CREATE_COMPANY_PROJECT_MODAL']"
             />
         </x-slot:header>
 
@@ -27,7 +27,7 @@
 
     {{-- Company Project view modal --}}
     <x-modal.delete
-        :id="$modal['DELETE_COMPANY_PROJECT_MODAL']"
+        :id="$modalId['DELETE_COMPANY_PROJECT_MODAL']"
         title="Delete project"
         header="Are you sure to delete the project!"
         wire:ignore

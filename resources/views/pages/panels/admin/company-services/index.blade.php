@@ -16,7 +16,7 @@
     <x-header.page title="Services">
         <x-button.main
             label="Create Service"
-            :data-custom-open="$modal['CREATE_COMPANY_SERVICE_MODAL']"
+            :data-custom-open="$modalId['CREATE_COMPANY_SERVICE_MODAL']"
         />
     </x-header.page>
 
@@ -29,14 +29,14 @@
 
         {{-- Create service modal --}}
         @include('admin::company-services.partials.company-service-form-create', [
-            'modalId' => $modal['CREATE_COMPANY_SERVICE_MODAL'],
+            'modalId' => $modalId['CREATE_COMPANY_SERVICE_MODAL'],
             'modalTitle' => 'Create Service',
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, rem!',
         ])
 
         {{-- Update service modal --}}
         @include('admin::company-services.partials.company-service-form-update', [
-            'modalId' => $modal['UPDATE_COMPANY_SERVICE_MODAL'],
+            'modalId' => $modalId['UPDATE_COMPANY_SERVICE_MODAL'],
             'modalTitle' => 'Update Service',
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, rem!',
         ])

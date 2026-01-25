@@ -25,8 +25,10 @@ class GetCurrentLandingSectionsAction
 
             $dto = new LandingSectionDto(
                 key: $key,
-                title: $section?->getTitle() ?? $defaults['title'] ?? null,
-                description: $section?->getDescription() ?? $defaults['description'] ?? null,
+                label: $section?->getTitle() ?? $defaults['label'],
+                title: $section?->getTitle() ?? $defaults['title'],
+                description: $section?->getDescription() ?? $defaults['description'],
+                url: $section?->getUrl() ?? $defaults['url'],
                 visible: $section?->getVisibility()?->value() ?? ($defaults['visible'] ?? true),
                 order: $section?->getOrder() ?? ($defaults['order'] ?? null),
                 data: $section?->getData() ?? $defaults['data'] ?? []
@@ -49,10 +51,12 @@ class GetCurrentLandingSectionsAction
      */
     protected function attachServices(LandingSectionDto $dto, array $defaults): void
     {
-        $services = app(GetCompanyServicesVisibleAction::class)->execute();
+        $services = app(GetCompanyServicesVisibleAction::class)
+            ->execute();
 
         if ($services->isNotEmpty()) {
-            $dto->data = CompanyServicesResource::collection($services)->resolve();
+            $dto->data = CompanyServicesResource::collection($services)
+                ->resolve();
         } else {
             $dto->data = $defaults['data'] ?? [];
         }

@@ -18,7 +18,7 @@
         <x-button.outline
             class="modal-close"
             label="Cancel"
-            :data-modal-id="$modal['CREATE_USER_MODAL']"
+            :data-modal-id="$modalId['CREATE_USER_MODAL']"
         />
 
         <x-button.main

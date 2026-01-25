@@ -2,7 +2,7 @@
 
 namespace App\Support\Enums;
 
-enum ModalIdsEnum: string
+enum ModalEnum: string
 {
     // Security / User Modals
     case UPDATE_EMAIL_MODAL = 'update-email-modal';
@@ -21,4 +21,10 @@ enum ModalIdsEnum: string
     case CREATE_COMPANY_PROJECT_MODAL = 'create-company-project-modal';
     case UPDATE_COMPANY_PROJECT_MODAL = 'update-company-project-modal';
     case DELETE_COMPANY_PROJECT_MODAL = 'delete-company-project-modal';
+
+    // Contacts / Crud Modals
+    case VIEW_CONTACT_MODAL   = 'view-contact-modal';
+    case CREATE_CONTACT_MODAL = 'create-contact-modal';
+    case UPDATE_CONTACT_MODAL = 'update-contact-modal';
+    case DELETE_CONTACT_MODAL = 'delete-contact-modal';
 }

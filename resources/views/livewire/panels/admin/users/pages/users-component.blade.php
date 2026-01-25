@@ -26,13 +26,13 @@
 
     {{-- User view modal --}}
     @include('pages.panels.admin.users.partials.user-view-modal', [
-        'modalId' => $modal['VIEW_USER_MODAL'],
+        'modalId' => $modalId['VIEW_USER_MODAL'],
         'modalTitle' => 'View User',
     ])
 
     {{-- User delete modal --}}
     <x-modal.delete
-        :id="$modal['DELETE_USER_MODAL']"
+        :id="$modalId['DELETE_USER_MODAL']"
         title="Delete user"
         header="Are you sure to delete the user!"
         wire:ignore

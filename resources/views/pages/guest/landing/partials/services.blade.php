@@ -21,9 +21,11 @@
                     class="services__card group"
                     id="{{ $service['uuid'] }}"
                 >
-                    <div class="services__icon">
-                        <i class="{{ $service['icon'] }}"></i>
-                    </div>
+                    @if ($service['icon'])
+                        <div class="services__icon">
+                            {!! $service['icon'] !!}
+                        </div>
+                    @endif
 
                     <h3 class="service-data__title">
                         {{ $service['title'] }}

@@ -6,17 +6,28 @@ use Illuminate\Support\Facades\View;
 
 class ViewNamespaceRegistrarService
 {
-    /**
-     * Register custom view namespaces.
-     */
     public function boot(): void
     {
-        // Admin panel views
-        View::addNamespace('admin', resource_path('views/pages/panels/admin'));
-        View::addNamespace('admin_livewire', resource_path('views/livewire/panels/admin'));
+        $this->registerPanelNamespaces();
+    }
 
-        // User panel views
-        View::addNamespace('user', resource_path('views/pages/panels/user'));
-        View::addNamespace('user_livewire', resource_path('views/livewire/panels/user'));
+    protected function registerPanelNamespaces(): void
+    {
+        $this->registerNamespaces([
+            // Admin panel
+            'admin'          => 'pages/panels/admin',
+            'admin_livewire' => 'livewire/panels/admin',
+
+            // User panel
+            'user'           => 'pages/panels/user',
+            'user_livewire'  => 'livewire/panels/user',
+        ]);
+    }
+
+    protected function registerNamespaces(array $namespaces): void
+    {
+        foreach ($namespaces as $namespace => $path) {
+            View::addNamespace($namespace, resource_path("views/{$path}"));
+        }
     }
 }

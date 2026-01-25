@@ -23,11 +23,11 @@
 }
 
 .projects__image {
-    @apply w-full h-[calc(100%-120px)];
+    @apply w-full aspect-[4/3];
 }
 
 .projects__image img {
-    @apply rounded-xl object-cover;
+    @apply absolute w-full h-full object-cover;
 }
 
 .projects__content {

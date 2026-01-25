@@ -1,0 +1,15 @@
+.contact-view {
+    @apply w-full flex flex-col justify-center gap-5;
+}
+
+.contact-view-row {
+    @apply flex items-center justify-between;
+}
+
+.contact-view-row:not(:last-child) {
+    @apply border-b border-current/5;
+}
+
+.contact-view-row .label-info {
+    @apply flex-1;
+}

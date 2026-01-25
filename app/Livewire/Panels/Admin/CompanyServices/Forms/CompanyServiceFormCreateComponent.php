@@ -40,11 +40,13 @@ class CompanyServiceFormCreateComponent extends Component
 
         $createDto = new CreateCompanyServiceDto(
             title: $this->form->title,
+            icon: $this->form->icon,
             description: $this->form->description,
             visible: $this->form->visible
         );
 
-        app(CreateCompanyServiceAction::class)->execute(dto: $createDto);
+        app(CreateCompanyServiceAction::class)
+            ->execute(dto: $createDto);
 
         $this->resetForm();
         $this->dispatchCompanyServiceCreatedEvent();

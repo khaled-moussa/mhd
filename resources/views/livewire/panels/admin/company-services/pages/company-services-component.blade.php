@@ -9,9 +9,9 @@
             <h6>Services ({{ $paginator->total() }})</h6>
 
             <x-button.main
-                class="hidden!"
+                class="modal-open hidden!"
                 label="Create Service"
-                :data-custom-open="$modal['CREATE_COMPANY_SERVICE_MODAL']"
+                :data-modal-id="$modalId['CREATE_COMPANY_SERVICE_MODAL']"
             />
         </x-slot:header>
 
@@ -27,13 +27,13 @@
 
     {{-- Company Service view modal --}}
     @include('admin::company-services.partials.company-service-view-modal', [
-        'modalId' => $modal['VIEW_COMPANY_SERVICE_MODAL'],
+        'modalId' => $modalId['VIEW_COMPANY_SERVICE_MODAL'],
         'modalTitle' => 'View Company Service',
     ])
 
     {{-- Company Service view modal --}}
     <x-modal.delete
-        :id="$modal['DELETE_COMPANY_SERVICE_MODAL']"
+        :id="$modalId['DELETE_COMPANY_SERVICE_MODAL']"
         title="Delete service"
         header="Are you sure to delete the service!"
         wire:ignore

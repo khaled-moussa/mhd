@@ -3,6 +3,7 @@
 use App\App\Web\Controllers\Panels\Admin\CompanyProjects\CompanyProjectController;
 use App\App\Web\Controllers\Panels\Admin\Dashboard\DashboardController;
 use App\App\Web\Controllers\Panels\Admin\CompanyServices\CompanyServiceController;
+use App\App\Web\Controllers\Panels\Admin\Contacts\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +55,14 @@ Route::middleware([
                 Route::get('/', CompanyProjectController::class)
                     ->name('index');
             });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Contacts
+        |--------------------------------------------------------------------------
+        */
+        Route::get('contacts', ContactController::class)
+            ->name('contacts.index');
         /*
         |--------------------------------------------------------------------------
         | Shared Admin Routes

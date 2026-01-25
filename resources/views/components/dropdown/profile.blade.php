@@ -20,8 +20,8 @@
 >
 
     <div class="account-dropdown-info">
-        <p> {{ $authUser['full_name'] }} </p>
-        <p> {{ $authUser['email'] }} </p>
+        <p> {{ $currentUser['full_name'] }} </p>
+        <p> {{ $currentUser['email'] }} </p>
     </div>
 
     {{-- Account dropdown content --}}

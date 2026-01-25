@@ -13,7 +13,7 @@ use Livewire\Component;
 
 class SiteEditorComponent extends Component
 {
-    use WithLivewireExceptionHandling;
+    // use WithLivewireExceptionHandling;
 
     /*
     |-----------------------------
@@ -73,9 +73,11 @@ class SiteEditorComponent extends Component
         foreach ($sections as $section) {
             $dto = new LandingSectionDto(
                 key: $section['key'],
+                label: $section['label'] ?? null,
                 title: $section['title'] ?? null,
                 description: $section['description'] ?? null,
-                visible: $section['visible'] ?? true,
+                url: $section['url'] ?? null,
+                visible: $section['visible'],
                 order: $section['order'] ?? null,
                 data: $section['data'] ?? [],
             );

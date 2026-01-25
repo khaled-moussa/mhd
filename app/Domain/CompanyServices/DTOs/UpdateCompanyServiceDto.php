@@ -13,7 +13,8 @@ class UpdateCompanyServiceDto
     public function __construct(
         public string $uuid,
         public string $title,
-        public ?string $description = null,
+        public string $description,
+        public ?string $icon = null,
         public bool $visible = true,
     ) {}
 
@@ -25,6 +26,7 @@ class UpdateCompanyServiceDto
         return array_filter(
             [
                 'uuid'        => $this->uuid,
+                'icon'       => $this->icon,
                 'title'       => $this->title,
                 'description' => $this->description,
                 'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,

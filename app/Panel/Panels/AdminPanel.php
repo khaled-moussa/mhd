@@ -43,7 +43,14 @@ class AdminPanel implements PanelContract
             new SidebarItem(
                 label: 'Projects',
                 routeName: 'admin.company-projects.index',
-                icon: 'fi fi-tr-construction-location',
+                icon: 'fi fi-tr-visit',
+            ),
+
+
+            new SidebarItem(
+                label: 'Contacts',
+                routeName: 'admin.contacts.index',
+                icon: 'fi fi-tr-customer-service',
             ),
         ];
     }

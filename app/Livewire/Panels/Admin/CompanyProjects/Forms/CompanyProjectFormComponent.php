@@ -9,8 +9,6 @@ use Livewire\Form;
 
 class CompanyProjectFormComponent extends Form
 {
-    use WithLivewireExceptionHandling;
-
     /*
     |-----------------------------
     | Properties
@@ -61,7 +59,7 @@ class CompanyProjectFormComponent extends Form
             'priceStart' => [
                 'required',
                 'numeric',
-                'min:0',
+                'min:1',
             ],
 
             'address' => [
@@ -82,7 +80,7 @@ class CompanyProjectFormComponent extends Form
             ], // 5MB
 
             'file' => [
-                'required',
+                'nullable',
                 'file',
                 'mimes:pdf,doc,docx,xls,xlsx',
                 'max:5120', // 5 MB
@@ -169,7 +167,6 @@ class CompanyProjectFormComponent extends Form
 
         return $url;
     }
-
 
     /*
     |-----------------------------

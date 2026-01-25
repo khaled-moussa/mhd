@@ -5,6 +5,7 @@ namespace App\Livewire\Panels\Admin\CompanyProjects\Forms;
 use App\Domain\CompanyProjects\Actions\CreateCompanyProjectAction;
 use App\Domain\CompanyProjects\DTOs\CreateCompanyProjectDto;
 use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectFilesJob;
+use App\Domain\CompanyProjects\Models\CompanyProject;
 use App\Support\Enums\EventsEnum;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -12,7 +13,7 @@ use Livewire\WithFileUploads;
 class CompanyProjectFormCreateComponent extends Component
 {
     use WithFileUploads;
-    // use WithLivewireExceptionHandling;
+    // use WithLivewireExceptionHandling;  
 
     /*
     |-----------------------------
@@ -63,14 +64,7 @@ class CompanyProjectFormCreateComponent extends Component
             )
         );
 
-        dispatch(new StoreCompanyProjectFilesJob(
-            companyProject: $project,
-            tempImagesPaths: collect($this->form->images)->map->getRealPath()->all(),
-            tempFileData: $this->form->file ? [
-                'name' => $this->form->file->getClientOriginalName(),
-                'path' => $this->form->file->getRealPath(),
-            ] : null,
-        ));
+        $this->uploadProjectFiles($project);
 
         $this->resetForm();
         $this->dispatchCompanyProjectCreatedEvent();
@@ -81,6 +75,38 @@ class CompanyProjectFormCreateComponent extends Component
     | Helpers
     |-----------------------------
     */
+    private function uploadProjectFiles(CompanyProject $project): void
+    {
+        $tempImagesPaths = [];
+        $tempFileData = null;
+
+        // Multiple images
+        if (!empty($this->form->images)) {
+            $tempImagesPaths = collect($this->form->images)
+                ->map(fn($image) => $image->getRealPath())
+                ->all();
+        }
+
+        // Single file
+        if (!empty($this->form->file)) {
+            $tempFileData = [
+                'name' => $this->form->file->getClientOriginalName(),
+                'path' => $this->form->file->getRealPath(),
+            ];
+        }
+
+        // Nothing to upload
+        if (empty($tempImagesPaths) && is_null($tempFileData)) {
+            return;
+        }
+
+        dispatch(new StoreCompanyProjectFilesJob(
+            companyProject: $project,
+            tempImagesPaths: $tempImagesPaths,
+            tempFileData: $tempFileData,
+        ));
+    }
+
     private function resetForm(): void
     {
         $this->form->resetForm();

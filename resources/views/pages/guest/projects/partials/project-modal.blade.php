@@ -88,7 +88,7 @@
 
                                 <x-label.info
                                     label="Price Start"
-                                    x-description="projectData.price_start"
+                                    x-description="`${projectData.price_start} EGP`"
                                 />
                             </div>
 

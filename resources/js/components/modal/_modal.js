@@ -69,7 +69,7 @@ export function showModal({ modalId, callback, withEvent = false }) {
     }
 
     if (withEvent) {
-        dispatchModalClosedEvent(modalId);
+        dispatchModalOpenedEvent(modalId);
     }
 
     openCallback = callback;

@@ -1,18 +1,30 @@
 <?php
 
-use Illuminate\Support\Str;
-
 return [
     'sections' => [
+
+        /*
+        |----------------------
+        | Hero
+        |----------------------
+        */
         'hero' => [
+            'label' => 'Hero',
             'title' => 'Find Your Dream Property',
             'description' => 'Discover modern real estate solutions with cutting-edge architecture and sustainable developments.',
-            'data' => [],
+            'url' => '#hero',
             'visible' => true,
             'order' => 1,
+            'data' => [],
         ],
 
+        /*
+        |----------------------
+        | About
+        |----------------------
+        */
         'about' => [
+            'label' => 'About',
             'title' => 'Discover who we are, what drives us.',
             'description' => '“We are passionate about transforming ideas into impactful digital experiences.
                 Our team combines creativity, technology, and strategy to deliver exceptional
@@ -23,59 +35,78 @@ return [
                 Whether it’s building a brand from the ground up, developing custom web solutions,
                 or enhancing your online presence — we’re here to bring your vision to life with
                 precision, innovation, and care.”',
-            'data' => [],
+
+            'url' => '#about',
             'visible' => true,
             'order' => 2,
+            'data' => [],
         ],
 
+        /*
+        |----------------------
+        | Services
+        |----------------------
+        */
         'services' => [
+            'label' => 'Services',
             'title' => 'Our Services',
             'description' => 'We provide professional real estate solutions to help you find, manage, and grow your investments with confidence..',
+            'url' => '#services',
+            'visible' => true,
+            'order' => 3,
             'data' => [
                 [
                     'uuid' => 'srv-100',
-                    'icon' => 'fi fi-tc-garage',
+                    'icon' => '<i class="fi fi-tc-garage"></i>',
                     'title' => 'Property Sales',
                     'description' => 'Buy and sell residential and commercial properties with expert guidance.',
                 ],
                 [
                     'uuid' => 'srv-101',
-                    'icon' => 'fi fi-ts-document-gear',
+                    'icon' => '<i class="fi fi-ts-document-gear"></i>',
                     'title' => 'Property Management',
                     'description' => 'Full-service management for rental properties, including tenants and maintenance.',
                 ],
                 [
                     'uuid' => 'srv-102',
-                    'icon' => 'fi fi-tr-builder',
+                    'icon' => '<i class="fi fi-tr-builder"></i>',
                     'title' => 'Real Estate Investment',
                     'description' => 'Discover profitable real estate opportunities and maximize your ROI.',
                 ],
                 [
                     'uuid' => 'srv-103',
-                    'icon' => 'fi fi-tr-assessment',
+                    'icon' => '<i class="fi fi-tr-assessment"></i>',
                     'title' => 'Legal & Documentation',
                     'description' => 'Hassle-free support with contracts, property titles, and legal compliance.',
                 ],
                 [
                     'uuid' => 'srv-104',
-                    'icon' => 'fi fi-ts-apartment',
+                    'icon' => '<i class="fi fi-ts-apartment"></i>',
                     'title' => 'Construction & Development',
                     'description' => 'From planning to execution, we develop high-quality housing and commercial projects.',
                 ],
                 [
                     'uuid' => 'srv-105',
-                    'icon' => 'fi fi-tr-brain-bulb',
+                    'icon' => '<i class="fi fi-tr-brain-bulb"></i>',
                     'title' => 'Consulting & Valuation',
                     'description' => 'Accurate property valuation and professional advice for smart decisions.',
                 ],
             ],
-            'visible' => true,
-            'order' => 3,
+
         ],
 
+        /*
+        |----------------------
+        | Projects
+        |----------------------
+        */
         'projects' => [
+            'label' => 'Projects',
             'title' => 'Our Projects',
             'description' => 'Explore some of our recent real estate developments — from modern apartments to commercial complexes.',
+            'url' => '#projects',
+            'visible' => true,
+            'order' => 4,
             'data' => [
                 [
                     'uuid' => 'pr-100',
@@ -112,19 +143,33 @@ return [
             ]
         ],
 
+        /*
+        |----------------------
+        | Contact
+        |----------------------
+        */
         'contact' => [
+            'label' => 'Contact',
             'title' => 'Let\'s Connect',
             'description' => 'Have questions or ready to start your real estate journey? Reach out to us — our team is here to assist you every step of the way.',
-            'data' => [],
-
+            'url' => '#contact',
             'visible' => true,
-            'order' => null,
+            'order' => 5,
+            'data' => [],
         ],
 
+        /*
+        |----------------------
+        | Footer
+        |----------------------
+        */
         'footer' => [
+            'label' => 'Footer',
             'title' => 'Our Services',
-            'description' => 'The most trusted real estate company, empowering clients with innovative solutions
-                    and top-quality developments.',
+            'description' => 'The most trusted real estate company, empowering clients with innovative solutions and top-quality developments.',
+            'url' => null,
+            'visible' => true,
+            'order' => null,
             'data' => [
                 'socials' => [
                     [
@@ -172,9 +217,6 @@ return [
                     ],
                 ],
             ],
-
-            'visible' => true,
-            'order' => null,
         ],
     ],
 ];

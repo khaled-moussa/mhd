@@ -1,6 +1,7 @@
 import MessageToast from "@js/utils/message-toast";
-import { closeModal, showModal } from "@js/components/modal/_modal";
-import { MODALS, UI_EVENTS } from "@js/utils/enums";
+import resetFormValidation from "@js/utils/reset-form-validation";
+import { showModal, closeModal } from "@js/components/modal/_modal";
+import { MODALS, FORMS, UI_EVENTS } from "@js/utils/enums";
 import { MODALS_EVENT } from "@js/utils/events";
 
 document.addEventListener("alpine:init", () => {
@@ -34,15 +35,28 @@ document.addEventListener("alpine:init", () => {
 
         /* 
         |-------------------------------
+        | Helpers
+        |------------------------------- 
+        */
+        isValidPayload(companyServiceUuid, triggerEl) {
+            return Boolean(companyServiceUuid && triggerEl);
+        },
+
+        showError() {
+            MessageToast("error");
+        },
+
+        /* 
+        |-------------------------------
         | Listeners
         |------------------------------- 
         */
         registerListeners() {
-            this.listenToModalOpened();
-            this.listenToCompanyServiceUpdated();
+            this.onModalOpened();
+            this.onServiceServiceUpdatedEvent();
         },
 
-        listenToModalOpened() {
+        onModalOpened() {
             window.addEventListener(
                 MODALS_EVENT.opened(MODALS.UPDATE_COMPANY_SERVICE_MODAL),
                 ({ detail }) => {
@@ -53,29 +67,18 @@ document.addEventListener("alpine:init", () => {
             );
         },
 
-        listenToCompanyServiceUpdated() {
+        onServiceServiceUpdatedEvent() {
             this.$el.addEventListener(
                 UI_EVENTS.COMPANY_SERVICE_UPDATED_EVENT,
                 () => {
                     closeModal({
                         modalId: MODALS.UPDATE_COMPANY_SERVICE_MODAL,
                     });
+
                     MessageToast("updated");
+                    resetFormValidation(FORMS.UPDATE_COMPANY_SERVICE_FORM);
                 },
             );
-        },
-
-        /* 
-        |-------------------------------
-        | Helpers
-        |------------------------------- 
-        */
-        isValidPayload(companyServiceUuid, triggerEl) {
-            return Boolean(companyServiceUuid && triggerEl);
-        },
-
-        showError() {
-            MessageToast("error");
         },
     }));
 });

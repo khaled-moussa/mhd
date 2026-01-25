@@ -4,6 +4,7 @@ import initCountUp from "./hero.js";
 
 // Alpine import
 import "../projects/_projects.js";
+import "../contacts/_contacts.js"
 
 // Run imports
 initNavbarToggle();

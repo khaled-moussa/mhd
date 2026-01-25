@@ -12,7 +12,8 @@ class CreateCompanyServiceDto
      */
     public function __construct(
         public string $title,
-        public ?string $description = null,
+        public string $description,
+        public ?string $icon = null,
         public bool $visible = true,
     ) {}
 
@@ -23,6 +24,7 @@ class CreateCompanyServiceDto
     {
         return array_filter(
             [
+                'icon'       => $this->icon,
                 'title'       => $this->title,
                 'description' => $this->description,
                 'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,

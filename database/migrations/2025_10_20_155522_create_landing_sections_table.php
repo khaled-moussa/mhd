@@ -21,10 +21,16 @@ return new class extends Migration
             $table->string('key')
                 ->unique();
 
+            $table->string('label')
+                ->nullable();
+
             $table->string('title')
                 ->nullable();
 
-            $table->text('description')
+            $table->longText('description')
+                ->nullable();
+
+            $table->string('url')
                 ->nullable();
 
             $table->string('visibility_state');

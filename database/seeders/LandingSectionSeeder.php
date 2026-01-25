@@ -25,8 +25,10 @@ class LandingSectionSeeder extends Seeder
         foreach ($defaultSections as $key => $section) {
             $dto = new LandingSectionDto(
                 key: $key,
-                title: $section['title'] ?? null,
-                description: $section['description'] ?? null,
+                label: $section['label'],
+                title: $section['title'],
+                description: $section['description'],
+                url: $section['url'] ?? null,
                 visible: $section['visible'] ?? true,
                 order: $section['order'] ?? $index,
                 data: $section['data'] ?? []

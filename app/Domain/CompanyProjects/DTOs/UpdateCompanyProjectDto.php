@@ -18,7 +18,6 @@ class UpdateCompanyProjectDto
         public ?float  $priceStart = null,
         public ?string $address = null,
         public ?string $location = null,
-        public ?array  $images = null,
         public bool  $visible = true,
     ) {}
 
@@ -35,7 +34,6 @@ class UpdateCompanyProjectDto
                 'price_start'      => $this->priceStart,
                 'address'          => $this->address,
                 'location'         => $this->location,
-                'images'           => $this->images,
                 'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
             ];
     }

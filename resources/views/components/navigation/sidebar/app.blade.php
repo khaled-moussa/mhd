@@ -20,7 +20,7 @@
 	<div class="sidebar-menu-scroll">
 		{{-- Main Menu --}}
 		<ul class="sidebar-menu">
-			@foreach ($primarySidebarItems as $item)
+			@foreach ($primaryMenu as $item)
 				<x-navigation.sidebar.item
 					:label="$item->label"
 					:icon="$item->icon"
@@ -32,7 +32,7 @@
 
 		{{-- Secondary Menu --}}
 		<ul class="sidebar-menu">
-			@foreach ($secondarySidebarItems as $item)
+			@foreach ($secondaryMenu as $item)
 				<x-navigation.sidebar.item
 					:label="$item->label"
 					:icon="$item->icon"
