@@ -4,11 +4,8 @@
         id="account-dropdown-btn"
         data-dropdown-toggle="account-dropdown-menu"
     >
+        <img src="{{ $currentUser['avatar'] }}" />
 
-        <x-asset.img
-            folder="mockups"
-            img="profile.jpg"
-        />
         <i class="fi fi-rs-angle-small-down"></i>
     </x-button.dropdown>
 </div>

@@ -73,6 +73,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->uuid;
     }
 
+    public function getAvatar(): string
+    {
+        $name = urlencode($this->getFullName());
+        return "https://ui-avatars.com/api/?name={$name}&background=fff&color=000";
+    }
+
     public function getFullName(): string
     {
         return $this->first_name . ' ' . $this->last_name;

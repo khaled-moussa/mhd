@@ -15,6 +15,7 @@ class ProfileComponent extends BaseSettingComponent
     |-----------------------------
     */
     public string $userUuid;
+    public string $avatar;
     public string $fullName;
     public string $firstName;
     public string $lastName;
@@ -100,6 +101,7 @@ class ProfileComponent extends BaseSettingComponent
     private function fillFromUser(): void
     {
         $this->userUuid    = $this->user->getUuid();
+        $this->avatar      = $this->user->getAvatar();
         $this->fullName    = $this->user->getFullName();
         $this->firstName   = $this->user->getFirstName();
         $this->lastName    = $this->user->getLastName();

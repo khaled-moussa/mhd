@@ -29,16 +29,16 @@ function statusHandler(status, title) {
     let toastTitle;
     switch (status) {
         case "success":
-            toastTitle = `<i class="ti ti-circle-check-filled text-[#2a9a29]"></i> ${title}`;
+            toastTitle = `<i class="fi fi-ss-check-circle text-[#2a9a29]"></i> ${title}`;
             break;
         case "danger":
-            toastTitle = `<i class="ti ti-alert-triangle-filled text-[#c23c3c]"></i> ${title}`;
+            toastTitle = `<i class="fi fi-sr-cross-circle text-[#c23c3c]"></i> ${title}`;
             break;
         case "warning":
-            toastTitle = `<i class="ti ti-exclamation-circle-filled text-yellow-400"></i> ${title}`;
+            toastTitle = `<i class="fi fi-sr-engine-warning text-yellow-400"></i> ${title}`;
             break;
         case "info":
-            toastTitle = `<i class="ti ti-bell-filled text-current"></i> ${title}`;
+            toastTitle = `<i class="fi fi-tc-bell-ring text-current"></i> ${title}`;
             break;
     }
 

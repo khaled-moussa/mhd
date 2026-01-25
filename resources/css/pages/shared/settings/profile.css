@@ -40,11 +40,11 @@
    Profile Image  
 -------------------------------- */
 .card-profile-img {
-    @apply relative w-20 h-20;
+    @apply relative w-12 h-12;
 }
 
 .card-profile-img img {
-    @apply absolute w-full h-full rounded-full;
+    @apply absolute rounded-full;
 }
 
 /* -------------------------------  

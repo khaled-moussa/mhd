@@ -2,6 +2,10 @@
 <div class="card">
     <div class="card-profile">
         <div>
+            <div class="card-profile-img">
+                <img src="{{ $avatar }}" />
+            </div>
+
             <div class="card-profile-info">
                 <header>
                     {{ $fullName }}

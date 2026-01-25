@@ -14,6 +14,7 @@ class UserViewResource extends JsonResource
     {
         return [
             'uuid'        => $this->getUuid(),
+            'avatar'      => $this->getAvatar(),
             'full_name'   => $this->getFullName(),
             'email'       => $this->getEmail(),
         ];
