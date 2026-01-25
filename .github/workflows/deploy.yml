@@ -2,7 +2,8 @@ name: Deploy MHD Project
 
 on:
   push:
-    branches: -master
+    branches:
+      - master
 
 jobs:
   deploy:
@@ -10,16 +11,16 @@ jobs:
 
     steps:
       - name: Checkout Repository
-      - uses: actions/checkout@v4
-    
+        uses: actions/checkout@v4
+
       - name: Install NPM
         run: |
           npm ci
           npm run build
-        
+
       - name: Upload build assets to server
-      - uses: appleboy/scp-action@v0.1.4
-        with: 
+        uses: appleboy/scp-action@v0.1.4
+        with:
           host: ${{ secrets.SITEGROUND_IP }}
           username: ${{ secrets.SITEGROUND_USER }}
           key: ${{ secrets.SITEGROUND_KEY }}
