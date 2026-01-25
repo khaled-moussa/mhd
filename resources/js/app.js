@@ -1,4 +1,5 @@
 import "./bootstrap";
+
 import initTheme from "./common/theme/_theme";
 import initSidebarCollapse from "./components/sidebar/sidebar-collapse.js";
 import globalException from "./exceptions/global-exception.js";
@@ -11,7 +12,6 @@ import { initFlowbite } from "flowbite";
 |------------------------------- 
 */
 import.meta.glob([
-    "../assets/audios/**", // include all audios
     "../assets/images/**", // include all images
     "../assets/videos/**", // include all videos
 ]);

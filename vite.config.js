@@ -64,7 +64,10 @@ export default defineConfig({
             "@css_pages": resolve(__dirname, "resources/css/pages"),
 
             "@js_admin": resolve(__dirname, "resources/js/pages/panels/admin"),
-            "@css_admin": resolve(__dirname, "resources/css/pages/panels/admin"),
+            "@css_admin": resolve(
+                __dirname,
+                "resources/css/pages/panels/admin",
+            ),
 
             "@js_user": resolve(__dirname, "resources/js/pages/panels/user"),
             "@css_user": resolve(__dirname, "resources/css/pages/panels/user"),
@@ -73,7 +76,7 @@ export default defineConfig({
             "@css_guest": resolve(__dirname, "resources/css/pages/guest"),
 
             "@img": resolve(__dirname, "resources/assets/images"),
-            "@vidoes": resolve(__dirname, "resources/audio"),
+            "@vidoes": resolve(__dirname, "resources/assets/vidoes"),
             "@json": resolve(__dirname, "resources/json"),
             "@views": resolve(__dirname, "resources/views"),
         },
