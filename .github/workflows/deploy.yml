@@ -1,0 +1,62 @@
+name: Deploy MHD Project
+
+on:
+  push:
+    branches: -master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+      - uses: actions/checkout@v4
+    
+      - name: Install NPM
+        run: |
+          npm ci
+          npm run build
+        
+      - name: Upload build assets to server
+      - uses: appleboy/scp-action@v0.1.4
+        with: 
+          host: ${{ secrets.SITEGROUND_IP }}
+          username: ${{ secrets.SITEGROUND_USER }}
+          key: ${{ secrets.SITEGROUND_KEY }}
+          port: ${{ secrets.SITEGROUND_PORT }}
+          source: "public/build/"
+          target: "/home/u2637-4ikru4wnhy56/www/mhd-egy.com/public_html/public/"
+          overwrite: true
+          strip_components: 1
+
+      - name: Deploy and Build on Server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SITEGROUND_IP }}
+          username: ${{ secrets.SITEGROUND_USER }}
+          key: ${{ secrets.SITEGROUND_KEY }}
+          port: ${{ secrets.SITEGROUND_PORT }}
+          script: |
+            cd /home/u2637-4ikru4wnhy56/www/mhd-egy.com/public_html
+
+            echo "Pulling latest code..."
+            git reset --hard
+            git clean -fd
+            git pull origin master
+
+            echo "Installing PHP dependencies..."
+            composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+
+            echo "Running package discovery..."
+            php artisan package:discover --ansi
+
+            echo "Running migrations..."
+            php artisan migrate --force --no-interaction
+
+            echo "Clearing caches..."
+            php artisan optimize:clear
+            php artisan cache:clear
+            php artisan route:clear
+            php artisan view:clear
+
+            echo "Deployment completed."
