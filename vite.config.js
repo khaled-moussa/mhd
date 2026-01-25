@@ -64,10 +64,7 @@ export default defineConfig({
             "@css_pages": resolve(__dirname, "resources/css/pages"),
 
             "@js_admin": resolve(__dirname, "resources/js/pages/panels/admin"),
-            "@css_admin": resolve(
-                __dirname,
-                "resources/css/pages/panels/admin",
-            ),
+            "@css_admin": resolve(__dirname, "resources/css/pages/panels/admin"),
 
             "@js_user": resolve(__dirname, "resources/js/pages/panels/user"),
             "@css_user": resolve(__dirname, "resources/css/pages/panels/user"),

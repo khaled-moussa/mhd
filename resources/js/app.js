@@ -7,6 +7,17 @@ import { initFlowbite } from "flowbite";
 
 /* 
 |------------------------------- 
+| Meta Glob 
+|------------------------------- 
+*/
+import.meta.glob([
+    "../assets/audios/**", // include all audios
+    "../assets/images/**", // include all images
+    "../assets/videos/**", // include all videos
+]);
+
+/* 
+|------------------------------- 
 | Helpers 
 |------------------------------- 
 */
