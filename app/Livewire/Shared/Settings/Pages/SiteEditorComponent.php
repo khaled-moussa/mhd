@@ -7,13 +7,14 @@ use App\Domain\Landing\Actions\GetLandingSectionsAction;
 use App\Domain\Landing\Actions\UpdateLandingSectionAction;
 use App\Domain\Landing\Actions\UpsertLandingSectionsAction;
 use App\Domain\Landing\DTOs\UpdateLandingSectionDto;
+use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class SiteEditorComponent extends Component
 {
-    // use WithLivewireExceptionHandling;
+    use WithLivewireExceptionHandling;
 
     /*
     |-----------------------------

@@ -17,8 +17,8 @@ use Livewire\WithFileUploads;
 
 class CompanyProjectFormUpdateComponent extends Component
 {
+    use WithLivewireExceptionHandling;
     use WithFileUploads;
-    // use WithLivewireExceptionHandling;
 
     /*
     |-----------------------------

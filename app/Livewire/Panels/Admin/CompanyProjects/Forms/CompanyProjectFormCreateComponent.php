@@ -6,14 +6,15 @@ use App\Domain\CompanyProjects\Actions\CreateCompanyProjectAction;
 use App\Domain\CompanyProjects\DTOs\CreateCompanyProjectDto;
 use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectFilesJob;
 use App\Domain\CompanyProjects\Models\CompanyProject;
+use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class CompanyProjectFormCreateComponent extends Component
 {
+    use WithLivewireExceptionHandling;  
     use WithFileUploads;
-    // use WithLivewireExceptionHandling;  
 
     /*
     |-----------------------------

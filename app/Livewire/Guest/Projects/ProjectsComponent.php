@@ -6,6 +6,7 @@ use App\App\Web\Resources\CompanyProjects\CompanyProjectsResource;
 use App\Domain\CompanyProjects\Actions\GetCompanyProjectByUuidAction;
 use App\Domain\CompanyProjects\Actions\GetVisibleCompanyProjectsAction;
 use App\Domain\CompanyProjects\Models\CompanyProject;
+use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use App\Support\Traits\HandlePaginationButtons;
 use Livewire\Component;
@@ -14,7 +15,7 @@ use Livewire\WithPagination;
 
 class ProjectsComponent extends Component
 {
-    // use WithLivewireExceptionHandling;
+    use WithLivewireExceptionHandling;
     use WithPagination;
     use HandlePaginationButtons;
     use WithoutUrlPagination;

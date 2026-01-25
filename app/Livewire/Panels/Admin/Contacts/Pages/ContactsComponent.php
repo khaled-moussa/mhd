@@ -7,6 +7,7 @@ use App\Domain\Contacts\Actions\DeleteContactAction;
 use App\Domain\Contacts\Actions\GetContactByUuidAction;
 use App\Domain\Contacts\Actions\GetContactsAction;
 use App\Domain\Contacts\Models\Contact;
+use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use App\Support\Traits\HandlePaginationButtons;
 use Livewire\Attributes\Computed;
@@ -16,6 +17,7 @@ use Livewire\WithPagination;
 
 class ContactsComponent extends Component
 {
+    use WithLivewireExceptionHandling;
     use WithPagination;
     use HandlePaginationButtons;
 
