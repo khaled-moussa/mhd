@@ -68,7 +68,7 @@
                         {{-- Message --}}
                         <x-label.info
                             label="Message"
-                            :description="$form->message"
+                            x-description="contactData.message"
                         />
                     </div>
                 </div>

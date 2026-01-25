@@ -10,6 +10,7 @@ document.addEventListener("alpine:init", () => {
         | State
         |-------------------------------
         */
+        contactData: [],
         canDelete: true,
 
         /* 
@@ -35,19 +36,17 @@ document.addEventListener("alpine:init", () => {
 
             await this.$wire.call("viewContact", contactUuid);
 
-            showModal({
-                modalId: MODALS.VIEW_CONTACT_MODAL,
-                callback: () => this.toggleSpinner(false),
-            });
+            this.contactData = [];
         },
 
         deleteContact(contactUuid) {
+            
             if (!this.canDelete) {
                 return MessageToast("warning");
             }
 
             deleteModal({
-                modalId: MODALS.DELETE_CONTACT_REQUEST_MODAL,
+                modalId: MODALS.DELETE_CONTACT_MODAL,
                 closeAfterConfirm: true,
                 onConfirm: () => this.confirmDelete(contactUuid),
             });
@@ -86,7 +85,28 @@ document.addEventListener("alpine:init", () => {
         |-------------------------------
         */
         registerListeners() {
+            this.onContactDataLoaded();
             this.onContactDeleted();
+        },
+
+        onContactDataLoaded() {
+            this.$el.addEventListener(
+                UI_EVENTS.CONTACT_LOADED_EVENT,
+                ({ detail }) => {
+                    const contactData = detail.data;
+
+                    if (contactData.length === 0) {
+                        return;
+                    }
+
+                    this.contactData = contactData;
+
+                    showModal({
+                        modalId: MODALS.VIEW_CONTACT_MODAL,
+                        callback: () => this.toggleSpinner(false),
+                    });
+                },
+            );
         },
 
         onContactDeleted() {

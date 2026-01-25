@@ -21,5 +21,12 @@
     >
         {{-- Contacts table livewire component --}}
         <livewire:panels.admin.contacts.pages.contacts-component />
+
+        {{-- Contacts view modal --}}
+        @include('admin::contacts.partials.contact-view-modal', [
+            'modalId' => $modalId['VIEW_CONTACT_MODAL'],
+            'modalTitle' => 'View Contact Info',
+        ])
+
     </div>
 @endsection

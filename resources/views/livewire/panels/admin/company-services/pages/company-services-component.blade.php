@@ -33,11 +33,11 @@
 
     {{-- Company Service view modal --}}
     <x-modal.delete
-        :id="$modalId['DELETE_COMPANY_SERVICE_MODAL']"
-        title="Delete service"
+        :id="$modalId['DELETE_CONTACT_MODAL']"
+        title="Delete contact"
         header="Are you sure to delete the service!"
         wire:ignore
-        wire:target="deleteService"
+        wire:target="deleteContact"
         wire:loading.class="spinner"
     />
 </div>

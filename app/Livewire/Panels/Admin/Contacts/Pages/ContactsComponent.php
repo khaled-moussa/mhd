@@ -7,7 +7,6 @@ use App\Domain\Contacts\Actions\DeleteContactAction;
 use App\Domain\Contacts\Actions\GetContactByUuidAction;
 use App\Domain\Contacts\Actions\GetContactsAction;
 use App\Domain\Contacts\Models\Contact;
-use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use App\Support\Traits\HandlePaginationButtons;
 use Livewire\Attributes\Computed;
@@ -17,7 +16,6 @@ use Livewire\WithPagination;
 
 class ContactsComponent extends Component
 {
-    // use WithLivewireExceptionHandling;
     use WithPagination;
     use HandlePaginationButtons;
 
@@ -31,7 +29,7 @@ class ContactsComponent extends Component
         $this->initPaginationButtons($this->contacts);
 
         return view('admin_livewire::contacts.pages.contacts-component', [
-            'paginator' => $this->contacts,
+            'paginator'    => $this->contacts,
             'contactsData' => $this->contactsData,
         ]);
     }
@@ -62,22 +60,25 @@ class ContactsComponent extends Component
     */
     public function viewContact(string $contactUuid): void
     {
-        $this->getContact($contactUuid);
+        $contact = $this->getContact($contactUuid);
+        
+        $contactData = (new ContactsResource($contact))->resolve();
+
+        $this->dispatchContactDataLoaded(data: $contactData);
     }
 
-    public function deleteContactRequest(string $contactUuid): void
+    public function deleteContact(string $contactUuid): void
     {
         $contact = $this->getContact($contactUuid);
 
-        app(DeleteContactAction::class)
-            ->execute($contact);
+        app(DeleteContactAction::class)->execute($contact);
 
         // If current page becomes empty → go back
-        if ($this->Request->count() === 0 && $this->currentPage > 1) {
+        if ($this->contacts->count() === 0 && $this->currentPage > 1) {
             $this->previousPage();
         }
 
-        $this->dispatchCreated();
+        $this->dispatchContactDeleted();
     }
 
     /*
@@ -100,5 +101,20 @@ class ContactsComponent extends Component
     {
         return app(GetContactByUuidAction::class)
             ->execute($contactUuid);
+    }
+
+    /*
+    |-----------------------------
+    | Dispatchers
+    |-----------------------------
+    */
+    private function dispatchContactDataLoaded(array $data): void
+    {
+        $this->dispatch(EventsEnum::CONTACT_LOADED_EVENT, data: $data);
+    }
+
+    private function dispatchContactDeleted(): void
+    {
+        $this->dispatch(EventsEnum::CONTACT_DELETED_EVENT);
     }
 }
