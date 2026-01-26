@@ -16,6 +16,7 @@
             {{-- View --}}
             <li class="table-row-actions__item">
                 <x-button.outline
+                    id="view-project-btn"
                     class="secondary"
                     label="View"
                     @click="viewCompanyProject('{{ $item['uuid'] }}')"

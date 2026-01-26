@@ -35,8 +35,10 @@ class ProjectsComponent extends Component
     | Lifecycle
     |---------------------------------
     */
-    public function mount(int $perPage = 10, bool $showViewAllProjectsBtn = false): void
-    {
+    public function mount(
+        int $perPage = 10,
+        bool $showViewAllProjectsBtn = false
+    ): void {
         $this->perPage = $perPage;
         $this->isProjectSection = $showViewAllProjectsBtn;
 

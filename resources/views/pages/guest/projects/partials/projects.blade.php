@@ -12,7 +12,6 @@
         id="projects-container"
         class="projects__container"
     >
-
         {{-- Header Section --}}
         <x-header.section
             :title="$section['title']"

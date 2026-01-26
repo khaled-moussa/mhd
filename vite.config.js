@@ -12,6 +12,12 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/app.js",
 
+                /*
+                |-------------------------
+                | Guest
+                |-------------------------
+                */
+
                 // Auth
                 "resources/css/pages/auth/_auth.css",
                 "resources/js/pages/auth/_auth.js",
@@ -20,7 +26,11 @@ export default defineConfig({
                 "resources/css/pages/guest/landing/_landing.css",
                 "resources/js/pages/guest/landing/_landing.js",
 
-                // -- Panels / Admin
+                /*
+                |-------------------------
+                | Panels / Admin
+                |-------------------------
+                */
 
                 // Dashboard
                 "resources/css/pages/panels/admin/dashboard/_dashboard.css",
@@ -38,9 +48,16 @@ export default defineConfig({
                 "resources/css/pages/panels/admin/contacts/_contacts.css",
                 "resources/js/pages/panels/admin/contacts/_contacts.js",
 
-                // -- Shared
+                /*
+                |-------------------------
+                | Shared
+                |-------------------------
+                */
                 "resources/css/pages/shared/settings/_settings.css",
                 "resources/js/pages/shared/settings/_settings.js",
+
+                // Site preview
+                "resources/js/pages/shared/settings/site-editor/scripts/site-editor-preview.js",
             ],
             refresh: true,
         }),
@@ -63,7 +80,10 @@ export default defineConfig({
             "@css_pages": resolve(__dirname, "resources/css/pages"),
 
             "@js_admin": resolve(__dirname, "resources/js/pages/panels/admin"),
-            "@css_admin": resolve(__dirname, "resources/css/pages/panels/admin"),
+            "@css_admin": resolve(
+                __dirname,
+                "resources/css/pages/panels/admin",
+            ),
 
             "@js_user": resolve(__dirname, "resources/js/pages/panels/user"),
             "@css_user": resolve(__dirname, "resources/css/pages/panels/user"),
