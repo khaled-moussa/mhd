@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Domain\Roles\Models\CustomRole;
 use App\Domain\Users\Models\User;
 use App\Panel\Enums\PanelEnum;
 use Illuminate\Database\Seeder;
@@ -17,8 +16,8 @@ class UserSeeder extends Seeder
         $user =  User::create([
             'first_name' => 'Khaled',
             'last_name' => 'Moussa',
-            'email' => 'khaledmoussaeid@gmail.com',
-            'password' => '12345Test**',
+            'email' => 'admin@gmail.com',
+            'password' => '12345test',
             'panel_id' => PanelEnum::ADMIN->value,
             'email_verified_at' => now(),
         ]);
