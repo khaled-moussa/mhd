@@ -80,7 +80,7 @@ class CompanyProject extends Model implements HasMedia
         return $this->getFirstMediaUrl('images');
     }
 
-    public function getBorchure(): ?array
+    public function getBrochure(): ?array
     {
         return $this->firstMediaData('file');
     }

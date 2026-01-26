@@ -26,17 +26,14 @@ document.addEventListener("alpine:init", () => {
         | Actions
         |------------------------------- 
         */
-        viewCompanyProject(companyProjectUuid) {
+        async viewCompanyProject(companyProjectUuid) {
             if (!this.isValidUuid(companyProjectUuid)) {
                 return this.showError();
             }
 
-            this.toggleSpinner(true);
+            this.toggleSpinner();
 
-            dispatchModalOpenedEvent(MODALS.VIEW_COMPANY_PROJECT_MODAL, {
-                companyProjectUuid,
-                triggerEl: this.$el,
-            });
+            await this.$wire.call("viewCompanyProject", companyProjectUuid);
         },
 
         editCompanyProject(companyProjectUuid) {

@@ -4,7 +4,7 @@
          @forelse ($projectsData as $project)
              <div
                  class="projects__card"
-                 wire:target="viewProject"
+                 wire:target="viewProject('{{ $project['uuid'] }}')"
                  wire:loading.class="spinner"
                  @click="viewProject(`{{ $project['uuid'] }}`)"
              >

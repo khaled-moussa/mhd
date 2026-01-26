@@ -73,9 +73,13 @@ class CompanyProjectsComponent extends Component
     {
         $companyProject = $this->getCompanyProject($companyProjectUuid);
 
-        if ($companyProject) {
-            $this->form->fillCompanyProject(companyProject: $companyProject);
+        if (!$companyProject) {
+            return;
         }
+
+        $companyProjectData = (new CompanyProjectsResource($companyProject))->resolve();
+
+        $this->dispatchCompanyProjectLoadedEvent(data: $companyProjectData);
     }
 
     public function deleteCompanyProject(string $companyProjectUuid): void
@@ -126,6 +130,14 @@ class CompanyProjectsComponent extends Component
     | Dispatchers
     |----------------------------- 
     */
+    private function dispatchCompanyProjectLoadedEvent(array $data)
+    {
+        $this->dispatch(
+            EventsEnum::COMPANY_PROJECT_LOADED_EVENT,
+            data: $data
+        );
+    }
+
     private function dispatchCompanyProjectDeletedEvent()
     {
         $this->dispatch(EventsEnum::COMPANY_PROJECT_DELETED_EVENT);

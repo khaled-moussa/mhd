@@ -2,6 +2,7 @@ import { showModal } from "@js/components/modal/_modal";
 import { UI_EVENTS } from "@js/utils/enums";
 import { MODALS } from "@js/utils/enums";
 import initSplideCarousel from "@js/common/carousel/_splide-carousel";
+import MessageToast from "../../../../utils/message-toast";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("projectViewComponent", () => ({
@@ -27,8 +28,12 @@ document.addEventListener("alpine:init", () => {
         | Actions
         |------------------------------- 
         */
-        async openProject(projectData, triggerEl) {
+        async openProject(projectData) {
             if (projectData.length === 0) {
+                return this.showError();
+            }
+
+            if (projectData.url || projectData.images.length === 0) {
                 return this.showError();
             }
 
@@ -41,6 +46,36 @@ document.addEventListener("alpine:init", () => {
             showModal({
                 modalId: MODALS.VIEW_COMPANY_PROJECT_MODAL,
             });
+        },
+
+        downloadBrochure() {
+            const brochure = this.projectData.brochure;
+
+            if (!brochure || !brochure.url) {
+                this.showError();
+                return;
+            }
+
+            const button = this.$el;
+
+            // UI state
+            button.classList.add("spinner");
+            button.disabled = true;
+
+            const link = document.createElement("a");
+            link.href = brochure.url;
+            link.download = brochure.name;
+            link.rel = "noopener";
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Restore UI
+            setTimeout(() => {
+                button.classList.remove("spinner");
+                button.disabled = false;
+            }, 500);
         },
 
         initImages(images) {
@@ -89,6 +124,15 @@ document.addEventListener("alpine:init", () => {
                     this.openProject(detail.projectData);
                 },
             );
+        },
+
+        /* 
+        |-------------------------------
+        | Helpers
+        |------------------------------- 
+        */
+        showError() {
+            MessageToast("error");
         },
     }));
 });

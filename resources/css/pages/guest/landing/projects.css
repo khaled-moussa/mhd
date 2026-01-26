@@ -1,3 +1,5 @@
+@import "../../panels//admin/projects/project-view.css";
+
 /* -------------------------------
    Projects Section
 ------------------------------- */
@@ -49,83 +51,4 @@
 
 .projects__load-more > button {
     @apply p-3 !border-current/30;
-}
-
-/* -------------------------------
-   Project Modal
-------------------------------- */
-.projects__modal .modal-container {
-    @apply p-5;
-}
-
-.projects__modal .modal-container.xl {
-    @apply w-full max-w-full xl:w-[60vw];
-}
-
-.projects__modal-body {
-    @apply flex flex-col gap-6 px-6 lg:flex-row;
-}
-
-.projects__modal-carousel {
-    @apply w-full max-h-[350px] lg:w-1/2 lg:max-h-[550px];
-}
-
-.projects__modal-image {
-    @apply relative w-full h-[350px] rounded-xl overflow-hidden shadow-md lg:h-[550px];
-}
-
-.projects__modal-image img {
-    @apply absolute w-full h-full object-cover;
-}
-
-.projects__modal-info {
-    @apply flex-1 !space-y-5;
-}
-
-.projects__modal-info-title {
-    @apply text-2xl font-semibold;
-}
-
-.projects__modal-info-desc {
-    @apply text-current/70 text-sm;
-}
-
-.projects__modal-footer {
-    @apply py-2 px-6 flex flex-col gap-3;
-}
-
-.projects__modal-card {
-    @apply w-full h-fit mt-5 p-5 rounded-xl border border-current/10;
-}
-
-.projects__modal-card > header {
-    @apply text-2xl font-semibold mb-5;
-}
-
-.projects__modal-row {
-    @apply flex flex-col !p-0 sm:flex-row;
-}
-
-.projects__modal-details .label-info {
-    @apply flex-1;
-}
-
-.projects__modal-location {
-    @apply flex flex-col gap-3;
-}
-
-.projects__modal-location-header {
-    @apply flex items-center gap-2 py-3 text-xl;
-}
-
-.projects__modal-location-title {
-    @apply font-semibold;
-}
-
-.projects__modal-location iframe {
-    @apply rounded-2xl;
-}
-
-.projects__modal-actions {
-    @apply flex justify-end gap-3 mt-5 border-t border-current/10 pt-4;
 }

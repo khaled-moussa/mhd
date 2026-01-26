@@ -100,36 +100,46 @@
                             </div>
                         </div>
 
-                        <div
-                            class="projects__modal-location"
-                            x-show="projectData.location"
-                            x-transition
-                        >
-                            <div class="projects__modal-location-header">
+
+                        <div class="project-view__location">
+                            <div class="project-view__location-header">
                                 <i class="fi fi-ss-map-marker-home"></i>
-                                <header class="projects__modal-location-title">
+                                <header class="project-view__location-title">
                                     Location
                                 </header>
                             </div>
 
-                            <iframe
-                                id="projects-modal-map"
-                                width="100%"
-                                height="300"
-                                style="border:0;"
-                                allowfullscreen
-                                loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"
-                                :src="projectData.location"
-                            >
-                            </iframe>
+                            <!-- If location exists -->
+                            <template x-if="projectData.location">
+                                <iframe
+                                    width="100%"
+                                    height="300"
+                                    loading="lazy"
+                                    style="border:0"
+                                    allowfullscreen
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    :src="projectData.location"
+                                ></iframe>
+                            </template>
+
+                            <!-- If location is empty -->
+                            <template x-if="!projectData.location">
+                                <div class="project-view__no-location">
+                                    <i class="fi fi-rr-info"></i>
+                                    <span>No location found</span>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
 
                 {{-- Modal Actions --}}
                 <div class="projects__modal-actions">
-                    <x-button.main label="Download Brochure" />
+                    <x-button.main
+                        label="Download Brochure"
+                        @click="downloadBrochure()"
+                    />
+
                     <x-button.outline
                         label="Close"
                         data-custom-close="projects-modal"

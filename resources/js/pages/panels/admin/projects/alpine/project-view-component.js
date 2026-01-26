@@ -1,20 +1,18 @@
-import MessageToast from "@js/utils/message-toast";
 import { showModal } from "@js/components/modal/_modal";
+import { UI_EVENTS } from "@js/utils/enums";
 import { MODALS } from "@js/utils/enums";
-import { MODALS_EVENT } from "@js/utils/events";
-import { UI_EVENTS } from "../../../../../utils/enums";
 import initSplideCarousel from "@js/common/carousel/_splide-carousel";
+import MessageToast from "@js/utils/message-toast";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("projectViewComponent", () => ({
         /* 
         |-------------------------------
-        | State
+        | Init
         |------------------------------- 
         */
         projectData: [],
-
-        splideElementId: "#admin-project-view-splide",
+        splideElementId: "#project-modal-splide",
 
         /* 
         |-------------------------------
@@ -27,34 +25,90 @@ document.addEventListener("alpine:init", () => {
 
         /* 
         |-------------------------------
-        | Syncing
+        | Actions
         |------------------------------- 
         */
-        async viewCompanyProject(projectUuid, triggerEl) {
-            if (!projectUuid || !triggerEl) {
-                MessageToast("error");
+        async openProject(projectData) {
+            if (!projectData) {
+                return this.showError();
+            }
+
+            if (projectData.url || projectData.images.length === 0) {
+                MessageToast(
+                    "warning",
+                    "images or brochure still uploading, wait a few minutes",
+                );
                 return;
             }
 
-            await this.$wire.call("viewCompanyProject", projectUuid);
+            this.projectData = projectData;
 
-            triggerEl.classList.remove("spinner");
-        },
+            // Init images carousel
+            this.initImages(this.projectData.images);
 
-        async openProject() {
-            if (!this.projectData.length === 0) {
-                MessageToast("error");
-                return;
-            }
-
-            this.$nextTick(() =>
-                initSplideCarousel({
-                    splideElementId: this.splideElementId,
-                }),
-            );
-
+            // Show modal
             showModal({
                 modalId: MODALS.VIEW_COMPANY_PROJECT_MODAL,
+            });
+        },
+
+        downloadBrochure() {
+            const brochure = this.projectData.brochure;
+
+            if (!brochure || !brochure.url) {
+                this.showError();
+                return;
+            }
+
+            const button = this.$el;
+
+            // UI state
+            button.classList.add("spinner");
+            button.disabled = true;
+
+            const link = document.createElement("a");
+            link.href = brochure.url;
+            link.download = brochure.name;
+            link.rel = "noopener";
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Restore UI
+            setTimeout(() => {
+                button.classList.remove("spinner");
+                button.disabled = false;
+            }, 500);
+        },
+
+        initImages(images) {
+            this.$nextTick(() => {
+                initSplideCarousel({
+                    splideElementId: this.splideElementId,
+                });
+            });
+
+            // Elements
+            const carouselList = document.getElementById(
+                "projects-modal-carousel-list",
+            );
+
+            // Clear old slides
+            carouselList.innerHTML = "";
+
+            // Add new slides
+            images.forEach((img) => {
+                const slide = document.createElement("li");
+                slide.className = "splide__slide";
+
+                const image = document.createElement("img");
+                image.src = img.path;
+                image.alt = "project";
+                image.className = "projects__modal-image rounded-xl";
+
+                slide.appendChild(image);
+                carouselList.appendChild(slide);
             });
         },
 
@@ -64,30 +118,25 @@ document.addEventListener("alpine:init", () => {
         |------------------------------- 
         */
         registerListeners() {
-            this.onModalOpenEvent();
-            this.onProjectLoadedDataEvent();
+            this.onProjectDataLoadedEvent();
         },
 
-        onModalOpenEvent() {
-            window.addEventListener(
-                MODALS_EVENT.opened(MODALS.VIEW_COMPANY_PROJECT_MODAL),
-                ({ detail }) => {
-                    this.viewCompanyProject(
-                        detail.companyProjectUuid,
-                        detail.triggerEl,
-                    );
-                },
-            );
-        },
-
-        onProjectLoadedDataEvent() {
+        onProjectDataLoadedEvent() {
             window.addEventListener(
                 UI_EVENTS.COMPANY_PROJECT_LOADED_EVENT,
                 ({ detail }) => {
-                    this.projectData = detail.projectData;
-                    this.openProject();
+                    this.openProject(detail.data);
                 },
             );
+        },
+
+        /* 
+        |-------------------------------
+        | Helpers
+        |------------------------------- 
+        */
+        showError() {
+            MessageToast("error");
         },
     }));
 });
