@@ -1,7 +1,7 @@
 @props([
     'label' => null,
     'description' => null,
-    'xDescription' => null, // 👈 Alpine-only
+    'xDescription' => null, // Alpine-only
     'placeholder' => false,
     'badgelabel' => null,
     'badgecolor' => null,
