@@ -33,10 +33,9 @@ document.addEventListener("alpine:init", () => {
             }
 
             this.toggleSpinner(true);
+            this.contactData = [];
 
             await this.$wire.call("viewContact", contactUuid);
-
-            this.contactData = [];
         },
 
         deleteContact(contactUuid) {
