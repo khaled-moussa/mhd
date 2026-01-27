@@ -6,7 +6,6 @@
 	{{-- Brand --}}
 	<div class="sidebar-brand">
 		<div class="logo"></div>
-		{{-- <span class="brand-name">BRAND</span> --}}
 	</div>
 
 	{{-- Toggle --}}

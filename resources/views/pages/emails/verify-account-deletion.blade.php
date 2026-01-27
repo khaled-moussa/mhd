@@ -5,7 +5,7 @@
 
     <div class="header">Hello, {{ $name }} </div>
 
-    <p>We received a request to delete your TACKTK account.</p>
+    <p>We received a request to delete your account.</p>
 
     <div class="content">
         <div class="sub-header">Verify Account Deletion</div>

@@ -1,10 +1,10 @@
 @extends('layouts.email')
 
 @section('content')
-    {{-- <img src="https://via.placeholder.com/150" class="logo" alt="Tacktk Logo"> --}}
+    {{-- <img src="https://via.placeholder.com/150" class="logo" alt="> --}}
 
     <div class="header">Hello, {{ $name }} </div>
-    <p>We received a request to reset your password for your TACKTK account.</p>
+    <p>We received a request to reset your password for your account.</p>
 
     <div class="content">
         <div class="sub-header">Reset Your Password</div>

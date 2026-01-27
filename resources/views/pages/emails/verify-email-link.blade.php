@@ -4,7 +4,7 @@
 	<div class="header">Hello, {{ $name }} </div>
 
 	<p>
-		We received a request to verify your email for your BRAND account.
+		We received a request to verify your email for your account.
 	</p>
 
 	<div class="content">

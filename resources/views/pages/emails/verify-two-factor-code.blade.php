@@ -3,7 +3,7 @@
 @section('content')
     <div class="header">Hello, {{ $name }} </div>
 
-    <p>We received a request to confirm your identity using Two-Factor Authentication (2FA) for your BRAND account.</p>
+    <p>We received a request to confirm your identity using Two-Factor Authentication (2FA) for your account.</p>
 
     <div class="content">
         <div class="sub-header">Your Authentication Code</div>
