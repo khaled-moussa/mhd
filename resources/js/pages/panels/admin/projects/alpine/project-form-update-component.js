@@ -71,7 +71,7 @@ document.addEventListener("alpine:init", () => {
         */
         async editCompanyProject(projectUuid, triggerEl) {
             if (!projectUuid || !triggerEl) {
-                MessageToast("error");
+                showError();
                 return;
             }
 
@@ -145,7 +145,7 @@ document.addEventListener("alpine:init", () => {
             });
 
             if (result.errors.invalidType || result.errors.oversize) {
-                MessageToast("error");
+                showError();
                 return;
             }
 
@@ -295,7 +295,7 @@ document.addEventListener("alpine:init", () => {
             });
 
             if (result.errors.invalidType || result.errors.oversize) {
-                MessageToast("error");
+                showError();
                 return;
             }
 
@@ -442,6 +442,18 @@ document.addEventListener("alpine:init", () => {
                     this.resetFile();
                 },
             );
+        },
+
+        /* 
+        |-------------------------------
+        | Helpers
+        |------------------------------- 
+        */
+
+        showError() {
+            console.log(3);
+
+            showError();
         },
     }));
 });

@@ -12,7 +12,7 @@
 
 .modal-container {
     @apply box-border flex max-h-[98vh] max-w-lg min-w-[30%] flex-col gap-4 overflow-y-auto rounded p-8;
-    @apply bg-light dark:bg-main-dark;
+    @apply bg-background;
     @apply max-sm:min-w-[95%];
 }
 
@@ -34,17 +34,17 @@
 }
 
 .modal-header {
-    @apply border-dark/5 flex items-center justify-between border-b border-solid pb-2;
+    @apply border-background/5 flex items-center justify-between border-b border-solid pb-2;
 }
 
 .modal-title {
     @apply my-0 text-base leading-none font-semibold;
-    @apply text-dark dark:text-light;
+    @apply text-foreground;
 }
 
 .modal-description {
-    @apply mb-5 !text-sm !font-light !text-current/70 !break-words !whitespace-pre-line;
-    @apply text-dark dark:text-light;
+    @apply mb-5 !text-sm !font-semibold !text-current/70 !break-words !whitespace-pre-line;
+    @apply text-foreground;
 }
 
 .modal-close {
@@ -55,7 +55,7 @@
     @apply content-['\2715'];
 }
 .modal-content {
-    @apply bg-light dark:bg-main-dark;
+    @apply bg-background;
 }
 
 .modal-footer {

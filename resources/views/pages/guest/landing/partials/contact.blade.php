@@ -2,34 +2,60 @@
     'section' => [],
 ])
 
-<section
-    id="contact"
-    class="contact-section"
->
+<section id="contact" class="contact-section">
     <div class="contact-container">
-        {{-- Header Section --}}
-        <x-header.section
-            :title="$section['title']"
-            :description="$section['description']"
-        />
 
-        <div class="contact-card">
-            <div class="spotlight"></div>
+        {{-- Header --}}
+        <div class="contact-header">
+            <span class="section-label">Get in touch</span>
+            <h2>{{ $section['title'] }}</h2>
+            <p>{{ $section['description'] }}</p>
+        </div>
 
-            <h2 class="contact-title">
-                <span class="text-gradient">Get in Touch</span>
-            </h2>
+        <div class="contact-layout">
 
-            <p
-                class="contact-subtitle"
-                style="animation-delay: 0.2s;"
-            >
-                Have a question or want to collaborate?
-            </p>
+            {{-- Left: Info --}}
+            <div class="contact-info">
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">
+                        <i class="fi fi-rr-phone-call"></i>
+                    </div>
+                    <div class="contact-info-text">
+                        <strong>Phone</strong>
+                        <span>{{ $section['phone'] ?? '+966 50 000 0000' }}</span>
+                    </div>
+                </div>
 
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">
+                        <i class="fi fi-rr-envelope"></i>
+                    </div>
+                    <div class="contact-info-text">
+                        <strong>Email</strong>
+                        <span>{{ $section['email'] ?? 'hello@mhd.dev' }}</span>
+                    </div>
+                </div>
 
-            {{-- Contact form create livewire --}}
-            <livewire:guest.contacts.contact-form-create-component />
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">
+                        <i class="fi fi-rr-marker"></i>
+                    </div>
+                    <div class="contact-info-text">
+                        <strong>Office</strong>
+                        <span>{{ $section['address'] ?? 'Riyadh, Saudi Arabia' }}</span>
+                    </div>
+                </div>
+
+                <div class="contact-info-note">
+                    <p>We typically respond within <strong>24 hours</strong>. For urgent inquiries, feel free to call us directly.</p>
+                </div>
+            </div>
+
+            {{-- Right: Form --}}
+            <div class="contact-card">
+                <livewire:guest.contacts.contact-form-create-component />
+            </div>
+
         </div>
     </div>
 </section>

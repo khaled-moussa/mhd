@@ -1,56 +1,122 @@
-/* -------------------------------
-   Services Section
-------------------------------- */
+/* 
+|-----------------------------
+| Services Section
+|-----------------------------
+*/
 .services {
     @apply py-24;
 }
 
-/* -------------------------------
-   Container
-------------------------------- */
 .services__container {
-    @apply container mx-auto px-4 text-current/90;
-    @apply !transition-all duration-200;
+    @apply container mx-auto;
 }
 
-/* -------------------------------
-   Grid
-------------------------------- */
+/* 
+|-----------------------------
+| Services Header
+|-----------------------------
+*/
+.services__header {
+    @apply mb-14;
+}
+
+.services__header .section-label {
+    @apply inline-flex items-center gap-1.5 mb-3;
+    @apply text-[11px] font-medium text-primary tracking-[0.08em] uppercase;
+}
+
+.services__header .section-label::before {
+    content: '';
+    @apply block w-5 h-px bg-primary;
+}
+
+.services__header h2 {
+    @apply text-[clamp(26px,3.5vw,40px)] font-medium tracking-tight text-dark leading-tight mb-2.5;
+}
+
+.services__header p {
+    @apply text-[15px] text-dark/50 max-w-lg leading-relaxed;
+}
+
+/* 
+|-----------------------------
+| Services Grid
+|-----------------------------
+*/
 .services__grid {
-    @apply grid grid-cols-1 gap-6;
-    @apply md:grid-cols-2 md:gap-8;
+    @apply grid grid-cols-1 gap-4;
+    @apply md:grid-cols-2;
     @apply lg:grid-cols-3;
 }
 
-/* -------------------------------
-   Service Card
-------------------------------- */
+/* 
+|-----------------------------
+| Service Card
+|-----------------------------
+*/
 .services__card {
-    @apply bg-current/5 backdrop-blur-sm border border-none rounded-xl p-6;
-    @apply hover:bg-white/10 hover:shadow-xl hover:shadow-primary/50;
+    @apply relative bg-background rounded-2xl border border-current/10 p-7;
+    @apply flex flex-col gap-4 overflow-hidden;
+    @apply transition-all duration-200;
+    @apply hover:-translate-y-0.5 hover:bg-primary/10;
 }
 
-/* -------------------------------
-   Icon
-------------------------------- */
+/* 
+|-----------------------------
+| Card Number
+|-----------------------------
+*/
+.services__card-number {
+    @apply absolute top-6 right-7;
+    @apply text-[11px] font-medium text-dark/[0.12] tracking-[0.04em];
+}
+
+/* 
+|-----------------------------
+| Service Icon
+|-----------------------------
+*/
 .services__icon {
-    @apply bg-current/10 rounded-lg w-12 h-12 flex items-center justify-center mb-5;
-    @apply transition-colors duration-300 group-hover:text-red-400;
+    @apply w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0;
+    @apply bg-primary-300/10;
 }
 
 .services__icon i {
-    @apply text-2xl group-hover:text-current/90;
+    @apply text-lg text-primary;
 }
 
-/* -------------------------------
-   Content
-------------------------------- */
-.services__title,
+/* 
+|-----------------------------
+| Service Content
+|-----------------------------
+*/
 .service-data__title {
-    @apply text-xl font-semibold mb-3 text-current;
+    @apply text-[15px] font-medium text-dark leading-snug;
 }
 
-.services__description,
 .service-data__description {
-    @apply text-current/70;
+    @apply text-[13px] text-dark/55 leading-[1.7] flex-1;
+}
+
+.service-data__link {
+    @apply inline-flex items-center gap-1 mt-1;
+    @apply text-[12px] font-medium text-primary;
+}
+
+/* 
+|-----------------------------
+| CTA Card (last card)
+|-----------------------------
+*/
+.services__card--cta {
+    @apply bg-primary-300/10 border-primary/[0.12];
+    @apply items-center justify-center text-center;
+}
+
+.services__card--cta h3 {
+    @apply text-[13px] font-medium text-primary;
+}
+
+.services__card--cta p {
+    @apply text-[12px] text-dark/50 leading-relaxed;
 }

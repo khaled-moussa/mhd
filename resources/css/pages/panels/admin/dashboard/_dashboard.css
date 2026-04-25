@@ -1,16 +1,27 @@
+/* 
+|-----------------------------
+| Reference
+|-----------------------------
+*/
 @reference "@css/reference.css";
 
-/* Impots */
+/* 
+|-----------------------------
+| Imports
+|-----------------------------
+*/
 @import "@css/pages/_layouts/app-layouts.css";
 @import "@css_admin/dashboard/dashboard-cards.css";
 @import "@css_admin/projects/_projects.css";
 
-/* -------------------------------------------------
-   Dashboard Grid
--------------------------------------------------- */
+/* 
+|-----------------------------
+| Dashboard Grid
+|-----------------------------
+*/
 .dashboard-grid {
-    @apply grid gap-5 lg:grid-cols-[1fr];
-    @apply h-full;
+    @apply grid h-full gap-5;
+    @apply lg:grid-cols-[1fr];
 }
 
 .dashboard-grid > div {

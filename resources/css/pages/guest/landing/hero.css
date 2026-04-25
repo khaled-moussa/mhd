@@ -1,35 +1,21 @@
-/* -------------------------------
-   Hero Section
-------------------------------- */
+/* 
+|-----------------------------
+| Hero Section
+|-----------------------------
+*/
 .hero {
     @apply p-5 relative flex flex-col justify-center overflow-hidden;
 }
 
-/* -------------------------------
-   Background
-------------------------------- */
-.hero__bg {
-    @apply absolute inset-0 overflow-hidden;
-}
 
-.hero__spotlight {
-    @apply absolute w-72 h-72 bg-main-light rounded-full filter blur-3xl animate-float;
-}
-
-.hero__spotlight--top {
-    @apply top-1/4 left-10;
-}
-
-.hero__spotlight--bottom {
-    @apply bottom-1/4 right-10 w-96 h-96;
-}
-
-/* -------------------------------
-   Layout
-------------------------------- */
+/* 
+|-----------------------------
+| Hero Layout
+|-----------------------------
+*/
 .hero__container {
     @apply container mx-auto px-4 py-20 relative z-10;
-    @apply !transition-all duration-400;
+    @apply transition-all duration-400;
 }
 
 .hero__content {
@@ -45,33 +31,40 @@
     @apply relative w-full mt-12 flex-1;
 }
 
-/* -------------------------------
-   Badge
-------------------------------- */
+/* 
+|-----------------------------
+| Hero Badge
+|-----------------------------
+*/
 .hero__badge {
     @apply inline-flex items-center px-4 py-1.5 mb-6;
-    @apply !bg-current/10 backdrop-blur-sm border border-current/10 rounded-full;
+    @apply backdrop-blur-sm border border-primary/10 rounded-full;
 }
 
 .hero__badge-text {
-    @apply text-xs font-medium mr-2 !text-light/70;
+    @apply text-xs font-medium mr-2 text-muted-foreground;
 }
 
-/* -------------------------------
-   Title & Text
-------------------------------- */
+/* 
+|-----------------------------
+| Hero Typography
+|-----------------------------
+*/
 .hero__title {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight max-w-[70%];
-    @apply !transition-all duration-500;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight;
+    @apply max-w-[70%];
+    @apply transition-all duration-500;
 }
 
 .hero__description {
     @apply text-lg mb-8 max-w-lg text-current/50;
 }
 
-/* -------------------------------
-   Actions
-------------------------------- */
+/* 
+|-----------------------------
+| Hero Actions
+|-----------------------------
+*/
 .hero__actions {
     @apply flex flex-col items-center gap-3;
     @apply xl:w-1/2 md:flex-row;
@@ -82,15 +75,17 @@
     @apply w-full p-3 border-current/20;
 }
 
-/* -------------------------------
-   Stats
-------------------------------- */
+/* 
+|-----------------------------
+| Hero Stats
+|-----------------------------
+*/
 .hero__stats {
-    @apply mt-8 flex items-center !space-x-6;
+    @apply mt-8 flex items-center space-x-6;
 }
 
 .hero__stats div > h1 {
-    @apply text-2xl font-bold text-white;
+    @apply text-2xl font-bold text-primary-300;
 }
 
 .hero__stats div > h1::after {
@@ -105,9 +100,11 @@
     @apply h-12 w-px bg-current/10;
 }
 
-/* -------------------------------
-   Video
-------------------------------- */
+/* 
+|-----------------------------
+| Hero Video
+|-----------------------------
+*/
 .hero__video-wrapper {
     @apply w-full max-h-[500px] mx-auto bg-center bg-cover shadow-2xl;
 }
@@ -116,9 +113,11 @@
     @apply w-full h-full rounded-2xl;
 }
 
-/* -------------------------------
-   Floating Cards
-------------------------------- */
+/* 
+|-----------------------------
+| Hero Floating Cards
+|-----------------------------
+*/
 .hero__card {
     @apply absolute bg-current/10 backdrop-blur-md rounded-lg p-3;
     @apply border border-current/10 shadow-lg;
@@ -133,7 +132,8 @@
 }
 
 .hero__card-content i {
-    @apply h-10 w-10 bg-green-500/20 rounded-full flex items-center justify-center;
+    @apply h-10 w-10 bg-green-500/20 rounded-full;
+    @apply flex items-center justify-center;
 }
 
 .hero__card-content p {

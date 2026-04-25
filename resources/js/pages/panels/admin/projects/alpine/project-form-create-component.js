@@ -40,7 +40,8 @@ document.addEventListener("alpine:init", () => {
         },
 
         initState() {
-            this.dragImagesAreaElement = this.$el.querySelector("#image-drag-area");
+            this.dragImagesAreaElement =
+                this.$el.querySelector("#image-drag-area");
             this.imageInputElement = this.$el.querySelector("#image-input");
 
             const imagesDrag = new DragFiles({
@@ -49,7 +50,8 @@ document.addEventListener("alpine:init", () => {
                 onDrop: (images) => this.validateImages(images),
             });
 
-            this.dragFileAreaElement = this.$el.querySelector("#file-drag-area");
+            this.dragFileAreaElement =
+                this.$el.querySelector("#file-drag-area");
             this.fileInputElement = this.$el.querySelector("#file-input");
 
             const fileDrag = new DragFiles({
@@ -75,7 +77,7 @@ document.addEventListener("alpine:init", () => {
             });
 
             if (result.errors.invalidType || result.errors.oversize) {
-                MessageToast("error");
+                showError();
                 return;
             }
 
@@ -210,7 +212,7 @@ document.addEventListener("alpine:init", () => {
             });
 
             if (result.errors.invalidType || result.errors.oversize) {
-                MessageToast("error");
+                showError();
                 return;
             }
 
@@ -350,6 +352,16 @@ document.addEventListener("alpine:init", () => {
                     this.resetFile();
                 },
             );
+        },
+
+        /* 
+        |-------------------------------
+        | Helpers
+        |------------------------------- 
+        */
+
+        showError() {
+            showError();
         },
     }));
 });

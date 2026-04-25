@@ -1,17 +1,33 @@
+/* 
+|-----------------------------
+| Button Imports
+|-----------------------------
+*/
 @import "./add-btn.css";
 @import "./main-button.css";
 @import "./outline-button.css";
 @import "./floating-button.css";
 @import "./link-button.css";
 
+/* 
+|-----------------------------
+| Base Interactive Elements
+|-----------------------------
+*/
 a,
 button,
 input[type="submit"],
 input[type="button"],
 input[type="reset"] {
-    @apply child:first-letter:capitalize cursor-pointer transition-all duration-200 ;
+    @apply cursor-pointer transition-all duration-200;
+    @apply child:first-letter:capitalize;
 }
 
+/* 
+|-----------------------------
+| Icon + Text Spacing
+|-----------------------------
+*/
 a i + span,
 button i + span,
 input[type="submit"] i + span,
@@ -20,22 +36,32 @@ input[type="reset"] i + span {
     @apply pr-1;
 }
 
+/* 
+|-----------------------------
+| Disabled State
+|-----------------------------
+*/
 button[disabled],
 input[type="button"][disabled],
 input[type="submit"][disabled],
 input[type="reset"][disabled] {
-    @apply !pointer-events-none cursor-default bg-current/15 text-current/40;
+    @apply pointer-events-none cursor-default;
+    @apply bg-background/15 text-foreground/40;
 }
 
-/* Loading state */
+/* 
+|-----------------------------
+| Loading State (Spinner)
+|-----------------------------
+*/
 .auth-button.spinner,
 a.main-btn.spinner,
-a.main-btn.spinner,
-button.icon-btn.spinner,
-button.main-btn.spinner {
+button.main-btn.spinner,
+button.icon-btn.spinner {
     @apply child:invisible !text-transparent;
-    @apply before:backdrop-blur-none;
-    @apply focus-within:!text-transparent focus:!text-transparent focus-visible:!text-transparent bg-current/5;
+    @apply bg-current/5;
+    @apply focus:!text-transparent focus-visible:!text-transparent;
+    @apply focus-within:!text-transparent;
 }
 
 .auth-button.spinner::after,
@@ -46,18 +72,20 @@ button.icon-btn.spinner::after {
     filter: saturate(0) brightness(200);
 }
 
-.auth-button.spinner:disabled:after,
-a.main-btn.spinner:disabled:after,
-button.main-btn.spinner:disabled:after,
-.auth-button.spinner:disabled:after,
-a.main-btn.spinner:disabled:after,
-button.main-btn.spinner:disabled:after, 
-button.icon-btn.spinner::after:disabled:after {
+/* Disabled spinner adjustment */
+.auth-button.spinner:disabled::after,
+a.main-btn.spinner:disabled::after,
+button.main-btn.spinner:disabled::after,
+button.icon-btn.spinner:disabled::after {
     @apply top-auto h-5 w-5;
     filter: saturate(0);
 }
 
-/* Resend OTP button */
+/* 
+|-----------------------------
+| Resend OTP Button
+|-----------------------------
+*/
 .resend-btn {
     @apply ml-auto text-xs!;
 }

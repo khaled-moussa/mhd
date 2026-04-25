@@ -9,7 +9,7 @@
 }
 
 .dropdown-btn > div i {
-    @apply text-light/70;
+    @apply text-foreground/70;
 }
 
 .dropdown-btn > div i.ti {
@@ -24,5 +24,5 @@
 }
 
 .dropdown-btn:hover > i {
-    @apply text-dark;
+    @apply text-foreground;
 }

@@ -1,31 +1,36 @@
 /**
-  Global Styles
-  - Shared utilities and resets applied across the project
+|-----------------------------
+| Global Styles
+| Shared utilities and resets
+|-----------------------------
 */
 
-/* ================================
-   Reset & Base
-================================ */
+/* 
+|-----------------------------
+| Reset & Base
+|-----------------------------
+*/
 * {
     @apply m-0 p-0 box-border scroll-smooth;
+
     -webkit-tap-highlight-color: transparent;
 
     /* Firefox Scrollbar */
-    scrollbar-width: 0.3rem;
-    scrollbar-color: theme("colors.gray.200");
+    scrollbar-width: thin;
+    scrollbar-color: theme("colors.gray.200") transparent;
 }
 
 /* Chrome, Edge, Safari Scrollbar */
 *::-webkit-scrollbar {
-    @apply h-[0.3rem] w-[0.4rem] rounded-lg scroll-smooth;
+    @apply h-[0.3rem] w-[0.4rem] rounded-lg;
 }
 
 *::-webkit-scrollbar-track {
-    @apply bg-transparent rounded-lg;
+    @apply rounded-lg bg-transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-    @apply bg-gray-200 rounded-lg transition-all duration-150 ease-in-out;
+    @apply rounded-lg bg-gray-200 transition-all duration-150 ease-in-out;
 }
 
 /* RTL */
@@ -33,11 +38,13 @@
     @apply text-[0.95rem] font-normal;
 }
 
-/* ================================
-   Elements
-================================ */
+/* 
+|-----------------------------
+| Elements
+|-----------------------------
+*/
 img {
-    @apply select-none pointer-events-none;
+    @apply pointer-events-none select-none;
 }
 
 h1,
@@ -68,5 +75,5 @@ strong {
 }
 
 hr {
-    @apply text-dark/12 dark:text-light/12;
+    @apply text-foreground/12;
 }

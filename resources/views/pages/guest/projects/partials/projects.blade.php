@@ -12,12 +12,6 @@
         id="projects-container"
         class="projects__container"
     >
-        {{-- Header Section --}}
-        <x-header.section
-            :title="$section['title']"
-            :description="$section['description']"
-        />
-
         {{-- Projects livewire component --}}
         <livewire:guest.projects.projects-component
             :perPage="$perPage"

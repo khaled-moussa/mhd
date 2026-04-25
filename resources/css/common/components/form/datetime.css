@@ -1,5 +1,5 @@
 input::-webkit-calendar-picker-indicator {
-  @apply text-light -translate-y-[3px] rounded-full text-xs;
+  @apply text-foreground -translate-y-[3px] rounded-full text-xs;
 }
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {

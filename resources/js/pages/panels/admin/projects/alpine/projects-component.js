@@ -28,6 +28,8 @@ document.addEventListener("alpine:init", () => {
         */
         async viewCompanyProject(companyProjectUuid) {
             if (!this.isValidUuid(companyProjectUuid)) {
+                console.log(1);
+                
                 return this.showError();
             }
 
@@ -38,6 +40,8 @@ document.addEventListener("alpine:init", () => {
 
         editCompanyProject(companyProjectUuid) {
             if (!this.isValidUuid(companyProjectUuid)) {
+                console.log(2);
+
                 return this.showError();
             }
 
@@ -63,6 +67,8 @@ document.addEventListener("alpine:init", () => {
 
         async confirmDelete(companyProjectUuid) {
             if (!this.isValidUuid(companyProjectUuid)) {
+                console.log(3);
+
                 return this.showError();
             }
 
@@ -102,6 +108,8 @@ document.addEventListener("alpine:init", () => {
         },
 
         showError() {
+            console.log(2);
+
             MessageToast("error");
         },
     }));

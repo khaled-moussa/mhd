@@ -13,15 +13,6 @@
 		@yield('title', config('app.name'))
 	</title>
 
-	{{-- Theme bootstrap (prevent FOUC) --}}
-	<script>
-		(function() {
-			if (localStorage.getItem('theme') === 'dark') {
-				document.documentElement.classList.add('dark');
-			}
-		})();
-	</script>
-
 	{{-- Vendor / External --}}
 	<script
 		src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js"

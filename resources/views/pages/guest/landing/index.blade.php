@@ -11,7 +11,7 @@
 
 {{-- Navbar --}}
 @section('navbar')
-    <x-navigation.navbar.guest />
+    @include('pages.guest.landing.partials.navbar')
 @endsection
 
 {{-- Content --}}
@@ -37,7 +37,5 @@
 
 {{-- Footer --}}
 @section('footer')
-    @if (isset($sections['footer']))
-        <x-navigation.footer.guest :section="$sections['footer']" />
-    @endif
+    @include('pages.guest.landing.partials.footer', ['section' => $sections['footer']])
 @endsection

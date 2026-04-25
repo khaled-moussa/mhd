@@ -9,17 +9,17 @@
 
 /* Chrome, Safari, Edge */
 .input-field input[type="range"]::-webkit-slider-thumb {
-  @apply bg-light h-3 w-3 cursor-pointer appearance-none rounded-full border-none;
+  @apply bg-background h-3 w-3 cursor-pointer appearance-none rounded-full border-none;
   -webkit-appearance: none;
 }
 /* Firefox */
 .input-field input[type="range"]::-moz-range-thumb {
-  @apply bg-light h-3 w-3 cursor-pointer appearance-none rounded-full border-none;
+  @apply bg-background h-3 w-3 cursor-pointer appearance-none rounded-full border-none;
 }
 
 .range-labels {
   @apply !mt-2 flex justify-between;
 }
 .range-labels span {
-  @apply text-dark font-inter text-sm;
+  @apply text-foreground font-inter text-sm;
 }

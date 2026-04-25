@@ -7,7 +7,7 @@
     @apply rounded-tr-2xl rounded-br-2xl transition-all ease-in-out duration-300 z-20;
     @apply lg:block lg:sticky lg:top-0 lg:border-r;
     @apply flex shrink-0 flex-col;
-    @apply bg-white dark:bg-dark;
+    @apply bg-background;
 }
 
 /* -------------------------------  

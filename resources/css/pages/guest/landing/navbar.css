@@ -1,69 +1,136 @@
-/* -------------------------------
-   Landing Navbar
-------------------------------- */
+/* 
+|-----------------------------
+| Landing Navbar
+|-----------------------------
+*/
 .landing-navbar {
-    @apply fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-2;
-    @apply backdrop-blur-xl bg-white/5 border-b border-white/10;
-    @apply transition-all duration-300 shadow-sm;
+    @apply fixed top-0 left-0 w-full z-50;
+    @apply flex items-center justify-between;
+    @apply px-6 h-16;
+    @apply border-b border-black/[0.08];
+    @apply transition-all duration-300;
+    @apply backdrop-blur-xl;
 }
 
-/* Scroll effect */
+/* 
+|-----------------------------
+| Scroll State
+|-----------------------------
+*/
 .landing-navbar.scrolled {
-    @apply bg-white/20 shadow-lg;
+    @apply bg-white/98 border-black/[0.12];
 }
 
-/* -------------------------------
-   Navbar Container
-------------------------------- */
+/* 
+|-----------------------------
+| Navbar Container
+|-----------------------------
+*/
 .landing-navbar-container {
-    @apply w-full flex items-center justify-between max-w-7xl mx-auto;
+    @apply w-full flex items-center justify-between max-w-7xl mx-auto gap-8;
 }
 
-/* -------------------------------
-   Logo
-------------------------------- */
+/* 
+|-----------------------------
+| Branding
+|-----------------------------
+*/
+.branding {
+    @apply flex items-center gap-2 shrink-0;
+}
+
 .branding img {
-    @apply h-12 w-auto transition-all duration-300;
+    @apply h-8 w-auto;
+    @apply transition-all duration-300;
 }
 
-/* -------------------------------
-   Navbar Menu (Desktop)
-------------------------------- */
+/* 
+|-----------------------------
+| Navbar Menu (Desktop)
+|-----------------------------
+*/
 .landing-navbar-menu {
-    @apply hidden items-center gap-8 shadow-none! border-none;
-    @apply max-sm:w-full lg:flex;
+    @apply hidden items-center gap-0.5 lg:flex;
+    @apply flex-1 justify-center;
 }
 
 .landing-navbar-link {
-    @apply text-current/80 text-base font-medium tracking-wide relative;
-    @apply transition-all duration-300 hover:text-current/100 text-nowrap!;
+    @apply relative px-3.5 py-1.5 rounded-lg;
+    @apply text-[13px] font-normal text-dark/55;
+    @apply transition-all duration-200;
+    @apply hover:bg-black/5 hover:text-dark;
+    @apply text-nowrap;
 }
 
-/* -------------------------------
-   Mobile Menu Toggle
-------------------------------- */
+.landing-navbar-link.active {
+    @apply text-primary font-medium;
+}
+
+/* 
+|-----------------------------
+| Navbar CTA
+|-----------------------------
+*/
+.landing-navbar-cta {
+    @apply hidden lg:flex items-center gap-1.5 shrink-0;
+    @apply h-[34px] px-4 rounded-lg;
+    @apply bg-primary text-white text-[13px] font-medium;
+    @apply transition-colors duration-200 hover:bg-primary-400;
+}
+
+/* 
+|-----------------------------
+| Mobile Toggle
+|-----------------------------
+*/
 .landing-navbar-toggle {
-    @apply flex items-center space-x-4 lg:hidden;
+    @apply flex items-center lg:hidden;
 }
 
 .landing-toggle-button {
-    @apply p-3 text-white bg-white/10 backdrop-blur-md rounded-xl transition-all duration-300 hover:bg-white/20;
+    @apply w-8 h-8 flex items-center justify-center;
+    @apply border border-black/[0.12] rounded-lg;
+    @apply transition-all duration-200 hover:bg-black/5;
+    @apply text-dark/60;
 }
 
-/* -------------------------------
-   Mobile Menu
-------------------------------- */
+/* 
+|-----------------------------
+| Mobile Menu
+|-----------------------------
+*/
 .collapsed {
-    @apply flex flex-col items-center gap-4 py-6 mt-2 border-t border-white/10 rounded-b-xl shadow-lg;
+    @apply flex flex-col gap-0.5 px-3 pb-3 pt-2;
+    @apply border-t border-black/[0.06];
 }
 
 .collapsed li {
-    @apply w-full text-center py-3 rounded-lg hover:bg-white/20 transition-all duration-300;
+    @apply w-full rounded-lg;
+    @apply transition-all duration-200;
 }
 
-/* -------------------------------
-   Navbar Expanded (Mobile)
-------------------------------- */
+.collapsed li a,
+.collapsed li .landing-navbar-link {
+    @apply block w-full px-3 py-2.5 rounded-lg;
+    @apply text-[13px] text-dark/60;
+    @apply hover:bg-black/5 hover:text-dark;
+}
+
+.collapsed li .landing-navbar-link.active {
+    @apply text-primary font-medium bg-primary/[0.06];
+}
+
+.collapsed .mobile-cta {
+    @apply mt-2 w-full h-[38px] flex items-center justify-center gap-1.5;
+    @apply bg-primary text-white text-[13px] font-medium rounded-lg;
+    @apply transition-colors duration-200 hover:bg-primary-400;
+}
+
+/* 
+|-----------------------------
+| Mobile Expanded State
+|-----------------------------
+*/
 .landing-navbar.expanded {
-    @apply flex flex-col;
+    @apply flex flex-col h-auto;
 }

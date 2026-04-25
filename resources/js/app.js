@@ -1,6 +1,5 @@
 import "./bootstrap";
 
-import initTheme from "./common/theme/_theme";
 import initSidebarCollapse from "./components/sidebar/sidebar-collapse.js";
 import globalException from "./exceptions/global-exception.js";
 import { initMicroModal } from "./components/modal/_modal.js";
@@ -23,7 +22,6 @@ import.meta.glob([
 */
 const initCommonScripts = () => {
     initMicroModal();
-    initTheme();
     globalException();
 };
 

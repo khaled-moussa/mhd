@@ -1,79 +1,109 @@
-/* -------------------------------
-   Footer Section
-------------------------------- */
+/* 
+|-----------------------------
+| Footer
+|-----------------------------
+*/
 .footer {
-    @apply pt-16 pb-8 bg-black/10;
+    @apply bg-dark pt-16 pb-0;
 }
 
-/* -------------------------------
-   Layout
-------------------------------- */
 .footer-container {
-    @apply container mx-auto px-4;
-    @apply transition-all duration-300;
+    @apply container mx-auto;
 }
 
+/* 
+|-----------------------------
+| Footer Grid
+|-----------------------------
+*/
 .footer-grid {
-    @apply grid grid-cols-1 gap-8 pb-8;
-    @apply md:grid-cols-2 lg:grid-cols-5;
+    @apply grid grid-cols-1 gap-12 pb-14;
+    @apply border-b border-white/[0.08];
+    @apply md:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr];
 }
 
-/* -------------------------------
-   Brand
-------------------------------- */
-.footer-brand {
-    @apply lg:col-span-2;
+/* 
+|-----------------------------
+| Brand
+|-----------------------------
+*/
+.footer-brand-mark {
+    @apply flex items-center gap-2 mb-5;
 }
 
-.footer-logo {
-    @apply text-2xl font-bold text-white mb-4;
+.footer-brand-icon {
+    @apply w-8 h-8 rounded-[7px] bg-primary flex items-center justify-center shrink-0;
 }
 
-.footer-brand .section-title {
-    @apply mb-6 max-w-xs text-2xl text-left;
+.footer-brand-icon i {
+    @apply text-white text-sm;
 }
 
-.footer-brand .section-description {
-    @apply mx-0 mb-6 text-left;
+.footer-brand-name {
+    @apply text-[14px] font-medium text-white leading-tight;
 }
-/* -------------------------------
-   Footer Links
-------------------------------- */
+
+.footer-brand-name span {
+    @apply block font-normal text-[11px] text-white/35 tracking-[0.04em];
+}
+
+.footer-brand-desc {
+    @apply text-[13px] text-white/45 leading-[1.75] max-w-[280px] mb-7;
+}
+
+/* 
+|-----------------------------
+| Socials
+|-----------------------------
+*/
 .footer-socials {
-    @apply flex space-x-4;
+    @apply flex gap-2;
 }
 
 .social-link {
-    @apply text-gray-400 text-sm transition-colors hover:text-current/80;
+    @apply w-[34px] h-[34px] rounded-lg flex items-center justify-center;
+    @apply border border-white/[0.1] text-white/50 text-[14px];
+    @apply transition-[border-color,background] duration-150;
+    @apply hover:border-white/25 hover:bg-white/[0.06] hover:text-white/80;
 }
 
-.footer-company {
-    @apply space-y-2;
-}
-
-/* -------------------------------
-   Columns
-------------------------------- */
-.footer-title {
-    @apply text-white font-medium mb-4;
+/* 
+|-----------------------------
+| Columns
+|-----------------------------
+*/
+.footer-col-title {
+    @apply text-[11px] font-medium text-white/35 tracking-[0.08em] uppercase mb-4;
 }
 
 .footer-list {
-    @apply space-y-2;
+    @apply flex flex-col gap-2.5;
 }
 
 .footer-link {
-    @apply text-gray-400 text-sm transition-colors hover:text-current/80;
+    @apply text-[13px] text-white/55;
+    @apply transition-colors duration-150 hover:text-white;
 }
 
-/* -------------------------------
-   Bottom Bar
-------------------------------- */
+/* 
+|-----------------------------
+| Bottom Bar
+|-----------------------------
+*/
 .footer-bottom {
-    @apply border-t border-white/10 pt-8 text-xs text-light/50;
-    @apply flex flex-col md:flex-row justify-between items-center;
+    @apply flex flex-col items-center gap-3 py-5;
+    @apply md:flex-row md:justify-between;
 }
 
-.footer-bottom a {
-    @apply me-2 hover:text-light/80;
+.footer-copy {
+    @apply text-[12px] text-white/25;
+}
+
+.footer-legal {
+    @apply flex items-center gap-6;
+}
+
+.footer-legal-link {
+    @apply text-[12px] text-white/25;
+    @apply transition-colors duration-150 hover:text-white/60;
 }

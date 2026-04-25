@@ -1,24 +1,69 @@
-/* -------------------------------
-   Global Utilities
-------------------------------- */
+/* 
+|-----------------------------
+| Global Utilities
+|-----------------------------
+*/
 body {
-    @apply bg-primary!;
+    @apply bg-background!;
 }
-/* -------------------------------
-   Shared Gradient
-------------------------------- */
+
+/* 
+|-----------------------------
+| Landing Content
+|-----------------------------
+*/
 .landing-content {
-    @apply bg-gradient-to-b from-primary to-primary/50;
+    @apply relative overflow-hidden;
+    background-image: url('@img/backgrounds/bg-main.png');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: repeat-y;
+    background-attachment: fixed; /* parallax feel — image stays still while content scrolls */
 }
 
+/* 
+|-----------------------------
+| Vignette — darkens edges, focuses center
+|-----------------------------
+*/
+.landing-content::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background:
+        /* Left edge shadow */
+        radial-gradient(ellipse 40% 100% at 0% 50%, rgb(0 0 0 / 6%) 0%, transparent 100%),
+        /* Right edge shadow */
+        radial-gradient(ellipse 40% 100% at 100% 50%, rgb(0 0 0 / 6%) 0%, transparent 100%),
+        /* Brand warm glow — top left, hero focus */
+        radial-gradient(ellipse 60% 40% at 10% 8%, rgb(99 19 20 / 10%) 0%, transparent 70%),
+        /* Brand secondary glow — mid page */
+        radial-gradient(ellipse 50% 30% at 90% 45%, rgb(99 19 20 / 6%) 0%, transparent 65%),
+        /* Bottom glow — footer approach */
+        radial-gradient(ellipse 60% 30% at 50% 95%, rgb(99 19 20 / 7%) 0%, transparent 70%);
+    z-index: 0;
+}
+
+/* All sections sit above the overlay */
+.landing-content > * {
+    @apply relative;
+    z-index: 1;
+}
+
+/* 
+|-----------------------------
+| Text Gradient
+|-----------------------------
+*/
 .text-gradient {
-    @apply bg-gradient-to-r from-red-100 via-red-300 to-red-500 
-           bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-300/85 via-primary-400/75 to-primary-500/60;
+    @apply bg-clip-text text-transparent;
 }
 
-/* -------------------------------
-   Section Header
-------------------------------- */
+/* 
+|-----------------------------
+| Section Header
+|-----------------------------
+*/
 .section-header {
     @apply text-center mb-16;
 }
@@ -28,5 +73,5 @@ body {
 }
 
 .section-description {
-    @apply text-gray-400 max-w-2xl mx-auto;
+    @apply text-muted-foreground max-w-2xl mx-auto;
 }

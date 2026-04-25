@@ -8,7 +8,7 @@
     Table Container
 -------------------------------------------------- */
 .table-container {
-    @apply w-full h-full flex flex-col rounded-xl overflow-hidden bg-current/4;
+    @apply w-full h-full flex flex-col rounded-xl overflow-hidden bg-current/2;
 }
 
 .table-container .table-header {
@@ -28,7 +28,7 @@
 }
 
 .table-container .table-scroll::-webkit-scrollbar {
-    @apply bg-main-dark;
+    @apply bg-background;
 }
 
 /* -------------------------------------------------

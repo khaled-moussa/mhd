@@ -1,24 +1,50 @@
+/* 
+|-----------------------------
+| Add Button
+|-----------------------------
+*/
 .add-btn {
-    @apply flex w-full flex-col items-center justify-center gap-4 rounded-lg border border-dashed border-[#dcdcdc] p-8 transition-all duration-200 ease-in-out;
-    @apply hover:border-black/20;
+    @apply flex w-full flex-col items-center justify-center gap-4 rounded-lg;
+    @apply border border-dashed border-[#dcdcdc] p-8;
+    @apply transition-all duration-200 ease-in-out;
+    @apply hover:border-background/20;
 }
 
+/* 
+|-----------------------------
+| Icon
+|-----------------------------
+*/
 .add-btn .icon {
-    @apply bg-light/5 text-light flex h-10 w-10 items-center justify-center rounded-full transition-all duration-150 ease-in-out;
+    @apply flex h-10 w-10 items-center justify-center;
+    @apply rounded-full bg-background/5 text-foreground;
+    @apply transition-all duration-150 ease-in-out;
 }
 
 .add-btn .icon i {
-    @apply text-xl transition-all duration-150 ease-in-out;
+    @apply text-xl;
+    @apply transition-all duration-150 ease-in-out;
 }
 
+/* 
+|-----------------------------
+| Text
+|-----------------------------
+*/
 .add-btn span {
-    @apply font-inter text-sm font-medium text-[#4A5565] transition-all duration-150 ease-in-out;
+    @apply font-inter text-sm font-medium text-[#4A5565];
+    @apply transition-all duration-150 ease-in-out;
 }
 
+/* 
+|-----------------------------
+| Hover States
+|-----------------------------
+*/
 .add-btn:hover .icon {
-    @apply bg-light/10;
+    @apply bg-background/10;
 }
 
 .add-btn:hover span {
-    @apply text-black;
+    @apply text-foreground;
 }

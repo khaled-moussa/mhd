@@ -2,45 +2,52 @@
     'section' => [],
 ])
 
-<section
-    id="about"
-    class="about"
->
+<section id="about" class="about">
     <div class="about__container">
+
         {{-- Header --}}
-        <x-header.section
-            class="about__header"
-            title="About Us"
-        />
+        <div class="about__header">
+            <span class="section-label">Who we are</span>
+            <h2>About us</h2>
+        </div>
 
         {{-- Content --}}
         <div class="about__content">
 
             {{-- Left: Text --}}
             <div class="about__text">
-                <p
-                    id="section-description"
-                    class="section-description"
-                >
-                    {{ $section['description'] }}
-                </p>
+                <p>{{ $section['description'] }}</p>
+                <p>{{ $section['description_secondary'] ?? '' }}</p>
+            </div>
 
-                {{-- Optional: Highlight stats or feature points --}}
-                <div class="about__stats">
-                    <div class="about__stat">
-                        <h3>500+</h3>
-                        <p>Projects Completed</p>
+            {{-- Right: Stats --}}
+            <div class="about__stats">
+                <div class="about__stat">
+                    <h3>500+</h3>
+                    <div class="about__stat-divider"></div>
+                    <div class="about__stat-info">
+                        <strong>Projects completed</strong>
+                        <p>Delivered across industries worldwide</p>
                     </div>
-                    <div class="about__stat">
-                        <h3>200+</h3>
-                        <p>Satisfied Clients</p>
+                </div>
+                <div class="about__stat">
+                    <h3>200+</h3>
+                    <div class="about__stat-divider"></div>
+                    <div class="about__stat-info">
+                        <strong>Satisfied clients</strong>
+                        <p>Long-term partnerships built on trust</p>
                     </div>
-                    <div class="about__stat">
-                        <h3>10</h3>
-                        <p>Years Experience</p>
+                </div>
+                <div class="about__stat">
+                    <h3>10</h3>
+                    <div class="about__stat-divider"></div>
+                    <div class="about__stat-info">
+                        <strong>Years experience</strong>
+                        <p>A decade of crafting digital solutions</p>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>

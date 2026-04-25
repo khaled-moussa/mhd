@@ -5,8 +5,6 @@ export default function resetFormValidation(formId) {
         return;
     }
 
-    console.log("1");
-    
     // Reset form fields
     form.reset();
 

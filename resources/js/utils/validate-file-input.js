@@ -8,7 +8,6 @@ export default function validateFileInput(
         maxSizeInMB = null,
     } = {},
 ) {
-
     let files = [];
 
     // Normalize input
@@ -20,7 +19,7 @@ export default function validateFileInput(
 
     const validFiles = [];
     const invalidFiles = [];
-    
+
     let invalidType = 0;
     let oversize = 0;
 

@@ -79,13 +79,6 @@ document.addEventListener("alpine:init", () => {
         },
 
         initImages(images) {
-            this.$nextTick(() => {
-                initSplideCarousel({
-                    splideElementId: this.splideElementId,
-                });
-            });
-
-            // Elements
             const carouselList = document.getElementById(
                 "projects-modal-carousel-list",
             );
@@ -93,18 +86,29 @@ document.addEventListener("alpine:init", () => {
             // Clear old slides
             carouselList.innerHTML = "";
 
-            // Add new slides
+            // Add new slides FIRST before initializing Splide
             images.forEach((img) => {
                 const slide = document.createElement("li");
                 slide.className = "splide__slide";
 
+                // Wrapper div — keeps h-full chain intact for object-fit to work
+                const wrapper = document.createElement("div");
+                wrapper.className = "projects__modal-image";
+
                 const image = document.createElement("img");
                 image.src = img.path;
                 image.alt = "project";
-                image.className = "projects__modal-image rounded-xl";
 
-                slide.appendChild(image);
+                wrapper.appendChild(image);
+                slide.appendChild(wrapper);
                 carouselList.appendChild(slide);
+            });
+
+            // Init Splide AFTER slides are in the DOM
+            this.$nextTick(() => {
+                initSplideCarousel({
+                    splideElementId: this.splideElementId,
+                });
             });
         },
 

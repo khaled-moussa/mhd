@@ -1,10 +1,257 @@
+/* 
+|-----------------------------
+| Vendors
+|-----------------------------
+*/
 @import "@css/common/vendors/_vendors.css";
+
+/* 
+|-----------------------------
+| Tailwind
+|-----------------------------
+*/
 @import "tailwindcss";
 
-/*!* Common styles *!*/
+/* 
+|-----------------------------
+| Common Styles
+|-----------------------------
+*/
 @import "@css/common/base/_base.css";
 @import "@css/common/components/_components.css";
 
-@reference "@css/reference.css";
-
+/* 
+|-----------------------------
+| Sources
+|-----------------------------
+*/
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
 @source "../views";
+@source "../**/*.blade.php";
+@source "../**/*.js";
+
+/* 
+|-----------------------------
+| Variants
+|-----------------------------
+*/
+@custom-variant child {
+    & > * {
+        @slot;
+    }
+}
+
+/* 
+|-----------------------------
+| Theme
+|-----------------------------
+*/
+@theme {
+    /* 
+    |-----------------------------
+    | Breakpoints
+    |-----------------------------
+    */
+    --breakpoint-xs: 480px;
+    --breakpoint-sm: 540px;
+    --breakpoint-md: 48rem;
+    --breakpoint-lg: 64rem;
+    --breakpoint-xl: 80rem;
+    --breakpoint-2xl: 96rem;
+
+    /* 
+    |-----------------------------
+    | Fonts
+    |-----------------------------
+    */
+    --font-poppins: "Poppins", sans-serif;
+    --font-inter: "Inter", sans-serif;
+    --font-ibm: "IBM Plex Sans Arabic", sans-serif;
+
+    /* 
+    |-----------------------------
+    | Base Colors
+    |-----------------------------
+    */
+    --color-light: #ffffff;
+    --color-dark: #202020;
+
+    --color-primary: #631314;
+    --color-secondary: #151515;
+    --color-danger: #e74c3c;
+
+    /* 
+    |-----------------------------
+    | Primary Scale
+    |-----------------------------
+    */
+    --color-primary-500: #631314;
+    --color-primary-400: #841518;
+    --color-primary-300: #a81d21;
+
+    /* 
+    |-----------------------------
+    | Background Colors
+    |-----------------------------
+    */
+    --color-background-light: #ffffff;
+    --color-background-dark: #000000;
+
+    /* 
+    |-----------------------------
+    | Foreground Colors
+    |-----------------------------
+    */
+    --color-foreground-light: #000000;
+    --color-foreground-dark: #ffffff;
+
+    --color-muted-foreground: rgb(255 255 255 / 72%);
+    --color-soft-foreground: rgb(255 255 255 / 60%);
+
+    /* 
+    |-----------------------------
+    | Brand Colors
+    |-----------------------------
+    */
+    --color-brand-light: var(--color-primary-400);
+    --color-brand-dark: var(--color-primary-300);
+
+    --color-brand-foreground-light: #ffffff;
+    --color-brand-foreground-dark: #ffffff;
+
+    /* 
+    |-----------------------------
+    | Gradients
+    |-----------------------------
+    */
+    --grad-brand: linear-gradient(135deg, #c3912b 0%, #facf6a 100%);
+
+    --grad-hero-left: radial-gradient(
+        1200px 600px at 10% -20%,
+        rgb(195 145 43 / 25%),
+        transparent 60%
+    );
+
+    --grad-hero-right: radial-gradient(
+        1000px 500px at 110% 0%,
+        rgb(250 207 106 / 15%),
+        transparent 50%
+    );
+
+    /* 
+    |-----------------------------
+    | Radius
+    |-----------------------------
+    */
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
+    --radius-full: 999px;
+
+    /* 
+    |-----------------------------
+    | Shadows
+    |-----------------------------
+    */
+    --shadow-soft: 0 8px 30px rgb(0 0 0 / 25%);
+    --shadow-strong: 0 20px 60px rgb(0 0 0 / 45%);
+
+    /* 
+    |-----------------------------
+    | Animations
+    |-----------------------------
+    */
+    --animate-wiggle: wiggle 4s ease-in-out infinite;
+    --animate-float: float 3s ease-out infinite;
+    --animate-slide-down: slide-down 0.3s ease-out forwards;
+
+    /* 
+    |-----------------------------
+    | Keyframes
+    |-----------------------------
+    */
+    @keyframes wiggle {
+        0%,
+        100% {
+            transform: translateY(5px);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            opacity: 0.6;
+        }
+        50% {
+            opacity: 0.75;
+        }
+    }
+
+    @keyframes slide-down {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* 
+|-----------------------------
+| Semantic Tokens (Runtime)
+|-----------------------------
+*/
+@theme inline {
+    --color-background: var(--color-background-light);
+    --color-foreground: var(--color-foreground-light);
+}
+
+/* 
+|-----------------------------
+| Container Utility
+|-----------------------------
+*/
+@utility container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 19.5px;
+
+    @media (width >= theme(--breakpoint-sm)) {
+        max-width: 540px;
+    }
+    @media (width >= theme(--breakpoint-md)) {
+        max-width: 46rem;
+    }
+    @media (width >= theme(--breakpoint-lg)) {
+        max-width: 62rem;
+    }
+    @media (width >= theme(--breakpoint-xl)) {
+        max-width: 78rem;
+    }
+    @media (width >= theme(--breakpoint-2xl)) {
+        max-width: 82.5rem;
+    }
+}
+
+/* 
+|-----------------------------
+| Semantic tokens (runtime theme switch)
+|-----------------------------
+*/
+/* :root {
+    --color-background: var(--color-background-dark);
+    --color-foreground: var(--color-foreground-dark);
+}
+
+.dark {
+    --color-background: var(--color-background-dark);
+    --color-foreground: var(--color-foreground-dark);
+} */

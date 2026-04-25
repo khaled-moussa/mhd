@@ -63,7 +63,7 @@ body.spinner::before {
 /* ---------- */
 
 .spinner-ignore {
-  @apply text-dark absolute top-0 right-0 bottom-0 left-0 z-100 mx-auto !hidden items-center justify-center pt-16 text-center text-sm leading-none font-medium select-none;
+  @apply text-foreground absolute top-0 right-0 bottom-0 left-0 z-100 mx-auto !hidden items-center justify-center pt-16 text-center text-sm leading-none font-medium select-none;
 }
 .spinner .spinner-ignore,
 .spinner-overlay .spinner-ignore {

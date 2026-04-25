@@ -16,7 +16,7 @@ class CompanyProjectsResource extends JsonResource
             'uuid'                => $this->getUuid(),
             'images'              => $this->getImages(),
             'image_cover'         => $this->getImageCover(),
-            'brochure'            => $this->getBrochure(),
+            'brochure'            => $this->getBorchure(),
             'title'               => $this->getTitle(),
             'description'         => $this->getDescription(),
             'price_start'         => $this->getPriceStart(),

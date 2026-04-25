@@ -1,46 +1,134 @@
-/* -------------------------------
-   Contact Section
-------------------------------- */
+/* 
+|-----------------------------
+| Contact Section
+|-----------------------------
+*/
 .contact-section {
     @apply py-24;
 }
 
-/* -------------------------------
-   Layout
-------------------------------- */
 .contact-container {
-    @apply container mx-auto px-4 relative z-10;
-    @apply !transition-all duration-300;
+    @apply container mx-auto;
 }
 
-.contact-container .highlight {
-    @apply animate-pulse;
+/* 
+|-----------------------------
+| Contact Header
+|-----------------------------
+*/
+.contact-header {
+    @apply mb-14;
 }
 
-/* -------------------------------
-   Card
-------------------------------- */
+.contact-header .section-label {
+    @apply inline-flex items-center gap-1.5 mb-3;
+    @apply text-[11px] font-medium text-primary tracking-[0.08em] uppercase;
+}
+
+.contact-header .section-label::before {
+    content: '';
+    @apply block w-5 h-px bg-primary;
+}
+
+.contact-header h2 {
+    @apply text-[clamp(26px,3.5vw,40px)] font-medium tracking-tight text-dark leading-tight mb-2.5;
+}
+
+.contact-header p {
+    @apply text-[15px] text-dark/50 max-w-lg leading-relaxed;
+}
+
+/* 
+|-----------------------------
+| Layout
+|-----------------------------
+*/
+.contact-layout {
+    @apply grid grid-cols-1 gap-5 items-start;
+    @apply lg:grid-cols-[1fr_1.6fr];
+}
+
+/* 
+|-----------------------------
+| Info Panel
+|-----------------------------
+*/
+.contact-info {
+    @apply flex flex-col gap-3;
+}
+
+.contact-info-card {
+    @apply flex items-center gap-3.5;
+    @apply bg-white rounded-2xl border border-black/[0.08] px-5 py-4;
+}
+
+.contact-info-icon {
+    @apply w-[38px] h-[38px] rounded-[9px] flex items-center justify-center shrink-0;
+    @apply bg-primary/[0.08];
+}
+
+.contact-info-icon i {
+    @apply text-[15px] text-primary;
+}
+
+.contact-info-text strong {
+    @apply block text-[12px] font-medium text-dark mb-0.5;
+}
+
+.contact-info-text span {
+    @apply text-[12px] text-dark/50;
+}
+
+.contact-info-note {
+    @apply rounded-2xl border border-primary/[0.1] bg-primary/[0.04] px-5 py-4 mt-1;
+}
+
+.contact-info-note p {
+    @apply text-[13px] text-dark/50 leading-[1.7];
+}
+
+.contact-info-note strong {
+    @apply text-primary font-medium;
+}
+
+/* 
+|-----------------------------
+| Form Card
+|-----------------------------
+*/
 .contact-card {
-    @apply relative max-w-4xl mx-auto rounded-2xl p-8 text-center;
-    @apply md:p-12;
-    @apply bg-white/5 backdrop-blur-lg border border-current/10;
+    @apply bg-white rounded-2xl border border-black/[0.08] p-8;
 }
 
-/* -------------------------------
-   Text
-------------------------------- */
-.contact-title {
-    @apply text-3xl font-bold mb-6;
-    @apply md:text-4xl;
+.contact-form-row {
+    @apply grid grid-cols-1 gap-3.5 mb-3.5;
+    @apply sm:grid-cols-2;
 }
 
-.contact-subtitle {
-    @apply text-gray-300 text-lg mb-8 max-w-2xl mx-auto;
+.contact-form-field {
+    @apply flex flex-col gap-1.5 mb-3.5;
 }
 
-/* -------------------------------
-   Button
-------------------------------- */
+.contact-form-field:last-of-type {
+    @apply mb-0;
+}
+
+.contact-form-field label {
+    @apply text-[12px] font-medium text-dark/55 tracking-[0.02em] uppercase;
+}
+
+.contact-form-field label span {
+    @apply text-primary ml-0.5;
+}
+
+/* 
+|-----------------------------
+| Submit Button
+|-----------------------------
+*/
 .form-button {
-    @apply w-full p-4 bg-transparent backdrop-blur-2xl text-current z-10;
+    @apply w-full h-11 mt-1 flex items-center justify-center gap-2;
+    @apply bg-primary text-white text-[14px] font-medium rounded-xl;
+    @apply transition-colors duration-200 hover:bg-primary-400;
+    @apply border-none cursor-pointer;
 }

@@ -17,103 +17,80 @@
             aria-modal="true"
             aria-labelledby="{{ $modalId }}-title"
         >
+            <div class="projects__modal-body">
 
-            {{-- Modal Header --}}
-            <header class="modal-header">
-                <h2
-                    id="{{ $modalId }}-title"
-                    class="projects__modal-title"
-                >
-                    {{ $title }}
-                </h2>
-
-                <x-button.outline
-                    class="modal-close"
-                    data-custom-close="{{ $modalId }}"
-                />
-            </header>
-
-            {{-- Modal Content --}}
-            <main
-                class="projects__modal-content"
-                id="{{ $modalId }}-content"
-            >
-
-                {{-- Modal Body --}}
-                <div class="projects__modal-body">
-
-                    {{-- Carousel --}}
-                    <div class="projects__modal-carousel">
-                        <div
-                            id="project-modal-splide"
-                            class="splide"
-                        >
-                            <div class="splide__track">
-                                <div
-                                    class="splide__list"
-                                    id="projects-modal-carousel-list"
-                                >
-                                </div>
-                            </div>
+                {{-- Left: Carousel --}}
+                <div class="projects__modal-carousel">
+                    <div
+                        id="project-modal-splide"
+                        class="splide"
+                    >
+                        <div class="splide__track">
+                            <div
+                                class="splide__list"
+                                id="projects-modal-carousel-list"
+                            ></div>
                         </div>
-                    </div>
-
-                    {{-- Info --}}
-                    <div class="projects__modal-info">
-                        <h3
-                            id="{{ $modalId }}-info-title"
-                            class="projects__modal-info-title"
-                        >
-                            {{ $title }}
-                        </h3>
-                        <p
-                            id="{{ $modalId }}-description"
-                            class="projects__modal-info-desc"
-                        >
-                            {{ $description }}
-                        </p>
                     </div>
                 </div>
 
-                {{-- Modal Footer --}}
-                <div class="projects__modal-footer">
-                    <div class="projects__modal-card">
-                        <header>Information</header>
-                        <div class="projects__modal-details">
-                            <div class="projects__modal-row">
-                                <x-label.info
-                                    label="Delivered"
-                                    x-description="projectData.delivered_at"
-                                />
+                {{-- Right: Info Panel --}}
+                <div class="projects__modal-info-panel">
 
-                                <x-label.info
-                                    label="Price Start"
-                                    x-description="`${projectData.price_start} EGP`"
-                                />
+                    {{-- Header --}}
+                    <div class="projects__modal-info-header">
+                        <div class="projects__modal-close-row">
+                            <x-button.outline
+                                class="modal-close"
+                                data-custom-close="{{ $modalId }}"
+                            />
+                        </div>
+                        <h2
+                            id="{{ $modalId }}-title"
+                            class="projects__modal-info-title"
+                        >{{ $title }}</h2>
+                        <p
+                            id="{{ $modalId }}-description"
+                            class="projects__modal-info-desc"
+                        >{{ $description }}</p>
+                    </div>
+
+                    {{-- Details --}}
+                    <div class="projects__modal-details-section">
+                        <div class="projects__modal-detail-grid">
+                            <div class="projects__modal-detail-item">
+                                <div class="projects__modal-detail-label">Delivered</div>
+                                <div
+                                    class="projects__modal-detail-value"
+                                    x-text="projectData.delivered_at"
+                                ></div>
                             </div>
-
-                            <div class="projects__modal-row">
-                                <x-label.info
-                                    label="Address"
-                                    x-description="projectData.address"
-                                />
+                            <div class="projects__modal-detail-item">
+                                <div class="projects__modal-detail-label">Price start</div>
+                                <div
+                                    class="projects__modal-detail-value"
+                                    x-text="`${projectData.price_start} EGP`"
+                                ></div>
+                            </div>
+                            <div class="projects__modal-detail-item projects__modal-detail-item--full">
+                                <div class="projects__modal-detail-label">Address</div>
+                                <div
+                                    class="projects__modal-detail-value"
+                                    x-text="projectData.address"
+                                ></div>
                             </div>
                         </div>
 
-
+                        {{-- Location --}}
                         <div class="project-view__location">
                             <div class="project-view__location-header">
                                 <i class="fi fi-ss-map-marker-home"></i>
-                                <header class="project-view__location-title">
-                                    Location
-                                </header>
+                                <span class="project-view__location-title">Location</span>
                             </div>
 
-                            <!-- If location exists -->
                             <template x-if="projectData.location">
                                 <iframe
                                     width="100%"
-                                    height="300"
                                     loading="lazy"
                                     style="border:0"
                                     allowfullscreen
@@ -122,30 +99,32 @@
                                 ></iframe>
                             </template>
 
-                            <!-- If location is empty -->
                             <template x-if="!projectData.location">
                                 <div class="project-view__no-location">
                                     <i class="fi fi-rr-info"></i>
-                                    <span>No location found</span>
+                                    <span>No location available</span>
                                 </div>
                             </template>
                         </div>
                     </div>
-                </div>
 
-                {{-- Modal Actions --}}
-                <div class="projects__modal-actions">
-                    <x-button.main
-                        label="Download Brochure"
-                        @click="downloadBrochure()"
-                    />
-
-                    <x-button.outline
-                        label="Close"
-                        data-custom-close="projects-modal"
-                    />
+                    {{-- Actions --}}
+                    <div class="projects__modal-actions">
+                        <x-button.main
+                            class="main-btn"
+                            label="Download brochure"
+                            @click="downloadBrochure()"
+                        >
+                            <i class="fi fi-rr-download"></i>
+                        </x-button.main>
+                        <x-button.outline
+                            class="outline-btn"
+                            label="Close"
+                            data-custom-close="projects-modal"
+                        />
+                    </div>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
 </div>

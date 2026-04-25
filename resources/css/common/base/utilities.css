@@ -1,9 +1,11 @@
-/* ================================
-   Body
-================================ */
+/* 
+|-----------------------------
+| Body
+|-----------------------------
+*/
 body {
-    @apply min-w-[320px] min-h-fit m-0 box-border scroll-smooth font-poppins;
-    @apply bg-dark dark:bg-dark text-dark dark:text-light;
+    @apply m-0 box-border min-h-fit min-w-[320px] scroll-smooth font-poppins;
+    @apply bg-background text-foreground;
 }
 
 body.modal-open {
@@ -14,34 +16,47 @@ body.theme-transition {
     @apply transition-colors duration-500 ease-in-out;
 }
 
-/* ================================
-   Spotlight Background
-================================ */
+/* 
+|-----------------------------
+| Spotlight Background
+|-----------------------------
+*/
 .spotlight {
     @apply absolute inset-0;
-    @apply bg-[radial-gradient(circle_at_center_left,rgba(0,0,0,0.075)_0%,rgba(255,255,255,0)_50%)]
-         dark:bg-[radial-gradient(circle_at_center_left,rgba(197,197,197,0.075)_0%,rgba(255,255,255,0)_50%)];
+
+    @apply bg-[radial-gradient(circle_at_center_left,rgba(0,0,0,0.075)_0%,rgba(255,255,255,0)_50%)];
 }
 
-/* ================================
-   Branding
-================================ */
+/* 
+|-----------------------------
+| Branding
+|-----------------------------
+*/
 .logo {
-    @apply flex items-center place-items-center gap-2 p-1 w-full h-[50px] transition-[width_height] duration-500;
-    @apply bg-[url(@img/branding/logo-light.png)] bg-contain bg-center bg-no-repeat content-[''];
-    @apply dark:bg-[url(@img/branding/logo-dark.png)];
+    @apply flex h-[50px] w-full items-center place-items-center gap-2 p-1;
+    @apply transition-[width_height] duration-500;
+
+    @apply bg-[url(@img/branding/logo-light.png)];
+    @apply bg-center bg-contain bg-no-repeat;
+
+    @apply content-[''];
+    /* @apply dark:bg-[url(@img/branding/logo-dark.png)]; */
 }
 
-/* ================================
-   Info
-================================ */
+/* 
+|-----------------------------
+| Info
+|-----------------------------
+*/
 .description {
-    @apply font-inter my-2.5 text-sm font-medium;
+    @apply my-2.5 text-sm font-medium font-inter;
     @apply text-current/60;
 }
 
 .empty {
-    @apply p-3 rounded-xl absolute left-1/2 transform -translate-x-1/2  text-base bg-current/5 backdrop-blur-xl mx-auto!;
+    @apply absolute left-1/2 mx-auto! p-3 text-base;
+    @apply -translate-x-1/2 transform rounded-xl;
+    @apply bg-current/5 backdrop-blur-xl;
 }
 
 .row {
@@ -49,5 +64,6 @@ body.theme-transition {
 }
 
 .link-url {
-    @apply underline text-current/85;
+    @apply underline;
+    @apply text-current/85;
 }

@@ -18,14 +18,14 @@
 }
 
 .tags-look > * {
-    @apply rounded-lg border-0 p-2 bg-light/5;
+    @apply rounded-lg border-0 p-2 bg-background/5;
 }
 
 /* -------------------------------
    Dropdown Items
 -------------------------------- */
 .tags-look .tagify__dropdown__item {
-    @apply inline-block align-middle m-[0.2em] rounded-[3px] px-3 py-2 text-[0.85em] transition-none text-dark dark:text-light bg-dark/5 dark:bg-light/5;
+    @apply inline-block align-middle m-[0.2em] rounded-[3px] px-3 py-2 text-[0.85em] transition-none text-foreground bg-background/5;
 }
 
 .tags-look .tagify__dropdown__item--hidden {
@@ -42,7 +42,7 @@
 
 .tagify--empty .tagify__input::before,
 .tagify__input::before {
-    @apply text-dark/30;
+    @apply text-foreground/30;
 }
 
 .tagify span,

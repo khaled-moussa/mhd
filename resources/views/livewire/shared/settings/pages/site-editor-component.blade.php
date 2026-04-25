@@ -58,10 +58,13 @@
                                     label="Icon"
                                     placeholder="Select Icon"
                                     :options="[
+                                        ['label' => 'Email', 'value' => 'fi-tr-envelope'],
+                                        ['label' => 'Phone', 'value' => 'fi-tr-phone-call'],
                                         ['label' => 'Facebook', 'value' => 'fi-brands-facebook'],
                                         ['label' => 'Instagram', 'value' => 'fi-brands-instagram'],
                                         ['label' => 'LinkedIn', 'value' => 'fi-brands-linkedin'],
                                         ['label' => 'X', 'value' => 'fi-brands-twitter-alt-circle'],
+                                   
                                     ]"
                                     x-model="social.icon"
                                 />

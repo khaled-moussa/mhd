@@ -1,30 +1,38 @@
-/* -------------------------------  
-   Dashboard Cards Grid Layout  
--------------------------------- */
+/* 
+|-----------------------------
+| Dashboard Cards Grid Layout
+|-----------------------------
+*/
 .dashboard-cards {
     @apply grid gap-5;
     @apply grid-cols-1 md:grid-cols-3;
 }
 
-/* -------------------------------  
-   Individual Dashboard Card  
--------------------------------- */
+/* 
+|-----------------------------
+| Individual Dashboard Card
+|-----------------------------
+*/
 .dashboard-card {
-    @apply w-full h-32 relative flex items-center gap-5;
-    @apply p-4 rounded-4xl border border-current/5 bg-main-dark;
+    @apply relative flex h-32 w-full items-center gap-5;
+    @apply rounded-4xl border border-current/5 bg-background p-4;
 }
 
-/* -------------------------------  
-   Card Icon  
--------------------------------- */
+/* 
+|-----------------------------
+| Card Icon
+|-----------------------------
+*/
 .dashboard-card-icon {
-    @apply grid place-items-center w-18 h-18 text-3xl;
+    @apply grid h-18 w-18 place-items-center text-3xl;
     @apply rounded-full bg-current/10;
 }
 
-/* -------------------------------  
-   Card Content  
--------------------------------- */
+/* 
+|-----------------------------
+| Card Content
+|-----------------------------
+*/
 .dashboard-card-content {
     @apply flex items-center;
     @apply text-[14px] font-medium text-current/75;
@@ -34,48 +42,57 @@
     @apply text-base font-medium text-current/60;
 }
 
-/* -------------------------------  
-   Card Main Value  
--------------------------------- */
+/* 
+|-----------------------------
+| Card Main Value
+|-----------------------------
+*/
 .dashboard-card-value {
     @apply mt-2 text-xl font-bold text-current;
     @apply xl:text-2xl;
 }
 
-/* -------------------------------  
-   Overview Section  
--------------------------------- */
+/* 
+|-----------------------------
+| Overview Section
+|-----------------------------
+*/
 .overview {
-    @apply w-full h-fit my-5 lg:my-0 p-5 sticky top-[70px];
+    @apply sticky top-[70px] my-5 h-fit w-full p-5;
     @apply rounded-xl bg-current/5 backdrop-blur-2xl;
+    @apply lg:my-0;
 }
 
 .overview-title {
-    @apply text-[16px] font-semibold mb-3;
+    @apply mb-3 text-[16px] font-semibold;
 }
 
 .overview .chart-card {
-    @apply !bg-transparent border-b border-current/10 rounded-none !shadow-none;
+    @apply rounded-none border-b border-current/10;
+    @apply !bg-transparent !shadow-none;
 }
 
 .overview .chart-wrapper {
-    @apply relative max-w-[250px] h-[320px] !mx-auto;
-    @apply md:max-w-[300px] lg:max-w-full;
+    @apply relative h-[320px] max-w-[250px];
+    @apply !mx-auto md:max-w-[300px] lg:max-w-full;
 }
 
-/* -------------------------------  
-   Overview Cards  
--------------------------------- */
+/* 
+|-----------------------------
+| Overview Cards
+|-----------------------------
+*/
 .overview-cards {
-    @apply flex flex-col gap-10 my-8;
+    @apply my-8 flex flex-col gap-10;
 }
 
 .overview-card {
-    @apply flex items-center gap-3 w-full h-fit rounded-2xl;
+    @apply flex h-fit w-full items-center gap-3;
+    @apply rounded-2xl;
 }
 
 .overview-card-icon {
-    @apply grid place-items-center w-11 h-11 text-xl;
+    @apply grid h-11 w-11 place-items-center text-xl;
     @apply rounded-xl bg-current/10;
 }
 

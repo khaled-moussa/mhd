@@ -136,6 +136,8 @@ document.addEventListener("alpine:init", () => {
         |------------------------------- 
         */
         showError() {
+            console.log(1);
+            
             MessageToast("error");
         },
     }));

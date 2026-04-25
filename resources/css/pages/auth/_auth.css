@@ -1,29 +1,40 @@
+/* 
+|-----------------------------
+| Auth Imports
+|-----------------------------
+*/
 @reference "@css/reference.css";
 @import "./utilities.css";
 @import "./verification.css";
 
-/* -------------------------------  
-   Auth Wrapper 
--------------------------------- */
+/* 
+|-----------------------------
+| Auth Wrapper
+|-----------------------------
+*/
 .auth-wrapper {
-    @apply grid w-full h-full gap-4 overflow-y-hidden p-0 bg-current/5;
-}
-
-.auth-wrapper:has(.auth-bg) {
-    @apply md:grid-cols-[2fr_1.25fr];
+    @apply grid min-h-screen w-full gap-4 overflow-y-hidden p-0;
+    @apply place-items-center; /* ← add this */
 }
 
 .auth-wrapper:has(:not(.auth-bg)) .auth-content {
-    @apply lg:w-1/2 mx-auto;
+    @apply mx-auto lg:w-[480px];
+}
+
+
+.auth-wrapper:has(:not(.auth-bg)) .auth-content {
+    @apply mx-auto lg:w-[480px];
 }
 
 .auth-wrapper:has(.auth-bg) .auth-content {
     @apply w-full;
 }
 
-/* -------------------------------  
-   Auth Image 
--------------------------------- */
+/* 
+|-----------------------------
+| Auth Background
+|-----------------------------
+*/
 .auth-bg {
     @apply relative hidden h-screen items-end justify-center;
     @apply md:flex;
@@ -33,33 +44,48 @@
     @apply h-full w-full object-cover object-top;
 }
 
-/* -------------------------------  
-   Auth Content 
--------------------------------- */
+/* 
+|-----------------------------
+| Auth Content
+|-----------------------------
+*/
 .auth-content {
-    @apply h-screen place-content-center overflow-y-auto rounded-3xl p-4;
-    @apply sm:p-8;
-    @apply lg:px-24 lg:py-12 lg:justify-center;
+    @apply h-fit overflow-y-auto rounded-xl p-10;
+    @apply bg-white border border-black/[0.08];
+    @apply sm:p-10;
+    @apply lg:px-10 lg:py-10;
 }
 
-.auth-content .header {
-    @apply mt-8 mb-3 -ml-1 flex flex-col items-center text-3xl font-semibold space-y-3!;
-    @apply md:items-start md:text-left md:text-4xl;
-}
-
+/* Logo */
 .auth-content .logo {
-    @apply mb-8 bg-left;
+    @apply mb-8 h-9 bg-left;
 }
 
-/* -------------------------------  
-   Auth Forms 
--------------------------------- */
+/* Header */
+.auth-content .header {
+    @apply mb-8 flex flex-col;
+}
+
+.auth-content .header h1 {
+    @apply text-2xl font-medium tracking-tight text-dark;
+    @apply md:text-[1.75rem];
+}
+
+.auth-content .header p {
+    @apply mt-1 text-sm text-foreground/50;
+}
+
+/* 
+|-----------------------------
+| Auth Forms
+|-----------------------------
+*/
 .auth-content .auth-form {
-    @apply mt-10 w-full gap-8;
+    @apply mt-0 w-full gap-5;
 }
 
 .auth-content .row-input {
-    @apply w-full flex items-center flex-col gap-5;
+    @apply flex w-full flex-col items-center gap-5;
     @apply md:flex-row;
 }
 
@@ -71,11 +97,15 @@
     @apply items-end!;
 }
 
-.auth-content .form-actions {
-    @apply flex flex-col items-center gap-6;
-    @apply child:w-fit;
+.auth-content .row {
+    @apply mt-1 mb-2;
 }
 
 .auth-content .forget-password {
-    @apply flex-1 text-nowrap text-end underline;
+    @apply text-sm text-primary underline underline-offset-[3px] flex-1 text-end text-nowrap;
+}
+
+.auth-content .form-actions {
+    @apply mt-2 flex flex-col items-center gap-4;
+    @apply child:w-full;
 }
