@@ -13,8 +13,6 @@ class GetLandingSectionsAction
     public function execute(): Collection
     {
         return LandingSection::query()
-            ->get()
-            ->keyBy('key')
-            ->sortBy('order');
+            ->get();
     }
 }

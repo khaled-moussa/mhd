@@ -2,12 +2,15 @@
 
 namespace App\Domain\Landing\Models;
 
+use App\App\Web\Resources\Landing\LandingSectionsResource;
 use App\Domain\Landing\QueryBuilders\LandingSectionBuilder;
 use App\Domain\Landing\VisibilityStates\VisibilityStates;
+use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\ModelStates\HasStates;
 
+#[UseResource(LandingSectionsResource::class)]
 class LandingSection extends Model
 {
     use HasFactory, HasStates;

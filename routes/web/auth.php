@@ -4,7 +4,6 @@ use App\App\Web\Controllers\Auth\EmailVerificationController;
 use App\App\Web\Controllers\Auth\ForgetPasswordController;
 use App\App\Web\Controllers\Auth\LoginController;
 use App\App\Web\Controllers\Auth\LogoutController;
-use App\App\Web\Controllers\Auth\RegisterController;
 use App\App\Web\Controllers\Auth\ResetPasswordController;
 use App\App\Web\Controllers\Auth\TwoFactorController;
 use Illuminate\Support\Facades\Route;
