@@ -1,24 +1,23 @@
 /* 
 |-----------------------------
-| Landing Navbar
+| Navbar
 |-----------------------------
 */
-.landing-navbar {
+.navbar {
     @apply fixed top-0 left-0 w-full z-50;
     @apply flex items-center justify-between;
-    @apply px-6 h-16;
-    @apply border-b border-black/[0.08];
-    @apply transition-all duration-300;
-    @apply backdrop-blur-xl;
+    @apply px-6 h-[60px];
+    @apply  border-b border-foreground/10 backdrop-blur-2xl;
+    @apply transition-[background,border-color] duration-300;
 }
 
 /* 
 |-----------------------------
-| Scroll State
+| Scrolled State
 |-----------------------------
 */
-.landing-navbar.scrolled {
-    @apply bg-white/98 border-black/[0.12];
+.navbar-scrolled {
+    @apply bg-foreground/10 border-foreground/10;
 }
 
 /* 
@@ -26,56 +25,43 @@
 | Navbar Container
 |-----------------------------
 */
-.landing-navbar-container {
-    @apply w-full flex items-center justify-between max-w-7xl mx-auto gap-8;
+.navbar-container {
+    @apply w-full flex items-center justify-between max-w-7xl mx-auto;
 }
 
 /* 
 |-----------------------------
-| Branding
+| Desktop Menu
 |-----------------------------
 */
-.branding {
-    @apply flex items-center gap-2 shrink-0;
+.navbar-menu {
+    @apply hidden items-center gap-0.5;
+    @apply lg:flex;
 }
 
-.branding img {
-    @apply h-8 w-auto;
-    @apply transition-all duration-300;
+.navbar-link {
+    @apply px-3 py-1.5 rounded-lg;
+    @apply text-[13px] text-foreground/55;
+    @apply transition-[background,color] duration-150;
+    @apply hover:bg-foreground/10 hover:text-foreground;
+    @apply whitespace-nowrap;
+}
+
+.navbar-link.active {
+    @apply bg-foreground/10 text-foreground;
 }
 
 /* 
 |-----------------------------
-| Navbar Menu (Desktop)
+| CTA Button
 |-----------------------------
 */
-.landing-navbar-menu {
-    @apply hidden items-center gap-0.5 lg:flex;
-    @apply flex-1 justify-center;
-}
-
-.landing-navbar-link {
-    @apply relative px-3.5 py-1.5 rounded-lg;
-    @apply text-[13px] font-normal text-dark/55;
-    @apply transition-all duration-200;
-    @apply hover:bg-black/5 hover:text-dark;
-    @apply text-nowrap;
-}
-
-.landing-navbar-link.active {
-    @apply text-primary font-medium;
-}
-
-/* 
-|-----------------------------
-| Navbar CTA
-|-----------------------------
-*/
-.landing-navbar-cta {
-    @apply hidden lg:flex items-center gap-1.5 shrink-0;
+.navbar-cta {
+    @apply hidden lg:flex items-center shrink-0;
     @apply h-[34px] px-4 rounded-lg;
-    @apply bg-primary text-white text-[13px] font-medium;
-    @apply transition-colors duration-200 hover:bg-primary-400;
+    @apply bg-primary text-background text-sm font-medium tracking-wide;
+    @apply transition-colors duration-150 hover:bg-primary-400;
+    @apply border-none cursor-pointer;
 }
 
 /* 
@@ -83,54 +69,67 @@
 | Mobile Toggle
 |-----------------------------
 */
-.landing-navbar-toggle {
-    @apply flex items-center lg:hidden;
+.navbar-toggle {
+    @apply flex flex-col items-center justify-center gap-[5px];
+    @apply w-8 h-8 rounded-lg border border-foreground/5;
+    @apply cursor-pointer lg:hidden;
+    @apply transition-colors duration-150 hover:bg-foreground/4;
 }
 
-.landing-toggle-button {
-    @apply w-8 h-8 flex items-center justify-center;
-    @apply border border-black/[0.12] rounded-lg;
-    @apply transition-all duration-200 hover:bg-black/5;
-    @apply text-dark/60;
-}
-
-/* 
-|-----------------------------
-| Mobile Menu
-|-----------------------------
-*/
-.collapsed {
-    @apply flex flex-col gap-0.5 px-3 pb-3 pt-2;
-    @apply border-t border-black/[0.06];
-}
-
-.collapsed li {
-    @apply w-full rounded-lg;
+.navbar-toggle span {
+    @apply block h-[1.5px] bg-foreground/55 rounded-sm;
     @apply transition-all duration-200;
 }
 
-.collapsed li a,
-.collapsed li .landing-navbar-link {
-    @apply block w-full px-3 py-2.5 rounded-lg;
-    @apply text-[13px] text-dark/60;
-    @apply hover:bg-black/5 hover:text-dark;
-}
+.navbar-toggle span:nth-child(1) { @apply w-[14px]; }
+.navbar-toggle span:nth-child(2) { @apply w-[10px]; }
+.navbar-toggle span:nth-child(3) { @apply w-[14px]; }
 
-.collapsed li .landing-navbar-link.active {
-    @apply text-primary font-medium bg-primary/[0.06];
+/* Animate to X when open */
+.navbar-checkbox:checked ~ * .navbar-toggle span:nth-child(1) {
+    @apply w-[14px] translate-y-[6.5px] rotate-45;
 }
-
-.collapsed .mobile-cta {
-    @apply mt-2 w-full h-[38px] flex items-center justify-center gap-1.5;
-    @apply bg-primary text-white text-[13px] font-medium rounded-lg;
-    @apply transition-colors duration-200 hover:bg-primary-400;
+.navbar-checkbox:checked ~ * .navbar-toggle span:nth-child(2) {
+    @apply opacity-0;
+}
+.navbar-checkbox:checked ~ * .navbar-toggle span:nth-child(3) {
+    @apply w-[14px] -translate-y-[6.5px] -rotate-45;
 }
 
 /* 
 |-----------------------------
-| Mobile Expanded State
+| Mobile Dropdown
 |-----------------------------
 */
-.landing-navbar.expanded {
-    @apply flex flex-col h-auto;
+.navbar-checkbox {
+    @apply hidden;
+}
+
+.navbar-mobile-menu {
+    @apply hidden;
+    @apply absolute top-[60px] left-0 right-0;
+    @apply bg-foreground/95 backdrop-blur-xl;
+    @apply border-t border-background/7;
+    @apply flex-col overflow-hidden;
+    @apply lg:hidden;
+}
+
+.navbar-checkbox:checked ~ .navbar-mobile-menu {
+    @apply flex;
+}
+
+.navbar-mobile-link {
+    @apply px-6 py-3.5 text-[13px] text-background/65;
+    @apply border-b border-background/[0.06] last:border-b-0;
+    @apply transition-colors duration-150;
+    @apply hover:bg-background/[0.06] hover:text-background;
+    @apply block;
+}
+
+.navbar-mobile-cta {
+    @apply mx-4 my-3 h-10 rounded-lg;
+    @apply bg-primary text-foreground text-[13px] font-medium;
+    @apply flex items-center justify-center;
+    @apply transition-colors duration-150 hover:bg-primary-400;
+    @apply border-none cursor-pointer w-[calc(100%-2rem)];
 }

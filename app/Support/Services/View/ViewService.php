@@ -2,20 +2,22 @@
 
 namespace App\Support\Services\View;
 
-use App\Panel\Resolvers\PanelManager;
-use App\Navigation\Sidebar\SidebarBuilder;
-use App\Domain\Users\Actions\GetCurrentUserAction;
-use App\Support\Cache\EnumCache;
-use App\Support\Helpers\EnumExporter;
 use App\Domain\Otp\Enums\OtpEventsEnum;
 use App\Domain\Otp\Enums\OtpExceptionsEnum;
 use App\Domain\Otp\Enums\OtpTimerEnum;
+use App\Domain\Users\Actions\GetCurrentUserAction;
+use App\Navigation\Sidebar\SidebarBuilder;
+use App\Panel\Resolvers\PanelManager;
+use App\Support\Cache\EnumCache;
+use App\Support\Context\SectionContext;
 use App\Support\Enums\EventsEnum;
 use App\Support\Enums\FormEnum;
 use App\Support\Enums\FormStepEnum;
 use App\Support\Enums\LabelEnum;
 use App\Support\Enums\ModalEnum;
-use Illuminate\Support\Facades\View;
+use App\Support\Helpers\EnumExporter;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\View as ViewFacade;
 
 class ViewService
 {
@@ -29,6 +31,7 @@ class ViewService
     {
         self::registerSharedEnums();
         self::registerPanelComposers();
+        self::registerSectionsComposers();
     }
 
     /*
@@ -50,6 +53,11 @@ class ViewService
         self::composeUserPanel();
     }
 
+    public static function registerSectionsComposers(): void
+    {
+        self::composeSections();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Shared Enums
@@ -58,7 +66,7 @@ class ViewService
 
     private static function shareEnums(): void
     {
-        View::share(
+        ViewFacade::share(
             'enums',
             EnumCache::remember('js', fn() => [
                 'OTP' => [
@@ -66,7 +74,6 @@ class ViewService
                     'ERRORS' => EnumExporter::export(OtpExceptionsEnum::class),
                     'TIMER'  => EnumExporter::export(OtpTimerEnum::class),
                 ],
-
                 'UI' => [
                     'FORMS'  => EnumExporter::export(FormEnum::class),
                     'MODALS' => EnumExporter::export(ModalEnum::class),
@@ -80,23 +87,17 @@ class ViewService
 
     private static function shareModalIds(): void
     {
-        View::share(
+        ViewFacade::share(
             'modalId',
-            EnumCache::remember(
-                'modalId',
-                fn() => EnumExporter::export(ModalEnum::class)
-            )
+            EnumCache::remember('modalId', fn() => EnumExporter::export(ModalEnum::class))
         );
     }
 
     private static function shareFormIds(): void
     {
-        View::share(
+        ViewFacade::share(
             'formId',
-            EnumCache::remember(
-                'form',
-                fn() => EnumExporter::export(FormEnum::class)
-            )
+            EnumCache::remember('form', fn() => EnumExporter::export(FormEnum::class))
         );
     }
 
@@ -108,7 +109,7 @@ class ViewService
 
     private static function composeSidebar(): void
     {
-        View::composer(
+        ViewFacade::composer(
             'components.navigation.sidebar.app',
             function (View $view) {
                 $panel   = app(PanelManager::class)->current();
@@ -125,7 +126,7 @@ class ViewService
 
     private static function composeUserPanel(): void
     {
-        View::composer(
+        ViewFacade::composer(
             [
                 'pages.shared.*',
                 'components.dropdown.profile',
@@ -136,6 +137,16 @@ class ViewService
                     ->getPanelId();
 
                 $view->with('panel', $panelId);
+            }
+        );
+    }
+
+    private static function composeSections(): void
+    {
+        ViewFacade::composer(
+            'pages.guest.landing.*',
+            function (View $view) {
+                $view->with('sections', SectionContext::toMapping());
             }
         );
     }

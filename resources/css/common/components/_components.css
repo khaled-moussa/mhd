@@ -7,7 +7,7 @@
 @import "./label/_label.css";
 @import "./header/_header.css";
 @import "./modal/_modal.css";
-@import "./navbar/_navbar.css";
+/* @import "./navbar/_navbar.css"; */
 @import "./sidebar/_sidebar.css";
 @import "./spinner/_spinner.css";
 @import "./progress/_progress.css";

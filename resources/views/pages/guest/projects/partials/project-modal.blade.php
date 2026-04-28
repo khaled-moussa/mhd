@@ -117,6 +117,7 @@
                         >
                             <i class="fi fi-rr-download"></i>
                         </x-button.main>
+                        
                         <x-button.outline
                             class="outline-btn"
                             label="Close"

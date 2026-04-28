@@ -51,9 +51,10 @@
     @apply !p-2 !px-3;
 }
 
-.modal-header .modal-close:before {
+.modal-close:before {
     @apply content-['\2715'];
 }
+
 .modal-content {
     @apply bg-background;
 }

@@ -1,12 +1,13 @@
-{{-- Use main layout --}}
+{{-- Use Main Layout --}}
 @extends('layouts.guest')
 
-{{-- Page title --}}
+{{-- Page Title --}}
 @section('title', 'Home')
 
-{{-- Page assets --}}
+{{-- Page Assets --}}
 @push('head')
-    @vite(['resources/css/pages/guest/landing/_landing.css', 'resources/js/pages/guest/landing/_landing.js'])
+    {{ Vite::landingStyle('landing/_landing.css') }}
+    {{ Vite::landingScript('landing/_landing.js') }}
 @endpush
 
 {{-- Navbar --}}
@@ -17,25 +18,15 @@
 {{-- Content --}}
 @section('content')
     <div class="landing-content">
-        @foreach ($sections as $key => $section)
-            @continue($key === 'footer')
-
-            {{-- Default landing section --}}
-            @includeIf("pages.guest.landing.partials.$key", compact('section'))
-
-            {{-- Projects section extra rendering --}}
-            @if ($key === 'projects')
-                @include('pages.guest.projects.partials.projects', [
-                    'section' => $section,
-                    'perPage' => 6,
-                    'showViewAllProjectsBtn' => true,
-                ])
-            @endif
-        @endforeach
+        @includeWhen(isset($sections->hero), 'pages.guest.landing.partials.hero', ['section' => $sections->hero])
+        @includeWhen(isset($sections->about), 'pages.guest.landing.partials.about', [ 'section' => $sections->about])
+        @includeWhen(isset($sections->services), 'pages.guest.landing.partials.services', [ 'section' => $sections->services])
+        @includeWhen(isset($sections->projects), 'pages.guest.projects.partials.projects', [ 'section' => $sections->projects])
+        @includeWhen(isset($sections->contact), 'pages.guest.landing.partials.contact', [ 'section' => $sections->contact])
     </div>
 @endsection
 
 {{-- Footer --}}
 @section('footer')
-    @include('pages.guest.landing.partials.footer', ['section' => $sections['footer']])
+    @include('pages.guest.landing.partials.footer', ['section' => $sections->footer])
 @endsection

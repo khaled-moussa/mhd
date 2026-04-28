@@ -4,31 +4,35 @@
 |-----------------------------
 */
 .hero {
-    @apply p-5 relative flex flex-col justify-center overflow-hidden;
+    @apply relative overflow-hidden pt-28 pb-20;
 }
 
+/* 
+|-----------------------------
+| Hero Container
+|-----------------------------
+*/
+.hero-container {
+    @apply container mx-auto relative z-10;
+    @apply transition-all duration-400;
+}
 
 /* 
 |-----------------------------
 | Hero Layout
 |-----------------------------
 */
-.hero__container {
-    @apply container mx-auto px-4 py-20 relative z-10;
-    @apply transition-all duration-400;
+.hero-content {
+    @apply grid grid-cols-1 gap-16 items-center;
+    @apply lg:grid-cols-2 lg:gap-16;
 }
 
-.hero__content {
-    @apply flex flex-col items-start gap-5;
-    @apply lg:flex-row;
+.hero-main {
+    @apply flex flex-col;
 }
 
-.hero__main {
-    @apply flex-1;
-}
-
-.hero__media {
-    @apply relative w-full mt-12 flex-1;
+.hero-media {
+    @apply relative w-full;
 }
 
 /* 
@@ -36,13 +40,22 @@
 | Hero Badge
 |-----------------------------
 */
-.hero__badge {
-    @apply inline-flex items-center px-4 py-1.5 mb-6;
-    @apply backdrop-blur-sm border border-primary/10 rounded-full;
+.hero-badge {
+    @apply inline-flex items-center gap-1.5 mb-6 self-start;
+    @apply px-3 py-1.5 rounded-full;
+    @apply border border-primary/[0.15] bg-primary/[0.04];
 }
 
-.hero__badge-text {
-    @apply text-xs font-medium mr-2 text-muted-foreground;
+.hero-badge-dot {
+    @apply w-1.5 h-1.5 rounded-full bg-primary shrink-0;
+}
+
+.hero-badge-text {
+    @apply text-[12px] font-medium text-primary tracking-[0.03em];
+}
+
+.hero-badge-divider {
+    @apply w-px h-3 bg-primary/20 shrink-0;
 }
 
 /* 
@@ -50,14 +63,18 @@
 | Hero Typography
 |-----------------------------
 */
-.hero__title {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight;
-    @apply max-w-[70%];
-    @apply transition-all duration-500;
+.hero-title {
+    @apply text-[clamp(36px,5vw,58px)] font-medium leading-[1.1] tracking-tight text-dark;
+    @apply mb-5;
 }
 
-.hero__description {
-    @apply text-lg mb-8 max-w-lg text-current/50;
+.hero-title .text-gradient {
+    @apply bg-gradient-to-br from-primary-300 to-primary-500;
+    @apply bg-clip-text text-transparent;
+}
+
+.hero-description {
+    @apply text-[15px] text-dark/50 leading-[1.75] max-w-[420px] mb-8;
 }
 
 /* 
@@ -65,14 +82,16 @@
 | Hero Actions
 |-----------------------------
 */
-.hero__actions {
-    @apply flex flex-col items-center gap-3;
-    @apply xl:w-1/2 md:flex-row;
+.hero-actions {
+    @apply flex items-center gap-2.5 mb-10;
 }
 
-.hero__actions .main-btn,
-.hero__actions .outline-btn {
-    @apply w-full p-3 border-current/20;
+.hero-actions .main-btn {
+    @apply h-11 px-6 text-[14px] font-medium;
+}
+
+.hero-actions .outline-btn {
+    @apply h-11 px-6 text-[14px] font-medium border-dark/[0.18];
 }
 
 /* 
@@ -80,36 +99,36 @@
 | Hero Stats
 |-----------------------------
 */
-.hero__stats {
-    @apply mt-8 flex items-center space-x-6;
+.hero-stats {
+    @apply flex items-center;
 }
 
-.hero__stats div > h1 {
-    @apply text-2xl font-bold text-primary-300;
+.hero-stat {
+    @apply pr-6 mr-6 border-r border-dark/[0.1];
 }
 
-.hero__stats div > h1::after {
-    content: "+";
+.hero-stat:last-child {
+    @apply border-r-0 pr-0 mr-0;
 }
 
-.hero__stats > p {
-    @apply text-sm text-gray-400;
+.hero-stat h3 {
+    @apply text-[22px] font-medium text-primary leading-none tracking-tight mb-1;
 }
 
-.hero__divider {
-    @apply h-12 w-px bg-current/10;
+.hero-stat p {
+    @apply text-[12px] text-dark/45;
 }
 
 /* 
 |-----------------------------
-| Hero Video
+| Hero Media
 |-----------------------------
 */
-.hero__video-wrapper {
+.hero-video-wrapper {
     @apply w-full max-h-[500px] mx-auto bg-center bg-cover shadow-2xl;
 }
 
-.hero__video-wrapper video {
+.hero-video-wrapper video {
     @apply w-full h-full rounded-2xl;
 }
 
@@ -118,24 +137,42 @@
 | Hero Floating Cards
 |-----------------------------
 */
-.hero__card {
-    @apply absolute bg-current/10 backdrop-blur-md rounded-lg p-3;
-    @apply border border-current/10 shadow-lg;
+.hero-card {
+    @apply absolute bg-white/85 border border-black/[0.08] rounded-2xl px-4 py-3 backdrop-blur-md;
 }
 
-.hero__card--bottom {
-    @apply -right-6 -bottom-6;
+.hero-card-br {
+    @apply -bottom-4 -right-4;
 }
 
-.hero__card-content {
-    @apply flex items-center gap-2;
+.hero-card-tl {
+    @apply -top-4 -left-4;
 }
 
-.hero__card-content i {
-    @apply h-10 w-10 bg-green-500/20 rounded-full;
-    @apply flex items-center justify-center;
+.hero-card-content {
+    @apply flex items-center gap-2.5;
 }
 
-.hero__card-content p {
-    @apply text-lg font-bold text-green-500;
+.hero-card-icon {
+    @apply w-9 h-9 rounded-[9px] flex items-center justify-center shrink-0;
+}
+
+.hero-card-icon-green {
+    @apply bg-green-500/[0.12];
+}
+
+.hero-card-icon-primary {
+    @apply bg-primary/[0.08];
+}
+
+.hero-card-value {
+    @apply text-[15px] font-medium leading-none;
+}
+
+.hero-card-value-green {
+    @apply text-green-600;
+}
+
+.hero-card-label {
+    @apply text-[11px] text-dark/45 mt-1;
 }

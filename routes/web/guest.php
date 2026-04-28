@@ -21,6 +21,6 @@ Route::get('/projects', ProjectController::class)
 
 
 Route::get('test', function () {
-    $test = SectionContext::toCollection();
-    dd($test->resolve());
+    $test = SectionContext::toMapping();
+    dd($test->hero);
 });

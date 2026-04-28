@@ -36,6 +36,16 @@ class SectionContext
     |--------------------------------------------------------------------------
     */
 
+    public static function toMapping(): object
+    {
+        return (object) collect(self::resolve())
+            ->mapWithKeys(
+                fn($section) => [
+                    $section['key'] => (object) $section,
+                ]
+            )->all();
+    }
+
     public static function toCollection(): mixed
     {
         return self::resolve()->toResourceCollection();

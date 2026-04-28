@@ -35,18 +35,6 @@
                     </span>
                 </div>
             @endforeach
-
-            {{-- CTA Card --}}
-            <div class="services__card services__card--cta">
-                <h3>Need something custom?</h3>
-                <p>Talk to us about your specific requirements</p>
-                <x-button.link
-                    class="service-data__link"
-                    label="Contact us"
-                    path="#contact"
-                />
-            </div>
         </div>
-
     </div>
 </section>

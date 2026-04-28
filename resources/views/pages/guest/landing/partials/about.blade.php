@@ -8,7 +8,7 @@
         {{-- Header --}}
         <div class="about__header">
             <span class="section-label">Who we are</span>
-            <h2>About us</h2>
+            <h2>{{ $section['title'] }}</h2>
         </div>
 
         {{-- Content --}}
@@ -17,7 +17,6 @@
             {{-- Left: Text --}}
             <div class="about__text">
                 <p>{{ $section['description'] }}</p>
-                <p>{{ $section['description_secondary'] ?? '' }}</p>
             </div>
 
             {{-- Right: Stats --}}
@@ -30,6 +29,7 @@
                         <p>Delivered across industries worldwide</p>
                     </div>
                 </div>
+
                 <div class="about__stat">
                     <h3>200+</h3>
                     <div class="about__stat-divider"></div>
@@ -38,6 +38,7 @@
                         <p>Long-term partnerships built on trust</p>
                     </div>
                 </div>
+
                 <div class="about__stat">
                     <h3>10</h3>
                     <div class="about__stat-divider"></div>
@@ -47,7 +48,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>

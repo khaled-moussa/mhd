@@ -1,31 +1,28 @@
-{{-- Use main layout --}}
+{{-- Use Main Layout --}}
 @extends('layouts.guest')
 
-{{-- Page title --}}
+{{-- Page Title --}}
 @section('title', 'Projects')
 
-{{-- Page assets --}}
+{{-- Page Assets --}}
 @push('head')
-    @vite(['resources/css/pages/guest/landing/_landing.css', 'resources/js/pages/guest/landing/_landing.js'])
+    {{ Vite::landingStyle('landing/_landing.css') }}
+    {{ Vite::landingScript('landing/_landing.js') }}
 @endpush
 
 {{-- Navbar --}}
 @section('navbar')
-    <x-navigation.navbar.guest />
+    @include('pages.guest.landing.partials.navbar')
 @endsection
 
 {{-- Content --}}
 @section('content')
     <div class="landing-content">
-        @include('pages.guest.projects.partials.projects', [
-            'section' => $sections['projects'],
-        ])
+        @includeWhen(isset($sections->projects), 'pages.guest.projects.partials.projects', [ 'section' => $sections->projects])
     </div>
 @endsection
 
 {{-- Footer --}}
 @section('footer')
-    @if (isset($sections['footer']))
-        <x-navigation.footer.guest :section="$sections['footer']" />
-    @endif
+    @include('pages.guest.landing.partials.footer', ['section' => $sections->footer])
 @endsection

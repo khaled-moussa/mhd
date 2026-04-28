@@ -67,3 +67,32 @@ body.theme-transition {
     @apply underline;
     @apply text-current/85;
 }
+/* 
+|-----------------------------
+| Branding
+|-----------------------------
+*/
+.branding {
+    @apply flex items-center gap-2 shrink-0;
+}
+
+.brand-icon {
+    @apply w-[34px] h-[34px] rounded-lg flex items-center justify-center shrink-0;
+    @apply bg-primary;
+}
+
+.brand-icon i {
+    @apply text-background text-sm;
+}
+
+.brand-name {
+    @apply text-[13px] font-semibold text-foreground leading-tight tracking-tight;
+}
+
+.brand-name span {
+    @apply block font-normal text-[10px] text-foreground/40 tracking-wide;
+}
+
+.brand-desc {
+    @apply my-3 text-[13px] text-muted-foreground leading-[1.75] max-w-[280px] mb-7;
+}
