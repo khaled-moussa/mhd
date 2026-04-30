@@ -2,52 +2,66 @@
     'section' => [],
 ])
 
-<section id="about" class="about">
-    <div class="about__container">
+<section
+    id="about"
+    class="about-section"
+>
+    <div class="about-container">
 
         {{-- Header --}}
-        <div class="about__header">
-            <span class="section-label">Who we are</span>
-            <h2>{{ $section['title'] }}</h2>
-        </div>
+        <x-header.section
+            label="Who we are"
+            :title="$section['title']"
+        />
 
         {{-- Content --}}
-        <div class="about__content">
+        <div class="about-layout">
 
-            {{-- Left: Text --}}
-            <div class="about__text">
-                <p>{{ $section['description'] }}</p>
+            {{-- Text --}}
+            <div class="about-content">
+                <p>
+                    {{ $section['description'] }}
+                </p>
             </div>
 
-            {{-- Right: Stats --}}
-            <div class="about__stats">
-                <div class="about__stat">
-                    <h3>500+</h3>
-                    <div class="about__stat-divider"></div>
-                    <div class="about__stat-info">
+            {{-- Stats --}}
+            <div class="about-stats">
+
+                <div class="about-card">
+                    <h3 class="about-number">500</h3>
+
+                    <div class="about-divider"></div>
+
+                    <div class="about-info">
                         <strong>Projects completed</strong>
                         <p>Delivered across industries worldwide</p>
                     </div>
                 </div>
 
-                <div class="about__stat">
-                    <h3>200+</h3>
-                    <div class="about__stat-divider"></div>
-                    <div class="about__stat-info">
+                <div class="about-card">
+                    <h3 class="about-number">870</h3>
+
+                    <div class="about-divider"></div>
+
+                    <div class="about-info">
                         <strong>Satisfied clients</strong>
                         <p>Long-term partnerships built on trust</p>
                     </div>
                 </div>
 
-                <div class="about__stat">
-                    <h3>10</h3>
-                    <div class="about__stat-divider"></div>
-                    <div class="about__stat-info">
+                <div class="about-card">
+                    <h3 class="about-number">10</h3>
+
+                    <div class="about-divider"></div>
+
+                    <div class="about-info">
                         <strong>Years experience</strong>
                         <p>A decade of crafting digital solutions</p>
                     </div>
                 </div>
+
             </div>
         </div>
+
     </div>
 </section>

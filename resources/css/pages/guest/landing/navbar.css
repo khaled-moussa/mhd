@@ -4,20 +4,13 @@
 |-----------------------------
 */
 .navbar {
-    @apply fixed top-0 left-0 w-full z-50;
-    @apply flex items-center justify-between;
-    @apply px-6 h-[60px];
-    @apply  border-b border-foreground/10 backdrop-blur-2xl;
+    @apply fixed top-0 left-0 z-50 w-full h-[60px];
+    @apply bg-primary/5;
     @apply transition-[background,border-color] duration-300;
 }
 
-/* 
-|-----------------------------
-| Scrolled State
-|-----------------------------
-*/
 .navbar-scrolled {
-    @apply bg-foreground/10 border-foreground/10;
+    @apply backdrop-blur-md! bg-foreground/50;
 }
 
 /* 
@@ -26,7 +19,7 @@
 |-----------------------------
 */
 .navbar-container {
-    @apply w-full flex items-center justify-between max-w-7xl mx-auto;
+    @apply flex items-center justify-between w-full h-full px-6;
 }
 
 /* 
@@ -35,20 +28,20 @@
 |-----------------------------
 */
 .navbar-menu {
-    @apply hidden items-center gap-0.5;
+    @apply hidden items-center gap-3;
+    @apply text-background text-base;
     @apply lg:flex;
 }
 
-.navbar-link {
-    @apply px-3 py-1.5 rounded-lg;
-    @apply text-[13px] text-foreground/55;
-    @apply transition-[background,color] duration-150;
-    @apply hover:bg-foreground/10 hover:text-foreground;
-    @apply whitespace-nowrap;
+.navbar-links {
+    @apply flex items-center gap-0.5;
 }
 
-.navbar-link.active {
-    @apply bg-foreground/10 text-foreground;
+.navbar-link {
+    @apply px-3 py-1.5 rounded-lg whitespace-nowrap;
+    @apply text-base;
+    @apply transition-[background,color] duration-150;
+    @apply hover:bg-foreground/20;
 }
 
 /* 
@@ -57,61 +50,68 @@
 |-----------------------------
 */
 .navbar-cta {
-    @apply hidden lg:flex items-center shrink-0;
+    @apply flex items-center justify-center shrink-0;
     @apply h-[34px] px-4 rounded-lg;
     @apply bg-primary text-background text-sm font-medium tracking-wide;
     @apply transition-colors duration-150 hover:bg-primary-400;
-    @apply border-none cursor-pointer;
 }
 
 /* 
 |-----------------------------
-| Mobile Toggle
-|-----------------------------
-*/
-.navbar-toggle {
-    @apply flex flex-col items-center justify-center gap-[5px];
-    @apply w-8 h-8 rounded-lg border border-foreground/5;
-    @apply cursor-pointer lg:hidden;
-    @apply transition-colors duration-150 hover:bg-foreground/4;
-}
-
-.navbar-toggle span {
-    @apply block h-[1.5px] bg-foreground/55 rounded-sm;
-    @apply transition-all duration-200;
-}
-
-.navbar-toggle span:nth-child(1) { @apply w-[14px]; }
-.navbar-toggle span:nth-child(2) { @apply w-[10px]; }
-.navbar-toggle span:nth-child(3) { @apply w-[14px]; }
-
-/* Animate to X when open */
-.navbar-checkbox:checked ~ * .navbar-toggle span:nth-child(1) {
-    @apply w-[14px] translate-y-[6.5px] rotate-45;
-}
-.navbar-checkbox:checked ~ * .navbar-toggle span:nth-child(2) {
-    @apply opacity-0;
-}
-.navbar-checkbox:checked ~ * .navbar-toggle span:nth-child(3) {
-    @apply w-[14px] -translate-y-[6.5px] -rotate-45;
-}
-
-/* 
-|-----------------------------
-| Mobile Dropdown
+| Toggle
 |-----------------------------
 */
 .navbar-checkbox {
     @apply hidden;
 }
 
+.navbar-toggle {
+    @apply flex flex-col items-center justify-center gap-[5px];
+    @apply w-9 h-9 rounded-lg cursor-pointer;
+    @apply border border-background/15;
+    @apply transition-colors duration-150;
+    @apply hover:bg-foreground/10;
+    @apply lg:hidden;
+}
+
+.navbar-toggle span {
+    @apply block h-[1.5px] rounded-sm bg-muted-foreground;
+    @apply transition-all duration-200;
+}
+
+.navbar-toggle span:nth-child(1),
+.navbar-toggle span:nth-child(3) {
+    @apply w-[14px];
+}
+
+.navbar-toggle span:nth-child(2) {
+    @apply w-[10px];
+}
+
+/* Open State */
+.navbar-checkbox:checked + .navbar-container .navbar-toggle span:nth-child(1) {
+    @apply translate-y-[6.5px] rotate-45;
+}
+
+.navbar-checkbox:checked + .navbar-container .navbar-toggle span:nth-child(2) {
+    @apply opacity-0;
+}
+
+.navbar-checkbox:checked + .navbar-container .navbar-toggle span:nth-child(3) {
+    @apply -translate-y-[6.5px] -rotate-45;
+}
+
+/* 
+|-----------------------------
+| Mobile Menu
+|-----------------------------
+*/
 .navbar-mobile-menu {
-    @apply hidden;
+    @apply hidden flex-col;
     @apply absolute top-[60px] left-0 right-0;
     @apply bg-foreground/95 backdrop-blur-xl;
     @apply border-t border-background/7;
-    @apply flex-col overflow-hidden;
-    @apply lg:hidden;
+    @apply lg:hidden!;
 }
 
 .navbar-checkbox:checked ~ .navbar-mobile-menu {
@@ -119,17 +119,16 @@
 }
 
 .navbar-mobile-link {
-    @apply px-6 py-3.5 text-[13px] text-background/65;
-    @apply border-b border-background/[0.06] last:border-b-0;
+    @apply block px-6 py-3.5;
+    @apply text-sm text-background/65;
+    @apply border-b border-background/10;
     @apply transition-colors duration-150;
-    @apply hover:bg-background/[0.06] hover:text-background;
-    @apply block;
+    @apply hover:bg-background/10 hover:text-background;
 }
 
 .navbar-mobile-cta {
-    @apply mx-4 my-3 h-10 rounded-lg;
-    @apply bg-primary text-foreground text-[13px] font-medium;
     @apply flex items-center justify-center;
+    @apply h-10 mx-4 my-3 rounded-lg;
+    @apply bg-primary text-background text-sm font-medium;
     @apply transition-colors duration-150 hover:bg-primary-400;
-    @apply border-none cursor-pointer w-[calc(100%-2rem)];
 }

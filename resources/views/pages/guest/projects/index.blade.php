@@ -17,9 +17,7 @@
 
 {{-- Content --}}
 @section('content')
-    <div class="landing-content">
-        @includeWhen(isset($sections->projects), 'pages.guest.projects.partials.projects', [ 'section' => $sections->projects])
-    </div>
+    @includeWhen(isset($sections->projects), 'pages.guest.projects.partials.projects',  [ 'section' => $sections->projects])
 @endsection
 
 {{-- Footer --}}

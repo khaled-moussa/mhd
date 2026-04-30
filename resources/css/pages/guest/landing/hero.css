@@ -1,178 +1,157 @@
 /* 
-|-----------------------------
+|-------------------------------
 | Hero Section
-|-----------------------------
+|-------------------------------
 */
-.hero {
-    @apply relative overflow-hidden pt-28 pb-20;
+.hero-section {
+    @apply relative flex flex-col min-h-screen overflow-hidden;
 }
 
 /* 
-|-----------------------------
-| Hero Container
-|-----------------------------
+|-------------------------------
+| Background
+|-------------------------------
+*/
+.hero-bg {
+    @apply absolute inset-0 z-0;
+}
+
+.hero-bg video,
+.hero-bg img {
+    @apply block w-full min-h-screen object-cover;
+}
+
+.hero-bg::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    @apply bg-gradient-to-r from-foreground/85 to-foreground/40;
+}
+
+/* 
+|-------------------------------
+| Container
+|-------------------------------
 */
 .hero-container {
-    @apply container mx-auto relative z-10;
-    @apply transition-all duration-400;
+    @apply relative z-10 flex-1 container mx-auto;
+}
+
+.hero-inner {
+    @apply grid grid-cols-1 items-end gap-12;
+    @apply pt-28 pb-14;
+    @apply lg:grid-cols-2 lg:gap-10;
 }
 
 /* 
-|-----------------------------
-| Hero Layout
-|-----------------------------
+|-------------------------------
+| Left Content
+|-------------------------------
 */
-.hero-content {
-    @apply grid grid-cols-1 gap-16 items-center;
-    @apply lg:grid-cols-2 lg:gap-16;
-}
-
-.hero-main {
+.hero-left {
     @apply flex flex-col;
 }
 
-.hero-media {
-    @apply relative w-full;
+.hero-tag {
+    @apply inline-flex items-center gap-2.5 mb-7;
 }
 
-/* 
-|-----------------------------
-| Hero Badge
-|-----------------------------
-*/
-.hero-badge {
-    @apply inline-flex items-center gap-1.5 mb-6 self-start;
-    @apply px-3 py-1.5 rounded-full;
-    @apply border border-primary/[0.15] bg-primary/[0.04];
+.hero-tag-line {
+    @apply w-7 h-px bg-background/30;
 }
 
-.hero-badge-dot {
-    @apply w-1.5 h-1.5 rounded-full bg-primary shrink-0;
+.hero-tag-text {
+    @apply text-[11px] font-medium text-background/45 tracking-wider uppercase;
 }
 
-.hero-badge-text {
-    @apply text-[12px] font-medium text-primary tracking-[0.03em];
-}
-
-.hero-badge-divider {
-    @apply w-px h-3 bg-primary/20 shrink-0;
-}
-
-/* 
-|-----------------------------
-| Hero Typography
-|-----------------------------
-*/
 .hero-title {
-    @apply text-[clamp(36px,5vw,58px)] font-medium leading-[1.1] tracking-tight text-dark;
-    @apply mb-5;
+    @apply mb-6 font-bold leading-[1.0] tracking-wider text-background;
+    @apply text-[clamp(44px,6vw,78px)];
 }
 
-.hero-title .text-gradient {
-    @apply bg-gradient-to-br from-primary-300 to-primary-500;
-    @apply bg-clip-text text-transparent;
+.hero-title-light {
+    @apply block mb-1 font-light text-background/45;
+    @apply text-[0.6em] tracking-wide;
+}
+
+.hero-title-accent {
+    @apply text-primary-300;
 }
 
 .hero-description {
-    @apply text-[15px] text-dark/50 leading-[1.75] max-w-[420px] mb-8;
+    @apply mb-8 max-w-[360px] text-sm leading-10 text-background/50;
 }
 
 /* 
-|-----------------------------
-| Hero Actions
-|-----------------------------
+|-------------------------------
+| Actions
+|-------------------------------
 */
 .hero-actions {
-    @apply flex items-center gap-2.5 mb-10;
-}
-
-.hero-actions .main-btn {
-    @apply h-11 px-6 text-[14px] font-medium;
-}
-
-.hero-actions .outline-btn {
-    @apply h-11 px-6 text-[14px] font-medium border-dark/[0.18];
-}
-
-/* 
-|-----------------------------
-| Hero Stats
-|-----------------------------
-*/
-.hero-stats {
-    @apply flex items-center;
-}
-
-.hero-stat {
-    @apply pr-6 mr-6 border-r border-dark/[0.1];
-}
-
-.hero-stat:last-child {
-    @apply border-r-0 pr-0 mr-0;
-}
-
-.hero-stat h3 {
-    @apply text-[22px] font-medium text-primary leading-none tracking-tight mb-1;
-}
-
-.hero-stat p {
-    @apply text-[12px] text-dark/45;
-}
-
-/* 
-|-----------------------------
-| Hero Media
-|-----------------------------
-*/
-.hero-video-wrapper {
-    @apply w-full max-h-[500px] mx-auto bg-center bg-cover shadow-2xl;
-}
-
-.hero-video-wrapper video {
-    @apply w-full h-full rounded-2xl;
-}
-
-/* 
-|-----------------------------
-| Hero Floating Cards
-|-----------------------------
-*/
-.hero-card {
-    @apply absolute bg-white/85 border border-black/[0.08] rounded-2xl px-4 py-3 backdrop-blur-md;
-}
-
-.hero-card-br {
-    @apply -bottom-4 -right-4;
-}
-
-.hero-card-tl {
-    @apply -top-4 -left-4;
-}
-
-.hero-card-content {
     @apply flex items-center gap-2.5;
 }
 
-.hero-card-icon {
-    @apply w-9 h-9 rounded-[9px] flex items-center justify-center shrink-0;
+/* 
+|-------------------------------
+| Right Stats
+|-------------------------------
+*/
+.hero-right {
+    @apply w-1/2 flex flex-col gap-3 self-end;
 }
 
-.hero-card-icon-green {
-    @apply bg-green-500/[0.12];
+.hero-stat-card {
+    @apply flex items-center gap-3.5 px-5 py-4 rounded-2xl;
+    @apply border border-background/10;
+    @apply bg-foreground/10 backdrop-blur-xs;
 }
 
-.hero-card-icon-primary {
-    @apply bg-primary/[0.08];
+.hero-stat-accent {
+    @apply w-[3px] h-9 shrink-0 rounded-sm;
+    @apply bg-gradient-to-b from-primary-300 to-primary-500;
 }
 
-.hero-card-value {
-    @apply text-[15px] font-medium leading-none;
+.hero-stat-num {
+    @apply text-xl font-bold leading-none tracking-wide text-background;
 }
 
-.hero-card-value-green {
-    @apply text-green-600;
+.hero-stat-label {
+    @apply mt-1 text-xs text-background/45;
 }
 
-.hero-card-label {
-    @apply text-[11px] text-dark/45 mt-1;
+/* 
+|-------------------------------
+| Bottom Bar
+|-------------------------------
+*/
+.hero-bar {
+    @apply relative z-10 flex items-center gap-5;
+    @apply px-8 py-4;
+    @apply border-t border-background/10;
+    @apply bg-foreground/10 backdrop-blur-xl;
+}
+
+.hero-bar-item {
+    @apply flex items-center gap-2;
+}
+
+.hero-bar-dot {
+    @apply w-[7px] h-[7px] rounded-full shrink-0;
+}
+
+.hero-bar-label {
+    @apply text-[12px] text-background/40 whitespace-nowrap;
+}
+
+.hero-bar-value {
+    @apply text-[12px] font-semibold text-background whitespace-nowrap;
+}
+
+.hero-bar-sep {
+    @apply w-px h-5 shrink-0 bg-background/[0.1];
+}
+
+.hero-scroll-hint {
+    @apply hidden items-center gap-2 lg:flex ml-auto;
+    @apply text-xs text-background/30 tracking-wider;
+    @apply before:content-['——']
 }

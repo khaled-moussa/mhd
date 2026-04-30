@@ -1,11 +1,23 @@
-// Import local modules
-import initNavbar from "./navbar.js";
-import initCountUp from "./hero.js";
+/*
+|----------------------------------
+| Local Modules
+|----------------------------------
+*/
+import initNavbar from "./script/navbar.js";
+import initCountUp from "./script/hero.js";
+import "./script/project-view.js";
 
-// Alpine import
-import "../projects/_projects.js";
-import "../contacts/_contacts.js"
+/*
+|----------------------------------
+| External Modules
+|----------------------------------
+*/
+import "../contacts/_contacts.js";
 
-// Run imports
+/*
+|----------------------------------
+| Init
+|----------------------------------
+*/
 initNavbar();
-// initCountUp();
+initCountUp();

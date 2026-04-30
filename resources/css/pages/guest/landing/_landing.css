@@ -2,14 +2,48 @@
 
 /* 
 |-----------------------------
-| Imports
+| Landing Imports
 |-----------------------------
 */
 @import "./navbar.css";
 @import "./hero.css";
-@import "./about-us.css";
+@import "./about.css";
 @import "./services.css";
 @import "./projects.css";
 @import "./contact.css";
 @import "./footer.css";
-@import "./utilities.css";
+
+/* 
+|-----------------------------
+| Global Utilities
+|-----------------------------
+*/
+body {
+    @apply bg-background;
+}
+
+/* 
+|-----------------------------
+| Landing Content
+|-----------------------------
+*/
+.guest-shell {
+    @apply relative overflow-hidden;
+    @apply bg-[url(@img/backgrounds/bg-main.png)];
+    @apply bg-cover bg-center bg-repeat-y bg-fixed;
+}
+
+.guest-shell > * {
+    @apply relative z-10;
+}
+
+/* 
+|-----------------------------
+| Text Gradient
+|-----------------------------
+*/
+.text-gradient {
+    @apply font-semibold text-transparent;
+    @apply bg-gradient-to-r from-red-300/85 via-primary-400/75 to-primary-500/60;
+    @apply bg-clip-text;
+}

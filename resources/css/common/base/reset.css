@@ -1,0 +1,72 @@
+/* 
+|-----------------------------
+| Reset & Base
+|-----------------------------
+*/
+* {
+    @apply m-0 p-0 box-border scroll-smooth;
+
+    -webkit-tap-highlight-color: transparent;
+
+    /* Firefox Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: theme("colors.gray.200") transparent;
+}
+
+/* Chrome, Edge, Safari Scrollbar */
+*::-webkit-scrollbar {
+    @apply h-[0.3rem] w-[0.4rem] rounded-lg;
+}
+
+*::-webkit-scrollbar-track {
+    @apply rounded-lg bg-transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    @apply rounded-lg bg-gray-200 transition-all duration-150 ease-in-out;
+}
+
+/* RTL */
+*[dir="rtl"] {
+    @apply text-[0.95rem] font-normal;
+}
+
+/* 
+|-----------------------------
+| Elements
+|-----------------------------
+*/
+img {
+    @apply pointer-events-none select-none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+    @apply my-0;
+}
+
+p {
+    @apply leading-normal;
+}
+
+a:hover {
+    @apply no-underline;
+}
+
+i {
+    @apply flex h-fit;
+}
+
+strong {
+    @apply font-semibold;
+}
+
+hr {
+    @apply text-background/20;
+}

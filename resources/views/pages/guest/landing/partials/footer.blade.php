@@ -3,24 +3,14 @@
     class="footer"
 >
     <div class="footer-container">
+
+        {{-- Grid --}}
         <div class="footer-grid">
 
             {{-- Brand --}}
             <div class="footer-brand">
 
-                <div class="branding">
-                    <div class="brand-icon">
-                        <i class="fi fi-sr-home"></i>
-                    </div>
-                    <div class="brand-name">
-                        MHD
-                        <span>Development</span>
-                    </div>
-                </div>
-
-                <p class="brand-desc">
-                    {{ $section['description'] }}
-                </p>
+                <x-global.branding />
 
                 <div class="footer-socials">
                     @foreach ($section['data']['socials'] as $social)
@@ -32,6 +22,7 @@
                         </x-button.link>
                     @endforeach
                 </div>
+
             </div>
 
             {{-- Company --}}
@@ -72,6 +63,7 @@
 
         {{-- Bottom Bar --}}
         <div class="footer-bottom">
+
             <p class="footer-copy">
                 &copy; {{ date('Y') }} MHD. All rights reserved.
             </p>
@@ -86,6 +78,7 @@
                     label="Privacy Policy"
                 />
             </div>
+
         </div>
 
     </div>

@@ -28,7 +28,7 @@
     @apply flex flex-col gap-5;
 }
 
-.dashboard-grid .projects .table-container .table-header .main-btn {
+.dashboard-grid .projects .table-container .table-header .primary-btn {
     @apply block!;
 }
 

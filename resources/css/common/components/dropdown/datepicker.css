@@ -122,7 +122,7 @@
   @apply border-none shadow-none ring-0 outline-0 focus:!border-none focus:shadow-none focus:ring-0 focus:outline-0;
 }
 
-.main-btn.date-range-field,
+.primary-btn.date-range-field,
 .outline-btn.date-range-field,
 .danger-btn.date-range-field {
   @apply py-0;

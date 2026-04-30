@@ -48,7 +48,7 @@
 
     <x-button.main
         label="Send Message"
-        class="form-button"
+        class="primary-btn-full"
         wire:target="submit"
         wire:loading.class="spinner"
     />

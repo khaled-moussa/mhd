@@ -3,40 +3,40 @@
 | Project Modal Container
 |-----------------------------
 */
-.projects__modal .modal-container {
+.projects-modal .modal-container {
     @apply p-0 overflow-hidden;
 }
 
-.projects__modal .modal-container.xl {
+.projects-modal .modal-container.xl {
+    @apply flex flex-col;
     @apply w-full max-w-full xl:w-[860px];
-    @apply max-h-[90vh] flex flex-col;
+    @apply max-h-[90vh];
 }
 
 /* 
 |-----------------------------
-| Modal Body — side by side
+| Modal Body
 |-----------------------------
 */
-.projects__modal-body {
-    @apply grid grid-cols-1 flex-1 overflow-hidden;
+.projects-modal-body {
+    @apply min-h-[500px] grid grid-cols-1 flex-1 overflow-hidden;
     @apply md:grid-cols-[1.1fr_1fr];
-    min-height: 500px;
 }
 
 /* 
 |-----------------------------
-| Carousel — full height left panel
+| Gallery
 |-----------------------------
 */
-.projects__modal-carousel {
-    @apply relative bg-dark overflow-hidden;
-    @apply min-h-[260px] md:min-h-0;
+.projects-modal-gallery {
+    @apply relative overflow-hidden bg-foreground;
+    @apply md:min-h-0;
 }
 
-.projects__modal-carousel .splide,
-.projects__modal-carousel .splide__track,
-.projects__modal-carousel .splide__list,
-.projects__modal-carousel .splide__slide {
+.projects-modal-gallery .splide,
+.projects-modal-gallery .splide__track,
+.projects-modal-gallery .splide__list,
+.projects-modal-gallery .splide__slide {
     @apply h-full;
 }
 
@@ -45,73 +45,54 @@
 | Modal Image
 |-----------------------------
 */
-.projects__modal-image {
+.projects-modal-image {
     @apply w-full h-full;
 }
 
-.projects__modal-image img {
-    @apply w-full h-full block;
-    object-fit: cover;
-    object-position: center;
+.projects-modal-image img {
+    @apply block w-full h-full object-cover;
 }
 
 /* 
 |-----------------------------
-| Info Panel — scrollable right panel
+| Info Panel
 |-----------------------------
 */
-.projects__modal-info-panel {
+.projects-modal-panel {
     @apply flex flex-col overflow-y-auto;
 }
 
 /* 
 |-----------------------------
-| Info Header
+| Details
 |-----------------------------
 */
-.projects__modal-info-header {
-    @apply px-6 pt-5 pb-4 border-b border-black/[0.07];
+.projects-modal-details {
+    @apply flex-1 flex flex-col gap-3;
+    @apply px-6 py-5;
 }
 
-.projects__modal-close-row {
-    @apply flex justify-end mb-2.5;
-}
-
-.projects__modal-info-title {
-    @apply text-[17px] font-medium text-dark mb-1;
-}
-
-.projects__modal-info-desc {
-    @apply text-[13px] text-dark/55 leading-relaxed;
-}
-
-/* 
-|-----------------------------
-| Details Section
-|-----------------------------
-*/
-.projects__modal-details-section {
-    @apply px-6 py-5 flex flex-col gap-3 flex-1;
-}
-
-.projects__modal-detail-grid {
+.projects-modal-grid {
     @apply grid grid-cols-2 gap-3;
 }
 
-.projects__modal-detail-item {
-    @apply bg-dark/[0.03] rounded-[10px] border border-black/[0.07] px-3 py-2.5;
+.projects-modal-item {
+    @apply px-3 py-2.5 rounded-[10px];
+    @apply border border-foreground/10 bg-foreground/10;
 }
 
-.projects__modal-detail-item--full {
+.projects-modal-item.full {
     @apply col-span-2;
 }
 
-.projects__modal-detail-label {
-    @apply text-[10px] font-medium text-dark/40 tracking-[0.06em] uppercase mb-1;
+.projects-modal-label {
+    @apply mb-1;
+    @apply text-[10px] font-medium uppercase tracking-wide;
+    @apply text-foreground/40;
 }
 
-.projects__modal-detail-value {
-    @apply text-[13px] font-medium text-dark;
+.projects-modal-value {
+    @apply text-sm font-medium text-foreground;
 }
 
 /* 
@@ -119,57 +100,37 @@
 | Location
 |-----------------------------
 */
-.project-view__location {
+.project-location {
     @apply flex flex-col gap-2.5 mt-1;
 }
 
-.project-view__location-header {
+.project-location-header {
     @apply flex items-center gap-1.5;
 }
 
-.project-view__location-header i {
-    @apply text-[14px] text-primary;
+.project-location-title {
+    @apply text-xs font-medium uppercase tracking-[0.02em];
+    @apply text-foreground;
 }
 
-.project-view__location-title {
-    @apply text-[12px] font-medium text-dark tracking-[0.02em] uppercase;
+.project-location iframe {
+    @apply w-full h-40 rounded-xl border border-foreground/10;
 }
 
-.project-view__location iframe {
-    @apply w-full rounded-xl border border-black/[0.08];
-    height: 160px;
-}
-
-.project-view__no-location {
+.project-location-empty {
+    @apply h-40;
     @apply flex items-center justify-center gap-2;
-    @apply h-[120px] rounded-xl border border-black/[0.07];
-    @apply text-[13px] text-dark/40 bg-dark/[0.03];
+    @apply rounded-xl border border-foreground/10;
+    @apply bg-foreground/10;
+    @apply text-sm text-foreground/40;
 }
 
 /* 
 |-----------------------------
-| Modal Actions
+| Actions
 |-----------------------------
 */
-.projects__modal-actions {
-    @apply flex gap-2 px-6 py-4;
-    @apply border-t border-black/[0.07];
-}
-
-.projects__modal-actions .main-btn {
-    @apply flex-1 h-10 text-[13px];
-}
-
-.projects__modal-actions .outline-btn {
-    @apply h-10 px-4 text-[13px] border-dark/[0.15];
-}
-
-/* 
-|-----------------------------
-| Project View Actions (shared)
-|-----------------------------
-*/
-.project-view__actions {
-    @apply flex justify-end gap-3 mt-5 pt-4;
-    @apply border-t border-black/[0.07];
+.projects-modal-actions {
+    @apply flex justify-start gap-2 py-2;
+    @apply border-t border-foreground/10;
 }

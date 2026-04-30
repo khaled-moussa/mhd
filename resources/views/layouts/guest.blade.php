@@ -2,20 +2,22 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-	@include('layouts.partials.head')
+    @include('layouts.partials.head')
 </head>
 
 <body class="loader">
-	{{-- Navbar --}}
-	@yield('navbar')
+    {{-- Navbar --}}
+    @yield('navbar')
 
-	{{-- Main Content --}}
-	@yield('content')
+    {{-- Main --}}
+    <div class="guest-shell">
+        @yield('content')
+    </div>
 
-	{{-- Footer --}}
-	@yield('footer')
+    {{-- Footer --}}
+    @yield('footer')
 
-	@include('layouts.partials.scripts')
+    @include('layouts.partials.scripts')
 </body>
 
 </html>

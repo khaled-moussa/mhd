@@ -1,4 +1,10 @@
-@import "../../panels//admin/projects/project-view.css";
+/* 
+|-----------------------------
+| Projects Imports
+|-----------------------------
+*/
+
+@import "@css_admin/projects/project-view.css";
 
 /* 
 |-----------------------------
@@ -9,7 +15,7 @@
     @apply relative py-24;
 }
 
-.projects__container {
+.projects-container {
     @apply container mx-auto;
 }
 
@@ -18,25 +24,8 @@
 | Projects Header
 |-----------------------------
 */
-.projects__header {
-    @apply flex items-end justify-between gap-8 mb-14;
-}
 
-.projects__header-left .section-label {
-    @apply inline-flex items-center gap-1.5 mb-3;
-    @apply text-[11px] font-medium text-primary tracking-[0.08em] uppercase;
-}
-
-.projects__header-left .section-label::before {
-    content: "";
-    @apply block w-5 h-px bg-primary;
-}
-
-.projects__header-left h2 {
-    @apply text-[clamp(26px,3.5vw,40px)] font-medium tracking-tight text-dark leading-tight;
-}
-
-.projects__view-all {
+.projects-view-all {
     @apply inline-flex items-center gap-1.5 shrink-0 pb-1;
     @apply text-[13px] font-medium text-primary;
     @apply border-b border-primary/30;
@@ -48,7 +37,7 @@
 | Projects Grid
 |-----------------------------
 */
-.projects__grid {
+.projects-grid {
     @apply grid grid-cols-1 gap-4;
     @apply md:grid-cols-2;
     @apply lg:grid-cols-3;
@@ -59,10 +48,10 @@
 | Project Card
 |-----------------------------
 */
-.projects__card {
-    @apply bg-white rounded-2xl border border-black/[0.08] overflow-hidden cursor-pointer;
+.projects-card {
+    @apply overflow-hidden cursor-pointer rounded-2xl;
+    @apply bg-background border border-foreground/10;
     @apply transition-[transform,border-color] duration-200;
-    @apply hover:-translate-y-0.5 hover:border-primary/20;
 }
 
 /* 
@@ -70,33 +59,33 @@
 | Project Image
 |-----------------------------
 */
-.projects__image {
-    @apply relative w-full overflow-hidden;
-    aspect-ratio: 4/3;
+.projects-image {
+    @apply relative w-full overflow-hidden transition-all duration-500;
+    @apply hover:scale-105;
+    aspect-ratio: 4 / 3;
 }
 
-.projects__image img {
+.projects-image img {
     @apply absolute w-full h-full object-cover;
     @apply transition-transform duration-500;
 }
 
-.projects__card:hover .projects__image img {
-    @apply scale-105;
-}
-
-/* Hover overlay */
-.projects__overlay {
-    @apply absolute inset-0 flex items-center justify-center;
+/* Overlay */
+.projects-overlay {
+    @apply absolute inset-0;
+    @apply flex items-center justify-center;
     @apply bg-primary/55 opacity-0;
-    @apply transition-opacity duration-250;
+    @apply transition-opacity duration-300;
 }
 
-.projects__card:hover .projects__overlay {
+.projects-card:hover .projects-overlay {
     @apply opacity-100;
 }
 
-.projects__overlay-btn {
-    @apply w-10 h-10 rounded-full bg-white flex items-center justify-center;
+.projects-overlay-btn {
+    @apply w-10 h-10 rounded-full;
+    @apply flex items-center justify-center;
+    @apply bg-background;
 }
 
 /* 
@@ -104,32 +93,23 @@
 | Project Content
 |-----------------------------
 */
-.projects__content {
+.projects-content {
     @apply px-5 pt-4 pb-5;
 }
 
-.projects__meta {
+.projects-meta {
     @apply flex items-center gap-2 mb-2;
 }
 
-.projects__date,
-.projects__location {
-    @apply text-[11px] text-dark/40 tracking-[0.02em];
+.projects-date,
+.projects-address {
+    @apply text-xs text-foreground/65 tracking-wider;
 }
 
-.projects__meta-dot {
-    @apply w-[3px] h-[3px] rounded-full bg-dark/20;
+.projects-meta-dot {
+    @apply w-[3px] h-[3px] rounded-full bg-primary;
 }
 
-.projects__title {
-    @apply text-[15px] font-medium text-dark leading-snug;
-}
-
-/* 
-|-----------------------------
-| Load More / View All
-|-----------------------------
-*/
-.projects__load-more {
-    @apply mt-10 flex justify-center;
+.projects-title {
+    @apply text-base font-medium text-foreground leading-snug;
 }

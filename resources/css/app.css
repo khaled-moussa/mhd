@@ -240,18 +240,3 @@
         max-width: 82.5rem;
     }
 }
-
-/* 
-|-----------------------------
-| Semantic tokens (runtime theme switch)
-|-----------------------------
-*/
-/* :root {
-    --color-background: var(--color-background-dark);
-    --color-foreground: var(--color-foreground-dark);
-}
-
-.dark {
-    --color-background: var(--color-background-dark);
-    --color-foreground: var(--color-foreground-dark);
-} */

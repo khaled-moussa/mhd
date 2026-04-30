@@ -29,17 +29,17 @@
         ])
 
         {{-- Create project modal --}}
-    @include('admin::company-projects.partials.company-project-form-create', [
-        'modalId' => $modalId['CREATE_COMPANY_PROJECT_MODAL'],
-        'modalTitle' => 'Create Project',
-        'description' => 'Fill in the required information to create a new project and assign it to the company workspace.',
-    ])
+        @include('admin::company-projects.partials.company-project-form-create', [
+            'modalId' => $modalId['CREATE_COMPANY_PROJECT_MODAL'],
+            'modalTitle' => 'Create Project',
+            'description' => 'Fill in the required information to create a new project and assign it to the company workspace.',
+        ])
 
-    {{-- Update project modal --}}
-    @include('admin::company-projects.partials.company-project-form-update', [
-        'modalId' => $modalId['UPDATE_COMPANY_PROJECT_MODAL'],
-        'modalTitle' => 'Update Project',
-        'description' => 'Modify existing project details such as name, status, timeline, and assigned data.',
-    ])
-        </div>
+        {{-- Update project modal --}}
+        @include('admin::company-projects.partials.company-project-form-update', [
+            'modalId' => $modalId['UPDATE_COMPANY_PROJECT_MODAL'],
+            'modalTitle' => 'Update Project',
+            'description' => 'Modify existing project details such as name, status, timeline, and assigned data.',
+        ])
+    </div>
 @endsection

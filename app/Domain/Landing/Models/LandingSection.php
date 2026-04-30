@@ -5,6 +5,7 @@ namespace App\Domain\Landing\Models;
 use App\App\Web\Resources\Landing\LandingSectionsResource;
 use App\Domain\Landing\QueryBuilders\LandingSectionBuilder;
 use App\Domain\Landing\VisibilityStates\VisibilityStates;
+use App\Domain\Landing\VisibilityStates\VisibleState;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,24 +14,25 @@ use Spatie\ModelStates\HasStates;
 #[UseResource(LandingSectionsResource::class)]
 class LandingSection extends Model
 {
-    use HasFactory, HasStates;
+    use HasFactory;
+    use HasStates;
 
     /*
-    |-------------------------------
-    |  Properties
-    |-------------------------------
+    |----------------------------------
+    | Properties
+    |----------------------------------
     */
     protected $guarded = [];
 
     protected $casts = [
         'visibility_state' => VisibilityStates::class,
-        'data' => 'array',
+        'data'             => 'array',
     ];
 
     /*
-    |-------------------------------
-    |  Query Builder
-    |-------------------------------
+    |----------------------------------
+    | Query Builder
+    |----------------------------------
     */
     public function newEloquentBuilder($query): LandingSectionBuilder
     {
@@ -38,9 +40,9 @@ class LandingSection extends Model
     }
 
     /*
-    |-------------------------------
-    |  Attributes
-    |-------------------------------
+    |----------------------------------
+    | Attributes
+    |----------------------------------
     */
     public function getKeyAttribute($value): string
     {
@@ -48,9 +50,9 @@ class LandingSection extends Model
     }
 
     /*
-    |-------------------------------
-    |  Getters
-    |-------------------------------
+    |----------------------------------
+    | Getters
+    |----------------------------------
     */
     public function getKey(): string
     {
@@ -87,18 +89,28 @@ class LandingSection extends Model
         return $this->order;
     }
 
-    public function getData(): ?array
+    public function getData(): array
     {
-        return $this->data;
+        return $this->data ?? [];
     }
 
     /*
-    |-------------------------------
-    |  Getters Helpers
-    |-------------------------------
+    |----------------------------------
+    | Helpers
+    |----------------------------------
     */
     public function isVisible(): bool
     {
-        return $this->visibility_state->value();
+        return $this->visibility_state->value() == VisibleState::class;
+    }
+
+    public function hasData(): bool
+    {
+        return !empty($this->getData());
+    }
+
+    public function isReady(): bool
+    {
+        return $this->isVisible() && $this->hasData();
     }
 }

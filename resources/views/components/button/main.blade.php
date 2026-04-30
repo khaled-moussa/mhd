@@ -7,7 +7,7 @@
 <button
 	type="{{ $type }}"
 	id="{{ $attributes->get('id') }}"
-	@class(['main-btn', $attributes->get('class')])
+	@class(['primary-btn', $attributes->get('class')])
 	{{ $attributes->whereStartsWith('data') }}
 	{{ $attributes->whereStartsWith('wire') }}
 	{{ $attributes->whereStartsWith('x-') }}

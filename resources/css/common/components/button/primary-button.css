@@ -1,14 +1,25 @@
 /* 
 |-----------------------------
-| Main Button
+| Primary Button
 |-----------------------------
 */
-.main-btn {
+.primary-btn {
     @apply flex w-max min-h-8 items-center justify-center gap-2;
-    @apply rounded-lg px-5 py-2;
+    @apply rounded-sm px-5 py-3;
     @apply text-sm font-medium;
-    @apply bg-foreground text-background;
-    @apply hover:bg-current/10 hover:text-current/90;
+    @apply bg-primary-400 text-background;
+    @apply shadow-sm;
+    @apply hover:bg-primary-300;
+}
+
+/* 
+|-----------------------------
+| Width Variant
+|-----------------------------
+*/
+
+.primary-btn-full {
+    @apply w-full;
 }
 
 /* 
@@ -16,8 +27,9 @@
 | Danger Variant
 |-----------------------------
 */
-.main-btn.danger {
+.primary-btn.danger {
     @apply bg-[#ac3737] text-background;
+    @apply shadow-sm;
     @apply hover:bg-[#b01212];
 }
 
@@ -26,6 +38,6 @@
 | Icon
 |-----------------------------
 */
-.main-btn i {
+.primary-btn i {
     @apply shrink-0;
 }

@@ -4,7 +4,7 @@
 |-----------------------------
 */
 @import "./add-btn.css";
-@import "./main-button.css";
+@import "./primary-button.css";
 @import "./outline-button.css";
 @import "./floating-button.css";
 @import "./link-button.css";
@@ -55,8 +55,8 @@ input[type="reset"][disabled] {
 |-----------------------------
 */
 .auth-button.spinner,
-a.main-btn.spinner,
-button.main-btn.spinner,
+a.primary-btn.spinner,
+button.primary-btn.spinner,
 button.icon-btn.spinner {
     @apply child:invisible !text-transparent;
     @apply bg-current/5;
@@ -65,8 +65,8 @@ button.icon-btn.spinner {
 }
 
 .auth-button.spinner::after,
-a.main-btn.spinner::after,
-button.main-btn.spinner::after,
+a.primary-btn.spinner::after,
+button.primary-btn.spinner::after,
 button.icon-btn.spinner::after {
     @apply top-auto h-5 w-5;
     filter: saturate(0) brightness(200);
@@ -74,8 +74,8 @@ button.icon-btn.spinner::after {
 
 /* Disabled spinner adjustment */
 .auth-button.spinner:disabled::after,
-a.main-btn.spinner:disabled::after,
-button.main-btn.spinner:disabled::after,
+a.primary-btn.spinner:disabled::after,
+button.primary-btn.spinner:disabled::after,
 button.icon-btn.spinner:disabled::after {
     @apply top-auto h-5 w-5;
     filter: saturate(0);

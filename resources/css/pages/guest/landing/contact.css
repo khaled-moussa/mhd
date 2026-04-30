@@ -13,34 +13,7 @@
 
 /* 
 |-----------------------------
-| Contact Header
-|-----------------------------
-*/
-.contact-header {
-    @apply mb-14;
-}
-
-.contact-header .section-label {
-    @apply inline-flex items-center gap-1.5 mb-3;
-    @apply text-[11px] font-medium text-primary tracking-[0.08em] uppercase;
-}
-
-.contact-header .section-label::before {
-    content: '';
-    @apply block w-5 h-px bg-primary;
-}
-
-.contact-header h2 {
-    @apply text-[clamp(26px,3.5vw,40px)] font-medium tracking-tight text-dark leading-tight mb-2.5;
-}
-
-.contact-header p {
-    @apply text-[15px] text-dark/50 max-w-lg leading-relaxed;
-}
-
-/* 
-|-----------------------------
-| Layout
+| Contact Layout
 |-----------------------------
 */
 .contact-layout {
@@ -50,56 +23,71 @@
 
 /* 
 |-----------------------------
-| Info Panel
+| Contact Info
 |-----------------------------
 */
 .contact-info {
     @apply flex flex-col gap-3;
 }
 
-.contact-info-card {
+.contact-item {
     @apply flex items-center gap-3.5;
-    @apply bg-white rounded-2xl border border-black/[0.08] px-5 py-4;
+    @apply px-5 py-4;
+    @apply bg-background/75 border border-foreground/8 rounded-2xl;
 }
 
-.contact-info-icon {
-    @apply w-[38px] h-[38px] rounded-[9px] flex items-center justify-center shrink-0;
-    @apply bg-primary/[0.08];
+.contact-item-icon {
+    @apply w-10 h-10 shrink-0;
+    @apply flex items-center justify-center;
+    @apply rounded-sm bg-primary/10;
 }
 
-.contact-info-icon i {
-    @apply text-[15px] text-primary;
+.contact-item-icon i {
+    @apply text-base text-primary;
 }
 
-.contact-info-text strong {
-    @apply block text-[12px] font-medium text-dark mb-0.5;
+.contact-item-text strong {
+    @apply block mb-0.5;
+    @apply text-xs font-medium text-foreground;
 }
 
-.contact-info-text span {
-    @apply text-[12px] text-dark/50;
-}
-
-.contact-info-note {
-    @apply rounded-2xl border border-primary/[0.1] bg-primary/[0.04] px-5 py-4 mt-1;
-}
-
-.contact-info-note p {
-    @apply text-[13px] text-dark/50 leading-[1.7];
-}
-
-.contact-info-note strong {
-    @apply text-primary font-medium;
+.contact-item-text span {
+    @apply text-xs text-foreground/50;
 }
 
 /* 
 |-----------------------------
-| Form Card
+| Contact Note
+|-----------------------------
+*/
+.contact-note {
+    @apply mt-1 px-5 py-4;
+    @apply rounded-2xl border border-primary/10 bg-primary/10;
+}
+
+.contact-note p {
+    @apply text-[13px] leading-relaxed text-foreground/50;
+}
+
+.contact-note strong {
+    @apply font-medium text-primary;
+}
+
+/* 
+|-----------------------------
+| Contact Card
 |-----------------------------
 */
 .contact-card {
-    @apply bg-white rounded-2xl border border-black/[0.08] p-8;
+    @apply p-8 rounded-2xl;
+    @apply bg-background border border-foreground/10;
 }
 
+/* 
+|-----------------------------
+| Form
+|-----------------------------
+*/
 .contact-form-row {
     @apply grid grid-cols-1 gap-3.5 mb-3.5;
     @apply sm:grid-cols-2;
@@ -114,21 +102,10 @@
 }
 
 .contact-form-field label {
-    @apply text-[12px] font-medium text-dark/55 tracking-[0.02em] uppercase;
+    @apply text-xs font-bold uppercase tracking-wide;
+    @apply text-foreground/55;
 }
 
 .contact-form-field label span {
-    @apply text-primary ml-0.5;
-}
-
-/* 
-|-----------------------------
-| Submit Button
-|-----------------------------
-*/
-.form-button {
-    @apply w-full h-11 mt-1 flex items-center justify-center gap-2;
-    @apply bg-primary text-white text-[14px] font-medium rounded-xl;
-    @apply transition-colors duration-200 hover:bg-primary-400;
-    @apply border-none cursor-pointer;
+    @apply ml-0.5 text-primary;
 }

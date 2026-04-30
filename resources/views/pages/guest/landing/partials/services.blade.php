@@ -2,39 +2,53 @@
     'section' => [],
 ])
 
-<section id="services" class="services">
-    <div class="services__container">
+<section
+    id="services"
+    class="services"
+>
+    <div class="services-container">
 
         {{-- Header --}}
-        <div class="services__header">
-            <span class="section-label">What we offer</span>
-            <h2>{{ $section['title'] }}</h2>
-            <p>{{ $section['description'] }}</p>
-        </div>
+        <x-header.section
+            label="What we offer"
+            :title="$section['title']"
+        />
 
-        {{-- Services Grid --}}
-        <div class="services__grid">
+        {{-- Grid --}}
+        <div class="services-grid">
             @foreach ($section['data'] as $index => $service)
-                <div class="services__card group" id="{{ $service['uuid'] }}">
-                    <span class="services__card-number">
+                <div
+                    id="{{ $service['uuid'] }}"
+                    class="services-card group"
+                >
+                    {{-- Number --}}
+                    <span class="services-card-number">
                         {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
                     </span>
 
+                    {{-- Icon --}}
                     @if ($service['icon'])
-                        <div class="services__icon">
+                        <div class="services-icon">
                             {!! $service['icon'] !!}
                         </div>
                     @endif
 
-                    <h3 class="service-data__title">{{ $service['title'] }}</h3>
-                    <p class="service-data__description">{{ $service['description'] }}</p>
+                    {{-- Content --}}
+                    <h3 class="services-title">
+                        {{ $service['title'] }}
+                    </h3>
 
-                    <span class="service-data__link">
+                    <p class="services-description">
+                        {{ $service['description'] }}
+                    </p>
+
+                    <span class="services-link">
                         Learn more
                         <i class="fi fi-rr-arrow-right"></i>
                     </span>
                 </div>
             @endforeach
         </div>
+
     </div>
 </section>

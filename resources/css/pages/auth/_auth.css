@@ -1,9 +1,10 @@
+@reference "@css/reference.css";
+
 /* 
 |-----------------------------
 | Auth Imports
 |-----------------------------
 */
-@reference "@css/reference.css";
 @import "./utilities.css";
 @import "./verification.css";
 
@@ -14,20 +15,7 @@
 */
 .auth-wrapper {
     @apply grid min-h-screen w-full gap-4 overflow-y-hidden p-0;
-    @apply place-items-center; /* ← add this */
-}
-
-.auth-wrapper:has(:not(.auth-bg)) .auth-content {
-    @apply mx-auto lg:w-[480px];
-}
-
-
-.auth-wrapper:has(:not(.auth-bg)) .auth-content {
-    @apply mx-auto lg:w-[480px];
-}
-
-.auth-wrapper:has(.auth-bg) .auth-content {
-    @apply w-full;
+    @apply place-items-center;
 }
 
 /* 
@@ -52,8 +40,7 @@
 .auth-content {
     @apply h-fit overflow-y-auto rounded-xl p-10;
     @apply bg-white border border-black/[0.08];
-    @apply sm:p-10;
-    @apply lg:px-10 lg:py-10;
+    @apply sm:p-10 lg:px-10 lg:py-10;
 }
 
 /* Logo */

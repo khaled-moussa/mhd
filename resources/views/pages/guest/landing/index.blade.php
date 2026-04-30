@@ -1,4 +1,4 @@
-{{-- Use Main Layout --}}
+{{-- Main Layout --}}
 @extends('layouts.guest')
 
 {{-- Page Title --}}
@@ -17,16 +17,45 @@
 
 {{-- Content --}}
 @section('content')
-    <div class="landing-content">
-        @includeWhen(isset($sections->hero), 'pages.guest.landing.partials.hero', ['section' => $sections->hero])
-        @includeWhen(isset($sections->about), 'pages.guest.landing.partials.about', [ 'section' => $sections->about])
-        @includeWhen(isset($sections->services), 'pages.guest.landing.partials.services', [ 'section' => $sections->services])
-        @includeWhen(isset($sections->projects), 'pages.guest.projects.partials.projects', [ 'section' => $sections->projects])
-        @includeWhen(isset($sections->contact), 'pages.guest.landing.partials.contact', [ 'section' => $sections->contact])
-    </div>
+
+    @includeWhen(
+        property_exists($sections, 'hero'),
+        'pages.guest.landing.partials.hero',
+        ['section' => data_get($sections, 'hero')]
+    )
+
+    @includeWhen(
+        property_exists($sections, 'about'),
+        'pages.guest.landing.partials.about',
+        ['section' => data_get($sections, 'about')]
+    )
+
+    @includeWhen(
+        property_exists($sections, 'services'),
+        'pages.guest.landing.partials.services',
+        ['section' => data_get($sections, 'services')]
+    )
+
+    @includeWhen(
+        property_exists($sections, 'projects'),
+        'pages.guest.projects.partials.projects',
+        ['projects' => data_get($sections, 'projects')]
+    )
+
+    @includeWhen(
+        property_exists($sections, 'contact'),
+        'pages.guest.landing.partials.contact',
+        ['section' => data_get($sections, 'contact')]
+    )
+
+
 @endsection
 
 {{-- Footer --}}
 @section('footer')
-    @include('pages.guest.landing.partials.footer', ['section' => $sections->footer])
+    @includeWhen(
+        property_exists($sections, 'footer'),
+        'pages.guest.landing.partials.footer',
+        ['section' => data_get($sections, 'footer')]
+    )
 @endsection

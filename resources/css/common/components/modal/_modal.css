@@ -1,3 +1,8 @@
+/* 
+|-----------------------------
+| Base Modal
+|-----------------------------
+*/
 .modal {
     @apply hidden;
 }
@@ -7,15 +12,25 @@
 }
 
 .modal-overlay {
-    @apply fixed inset-0 z-[170] flex items-center justify-center bg-black/60;
+    @apply fixed inset-0 z-[170];
+    @apply flex items-center justify-center;
+    @apply bg-black/60;
 }
 
 .modal-container {
-    @apply box-border flex max-h-[98vh] max-w-lg min-w-[30%] flex-col gap-4 overflow-y-auto rounded p-8;
+    @apply box-border flex flex-col gap-4;
+    @apply min-w-[30%] max-w-lg max-h-[98vh];
+    @apply overflow-y-auto rounded p-8;
     @apply bg-background;
+
     @apply max-sm:min-w-[95%];
 }
 
+/* 
+|-----------------------------
+| Modal Sizes
+|-----------------------------
+*/
 .modal-container.sm {
     @apply max-w-[70vw];
     @apply lg:max-w-[40vw];
@@ -33,36 +48,79 @@
     @apply md:w-[60vw];
 }
 
+/* 
+|-----------------------------
+| Modal Header
+|-----------------------------
+*/
 .modal-header {
-    @apply border-background/5 flex items-center justify-between border-b border-solid pb-2;
+    @apply px-6 pt-5 pb-4;
+    @apply border-b border-foreground/10;
 }
 
 .modal-title {
-    @apply my-0 text-base leading-none font-semibold;
+    @apply my-0;
+    @apply text-base font-semibold leading-none;
     @apply text-foreground;
 }
 
 .modal-description {
-    @apply mb-5 !text-sm !font-semibold !text-current/70 !break-words !whitespace-pre-line;
-    @apply text-foreground;
+    @apply mt-4 mb-5 max-h-20;
+    @apply text-sm;
+    @apply break-words whitespace-pre-line;
+    @apply text-foreground/50;
+    @apply overflow-y-auto
 }
 
 .modal-close {
-    @apply !p-2 !px-3;
+    @apply ml-auto mb-2.5;
+    @apply px-3 p-2;
+    @apply text-foreground;
 }
 
-.modal-close:before {
+.modal-close::before {
     @apply content-['\2715'];
 }
 
+/* 
+|-----------------------------
+| Modal Content
+|-----------------------------
+*/
 .modal-content {
     @apply bg-background;
 }
 
-.modal-footer {
+.modal-content > iframe {
+    @apply min-h-[80vh];
+}
+
+.modal-footer,
+.modal-actions,
+.modal .modal-actions {
     @apply flex items-center justify-end gap-2;
 }
 
+.modal-actions,
+.modal .modal-actions {
+    @apply flex items-center justify-start px-8 py-3 gap-2;
+}
+
+/* 
+|-----------------------------
+| Performance
+|-----------------------------
+*/
+.modal .modal-container,
+.modal .modal-overlay {
+    will-change: transform;
+}
+
+/* 
+|-----------------------------
+| Open Animation
+|-----------------------------
+*/
 .modal[aria-hidden="false"] .modal-overlay {
     animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
@@ -71,6 +129,11 @@
     animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
+/* 
+|-----------------------------
+| Close Animation
+|-----------------------------
+*/
 .modal[aria-hidden="true"] .modal-overlay {
     animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
@@ -79,23 +142,16 @@
     animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.modal .modal-container,
-.modal .modal-overlay {
-    will-change: transform;
-}
-
-.modal-content > iframe {
-    @apply min-h-[80vh];
-}
-
-.modal .modal-actions {
-    @apply flex items-center justify-end gap-2 mt-7;
-}
-
+/* 
+|-----------------------------
+| Keyframes
+|-----------------------------
+*/
 @keyframes mmfadeIn {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -105,6 +161,7 @@
     from {
         opacity: 1;
     }
+
     to {
         opacity: 0;
     }
@@ -114,6 +171,7 @@
     from {
         transform: translateY(15%);
     }
+
     to {
         transform: translateY(0);
     }
@@ -123,6 +181,7 @@
     from {
         transform: translateY(0);
     }
+
     to {
         transform: translateY(-10%);
     }
