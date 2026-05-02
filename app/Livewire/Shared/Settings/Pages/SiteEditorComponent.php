@@ -5,7 +5,6 @@ namespace App\Livewire\Shared\Settings\Pages;
 use App\App\Web\Resources\SiteEditors\SiteEditorsResource;
 use App\Domain\Landing\Actions\GetLandingSectionsAction;
 use App\Domain\Landing\Actions\UpdateLandingSectionAction;
-use App\Domain\Landing\Actions\UpsertLandingSectionsAction;
 use App\Domain\Landing\DTOs\UpdateLandingSectionDto;
 use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
@@ -53,9 +52,7 @@ class SiteEditorComponent extends Component
     #[Computed]
     public function landingSectionsData(): array
     {
-        return SiteEditorsResource::collection(
-            $this->landingSections
-        )->resolve();
+        return SiteEditorsResource::collection($this->landingSections)->resolve();
     }
 
     /*

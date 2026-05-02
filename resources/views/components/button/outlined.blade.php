@@ -16,6 +16,7 @@
     {{ $attributes->whereStartsWith('wire') }}
     {{ $attributes->whereStartsWith('x-') }}
     {{ $attributes->whereStartsWith('@click') }}
+    {{ $attributes->whereStartsWith('onclick') }}
     @disabled($disabled)
 >
     {{-- Label --}}

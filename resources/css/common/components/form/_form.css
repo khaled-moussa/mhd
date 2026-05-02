@@ -4,16 +4,14 @@
 |--------------------------------
 */
 
-@import "./checkbox.css";
-@import "./datetime.css";
-@import "./drag-drop.css";
 @import "./input.css";
-@import "./tags.css";
-@import "./otp.css";
 @import "./select.css";
 @import "./textarea.css";
+@import "./checkbox.css";
+@import "./drag-drop.css";
+@import "./tags.css";
+@import "./otp.css";
 @import "./password.css";
-@import "./toggle-button.css";
 @import "./validation.css";
 
 /* 

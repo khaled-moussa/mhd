@@ -3,7 +3,6 @@
 namespace App\Livewire\Panels\Admin\CompanyProjects\Forms;
 
 use App\Domain\CompanyProjects\Models\CompanyProject;
-use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use Livewire\Attributes\Locked;
 use Livewire\Form;
 
@@ -112,7 +111,7 @@ class CompanyProjectFormComponent extends Form
         $this->location           = $companyProject->getLocation();
         $this->existingImages     = $companyProject->getImages();
         $this->removedImages      = [];
-        $this->existingFile       = $companyProject->getBorchure();
+        $this->existingFile       = $companyProject->getBrochure();
         $this->visible            = $companyProject->getVisibility()->value();
     }
 

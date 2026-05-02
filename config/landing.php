@@ -52,7 +52,7 @@ return [
             'title' => 'Our Services',
             'description' => 'We provide professional real estate solutions to help you find, manage, and grow your investments with confidence..',
             'url' => '#services',
-            'visible' => true,
+            'visible' => false,
             'order' => 3,
             'data' => [
                 [
@@ -105,7 +105,7 @@ return [
             'title' => 'Our Projects',
             'description' => 'Explore some of our recent real estate developments — from modern apartments to commercial complexes.',
             'url' => '#projects',
-            'visible' => true,
+            'visible' => false,
             'order' => 4,
 
             'data' => [

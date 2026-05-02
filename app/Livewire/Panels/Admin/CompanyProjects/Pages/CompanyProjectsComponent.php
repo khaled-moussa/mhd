@@ -52,16 +52,13 @@ class CompanyProjectsComponent extends Component
     #[Computed]
     public function companyProjects()
     {
-        return app(GetCompanyProjectsAction::class)
-            ->execute();
+        return app(GetCompanyProjectsAction::class)->paginate();
     }
 
     #[Computed]
     public function companyProjectsData(): array
     {
-        return CompanyProjectsResource::collection(
-            $this->companyProjects->items()
-        )->resolve();
+        return CompanyProjectsResource::collection($this->companyProjects->items())->resolve();
     }
 
     /*
@@ -77,17 +74,14 @@ class CompanyProjectsComponent extends Component
             return;
         }
 
-        $companyProjectData = (new CompanyProjectsResource($companyProject))->resolve();
-
-        $this->dispatchCompanyProjectLoadedEvent(data: $companyProjectData);
+        $this->dispatchCompanyProjectLoadedEvent($companyProject->toResource()->resolve());
     }
 
     public function deleteCompanyProject(string $companyProjectUuid): void
     {
         $companyProject = $this->getCompanyProject($companyProjectUuid);
 
-        app(DeleteCompanyProjectAction::class)
-            ->execute(companyProject: $companyProject);
+        app(DeleteCompanyProjectAction::class)->execute($companyProject);
 
         // If current page becomes empty → go back
         if ($this->companyProjects->count() === 0 && $this->currentPage > 1) {
@@ -121,8 +115,7 @@ class CompanyProjectsComponent extends Component
     */
     private function getCompanyProject(string $companyProjectUuid): ?CompanyProject
     {
-        return app(GetCompanyProjectByUuidAction::class)
-            ->execute(companyProjectUuid: $companyProjectUuid);
+        return app(GetCompanyProjectByUuidAction::class)->execute($companyProjectUuid);
     }
 
     /* 
@@ -132,10 +125,7 @@ class CompanyProjectsComponent extends Component
     */
     private function dispatchCompanyProjectLoadedEvent(array $data)
     {
-        $this->dispatch(
-            EventsEnum::COMPANY_PROJECT_LOADED_EVENT,
-            data: $data
-        );
+        $this->dispatch(EventsEnum::COMPANY_PROJECT_LOADED_EVENT, data: $data);
     }
 
     private function dispatchCompanyProjectDeletedEvent()

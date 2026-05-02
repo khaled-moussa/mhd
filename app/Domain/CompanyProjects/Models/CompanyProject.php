@@ -2,64 +2,95 @@
 
 namespace App\Domain\CompanyProjects\Models;
 
+use App\App\Web\Resources\CompanyProjects\CompanyProjectsResource;
 use App\Domain\CompanyProjects\QueryBuilders\CompanyProjectBuilder;
 use App\Domain\CompanyProjects\States\VisibilityStates\VisibilityStates;
+use App\Domain\Landing\VisibilityStates\VisibleState;
+use App\Support\Traits\HasFormattedTimestamps;
 use App\Support\Traits\HasUuid;
-use App\Support\Traits\ResolveMediaToArray;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\ModelStates\HasStates;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Attributes\UseResource;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Carbon\Carbon;
 
+#[UseResource(CompanyProjectsResource::class)]
 class CompanyProject extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
     use HasStates;
     use HasUuid;
-    use InteractsWithMedia;
-    use ResolveMediaToArray;
 
     /*
-    |-------------------------------
-    |  Properties
-    |-------------------------------
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
     */
     protected $guarded = [];
 
     protected $casts = [
         'images'           => 'array',
         'visibility_state' => VisibilityStates::class,
+        'delivered_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /*
-    |-------------------------------
-    |  Query Builder
-    |-------------------------------
+    |--------------------------------------------------------------------------
+    | Custom Query Builder
+    |--------------------------------------------------------------------------
     */
+
     public function newEloquentBuilder($query): CompanyProjectBuilder
     {
         return new CompanyProjectBuilder($query);
     }
 
     /*
-    |-------------------------------
-    |  Spatie Media
-    |-------------------------------
+    |--------------------------------------------------------------------------
+    |  Attributes
+    |--------------------------------------------------------------------------
+    */
+
+    public function getImageCoverAttribute(): ?string
+    {
+        return $this->getFirstMediaUrl('images');
+    }
+
+    public function getBrochureAttribute(): ?array
+    {
+        $media = $this->getFirstMedia('brochure');
+
+        return $media ? [
+            'id'   => $media->id,
+            'name' => $media->name,
+            'url'  => $media->getUrl(),
+        ] : null;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Media Register
+    |--------------------------------------------------------------------------
     */
 
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images');
-        
-        $this->addMediaCollection('file')->singleFile();
+        $this->addMediaCollection('brochure')->singleFile();
     }
 
     /*
-    |-------------------------------
-    |  Getters
-    |-------------------------------
+    |--------------------------------------------------------------------------
+    | Getters
+    |--------------------------------------------------------------------------
     */
+
     public function getId(): string
     {
         return $this->id;
@@ -70,21 +101,6 @@ class CompanyProject extends Model implements HasMedia
         return $this->uuid;
     }
 
-    public function getImages(): array
-    {
-        return $this->mediaArray('images');
-    }
-
-    public function getImageCover(): string
-    {
-        return $this->getFirstMediaUrl('images');
-    }
-
-    public function getBorchure(): ?array
-    {
-        return $this->firstMediaData('file');
-    }
-
     public function getTitle(): string
     {
         return $this->title;
@@ -93,6 +109,29 @@ class CompanyProject extends Model implements HasMedia
     public function getDescription(): ?string
     {
         return $this->description;
+    }
+
+    public function getImageCover(): string
+    {
+        return $this->image_cover;
+    }
+
+    public function getImages(): array
+    {
+        return $this->getMedia('images')
+            ->map(function ($media) {
+                return [
+                    'id'   => $media->id,
+                    'path' => $media->getUrl(),
+                ];
+            })
+            ->values()
+            ->toArray();
+    }
+
+    public function getBrochure(): ?array
+    {
+        return $this->brochure;
     }
 
     public function getPriceStart(): float
@@ -117,27 +156,28 @@ class CompanyProject extends Model implements HasMedia
 
     public function getDeliveredAt(): ?string
     {
-        return $this->delivered_at;
+        return $this->delivered_at->format('M d, Y');
     }
 
-    public function getCreatedAt(): string
+    public function getCreatedAt(): ?string
     {
-        return $this->created_at;
+        return $this->created_at->format('M d, Y h:i A');
     }
 
-    public function getUpdatedAt(): string
+    public function getUpdatedAt(): ?string
     {
-        return $this->updated_at;
+        return $this->updated_at->format('M d, Y h:i A');
     }
 
     /*
-    |-------------------------------
-    |  Getters Helpers
-    |-------------------------------
+    |--------------------------------------------------------------------------
+    | States
+    |--------------------------------------------------------------------------
     */
+
     public function isVisible(): bool
     {
-        return $this->visibility_state->value();
+        return $this->getVisibility() === VisibleState::class;
     }
 
     public function isHidden(): bool

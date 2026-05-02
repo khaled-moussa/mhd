@@ -12,34 +12,14 @@
 
 {{-- Content --}}
 @section('component')
-    {{-- Page header --}}
+    {{-- Page header --}}  
     <x-header.page title="Projects">
-        <x-button.primary label="Create Project" :data-custom-open="$modalId['CREATE_COMPANY_PROJECT_MODAL']" />
+        <x-button.primary
+            label="Create Project"
+            :data-custom-open="$modalId['CREATE_COMPANY_PROJECT_MODAL']"
+        />
     </x-header.page>
 
-    <div x-data="projectsComponent" class="projects">
-        {{-- Projects table livewire component --}}
-        <livewire:panels.admin.company-projects.pages.company-projects-component />
-
-        {{-- View project modal --}}
-        @include('admin::company-projects.partials.company-project-view-modal', [
-            'modalId' => $modalId['VIEW_COMPANY_PROJECT_MODAL'],
-            'modalTitle' => 'View Project',
-            'description' => 'View detailed information about the selected project, including its status, timeline, and key data.',
-        ])
-
-        {{-- Create project modal --}}
-        @include('admin::company-projects.partials.company-project-form-create', [
-            'modalId' => $modalId['CREATE_COMPANY_PROJECT_MODAL'],
-            'modalTitle' => 'Create Project',
-            'description' => 'Fill in the required information to create a new project and assign it to the company workspace.',
-        ])
-
-        {{-- Update project modal --}}
-        @include('admin::company-projects.partials.company-project-form-update', [
-            'modalId' => $modalId['UPDATE_COMPANY_PROJECT_MODAL'],
-            'modalTitle' => 'Update Project',
-            'description' => 'Modify existing project details such as name, status, timeline, and assigned data.',
-        ])
-    </div>
+    {{-- Project body  --}}
+    @include('admin::company-projects.partials.company-project-body')
 @endsection

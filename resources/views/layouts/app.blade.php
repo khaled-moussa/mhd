@@ -9,10 +9,10 @@
     <div class="app-shell">
 
         {{-- Sidebar --}}
-        @include('layouts.partials.sidebar')
+        @include('layouts.partials.sidebar.app')
 
         {{-- Navbar --}}
-        @include('layouts.partials.navbar')
+        @include('layouts.partials.navbar.app')
 
         {{-- Main Content --}}
         <main class="app-content">

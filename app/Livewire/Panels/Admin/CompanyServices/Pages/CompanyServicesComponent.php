@@ -52,16 +52,14 @@ class CompanyServicesComponent extends Component
     #[Computed]
     public function companyServices()
     {
-        return app(GetCompanyServicesAction::class)->execute();
+        return app(GetCompanyServicesAction::class)->paginate();
     }
 
 
     #[Computed]
     public function companyServicesData(): array
     {
-        return CompanyServicesResource::collection(
-            $this->companyServices->items()
-        )->resolve();
+        return CompanyServicesResource::collection($this->companyServices->items())->resolve();
     }
 
     /*
@@ -69,21 +67,24 @@ class CompanyServicesComponent extends Component
     | Actions
     |-----------------------------
     */
+
     public function viewCompanyService(string $companyServiceUuid): void
     {
         $companyService = $this->getCompanyService($companyServiceUuid);
 
-        if ($companyService) {
-            $this->form->fillCompanyService($companyService);
+        if (!$companyService) {
+            return;
         }
+
+        $this->dispatchCompanyServiceLoadedEvent($companyService->toResource()->resolve());
     }
+
 
     public function deleteCompanyService(string $companyServiceUuid): void
     {
         $companyService = $this->getCompanyService($companyServiceUuid);
 
-        app(DeleteCompanyServiceAction::class)
-            ->execute($companyService);
+        app(DeleteCompanyServiceAction::class)->execute($companyService);
 
         // If current page becomes empty → go back
         if ($this->companyServices->count() === 0 && $this->currentPage > 1) {
@@ -117,8 +118,7 @@ class CompanyServicesComponent extends Component
     */
     private function getCompanyService(string $companyServiceUuid): ?CompanyService
     {
-        return app(GetCompanyServiceByUuidAction::class)
-            ->execute($companyServiceUuid);
+        return app(GetCompanyServiceByUuidAction::class)->execute($companyServiceUuid);
     }
 
     /* 
@@ -126,6 +126,12 @@ class CompanyServicesComponent extends Component
     | Dispatchers
     |----------------------------- 
     */
+
+    private function dispatchCompanyServiceLoadedEvent(array $data)
+    {
+        $this->dispatch(EventsEnum::COMPANY_SERVICE_LOADED_EVENT, data: $data);
+    }
+
     private function dispatchCompanyServiceDeletedEvent()
     {
         $this->dispatch(EventsEnum::COMPANY_SERVICE_DELETED_EVENT);

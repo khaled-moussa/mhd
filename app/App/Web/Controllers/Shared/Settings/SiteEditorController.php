@@ -3,7 +3,6 @@
 namespace App\App\Web\Controllers\Shared\Settings;
 
 use App\App\Web\Resources\Landing\LandingSectionsResource;
-use App\Domain\Landing\Actions\BuildLandingHeadersAction;
 use App\Domain\Landing\Actions\GetCurrentLandingSectionsAction;
 use Illuminate\Support\Facades\View;
 

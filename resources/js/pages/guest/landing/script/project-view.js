@@ -28,8 +28,8 @@ window.openProject = function (projectData) {
 function updateModalContent(project) {
     setText('#projects-modal-title',       project.title);
     setText('#projects-modal-description', project.description);
-    setText('#project-delivered',          project.delivered);
-    setText('#project-price',              project.price);
+    setText('#project-delivered',          project.delivered_at);
+    setText('#project-price',              project.price_start);
     setText('#project-address',            project.address);
     setIframeSrc('#project-location',      project.location);
 }
@@ -59,7 +59,7 @@ function initImages(images = []) {
         list.insertAdjacentHTML('beforeend', `
             <li class="splide__slide">
                 <div class="projects-modal-image">
-                    <img src="${image}" alt="Project">
+                    <img src="${image.path}" alt="Project">
                 </div>
             </li>
         `);

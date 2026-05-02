@@ -1,105 +1,318 @@
 /* 
-|-----------------------------
-| Toggle
-|-----------------------------
+|-------------------------------
+| Drag & Drop Input
+|-------------------------------
 */
-.toggle {
-    @apply relative flex w-fit flex-wrap items-center gap-y-2 mb-2;
-    @apply last-of-type:mb-0;
-}
-
-.toggle span {
-    @apply ml-3 cursor-pointer;
+.drag-drop {
+    @apply flex items-center justify-center w-full;
 }
 
 /* 
-|-----------------------------
-| Input (Hidden)
-|-----------------------------
-*/
-.toggle > input[type="radio"],
-.toggle > input[type="checkbox"] {
-    @apply sr-only;
-}
-
-/* 
-|-----------------------------
-| Toggle Circle
-|-----------------------------
-*/
-.toggle-circle {
-    @apply relative flex items-center shrink-0 cursor-pointer;
-    @apply w-10 h-[1.5rem] rounded-full bg-current/20;
-
-    @apply after:absolute after:left-[18px];
-    @apply after:w-[0.8rem] after:h-[0.7rem];
-    @apply after:rounded-full after:bg-current/80;
-    @apply after:shadow-md after:transition-all;
-    @apply after:content-[''];
-
-    @apply peer-checked:bg-primary/30;
-    @apply peer-focus:outline-none;
-    @apply peer-checked:after:translate-x-full;
-}
-
-/* 
-|-----------------------------
+|-------------------------------
 | Label
-|-----------------------------
+|-------------------------------
 */
-.toggle-label {
-    @apply ml-3 text-sm font-medium leading-none;
-    @apply cursor-pointer text-foreground;
-    @apply first-letter:capitalize;
+.drag-drop-label {
+    @apply flex flex-col items-center justify-center gap-3;
+    @apply w-full my-2 px-4 py-4 rounded-lg border-2 border-dashed;
+    @apply border-foreground/10 bg-foreground/5 cursor-pointer;
+    @apply transition-all duration-150 ease-in-out;
+    @apply md:min-h-[150px] md:px-5;
+    @apply hover:border-foreground/50 hover:bg-foreground/20;
+}
+
+/* Avatar Variant */
+.drag-drop-label.avatar {
+    @apply w-26 h-26 min-h-26 rounded-full;
 }
 
 /* 
-|-----------------------------
-| Disabled State
-|-----------------------------
+|-------------------------------
+| Content
+|-------------------------------
 */
-.toggle > input[type="radio"]:disabled ~ .toggle-circle,
-.toggle > input[type="checkbox"]:disabled ~ .toggle-circle,
-.toggle > input[type="radio"]:disabled ~ .toggle-label,
-.toggle > input[type="checkbox"]:disabled ~ .toggle-label {
-    @apply pointer-events-none;
+.drag-drop-label > i {
+    @apply text-2xl text-foreground/40;
+    @apply transition-all duration-150 ease-in-out;
 }
 
-/* Disabled (unchecked) */
-.toggle > input[type="radio"]:disabled ~ .toggle-circle,
-.toggle > input[type="checkbox"]:disabled ~ .toggle-circle {
-    @apply bg-foreground/10 after:shadow-none;
+.drag-drop-label > div {
+    @apply flex flex-col items-center gap-3;
+    @apply md:gap-2;
+    @apply child:text-center;
 }
 
-.toggle > input[type="radio"]:disabled ~ .toggle-label,
-.toggle > input[type="checkbox"]:disabled ~ .toggle-label {
-    @apply text-foreground/40;
+.drag-drop-label p{
+    @apply text-sm font-medium font-poppins;
+    @apply text-foreground/65;
 }
 
-/* Checked + Disabled */
-.toggle > input[type="radio"]:checked:disabled ~ .toggle-circle,
-.toggle > input[type="checkbox"]:checked:disabled ~ .toggle-circle {
-    @apply bg-background/50 after:shadow-none;
+.drag-drop-label p:last-child{
+    @apply text-xs;
+    @apply text-foreground/45;
+}
+/* 
+|-------------------------------
+| Hover / Focus
+|-------------------------------
+*/
+.drag-drop:hover .drag-drop-label > i,
+.drag-drop.focus .drag-drop-label > i {
+    @apply text-foreground;
+}
+
+.drag-drop.focus .drag-drop-label {
+    @apply border-primary/30 bg-primary/5;
 }
 
 /* 
-|-----------------------------
-| Description
-|-----------------------------
+|-------------------------------
+| Text
+|-------------------------------
 */
-.toggle > p {
-    @apply w-full text-sm text-foreground/50;
+.drag-drop-text {
+    @apply text-center text-foreground/75!;
 }
 
 /* 
-|-----------------------------
-| Wrapper
-|-----------------------------
+|-------------------------------
+| States
+|-------------------------------
 */
-.toggle-wrapper {
-    @apply flex gap-3 !mt-4;
+.drag-drop.has-files {
+    @apply hidden;
 }
 
-.toggle-wrapper span {
-    @apply text-sm font-inter;
+.drag-drop.has-files .drag-drop-label > div {
+    @apply items-start child:text-left;
+}
+
+/* Submit Button */
+.drag-drop ~ button[type="submit"] {
+    @apply hidden;
+}
+
+.drag-drop.has-files ~ button[type="submit"] {
+    @apply flex;
+}
+
+/* Uploaded Files */
+.drag-drop:not(.has-files) ~ .uploaded-files {
+    @apply hidden;
+}
+
+/* 
+|-------------------------------
+| Invalid State
+|-------------------------------
+*/
+.drag-drop-label.invalid {
+    @apply border-red-200;
+}
+
+.drag-drop-label.invalid > i {
+    @apply text-red-500;
+}
+
+/* 
+|-------------------------------
+| File Wrapper
+|-------------------------------
+*/
+.file-wrapper {
+    @apply flex flex-col gap-2 mt-3;
+}
+
+/* 
+|-------------------------------
+| File Upload Card
+|-------------------------------
+*/
+.file-upload {
+    @apply relative flex items-center gap-3;
+    @apply px-3 py-2.5 rounded-xl;
+    @apply bg-white border border-black/[0.08];
+    @apply transition-[border-color] duration-150;
+}
+
+.file-upload.uploading {
+    @apply border-primary/20;
+}
+
+.file-upload.completed {
+    @apply border-green-500/20;
+}
+
+.file-upload.failed {
+    @apply border-red-400/20 bg-red-50/50;
+}
+
+/* 
+|-------------------------------
+| File Preview Thumbnail
+|-------------------------------
+*/
+.file-preview {
+    @apply w-11 h-11 rounded-lg object-cover shrink-0;
+    @apply border border-black/[0.06] bg-background;
+}
+
+.file-preview-icon {
+    @apply w-11 h-11 rounded-lg flex items-center justify-center shrink-0;
+    @apply bg-background border border-black/[0.06];
+}
+
+.file-preview-icon i {
+    @apply text-lg text-foreground/30;
+}
+
+/* 
+|-------------------------------
+| File Info
+|-------------------------------
+*/
+.file-info {
+    @apply flex-1 min-w-0;
+}
+
+.file-name {
+    @apply text-[13px] font-medium text-foreground leading-none mb-1.5;
+    @apply whitespace-nowrap overflow-hidden text-ellipsis;
+}
+
+.file-meta {
+    @apply flex items-center gap-2 mb-2;
+}
+
+.file-size {
+    @apply text-[11px] text-foreground/35;
+}
+
+/* 
+|-------------------------------
+| Progress Bar
+|-------------------------------
+*/
+.progress-bar {
+    @apply h-[3px] w-full rounded-full bg-black/[0.07] overflow-hidden mb-1.5;
+}
+
+.progress {
+    @apply h-full rounded-full bg-primary;
+    @apply transition-[width] duration-300 ease-out;
+}
+
+.file-upload.completed .progress {
+    @apply bg-green-500;
+}
+
+.file-upload.failed .progress {
+    @apply bg-red-400;
+}
+
+.progress-text {
+    @apply text-[11px] text-foreground/40;
+}
+
+/* 
+|-------------------------------
+| Status Badge
+|-------------------------------
+*/
+.file-status {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full;
+    @apply text-[10px] font-medium tracking-[0.03em];
+}
+
+.file-status.uploading {
+    @apply bg-primary/[0.08] text-primary;
+}
+
+.file-status.completed {
+    @apply bg-green-500/[0.1] text-green-700;
+}
+
+.file-status.failed {
+    @apply bg-red-400/[0.1] text-red-600;
+}
+
+.file-status.pending {
+    @apply bg-black/[0.06] text-foreground/45;
+}
+
+.file-status-dot {
+    @apply w-[5px] h-[5px] rounded-full shrink-0;
+}
+
+.uploading  .file-status-dot { @apply bg-primary; }
+.completed  .file-status-dot { @apply bg-green-500; }
+.failed     .file-status-dot { @apply bg-red-400; }
+.pending    .file-status-dot { @apply bg-foreground/30; }
+
+/* 
+|-------------------------------
+| File Action Buttons
+|-------------------------------
+*/
+.file-actions {
+    @apply flex items-center gap-1.5 shrink-0;
+}
+
+.file-action-btn {
+    @apply w-7 h-7 flex items-center justify-center rounded-lg;
+    @apply border border-black/[0.1] bg-transparent cursor-pointer;
+    @apply transition-all duration-150;
+    @apply hover:bg-black/[0.05];
+}
+
+.file-action-btn i {
+    @apply text-xs text-foreground/40;
+}
+
+.file-action-btn.danger {
+    @apply hover:border-red-300/60 hover:bg-red-50;
+}
+
+.file-action-btn.danger i {
+    @apply hover:text-red-500;
+}
+
+/* 
+|-------------------------------
+| Add More Files
+|-------------------------------
+*/
+.add-files {
+    @apply flex items-center gap-2.5 px-3 py-2.5 rounded-xl cursor-pointer;
+    @apply border border-dashed border-black/[0.12] bg-black/[0.01];
+    @apply transition-all duration-150;
+    @apply hover:border-primary/30 hover:bg-primary/[0.03];
+}
+
+.add-files-icon {
+    @apply w-8 h-8 rounded-lg flex items-center justify-center shrink-0;
+    @apply bg-black/[0.05];
+    @apply transition-colors duration-150;
+}
+
+.add-files-icon i {
+    @apply text-sm text-foreground/40;
+    @apply transition-colors duration-150;
+}
+
+.add-files:hover .add-files-icon {
+    @apply bg-primary/[0.08];
+}
+
+.add-files:hover .add-files-icon i {
+    @apply text-primary;
+}
+
+.add-files p {
+    @apply text-[13px] font-medium text-foreground/45;
+    @apply transition-colors duration-150;
+}
+
+.add-files:hover p {
+    @apply text-primary;
 }

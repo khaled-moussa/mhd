@@ -61,6 +61,7 @@ Route::middleware([
         */
         Route::get('contacts', ContactController::class)
             ->name('contacts.index');
+            
         /*
         |--------------------------------------------------------------------------
         | Shared Admin Routes

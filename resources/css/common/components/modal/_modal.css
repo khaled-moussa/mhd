@@ -26,10 +26,9 @@
 */
 .modal-container {
     @apply relative flex flex-col w-full overflow-hidden;
-    @apply bg-white rounded-2xl;
+    @apply bg-background rounded-2xl drop-shadow-xl;
     @apply max-h-[90vh] max-w-lg;
     @apply max-sm:max-w-[95vw];
-    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
 }
 
 /* 
@@ -68,23 +67,23 @@
 }
 
 .modal-eyebrow {
-    @apply text-[10px] font-medium text-dark/35 tracking-[0.08em] uppercase mb-1;
+    @apply text-[10px] font-medium text-foreground/35 tracking-[0.08em] uppercase mb-1;
 }
 
 .modal-title {
-    @apply text-[17px] font-semibold text-dark leading-tight my-0;
+    @apply text-[17px] font-semibold text-foreground leading-tight my-0;
 }
 
 .modal-close {
-    @apply w-7 h-7 flex items-center justify-center shrink-0 mt-0.5;
-    @apply rounded-lg border border-black/[0.1] bg-transparent cursor-pointer;
-    @apply transition-colors duration-150 hover:bg-black/[0.05];
+    @apply w-7 h-7 p-1 flex items-center justify-center shrink-0 mt-0.5;
+    @apply rounded-lg border border-foreground/20 bg-transparent cursor-pointer;
+    @apply transition-colors duration-150 hover:bg-foreground/20;
     @apply ml-auto;
 }
 
 .modal-close::before {
     content: '✕';
-    @apply text-[11px] text-dark/50;
+    @apply text-[11px] text-foreground/50;
 }
 
 /* 
@@ -93,7 +92,7 @@
 |-----------------------------
 */
 .modal-divider {
-    @apply h-px bg-black/[0.07] mx-6 mt-4;
+    @apply h-px bg-foreground/5 mx-6 mt-4;
 }
 
 /* 
@@ -102,8 +101,8 @@
 |-----------------------------
 */
 .modal-description {
-    @apply px-6 pt-3;
-    @apply text-[13px] text-dark/45 leading-relaxed;
+    @apply px-6;
+    @apply text-sm text-foreground/45 leading-relaxed;
 }
 
 /* 
@@ -134,7 +133,7 @@
 
 .modal-item {
     @apply px-3 py-2.5 rounded-[10px];
-    @apply bg-dark/[0.03] border border-black/[0.07];
+    @apply bg-foreground/10 border border-foreground/20;
 }
 
 .modal-item.full {
@@ -142,11 +141,11 @@
 }
 
 .modal-label {
-    @apply mb-1 text-[10px] font-medium uppercase tracking-[0.06em] text-dark/40;
+    @apply mb-1 text-[10px] font-medium uppercase tracking-[0.06em] text-foreground/40;
 }
 
 .modal-value {
-    @apply text-[13px] font-medium text-dark;
+    @apply text-[13px] font-medium text-foreground;
 }
 
 /* 

@@ -3,7 +3,6 @@
 namespace App\Livewire\Panels\Admin\CompanyServices\Forms;
 
 use App\Domain\CompanyServices\Models\CompanyService;
-use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use Livewire\Attributes\Locked;
 use Livewire\Form;
 

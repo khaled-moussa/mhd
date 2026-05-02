@@ -5,9 +5,6 @@ namespace App\Support\Services\View;
 use App\Domain\Otp\Enums\OtpEventsEnum;
 use App\Domain\Otp\Enums\OtpExceptionsEnum;
 use App\Domain\Otp\Enums\OtpTimerEnum;
-use App\Domain\Users\Actions\GetCurrentUserAction;
-use App\Navigation\Sidebar\SidebarBuilder;
-use App\Panel\Resolvers\PanelManager;
 use App\Support\Cache\EnumCache;
 use App\Support\Context\AuthContext;
 use App\Support\Context\SectionContext;
@@ -31,7 +28,6 @@ class ViewService
     public static function boot(): void
     {
         self::registerSharedEnums();
-        self::registerPanelComposers();
         self::registerSectionsComposers();
     }
 
@@ -47,12 +43,6 @@ class ViewService
         self::shareModalIds();
         self::shareFormIds();
         self::shareAuthUser();
-    }
-
-    public static function registerPanelComposers(): void
-    {
-        self::composeSidebar();
-        self::composeUserPanel();
     }
 
     public static function registerSectionsComposers(): void
@@ -117,40 +107,6 @@ class ViewService
     | View Composers
     |--------------------------------------------------------------------------
     */
-
-    private static function composeSidebar(): void
-    {
-        ViewFacade::composer(
-            'components.navigation.sidebar.app',
-            function (View $view) {
-                $panel   = app(PanelManager::class)->current();
-                $sidebar = app(SidebarBuilder::class);
-
-                $view->with([
-                    'panel'         => $panel,
-                    'primaryMenu'   => $sidebar->buildPrimary($panel),
-                    'secondaryMenu' => $sidebar->buildSecondary($panel),
-                ]);
-            }
-        );
-    }
-
-    private static function composeUserPanel(): void
-    {
-        ViewFacade::composer(
-            [
-                'pages.shared.*',
-                'components.dropdown.profile',
-            ],
-            function (View $view) {
-                $panelId = app(GetCurrentUserAction::class)
-                    ->execute()
-                    ->getPanelId();
-
-                $view->with('panel', $panelId);
-            }
-        );
-    }
 
     private static function composeSections(): void
     {

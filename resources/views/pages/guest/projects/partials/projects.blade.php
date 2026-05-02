@@ -17,7 +17,7 @@
 
                     {{-- Image --}}
                     <div class="projects-image">
-                        <img src="{{ $project['cover'] }}" alt="{{ $project['title'] }}"/>
+                        <img src="{{ $project['image_cover'] }}" alt="{{ $project['title'] }}"/>
                         <div class="projects-overlay">
                             <div class="projects-overlay-btn">
                                 <i class="fi fi-rr-arrow-up-right text-primary text-sm"></i>
@@ -28,7 +28,7 @@
                     {{-- Content --}}
                     <div class="projects-content">
                         <div class="projects-meta">
-                            <span class="projects-delivered">{{ $project['delivered'] }}</span>
+                            <span class="projects-delivered">{{ $project['delivered_at'] }}</span>
                             <div class="projects-meta-dot"></div>
                             <span class="projects-address">{{ $project['address'] }}</span>
                         </div>

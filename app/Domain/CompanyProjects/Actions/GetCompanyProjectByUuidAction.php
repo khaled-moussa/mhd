@@ -7,17 +7,15 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class GetCompanyProjectByUuidAction
 {
-    /**
-     * Get specific company service by uuid.
-     */
-    public function execute(string $companyProjectUuid): CompanyProject
+    /*
+    |-------------------------------
+    | Get Company Project by UUID
+    |-------------------------------
+    */
+    public function execute(string $uuid): CompanyProject
     {
-        $companyProject =  CompanyProject::whereUuid($companyProjectUuid)->first();
-
-        if (! $companyProject) {
-            throw new ModelNotFoundException('Cannot delete: CompanyProject instance not found or already deleted.');
-        }
-
-        return $companyProject;
+        return CompanyProject::where('uuid', $uuid)->firstOr(function () {
+            throw new ModelNotFoundException('CompanyProject not found.');
+        });
     }
 }

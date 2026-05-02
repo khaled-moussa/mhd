@@ -2,7 +2,6 @@
 
 namespace App\Domain\CompanyProjects\QueryBuilders;
 
-use App\Domain\CompanyProjects\States\VisibilityStates\VisibilityStates;
 use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
 use App\Domain\CompanyProjects\States\VisibilityStates\VisibleState;
 use Illuminate\Database\Eloquent\Builder;

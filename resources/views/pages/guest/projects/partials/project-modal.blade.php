@@ -1,4 +1,4 @@
-@props(['modalId', 'title' => '', 'description' => ''])
+@props(['modalId'])
 
 <div
     class="modal projects-modal"
@@ -29,25 +29,26 @@
                 {{-- Panel --}}
                 <div class="projects-modal-panel">
 
-                    {{-- Header --}}
-                    <div class="modal-header">
-                        <x-button.outlined
-                            class="modal-close"
-                            data-custom-close="{{ $modalId }}"
-                        />
+                    {{-- Modal header --}}
+                    <header class="modal-header">
                         <h2
                             id="projects-modal-title"
                             class="modal-title"
                         >
-                            {{ $title }}
                         </h2>
-                        <p
-                            id="projects-modal-description"
-                            class="modal-description"
-                        >
-                            {{ $description }}
-                        </p>
-                    </div>
+
+                        <x-button.outlined
+                            class="modal-close"
+                            :data-custom-close="$modalId"
+                        />
+                    </header>
+
+                    {{-- Modal description --}}
+                    <p
+                        id="projects-modal-description"
+                        class="modal-description"
+                    >
+                    </p>
 
                     {{-- Details --}}
                     <div class="projects-modal-details">
@@ -97,30 +98,32 @@
                                     referrerpolicy="no-referrer-when-downgrade"
                                     :src="{{ $project['location'] }}"
                                 >
-                            </iframe @else <div class="project-location-empty">
-                                <p>No location added</p>
+                                </iframe>
+                            @else
+                                <div class="project-location-empty">
+                                    <p>No location added</p>
+                                </div>
+                            @endif
                         </div>
-                        @endif
                     </div>
-                </div>
 
-                {{-- Actions --}}
-                <div class="modal-actions">
-                    <x-button.primary
-                        class="primary-btn"
-                        label="Download brochure"
-                    >
-                        <i class="fi fi-rr-download"></i>
-                        </x-button.main>
+                    {{-- Actions --}}
+                    <div class="modal-actions">
+
+                        <x-button.primary
+                            class="primary-btn"
+                            label="Download brochure"
+                        >
+                            <i class="fi fi-rr-download"></i>
+                        </x-button.primary>
 
                         <x-button.outlined
                             class="outline-btn"
                             label="Close"
                             data-custom-close="{{ $modalId }}"
                         />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>

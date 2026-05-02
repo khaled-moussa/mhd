@@ -12,7 +12,7 @@
 
 {{-- Navbar --}}
 @section('navbar')
-    @include('pages.guest.landing.partials.navbar')
+    @include('layouts.partials.navbar.guest')
 @endsection
 
 {{-- Content --}}
@@ -47,15 +47,13 @@
         'pages.guest.landing.partials.contact',
         ['section' => data_get($sections, 'contact')]
     )
-
-
 @endsection
 
 {{-- Footer --}}
 @section('footer')
     @includeWhen(
         property_exists($sections, 'footer'),
-        'pages.guest.landing.partials.footer',
+        'layouts.partials.footer.guest',
         ['section' => data_get($sections, 'footer')]
     )
 @endsection

@@ -26,18 +26,12 @@
     </x-table>
 
     {{-- Company Service view modal --}}
-    @include('admin::company-services.partials.company-service-view-modal', [
-        'modalId' => $modalId['VIEW_COMPANY_SERVICE_MODAL'],
-        'modalTitle' => 'View Company Service',
-    ])
-
-    {{-- Company Service view modal --}}
     <x-modal.delete
-        :id="$modalId['DELETE_CONTACT_MODAL']"
-        title="Delete contact"
-        header="Are you sure to delete the service!"
+        :modalId="$modalId['DELETE_COMPANY_SERVICE_MODAL']"
+        title="Delete service"
+        description="Are you sure to delete the service!"
         wire:ignore
-        wire:target="deleteContact"
+        wire:target="deleteService"
         wire:loading.class="spinner"
     />
 </div>

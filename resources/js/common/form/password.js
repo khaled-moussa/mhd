@@ -15,8 +15,6 @@ export default function showPassword() {
 
         const isPassword = input.type === "password";
 
-        console.log(isPassword);
-        
         // Toggle input type
         input.type = isPassword ? "text" : "password";
 

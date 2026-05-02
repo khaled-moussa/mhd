@@ -3,19 +3,46 @@
 namespace App\Domain\CompanyServices\Actions;
 
 use App\Domain\CompanyServices\Models\CompanyService;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Domain\Landing\Actions\ChangeLandingSectionVisibilityAction;
+use App\Domain\Landing\Actions\GetSectionByKeyAction;
+use App\Domain\Landing\VisibilityStates\NotVisibleState;
 
 class DeleteCompanyServiceAction
 {
-    /**
-     * Delete the given company service.
-     */
-    public function execute(CompanyService $companyService): void
+    /*
+    |-------------------------------
+    | Delete Company Service
+    |-------------------------------
+    */
+    public function execute(CompanyService $project): void
     {
-        if (! $companyService->exists) {
-            throw new ModelNotFoundException('Cannot delete: CompanyService instance not found or already deleted.');
+        if ($this->isLastProject()) {
+            $this->hideProjectsSection();
         }
 
-        $companyService->delete();
+        $project->delete();
+    }
+
+    /*
+    |-------------------------------
+    | Check Last Project
+    |-------------------------------
+    */
+    private function isLastProject(): bool
+    {
+        return CompanyService::count() === 1;
+    }
+
+    /*
+    |-------------------------------
+    | Hide Projects Section
+    |-------------------------------
+    */
+    private function hideProjectsSection(): void
+    {
+        $section = app(GetSectionByKeyAction::class)->execute('projects');
+
+        app(ChangeLandingSectionVisibilityAction::class)
+            ->execute($section, NotVisibleState::class);
     }
 }

@@ -27,9 +27,9 @@
 
     {{-- Company Project view modal --}}
     <x-modal.delete
-        :id="$modalId['DELETE_COMPANY_PROJECT_MODAL']"
+        :modalId="$modalId['DELETE_COMPANY_PROJECT_MODAL']"
         title="Delete project"
-        header="Are you sure to delete the project!"
+        description="Are you sure to delete the project!"
         wire:ignore
         wire:target="deleteProject"
         wire:loading.class="spinner"

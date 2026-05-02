@@ -1,57 +1,37 @@
-@props(['id', 'title', 'header', 'description' => null])
+@props([
+	'modalId', 
+	'title', 
+	'description' => null
+])
 
-<div
-	class="modal"
-	id="{{ $id }}"
-	aria-hidden="true"
-	{{ $attributes->whereStartsWith('wire:ignore') }}
->
-	<div
-		class="modal-overlay"
-		tabindex="-1"
-		data-micromodal-close
-	>
-		<div
-			class="modal-container sm"
-			role="dialog"
-			aria-modal="true"
-			aria-labelledby="{{ $id }}-title"
-		>
+<div class="modal" id="{{ $modalId }}" aria-hidden="true">
+	<div class="modal-overlay" tabindex="-1" data-micromodal-close>
+		<div class="modal-container lg" role="dialog" aria-modal="true" aria-labelledby="{{ $modalId }}-title">
+
 			<header class="modal-header">
-				{{-- Model title --}}
-				<h2
-					class="modal-title"
-					id="{{ $id }}-title"
-				>
+				{{-- Modal title --}}
+				<h2 class="modal-title" id="{{ $modalId }}-title">
 					{{ $title }}
 				</h2>
 
-				<x-button.outlined
-					class="modal-close"
-					data-custom-close="{{ $id }}"
-				/>
+				<x-button.outlined class="modal-close" :data-custom-close="$modalId" />
 			</header>
 
+			{{-- Modal description --}}
+			@if ($description)
+				<p class="modal-description">
+					{{ $description }}
+				</p>
+			@endif
+
+			<div class="modal-divider"></div>
+
 			{{-- Modal content --}}
-			<main
-				class="modal-content"
-				id="{{ $id }}-content"
-			>
-				{{-- Modal header --}}
-				<header class="modal-header">
-					{{ $header }}
-				</header>
-
-				@if ($description)
-					<p class="modal-description">
-						{{ $description }}
-					</p>
-				@endif
-
+			<main class="modal-content" id="{{ $modalId }}-content">
 				<div class="modal-actions">
 					<x-button.outlined
 						label="Cancel"
-						data-custom-close="{{ $id }}"
+						data-custom-close="{{ $modalId }}"
 					/>
 
 					<x-button.primary
@@ -65,3 +45,6 @@
 		</div>
 	</div>
 </div>
+
+
+

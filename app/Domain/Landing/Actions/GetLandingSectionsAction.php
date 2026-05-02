@@ -7,12 +7,13 @@ use Illuminate\Support\Collection;
 
 class GetLandingSectionsAction
 {
-    /**
-     * Retrieve all landing sections by merging defaults with database overrides.
-     */
+    /*
+    |-------------------------------
+    | Get Landing Sections
+    |-------------------------------
+    */
     public function execute(): Collection
     {
-        return LandingSection::query()
-            ->get();
+        return LandingSection::query()->get();
     }
 }

@@ -7,13 +7,15 @@ use App\Domain\CompanyServices\Models\CompanyService;
 
 class UpdateCompanyServiceAction
 {
-    /**
-     * Update an existing company service with new data.
-     */
-    public function execute(CompanyService $companyService, UpdateCompanyServiceDto $dto): CompanyService
+    /*
+    |-------------------------------
+    | Update Company Service
+    |-------------------------------
+    */
+    public function execute(CompanyService $service, UpdateCompanyServiceDto $dto): CompanyService
     {
-        $companyService->update($dto->toArray());
+        $service->update($dto->toArray());
 
-        return $companyService->fresh();
+        return $service->refresh();
     }
 }

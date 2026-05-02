@@ -13,8 +13,8 @@ import resetFormValidation from "@js/common/form/reset-form-validation.js";
 |------------------------------- 
 */
 import.meta.glob([
-    "../assets/images/**", // include all images
-    "../assets/videos/**", // include all videos
+    "../assets/images/**",
+    "../assets/videos/**",
 ]);
 
 /* 
@@ -24,8 +24,6 @@ import.meta.glob([
 */
 const initCommonScripts = () => {
     initMicroModal();
-    globalException();
-    resetFormValidation();
     showPassword();
 };
 
@@ -39,15 +37,20 @@ const initUIComponents = () => {
 
 /* 
 |------------------------------- 
+| Init App
+|------------------------------- 
+*/
+const initApp = () => {
+    initCommonScripts();
+    initSidebarScripts();
+    initUIComponents();
+};
+
+/* 
+|------------------------------- 
 | Events 
 |------------------------------- 
 */
-window.addEventListener("DOMContentLoaded", () => {
-    initCommonScripts();
-    initUIComponents();
-});
+window.addEventListener("DOMContentLoaded", initApp);
 
-document.addEventListener("livewire:navigated", () => {
-    initSidebarScripts();
-    initUIComponents();
-});
+// document.addEventListener("livewire:navigated", initApp);

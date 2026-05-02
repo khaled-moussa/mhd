@@ -1,0 +1,95 @@
+/* 
+|-------------------------------
+| Navbar — App
+|-------------------------------
+*/
+.navbar--app {
+    @apply col-span-2 row-start-1 sticky top-0 z-30;
+    @apply flex items-center justify-between h-[65px] px-5;
+    @apply bg-background/80 border-b border-foreground/10;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+/* 
+|-------------------------------
+| Layout
+|-------------------------------
+*/
+.navbar--app-left {
+    @apply flex items-center gap-3;
+}
+
+.navbar--app-right {
+    @apply flex items-center gap-2.5;
+}
+
+.navbar--app-actions {
+    @apply flex items-center gap-5;
+}
+
+/* 
+|-------------------------------
+| Toggle
+|-------------------------------
+*/
+.navbar--app-toggle {
+    @apply w-8 h-8 flex items-center justify-center rounded-lg;
+    @apply border border-foreground/10 bg-transparent cursor-pointer;
+    @apply transition-colors duration-150 hover:bg-foreground/5;
+}
+
+.navbar--app-toggle i {
+    @apply text-foreground/55 text-sm;
+}
+
+/* 
+|-------------------------------
+| Brand
+|-------------------------------
+*/
+.navbar--app-brand {
+    @apply text-[13px] font-semibold text-foreground;
+}
+
+/* 
+|-------------------------------
+| Avatar
+|-------------------------------
+*/
+.navbar--app-avatar {
+    @apply w-[30px] h-[30px] rounded-full bg-primary;
+    @apply flex items-center justify-center;
+    @apply text-[11px] font-semibold text-background cursor-pointer;
+}
+
+/* 
+|-------------------------------
+| Account Dropdown
+|-------------------------------
+*/
+.account-dropdown-btn .dropdown-btn img {
+    @apply h-8 w-8 rounded-full;
+}
+
+.account-dropdown {
+    @apply divide-y! divide-current/10!;
+}
+
+.account-dropdown form .link-btn {
+    @apply text-left! text-base;
+}
+
+.account-dropdown-info {
+    @apply p-3.5 text-sm;
+    @apply space-y-2!;
+}
+
+.account-dropdown-info p:first-child {
+    @apply font-semibold! text-foreground;
+}
+
+.account-dropdown-info p {
+    @apply max-w-[10rem] break-words whitespace-normal;
+    @apply font-semibold text-current/50;
+}

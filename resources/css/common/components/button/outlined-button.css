@@ -17,7 +17,6 @@
     @apply hover:bg-foreground/10;
 }
 
-
 /* Sizes */
 .outlined-btn.sm {
     @apply h-9 px-3 text-xs;
@@ -36,7 +35,6 @@
     @apply max-w-72;
 }
 
-
 /* Layout */
 .outlined-btn.full {
     @apply w-full;
@@ -45,7 +43,6 @@
 .outlined-btn.left {
     @apply me-auto my-5;
 }
-
 
 /* Variants */
 .outlined-btn.white {
@@ -58,13 +55,17 @@
     @apply hover:bg-primary-500;
 }
 
+.outlined-btn.icon {
+    @apply h-6 w-6 p-1;
+    @apply bg-background border  text-red-400! border-red-300;
+    @apply hover:bg-primary-300 hover:text-background!;
+}
 
 /* Focus */
 .outlined-btn:focus-visible {
     @apply outline-none;
     @apply ring-2 ring-primary ring-offset-2;
 }
-
 
 /* Disabled */
 .outlined-btn:disabled {

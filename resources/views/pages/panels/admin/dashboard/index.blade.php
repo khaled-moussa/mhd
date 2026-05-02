@@ -20,8 +20,8 @@
             {{-- KPI cards section --}}
             @include('admin::dashboard.partials.cards')
 
-            {{-- Users table section --}}
-            @include('admin::dashboard.partials.company-projects-table')
+            {{-- Project section  --}}
+            @include('admin::company-projects.partials.company-project-body')
         </div>
     </div>
 @endsection

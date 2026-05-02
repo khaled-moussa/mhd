@@ -2,39 +2,37 @@
 
 namespace App\Domain\CompanyProjects\DTOs;
 
-use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
-use App\Domain\CompanyProjects\States\VisibilityStates\VisibleState;
-
 class UpdateCompanyProjectDto
 {
-    /**
-     * Create a new DTO instance.
-     */
+    /*
+    |-------------------------------
+    | DTO
+    |-------------------------------
+    */
     public function __construct(
-        public string  $uuid,
-        public string  $title,
+        public string $uuid,
+        public string $title,
         public ?string $description = null,
-        public ?string $deliveredAt = null,
-        public ?float  $priceStart = null,
+        public ?float $priceStart = null,
         public ?string $address = null,
         public ?string $location = null,
-        public bool  $visible = true,
+        public ?string $deliveredAt = null,
     ) {}
 
-    /**
-     * Convert the DTO to an array.
-     */
+    /*
+    |-------------------------------
+    | Transform to Array
+    |-------------------------------
+    */
     public function toArray(): array
     {
-        return
-            [
-                'title'            => $this->title,
-                'description'      => $this->description,
-                'delivered_at'     => $this->deliveredAt,
-                'price_start'      => $this->priceStart,
-                'address'          => $this->address,
-                'location'         => $this->location,
-                'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
-            ];
+        return array_filter([
+            'title' => $this->title,
+            'description' => $this->description,
+            'price_start' => $this->priceStart,
+            'address' => $this->address,
+            'location' => $this->location,
+            'delivered_at' => $this->deliveredAt,
+        ], fn ($value) => $value !== null);
     }
 }

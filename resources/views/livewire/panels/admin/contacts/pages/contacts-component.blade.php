@@ -21,9 +21,9 @@
 
     {{-- Contact view modal --}}
     <x-modal.delete
-        :id="$modalId['DELETE_CONTACT_MODAL']"
+        :modalId="$modalId['DELETE_CONTACT_MODAL']"
         title="Delete contact"
-        header="Are you sure to delete the contact!"
+        description="Are you sure to delete the contact!"
         wire:ignore
         wire:target="deleteContact"
         wire:loading.class="spinner"
