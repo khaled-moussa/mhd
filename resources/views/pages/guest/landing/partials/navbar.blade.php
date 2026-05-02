@@ -20,33 +20,33 @@
             <ul class="navbar-links">
                 <li>
                     <x-button.link
+                        class="navbar-link"
                         label="About"
                         :path="url('#about')"
-                        class="navbar-link"
                     />
                 </li>
 
                 <li>
                     <x-button.link
+                        class="navbar-link"
                         label="Services"
                         :path="url('#services')"
-                        class="navbar-link"
                     />
                 </li>
 
                 <li>
                     <x-button.link
+                        class="navbar-link"
                         label="Projects"
                         :path="url('#projects')"
-                        class="navbar-link"
                     />
                 </li>
 
                 <li>
                     <x-button.link
+                        class="navbar-link"
                         label="Contact"
                         :path="url('#contact')"
-                        class="navbar-link"
                     />
                 </li>
             </ul>
@@ -54,7 +54,7 @@
             <x-button.link
                 class="primary-btn"
                 label="Get in touch"
-                path="#contact"
+                :path="url('#contact')"
             />
         </div>
 
@@ -75,35 +75,33 @@
     <div class="navbar-mobile-menu">
 
         <x-button.link
+            class="navbar-mobile-link"
             label="About"
             :path="url('#about')"
-            class="navbar-mobile-link"
         />
 
         <x-button.link
+            class="navbar-mobile-link"
             label="Services"
             :path="url('#services')"
-            class="navbar-mobile-link"
         />
 
         <x-button.link
+            class="navbar-mobile-link"
             label="Projects"
             :path="url('#projects')"
-            class="navbar-mobile-link"
         />
 
         <x-button.link
+            class="navbar-mobile-link"
             label="Contact"
             :path="url('#contact')"
-            class="navbar-mobile-link"
         />
 
-        <a
-            href="#contact"
-            class="navbar-mobile-cta"
-        >
-            Get in touch
-        </a>
+        <x-button.link
+            label="Get in touch"
+            class="primary-btn"
+        />
 
     </div>
 </nav>

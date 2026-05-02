@@ -46,7 +46,7 @@
         />
     </div>
 
-    <x-button.main
+    <x-button.primary
         label="Send Message"
         class="primary-btn-full"
         wire:target="submit"

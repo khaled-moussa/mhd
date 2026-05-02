@@ -3,12 +3,9 @@
 namespace App\Livewire\Auth;
 
 use App\Domain\Auth\Actions\AttemptToLoginAction;
-use App\Domain\Auth\Actions\LogoutCurrentUserAction;
-use App\Domain\Auth\Actions\SetTwoFactorSessionStateAction;
+use App\Domain\Auth\Actions\LogoutUserAction;
+use App\Domain\Auth\Actions\PanelResolverAction;
 use App\Domain\Auth\Exceptions\FailedToLoginException;
-use App\Domain\Users\Actions\RedirectToDashboardRouteAction;
-use App\Domain\Users\Models\User;
-use App\Domain\Users\Services\UserEmailRequestService;
 use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Illuminate\Support\Facades\Auth;
@@ -35,16 +32,6 @@ class LoginFormComponent extends Component
     public function render()
     {
         return view('livewire.auth.login-form-component');
-    }
-
-    public function handleKnownExceptions($e, $stopPropagation): bool
-    {
-        if ($e instanceof FailedToLoginException) {
-            $this->handleLoginException($e, $stopPropagation);
-            return true;
-        }
-
-        return false;
     }
 
     /*
@@ -81,29 +68,27 @@ class LoginFormComponent extends Component
     | Actions
     |-------------------------------
     */
-    public function attemptLogin(): void
+    public function submit(): void
     {
-        $this->validate();
+        try {
+            $this->validate();
 
-        $user = app(AttemptToLoginAction::class)
-            ->execute(
+            $user = app(AttemptToLoginAction::class)->execute(
                 email: $this->email,
                 password: $this->password,
             );
 
-        $this->handleTwoFactor(user: $user);
+            app(LogoutUserAction::class)->execute();
 
-        app(LogoutCurrentUserAction::class)->execute();
+            Auth::login($user, $this->remember);
 
-        Auth::login($user, $this->remember);
+            $this->resetForm();
+            $this->dispatchLoginSuccessEvent();
 
-        $redirectRoute = app(RedirectToDashboardRouteAction::class)
-            ->execute(user: $user);
-
-        $this->resetForm();
-        $this->dispatchLoginSuccessEvent();
-
-        $this->redirectRoute($redirectRoute);
+            $this->redirect(PanelResolverAction::panelRoute(user: $user));
+        } catch (FailedToLoginException $e) {
+            $this->addError('login_failed', $e->getMessage());
+        }
     }
 
     /*
@@ -111,19 +96,6 @@ class LoginFormComponent extends Component
     | Helpers
     |-------------------------------
     */
-    private function handleTwoFactor(User $user)
-    {
-        $setting = $user->loadMissing('setting')->getRelation('setting');
-
-        if ($setting->isTwoFactorEnabled()) {
-            app(UserEmailRequestService::class)
-                ->verifyTwoFactorRequest(user: $user);
-
-            app(SetTwoFactorSessionStateAction::class)
-                ->execute(state: true);
-        }
-    }
-
     private function resetForm(): void
     {
         $this->reset([
@@ -134,17 +106,6 @@ class LoginFormComponent extends Component
 
         $this->resetValidation();
         $this->resetErrorBag();
-    }
-
-    /* 
-    |-------------------------------
-    | Exception Handlers
-    |------------------------------- 
-    */
-    private function handleLoginException(FailedToLoginException $e, callable $stop): void
-    {
-        $this->addError('login_failed', $e->getMessage());
-        $stop();
     }
 
     /*

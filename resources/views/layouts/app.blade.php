@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-	<head>
-		@include('layouts.partials.head')
-	</head>
+<head>
+    @include('layouts.partials.head')
+</head>
 
-	<body class="loader">
-		<div class="app-shell">
-			{{-- Navigation --}}
-			<x-navigation.sidebar.app />
-			<x-navigation.navbar.app />
+<body class="loader">
+    <div class="app-shell">
 
-			{{-- Main Content --}}
-			<main class="app-content">
-				@yield('component')
-			</main>
-		</div>
+        {{-- Sidebar --}}
+        @include('layouts.partials.sidebar')
 
-		@include('layouts.partials.scripts')
-	</body>
+        {{-- Navbar --}}
+        @include('layouts.partials.navbar')
+
+        {{-- Main Content --}}
+        <main class="app-content">
+            @yield('component')
+        </main>
+
+        {{-- Scripts --}}
+        @include('layouts.partials.scripts')
+    </div>
+</body>
+
 </html>

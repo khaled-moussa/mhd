@@ -17,23 +17,14 @@ class AttemptToChangePasswordAction
             throw new PasswordResetTokenExpiredException;
         }
 
-        $tokenExists = Password::tokenExists(
-            user: $user,
-            token: $token
-        );
+        $tokenExists = Password::tokenExists(user: $user, token: $token);
 
         if (! $tokenExists) {
             throw new PasswordResetTokenExpiredException;
         }
 
-        app(UpdateUserPasswordAction::class)
-            ->execute(
-                user: $user,
-                newPassword: $newPassword
-            );
+        app(UpdateUserPasswordAction::class)->execute(user: $user, newPassword: $newPassword);
 
-        Password::deleteToken(
-            user: $user
-        );
+        Password::deleteToken(user: $user);
     }
 }

@@ -1,134 +1,60 @@
 /* 
-|-----------------------------
-| Navbar
-|-----------------------------
+|-------------------------------
+| Navbar (Base)
+|-------------------------------
 */
 .navbar {
-    @apply fixed top-0 left-0 z-50 w-full h-[60px];
-    @apply bg-primary/5;
-    @apply transition-[background,border-color] duration-300;
+    @apply sticky top-0 z-30;
+    @apply flex items-center justify-between;
+    @apply max-h-[65px] px-6 py-3;
+    @apply border-b border-current/5;
+    @apply backdrop-blur-xl;
 }
 
-.navbar-scrolled {
-    @apply backdrop-blur-md! bg-foreground/50;
+.navbar-brand {
+    @apply text-lg font-bold tracking-wide;
 }
 
-/* 
-|-----------------------------
-| Navbar Container
-|-----------------------------
-*/
-.navbar-container {
-    @apply flex items-center justify-between w-full h-full px-6;
+.navbar-actions {
+    @apply flex items-center gap-5;
 }
 
-/* 
-|-----------------------------
-| Desktop Menu
-|-----------------------------
-*/
-.navbar-menu {
-    @apply hidden items-center gap-3;
-    @apply text-background text-base;
-    @apply lg:flex;
-}
-
-.navbar-links {
-    @apply flex items-center gap-0.5;
-}
-
-.navbar-link {
-    @apply px-3 py-1.5 rounded-lg whitespace-nowrap;
-    @apply text-base;
-    @apply transition-[background,color] duration-150;
-    @apply hover:bg-foreground/20;
+.navbar .toggle-btn {
+    @apply xl:hidden;
 }
 
 /* 
-|-----------------------------
-| CTA Button
-|-----------------------------
+|-------------------------------
+| Account Dropdown Card
+|-------------------------------
 */
-.navbar-cta {
-    @apply flex items-center justify-center shrink-0;
-    @apply h-[34px] px-4 rounded-lg;
-    @apply bg-primary text-background text-sm font-medium tracking-wide;
-    @apply transition-colors duration-150 hover:bg-primary-400;
+.account-dropdown-btn .dropdown-btn {
+    @apply bg-transparent! border-0! p-0!;
 }
 
-/* 
-|-----------------------------
-| Toggle
-|-----------------------------
-*/
-.navbar-checkbox {
-    @apply hidden;
+.account-dropdown-btn .dropdown-btn img {
+    @apply w-8 h-8 rounded-full;
 }
 
-.navbar-toggle {
-    @apply flex flex-col items-center justify-center gap-[5px];
-    @apply w-9 h-9 rounded-lg cursor-pointer;
-    @apply border border-background/15;
-    @apply transition-colors duration-150;
-    @apply hover:bg-foreground/10;
-    @apply lg:hidden;
+.account-dropdown {
+    @apply divide-y! divide-foreground!;
 }
 
-.navbar-toggle span {
-    @apply block h-[1.5px] rounded-sm bg-muted-foreground;
-    @apply transition-all duration-200;
+.account-dropdown form .link-btn {
+    @apply text-left! text-base;
 }
 
-.navbar-toggle span:nth-child(1),
-.navbar-toggle span:nth-child(3) {
-    @apply w-[14px];
+.account-dropdown-info {
+    @apply p-3.5 text-sm;
+    @apply space-y-2!;
 }
 
-.navbar-toggle span:nth-child(2) {
-    @apply w-[10px];
+.account-dropdown-info p:first-child {
+    @apply font-semibold! text-current/85!;
 }
 
-/* Open State */
-.navbar-checkbox:checked + .navbar-container .navbar-toggle span:nth-child(1) {
-    @apply translate-y-[6.5px] rotate-45;
-}
-
-.navbar-checkbox:checked + .navbar-container .navbar-toggle span:nth-child(2) {
-    @apply opacity-0;
-}
-
-.navbar-checkbox:checked + .navbar-container .navbar-toggle span:nth-child(3) {
-    @apply -translate-y-[6.5px] -rotate-45;
-}
-
-/* 
-|-----------------------------
-| Mobile Menu
-|-----------------------------
-*/
-.navbar-mobile-menu {
-    @apply hidden flex-col;
-    @apply absolute top-[60px] left-0 right-0;
-    @apply bg-foreground/95 backdrop-blur-xl;
-    @apply border-t border-background/7;
-    @apply lg:hidden!;
-}
-
-.navbar-checkbox:checked ~ .navbar-mobile-menu {
-    @apply flex;
-}
-
-.navbar-mobile-link {
-    @apply block px-6 py-3.5;
-    @apply text-sm text-background/65;
-    @apply border-b border-background/10;
-    @apply transition-colors duration-150;
-    @apply hover:bg-background/10 hover:text-background;
-}
-
-.navbar-mobile-cta {
-    @apply flex items-center justify-center;
-    @apply h-10 mx-4 my-3 rounded-lg;
-    @apply bg-primary text-background text-sm font-medium;
-    @apply transition-colors duration-150 hover:bg-primary-400;
+.account-dropdown-info p {
+    @apply max-w-[10rem];
+    @apply font-light text-current/50;
+    @apply break-words whitespace-normal;
 }

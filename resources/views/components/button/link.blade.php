@@ -1,27 +1,22 @@
 @props([
-    'type' => 'button',
     'label' => null,
-    'path' => '#',
+    'href' => '#',
 ])
 
 <a
+    href="{{ $href }}"
     id="{{ $attributes->get('id') }}"
-    href="{{ $path }}"
-    {{ $attributes->whereStartsWith('class') }}
+    class="{{ $attributes->get('class') }}"
+    {{ $attributes->whereStartsWith('data') }}
     {{ $attributes->whereStartsWith('wire') }}
-    {{ $attributes->whereStartsWith('x-model') }}
+    {{ $attributes->whereStartsWith('x-') }}
     {{ $attributes->whereStartsWith('@click') }}
 >
-    {{-- Icon --}}
-    {{ $icon ?? null }}
-
     {{-- Label --}}
     @if ($label)
-        <span>
-            {{ $label }}
-        </span>
+        {{ $label }}
     @endif
 
-    {{-- Slot element --}}
+    {{-- Slot (icons, buttons, etc.) --}}
     {{ $slot }}
 </a>

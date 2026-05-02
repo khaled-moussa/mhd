@@ -1,71 +1,66 @@
+/* 
+|--------------------------------
+| Form System
+|--------------------------------
+*/
+
 @import "./checkbox.css";
 @import "./datetime.css";
 @import "./drag-drop.css";
 @import "./input.css";
 @import "./tags.css";
 @import "./otp.css";
-@import "./radio.css";
 @import "./select.css";
 @import "./textarea.css";
 @import "./password.css";
 @import "./toggle-button.css";
 @import "./validation.css";
 
-[type="text"]:focus,
-[type="email"]:focus,
-[type="url"]:focus,
-[type="password"]:focus,
-[type="number"]:focus,
-[type="date"]:focus,
-[type="datetime-local"]:focus,
-[type="month"]:focus,
-[type="search"]:focus,
-[type="tel"]:focus,
-[type="time"]:focus,
-[type="week"]:focus,
-[multiple]:focus,
-textarea:focus,
-select:focus {
-    @apply border-dark/40;
+/* 
+|--------------------------------
+| Field
+|--------------------------------
+*/
+.input-field {
+    @apply mb-3;
 }
 
-form {
-    @apply flex w-full flex-col gap-9;
+/* 
+|--------------------------------
+| Field Wrapper
+|--------------------------------
+*/
+.input-wrapper {
+    @apply relative;
 }
 
-input,
-input:active,
-input:focus,
-input:focus-visible,
-input:focus-within,
-textarea,
-textarea:active,
-textarea:focus,
-textarea:focus-visible,
-textarea:focus-within,
-[type="checkbox"],
-[type="checkbox"]:active,
-[type="checkbox"]:focus,
-[type="checkbox"]:focus-visible,
-[type="checkbox"]:focus-within,
-[type="radio"],
-[type="radio"]:active,
-[type="radio"]:focus,
-[type="radio"]:focus-visible,
-[type="radio"]:focus-within {
-    @apply !shadow-none !ring-0 !ring-transparent !outline-0 !outline-none;
+/* 
+|--------------------------------
+| Rows (actions / links / helpers)
+|--------------------------------
+*/
+.input-field-row-center {
+    @apply flex items-center justify-center;
+    @apply text-sm gap-2;
 }
 
-.input-field:has(input:required) label,
-.input-field:has(textarea:required) label {
-    @apply w-fit after:ml-1.5 after:text-red-500 after:content-['*'];
+.input-field-row-between {
+    @apply flex items-center justify-between;
+    @apply mb-5;
 }
 
-.form-actions {
-    @apply flex w-full flex-col-reverse justify-end gap-4 lg:flex-row;
+/* 
+|--------------------------------
+| Link
+|--------------------------------
+*/
+.input-field-link {
+    @apply text-center;
 }
 
-.form-actions button,
-.form-actions a {
-    @apply w-full !text-sm lg:w-auto;
+.input-field-link a {
+    @apply text-sm;
+    @apply text-foreground/85;
+    @apply transition-colors duration-300;
+    @apply hover:text-primary;
 }

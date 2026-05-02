@@ -4,11 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Domain\Auth\Middlewares\AuthMiddleware;
-use App\Domain\Auth\Middlewares\GuestMiddleware;
-use App\Domain\Auth\Middlewares\TwoFactorMiddleware;
 use App\Domain\Auth\Middlewares\EmailVerifiedMiddleware;
-
-use App\Panel\Middleware\SetPanelMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     /*
@@ -31,10 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'auth'        => AuthMiddleware::class,
-            'guest'       => GuestMiddleware::class,
             'verified'    => EmailVerifiedMiddleware::class,
-            'two-factor'  => TwoFactorMiddleware::class,
-            'panel'       => SetPanelMiddleware::class,
         ]);
     })
 

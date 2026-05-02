@@ -15,7 +15,7 @@
                 :placeholder="false"
             />
 
-            <x-button.outline
+            <x-button.outlined
                 class="modal-open"
                 data-modal-id="update-email-modal"
                 label="Edit"
@@ -29,7 +29,7 @@
             label="Password"
             description="Update your account password to maintain strong account protection."
         >
-            <x-button.outline
+            <x-button.outlined
                 class="modal-open"
                 label="Edit"
                 data-modal-id="update-password-modal"
@@ -43,7 +43,7 @@
             label="2-step verification"
             description="Add an extra layer of security by requiring a verification code when signing in."
         >
-            <x-button.outline
+            <x-button.outlined
                 class="modal-open"
                 :label="$twoFactorStateLabel"
                 data-modal-id="update-two-factor-modal"
@@ -57,7 +57,7 @@
             label="Delete Account"
             description="Permanently remove your account and all associated data from our system."
         >
-            <x-button.main
+            <x-button.primary
                 class="modal-open danger"
                 label="Delete Account"
                 data-modal-id="delete-account-modal"

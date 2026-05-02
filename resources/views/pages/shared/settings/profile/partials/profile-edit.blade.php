@@ -29,7 +29,7 @@
 
         {{-- Save / Cancel --}}
         <div class="form-actions">
-            <x-button.main
+            <x-button.primary
                 label="Save"
                 wire:loading.class="spinner"
                 wire:target="submit"
@@ -37,7 +37,7 @@
             >
             </x-button.main>
 
-            <x-button.outline
+            <x-button.outlined
                 label="Cancel"
                 @click="cancelEdit"
             >

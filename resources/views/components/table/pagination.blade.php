@@ -13,8 +13,8 @@
 
     <div class="pagination-elements">
         {{-- Prev Button --}}
-        <x-button.outline 
-            class="outline-btn"
+        <x-button.outlined 
+            class="outline-btn sm"
             :disabled="$paginator->onFirstPage()"
             wire:click="previousPage"
         >
@@ -23,8 +23,8 @@
 
         <div class="total-pages">
             {{-- Always show First Page --}}
-            <x-button.outline 
-                class="outline-btn {{ $currentPage == 1 ? 'active' : '' }}"
+            <x-button.outlined 
+                class="outline-btn sm {{ $currentPage == 1 ? 'active' : '' }}"
                 wire:click="setPage(1)"
             >
                 1
@@ -32,8 +32,8 @@
 
             {{-- Middle pages --}}
             @for ($i = $startingPage; $i <= $endingPage; $i++)
-                <x-button.outline 
-                    class="outline-btn {{ $currentPage == $i ? 'active' : '' }}"
+                <x-button.outlined 
+                    class="outline-btn sm {{ $currentPage == $i ? 'active' : '' }}"
                     wire:click="setPage({{ $i }})"
                 >
                     {{ $i }}
@@ -47,7 +47,7 @@
 
             {{-- Always show Last Page --}}
             @if ($lastPage > 1)
-                <x-button.outline 
+                <x-button.outlined 
                     class="outline-btn {{ $currentPage == $lastPage ? 'active' : '' }}"
                     wire:click="setPage({{ $lastPage }})"
                 >
@@ -57,8 +57,8 @@
         </div>
 
         {{-- Next Button --}}
-        <x-button.outline 
-            class="outline-btn"
+        <x-button.outlined 
+            class="outline-btn sm"
             :disabled="!$paginator->hasMorePages()"
             wire:click="nextPage"
         >

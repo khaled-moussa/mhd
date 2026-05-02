@@ -9,7 +9,7 @@
 	</div>
 
 	{{-- Toggle --}}
-	<x-button.outline
+	<x-button.outlined
 		id="sidebar-expand-btn"
 		class="toggle-btn"
 	>
@@ -48,11 +48,11 @@
 				>
 					@csrf
 
-					<x-button.icon
+					{{-- <x-button.icon
 						type="submit"
 						label="Logout"
 						icon="fi fi-sr-sign-out-alt"
-					/>
+					/> --}}
 				</form>
 			</li>
 		</ul>

@@ -7,13 +7,12 @@
 	@include('pages.panels.admin.company-services.partials.company-service-form')
 
 	<div class="modal-actions">
-		<x-button.outline
-			class="modal-close"
+		<x-button.outlined
 			label="Cancel"
 			:data-custom-close="$modalId['UPDATE_COMPANY_SERVICE_MODAL']"
 		/>
 
-		<x-button.main
+		<x-button.primary
 			label="Submit"
 			wire:target="submit"
 			wire:loading.class="spinner"

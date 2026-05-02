@@ -1,129 +1,31 @@
 /* 
-|-------------------------------
-| Inputs — Reset
-|-------------------------------
-*/
-
-/* Hide number input arrows */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    appearance: textfield;
-}
-
-/* Autofill reset */
-input:-webkit-autofill,
-input:-webkit-autofill:focus {
-    @apply transition-[background-color,color] duration-[600000s];
-    background-color: transparent !important;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    @apply rounded-full;
-    -webkit-background-clip: text !important;
-    @apply bg-transparent shadow-none;
-}
-
-/* File input */
-input[type="file"] {
-    @apply cursor-pointer;
-}
-
-input::file-selector-button {
-    @apply hidden;
-}
-
-/* 
-|-------------------------------
-| Input Field Wrapper
-|-------------------------------
-*/
-.input-field {
-    @apply relative;
-}
-
-/* 
-|-------------------------------
+|--------------------------------
 | Input
-|-------------------------------
+|--------------------------------
 */
-.input-field input:not([type="color"]),
-.input-field .tagify-input {
-    @apply w-full p-3 rounded-sm;
-    @apply text-sm font-medium font-inter;
-    @apply text-foreground placeholder:text-foreground/60;
-    @apply bg-current/2 border border-foreground/10;
-    @apply outline-none ring-0 shadow-none;
-    @apply transition-all duration-150 ease-in-out;
-}
-
-.input-field:hover input:not([type="color"]) {
-    @apply border-foreground/20;
-}
-
-.input-field input:focus,
-.input-field input:active {
-    @apply bg-current/7;
+.input-field input {
+    @apply w-full h-11;
+    @apply mt-1 px-3.5;
+    @apply rounded-sm border border-foreground/20;
+    @apply bg-foreground/3 text-sm text-foreground;
+    @apply transition-colors duration-150;
+    @apply outline-none;
 }
 
 /* 
-|-------------------------------
-| Label
-|-------------------------------
+|--------------------------------
+| Placeholder
+|--------------------------------
 */
-.input-field label {
-    @apply mb-3 flex items-center justify-between;
-    @apply text-sm font-medium leading-none;
-    @apply text-current/90 font-inter;
-    @apply transition-all duration-150 ease-in-out;
-}
-
-.input-field input:focus + label {
-    @apply text-current;
+.input-field input::placeholder {
+    @apply text-foreground/50;
 }
 
 /* 
-|-------------------------------
-| Description & Details
-|-------------------------------
+|--------------------------------
+| Focus State
+|--------------------------------
 */
-.input-field .description {
-    @apply my-2.5 text-sm font-medium text-current/60 font-inter;
-}
-
-.input-field .details {
-    @apply absolute right-4 top-[2.125rem];
-    @apply text-sm font-medium text-foreground/30 font-inter;
-}
-
-/* 
-|-------------------------------
-| Suffix & Actions
-|-------------------------------
-*/
-.input-field .suffix {
-    @apply absolute right-4 top-1/2 -translate-y-1/2;
-    @apply text-sm font-medium text-current/60;
-}
-
-.input-field > button {
-    @apply absolute right-4 top-1/2 -translate-y-1/2 p-1;
-    @apply text-black/50 hover:text-black/80;
-}
-
-/* 
-|-------------------------------
-| Helper Text
-|-------------------------------
-*/
-.input-field small {
-    @apply absolute right-4 top-10;
-    @apply text-sm leading-none text-foreground/60;
+.input-field input:focus {
+    @apply border border-primary/45;
 }

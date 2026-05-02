@@ -1,23 +1,41 @@
-/* 
-|-----------------------------
-| Navbar (Base)
-|-----------------------------
-*/
 .navbar {
-    @apply sticky top-0 z-30 flex max-h-[65px] items-center justify-between;
-    @apply border-b border-current/5 px-6 py-3 backdrop-blur-xl;
+    @apply col-span-2 row-start-1 sticky top-0 z-30;
+    @apply flex items-center justify-between h-[65px] px-5;
+    @apply bg-background/80 border-b border-black/[0.07];
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.navbar-left {
+    @apply flex items-center gap-3;
+}
+
+.navbar-toggle {
+    @apply w-8 h-8 flex items-center justify-center rounded-lg;
+    @apply border border-black/[0.1] bg-transparent cursor-pointer;
+    @apply transition-colors duration-150 hover:bg-black/[0.04];
+}
+
+.navbar-toggle i {
+    @apply text-dark/55 text-sm;
 }
 
 .navbar-brand {
-    @apply text-lg font-bold tracking-wide;
+    @apply text-[13px] font-semibold text-dark;
+}
+
+.navbar-right {
+    @apply flex items-center gap-2.5;
+}
+
+.navbar-avatar {
+    @apply w-[30px] h-[30px] rounded-full bg-primary;
+    @apply flex items-center justify-center;
+    @apply text-[11px] font-semibold text-white cursor-pointer;
 }
 
 .navbar-actions {
     @apply flex items-center gap-5;
-}
-
-.navbar .toggle-btn {
-    @apply xl:hidden;
 }
 
 /* 

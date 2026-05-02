@@ -1,11 +1,11 @@
 <?php
 
 use App\App\Web\Controllers\Auth\EmailVerificationController;
-use App\App\Web\Controllers\Auth\ForgetPasswordController;
 use App\App\Web\Controllers\Auth\LoginController;
+use App\App\Web\Controllers\Auth\RegisterController;
+use App\App\Web\Controllers\Auth\ForgotPasswordController;
 use App\App\Web\Controllers\Auth\LogoutController;
 use App\App\Web\Controllers\Auth\ResetPasswordController;
-use App\App\Web\Controllers\Auth\TwoFactorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,28 +16,15 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-/*
-|--------------------------------------------------------------------------
-| Guest Authentication Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::middleware('guest')
-    ->prefix('auth')
+Route::prefix('auth')
     ->as('auth.')
     ->group(function () {
-        Route::get('login', LoginController::class)
-            ->name('login');
-
-        // Route::get('register', RegisterController::class)
-        //     ->name('register');
-
-        Route::get('forgot-password', ForgetPasswordController::class)
-            ->name('forgot-password');
-
-        Route::get('reset-password/{email}/{token}', ResetPasswordController::class)
-            ->name('reset-password');
+        Route::get('/login', LoginController::class)->name('login');
+        Route::get('/register', RegisterController::class)->name('register');
+        Route::get('/forgot-password', ForgotPasswordController::class)->name('forgot-password');
+        Route::get('/reset-password', ResetPasswordController::class)->name('reset-password');
     });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -57,9 +44,6 @@ Route::middleware('auth')
 
         Route::post('verify/resend', [EmailVerificationController::class, 'resend'])
             ->name('verification.send');
-
-        Route::get('two-factor-authentication', TwoFactorController::class)
-            ->name('two-factor');
 
         Route::post('logout', LogoutController::class)
             ->name('logout');

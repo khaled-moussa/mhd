@@ -1,98 +1,70 @@
 @reference "@css/reference.css";
 
 /* 
-|-----------------------------
-| Auth Imports
-|-----------------------------
+|--------------------------------
+| Auth Page
+|--------------------------------
 */
-@import "./utilities.css";
-@import "./verification.css";
-
-/* 
-|-----------------------------
-| Auth Wrapper
-|-----------------------------
-*/
-.auth-wrapper {
-    @apply grid min-h-screen w-full gap-4 overflow-y-hidden p-0;
-    @apply place-items-center;
+.auth-page {
+    @apply w-full max-w-[650px] min-h-screen mx-auto;
+    @apply grid place-items-center;
 }
 
 /* 
-|-----------------------------
-| Auth Background
-|-----------------------------
+|--------------------------------
+| Right Panel
+|--------------------------------
 */
-.auth-bg {
-    @apply relative hidden h-screen items-end justify-center;
-    @apply md:flex;
+.auth-header {
+    @apply mb-10;
 }
 
-.auth-bg img {
-    @apply h-full w-full object-cover object-top;
+.auth-eyebrow {
+    @apply mb-3 text-sm font-medium uppercase;
+}
+
+.auth-title {
+    @apply mb-1.5 leading-tight text-foreground text-2xl line-clamp-3;
+}
+
+.auth-subtitle {
+    @apply text-sm leading-relaxed text-foreground/60;
 }
 
 /* 
-|-----------------------------
-| Auth Content
-|-----------------------------
+|--------------------------------
+| Form Layout (Grid System)
+|--------------------------------
 */
-.auth-content {
-    @apply h-fit overflow-y-auto rounded-xl p-10;
-    @apply bg-white border border-black/[0.08];
-    @apply sm:p-10 lg:px-10 lg:py-10;
+.auth-form-wrap {
+    @apply w-full bg-foreground/2 p-10;
+    @apply rounded-lg;
 }
 
-/* Logo */
-.auth-content .logo {
-    @apply mb-8 h-9 bg-left;
+.auth-form-wrap:has(.form-layout--2cols) {
+    @apply max-w-[800px];
 }
 
-/* Header */
-.auth-content .header {
-    @apply mb-8 flex flex-col;
+.form-layout {
+    @apply grid grid-cols-1 gap-4;
 }
 
-.auth-content .header h1 {
-    @apply text-2xl font-medium tracking-tight text-dark;
-    @apply md:text-[1.75rem];
-}
-
-.auth-content .header p {
-    @apply mt-1 text-sm text-foreground/50;
+.form-layout--2cols {
+    @apply grid grid-cols-1 gap-4;
+    @apply md:grid-cols-2;
 }
 
 /* 
-|-----------------------------
-| Auth Forms
-|-----------------------------
+|--------------------------------
+| Divider + Register
+|--------------------------------
 */
-.auth-content .auth-form {
-    @apply mt-0 w-full gap-5;
+.auth-divider {
+    @apply w-full mt-6 mb-4 flex items-center gap-2.5 text-foreground;
+    @apply before:flex-1 before:bg-foreground/20 before:h-px;
+    @apply after:flex-1 after:bg-foreground/20 after:h-px;
 }
 
-.auth-content .row-input {
-    @apply flex w-full flex-col items-center gap-5;
-    @apply md:flex-row;
-}
-
-.auth-content .input-field {
-    @apply w-full;
-}
-
-.auth-content .row-end {
-    @apply items-end!;
-}
-
-.auth-content .row {
-    @apply mt-1 mb-2;
-}
-
-.auth-content .forget-password {
-    @apply text-sm text-primary underline underline-offset-[3px] flex-1 text-end text-nowrap;
-}
-
-.auth-content .form-actions {
-    @apply mt-2 flex flex-col items-center gap-4;
-    @apply child:w-full;
+.auth-divider span {
+    @apply text-[11px] text-white/25;
 }

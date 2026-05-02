@@ -24,7 +24,7 @@
         </div>
 
         {{-- Edit Button --}}
-        <x-button.outline
+        <x-button.outlined
             label="Edit"
             @click="editUser"
         >

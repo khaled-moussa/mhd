@@ -26,7 +26,7 @@
                     {{ $modalTitle }}
                 </h2>
 
-                <x-button.outline
+                <x-button.outlined
                     class="modal-close"
                     :data-custom-close="$modalId"
                 />

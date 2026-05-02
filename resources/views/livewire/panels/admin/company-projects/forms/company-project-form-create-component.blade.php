@@ -7,13 +7,13 @@
     @include('admin::company-projects.partials.company-project-form')
 
     <div class="modal-actions">
-        <x-button.outline
+        <x-button.outlined
             class="modal-close"
             label="Cancel"
             :data-modal-id="$modalId['CREATE_COMPANY_PROJECT_MODAL']"
         />
 
-        <x-button.main
+        <x-button.primary
             label="Submit"
             wire:target="handleSubmit"
             wire:loading.class="spinner"

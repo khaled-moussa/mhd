@@ -1,114 +1,180 @@
-/* -------------------------------  
-   Sidebar Container  
--------------------------------- */
+/* 
+|-------------------------------
+| Sidebar Container
+|-------------------------------
+*/
 .sidebar {
-    @apply fixed -left-[250px] top-[65px] h-screen w-[85px] max-w-[250] row-span-2;
-    @apply px-4 py-5 border-current/5 backdrop-blur-2xl;
-    @apply rounded-tr-2xl rounded-br-2xl transition-all ease-in-out duration-300 z-20;
-    @apply lg:block lg:sticky lg:top-0 lg:border-r;
-    @apply flex shrink-0 flex-col;
-    @apply bg-background;
-}
-
-/* -------------------------------  
-   Toggle Button  
--------------------------------- */
-.sidebar .toggle-btn {
-    @apply hidden absolute top-19 right-[-12px] w-7 h-7 min-h-0 p-1 rounded-full border-none;
-    @apply bg-current/15 text-current cursor-pointer hover:bg-current/5;
-    @apply xl:flex;
-}
-
-.sidebar .toggle-btn i {
-    @apply text-xs;
-}
-
-/* -------------------------------  
-   Brand Section  
--------------------------------- */
-.sidebar-brand {
-    @apply flex items-center gap-3 mb-10 font-bold text-lg tracking-wide;
-}
-
-.sidebar-brand .logo {
-    @apply bg-left;
-}
-
-.sidebar-brand .brand-name {
-    @apply truncate;
-}
-
-/* -------------------------------  
-   Sidebar Menu  
--------------------------------- */
-.sidebar-menu {
-    @apply flex flex-col items-center justify-center gap-5 mt-8 p-0 transition-all duration-150 ease-in-out;
-}
-
-.sidebar-menu-scroll {
-    @apply w-full flex flex-col justify-between overflow-y-auto overflow-x-hidden;
-    scrollbar-width: none;
-    height: calc(100% - 135px);
-}
-
-.sidebar-menu li {
-    @apply flex items-center justify-center rounded-xl text-current/85;
-}
-
-.sidebar-menu li i {
-    @apply text-xl shrink-0;
-}
-
-.sidebar-menu:last-child li:last-child {
-    @apply !text-red-400;
-}
-
-.sidebar-menu a,
-.sidebar-menu form button {
-    @apply w-full p-3 flex items-center -me-1 rounded-xl text-current/80;
-    @apply transition-all duration-300 hover:bg-current/10 hover:text-current;
-}
-
-.sidebar-menu a.active,
-.sidebar-menu form button.active {
-    @apply bg-current/10 text-current;
-}
-
-.sidebar-menu a span,
-.sidebar-menu form button span {
-    @apply whitespace-nowrap transition-all duration-300;
-    @apply lg:w-0 lg:overflow-hidden lg:opacity-0;
-}
-
-/* -------------------------------  
-   Collapsed Sidebar  
--------------------------------- */
-.sidebar.collapsed {
-    @apply w-[235px];
-    @apply max-lg:fixed max-lg:left-0;
-}
-
-.sidebar.collapsed .sidebar-menu li {
+    @apply sticky top-0;
+    @apply flex flex-col overflow-hidden;
+    @apply grid-cols-1 grid-rows-2;
     @apply w-full;
+    @apply lg:px-2 py-4;
+    @apply bg-background;
+    @apply border-r border-foreground/[0.07];
+    @apply transition-all duration-250 ease-in-out;
+
+    height: calc(100vh - 65px);
 }
 
-.sidebar.collapsed a {
-    @apply flex h-full gap-3;
+
+/* 
+|-------------------------------
+| Sidebar Top — Brand
+|-------------------------------
+*/
+.sidebar-top {
+    @apply flex items-center justify-center;
+    @apply mb-5 px-1;
+    @apply transition-all duration-250;
 }
 
-.sidebar.collapsed a,
-.sidebar.collapsed form button {
-    @apply flex h-full gap-3;
+.sidebar-brand-icon {
+    @apply flex items-center justify-center shrink-0;
+    @apply w-9 h-9;
+    @apply rounded-[9px];
+    @apply bg-primary;
+    @apply cursor-pointer;
 }
 
-.sidebar.collapsed .sidebar-menu a span {
-    @apply lg:w-auto lg:opacity-100;
+.sidebar-brand-icon i {
+    @apply mx-auto text-sm text-white;
 }
 
-.sidebar.collapsed .sidebar-menu form button span {
-    @apply lg:w-auto lg:opacity-100;
+.sidebar-brand-text {
+    @apply text-[13px] font-semibold text-foreground;
+    @apply whitespace-nowrap;
+    @apply opacity-0 w-0 overflow-hidden ml-0;
+    @apply transition-all duration-250 ease-in-out;
 }
 
-.sidebar.collapsed .toggle-btn i {
-    @apply rotate-90;
+
+/* 
+|-------------------------------
+| Nav Scroll Area
+|-------------------------------
+*/
+.sidebar-scroll {
+    @apply flex flex-col flex-1;
+    @apply overflow-y-auto overflow-x-hidden;
+
+    scrollbar-width: none;
+}
+
+
+/* 
+|-------------------------------
+| Nav Section
+|-------------------------------
+*/
+.sidebar-section {
+    @apply mb-4;
+}
+
+/* Odd sections only */
+.sidebar-section:nth-child(even) {
+    @apply border-t border-foreground/10;
+}
+
+.sidebar-section-label {
+    @apply px-2 mb-1.5;
+    @apply text-xs font-medium uppercase tracking-wide;
+    @apply text-foreground/30;
+    @apply whitespace-nowrap;
+    @apply opacity-0 h-0 overflow-hidden;
+    @apply transition-all duration-200 ease-in-out;
+}
+
+
+/* 
+|-------------------------------
+| Nav Items
+|-------------------------------
+*/
+.sidebar-item {
+    @apply relative flex items-center gap-0;
+    @apply px-3 py-2.5 mb-4;
+    @apply rounded-sm;
+    @apply text-sm font-medium text-dark/45;
+    @apply cursor-pointer no-underline;
+    @apply transition-all duration-150;
+    @apply hover:bg-foreground/10 hover:text-foreground/70;
+}
+
+.sidebar-item.active {
+    @apply bg-primary/10 text-primary;
+}
+
+.sidebar-item i {
+    @apply flex h-fit shrink-0;
+    @apply text-lg;
+}
+
+.sidebar-item-label {
+    @apply whitespace-nowrap;
+    @apply opacity-0 w-0 overflow-hidden ml-0;
+    @apply transition-all duration-250 ease-in-out;
+}
+
+.sidebar-item-dot {
+    @apply absolute right-2.5;
+    @apply w-[5px] h-[5px];
+    @apply rounded-full bg-primary;
+    @apply hidden;
+}
+
+
+/* 
+|-------------------------------
+| Sidebar Tooltip (Collapsed)
+|-------------------------------
+*/
+.sidebar-item:not(.app-shell.collapsed .sidebar-item)[title]:hover::after {
+    content: attr(title);
+    @apply absolute;
+    @apply left-[calc(100%+10px)] top-1/2 -translate-y-1/2;
+    @apply z-50;
+    @apply px-2.5 py-1.5;
+    @apply text-xs font-medium text-white;
+    @apply bg-dark rounded-lg;
+    @apply whitespace-nowrap pointer-events-none;
+}
+
+
+/* 
+|-------------------------------
+| Sidebar Bottom — User
+|-------------------------------
+*/
+.sidebar-bottom {
+    @apply mt-auto pt-3;
+    @apply border-t border-foreground/10;
+}
+
+.sidebar-user {
+    @apply flex items-center gap-0;
+    @apply px-1.5 py-2;
+    @apply rounded-xl;
+    @apply cursor-pointer;
+    @apply transition-all duration-150;
+}
+
+.sidebar-user-avatar {
+    @apply flex items-center justify-center shrink-0;
+    @apply w-[30px] h-[30px];
+    @apply rounded-full bg-primary;
+    @apply text-xs font-semibold text-background;
+}
+
+.sidebar-user-info {
+    @apply opacity-0 w-0 overflow-hidden ml-0;
+    @apply transition-all duration-250 ease-in-out;
+}
+
+.sidebar-user-name {
+    @apply mb-1.5 text-xs font-semibold text-foreground/70;
+    @apply whitespace-nowrap;
+}
+
+.sidebar-user-role {
+    @apply text-xs text-muted-foreground whitespace-nowrap;
 }

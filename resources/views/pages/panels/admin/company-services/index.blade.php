@@ -14,7 +14,7 @@
 @section('component')
     {{-- Page header --}}
     <x-header.page title="Services">
-        <x-button.main
+        <x-button.primary
             label="Create Service"
             :data-custom-open="$modalId['CREATE_COMPANY_SERVICE_MODAL']"
         />

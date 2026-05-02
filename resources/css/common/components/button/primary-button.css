@@ -1,43 +1,61 @@
 /* 
-|-----------------------------
+|--------------------------------
 | Primary Button
-|-----------------------------
+|--------------------------------
 */
+
+/* Base */
 .primary-btn {
-    @apply flex w-max min-h-8 items-center justify-center gap-2;
-    @apply rounded-sm px-5 py-3;
-    @apply text-sm font-medium;
-    @apply bg-primary-400 text-background;
+    @apply inline-flex items-center justify-center gap-2;
+    @apply h-9 px-4;
+    @apply rounded-sm;
+    @apply text-xs font-bold uppercase tracking-wider;
+    @apply bg-primary-300 text-background;
     @apply shadow-sm;
-    @apply hover:bg-primary-300;
+    @apply cursor-pointer;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:bg-primary-500 hover:scale-[1.01];
 }
 
-/* 
-|-----------------------------
-| Width Variant
-|-----------------------------
-*/
 
+/* Sizes */
+.primary-btn.sm {
+    @apply h-9 px-3 text-xs;
+}
+
+.primary-btn.md {
+    @apply h-10 px-4 text-sm;
+}
+
+.primary-btn.lg {
+    @apply h-11 px-6 text-base;
+}
+
+.primary-btn.xl {
+    @apply h-12 px-10 text-lg;
+    @apply max-w-72;
+}
+
+
+/* Layout */
 .primary-btn-full {
     @apply w-full;
 }
 
-/* 
-|-----------------------------
-| Danger Variant
-|-----------------------------
-*/
-.primary-btn.danger {
-    @apply bg-[#ac3737] text-background;
-    @apply shadow-sm;
-    @apply hover:bg-[#b01212];
+.primary-btn-full-span {
+    @apply col-span-full;
 }
 
-/* 
-|-----------------------------
-| Icon
-|-----------------------------
-*/
-.primary-btn i {
-    @apply shrink-0;
+
+/* Focus */
+.primary-btn:focus-visible {
+    @apply outline-none;
+    @apply ring-2 ring-primary ring-offset-2;
+}
+
+
+/* Disabled */
+.primary-btn:disabled {
+    @apply opacity-50;
+    @apply pointer-events-none;
 }

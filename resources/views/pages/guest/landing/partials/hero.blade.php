@@ -42,7 +42,7 @@
                         path="#projects"
                     />
                     <x-button.link
-                        class="outline-btn"
+                        class="outlined-btn white"
                         label="Contact Us"
                         path="#contact"
                     />

@@ -4,6 +4,8 @@ import initSidebarCollapse from "./components/sidebar/sidebar-collapse.js";
 import globalException from "./exceptions/global-exception.js";
 import { initMicroModal } from "./components/modal/_modal.js";
 import { initFlowbite } from "flowbite";
+import showPassword from "@js/common/form/password.js";
+import resetFormValidation from "@js/common/form/reset-form-validation.js";
 
 /* 
 |------------------------------- 
@@ -23,6 +25,8 @@ import.meta.glob([
 const initCommonScripts = () => {
     initMicroModal();
     globalException();
+    resetFormValidation();
+    showPassword();
 };
 
 const initSidebarScripts = () => {
@@ -44,7 +48,6 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("livewire:navigated", () => {
-    initCommonScripts();
     initSidebarScripts();
     initUIComponents();
 });

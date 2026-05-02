@@ -1,11 +1,55 @@
-.checkbox {
-    @apply flex flex-row items-center gap-2.5 text-current cursor-pointer!;
+/* 
+|--------------------------------
+| Checkbox
+|--------------------------------
+*/
+.checkbox-field {
+    @apply flex items-center;
+    @apply gap-2.5;
+    @apply text-current;
+    @apply cursor-pointer;
 }
 
+/* 
+|--------------------------------
+| Wrapper
+|--------------------------------
+*/
+.checkbox-wrapper {
+    @apply flex items-center;
+    @apply gap-2;
+}
+
+/* 
+|--------------------------------
+| Label
+|--------------------------------
+*/
+.checkbox-label {
+    @apply text-xs uppercase;
+    @apply text-foreground;
+}
+
+/* 
+|--------------------------------
+| Icon
+|--------------------------------
+*/
 .checkbox-icon {
-    @apply h-5 w-5 flex rounded-md border border-[#a2a1a833]  peer-checked:bg-[#f39d52] transition;
+    @apply flex items-center justify-center;
+    @apply w-5 h-5;
+    @apply rounded-md;
+    @apply border border-foreground/20;
+    @apply transition-colors duration-150;
+    @apply peer-checked:bg-primary/80;
 }
 
+/* 
+|--------------------------------
+| SVG
+|--------------------------------
+*/
 .checkbox-svg {
-    @apply w-5 h-5 stroke-[#e8e8e8] dark:stroke-[#212121];
+    @apply w-5 h-5;
+    @apply stroke-background;
 }

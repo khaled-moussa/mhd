@@ -1,7 +1,20 @@
+/* 
+|-----------------------------
+| Date Picker Indicator
+|-----------------------------
+*/
 input::-webkit-calendar-picker-indicator {
-  @apply text-foreground -translate-y-[3px] rounded-full text-xs;
+    @apply -translate-y-[3px] rounded-full text-xs;
+    @apply text-foreground;
 }
+
+/* 
+|-----------------------------
+| Date / Datetime Overlay
+|-----------------------------
+*/
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-  @apply absolute inset-0 h-auto w-auto cursor-pointer bg-transparent bg-none text-transparent;
+    @apply absolute inset-0 w-auto h-auto;
+    @apply cursor-pointer bg-transparent text-transparent;
 }

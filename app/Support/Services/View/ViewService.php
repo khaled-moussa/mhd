@@ -9,6 +9,7 @@ use App\Domain\Users\Actions\GetCurrentUserAction;
 use App\Navigation\Sidebar\SidebarBuilder;
 use App\Panel\Resolvers\PanelManager;
 use App\Support\Cache\EnumCache;
+use App\Support\Context\AuthContext;
 use App\Support\Context\SectionContext;
 use App\Support\Enums\EventsEnum;
 use App\Support\Enums\FormEnum;
@@ -45,6 +46,7 @@ class ViewService
         self::shareEnums();
         self::shareModalIds();
         self::shareFormIds();
+        self::shareAuthUser();
     }
 
     public static function registerPanelComposers(): void
@@ -99,6 +101,15 @@ class ViewService
             'formId',
             EnumCache::remember('form', fn() => EnumExporter::export(FormEnum::class))
         );
+    }
+
+    private static function shareAuthUser(): void
+    {
+        ViewFacade::composer('layouts.app', function ($view) {
+            $view->with([
+                'user' => AuthContext::toResource(),
+            ]);
+        });
     }
 
     /*

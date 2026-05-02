@@ -50,7 +50,7 @@
                         ></p>
 
                         {{-- Cancel --}}
-                        <x-button.outline
+                        <x-button.outlined
                             class="cancel-btn danger"
                             label="Cancel"
                             x-show="!isEditing"
@@ -58,7 +58,7 @@
                         />
 
                         {{-- Remove --}}
-                        <x-button.outline
+                        <x-button.outlined
                             class="cancel-btn danger"
                             label="Remove"
                             x-show="isEditing"
@@ -130,7 +130,7 @@
                         ></p>
 
                         {{-- Cancel --}}
-                        <x-button.outline
+                        <x-button.outlined
                             class="cancel-btn danger"
                             label="Cancel"
                             x-show="!isEditing"
@@ -138,7 +138,7 @@
                         />
 
                         {{-- Remove --}}
-                        <x-button.outline
+                        <x-button.outlined
                             class="cancel-btn danger"
                             label="Remove"
                             x-show="isEditing"

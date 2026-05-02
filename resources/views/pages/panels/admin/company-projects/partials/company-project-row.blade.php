@@ -15,7 +15,7 @@
         <x-table.row-actions :index="$item['uuid']">
             {{-- View --}}
             <li class="table-row-actions__item">
-                <x-button.outline
+                <x-button.outlined
                     id="view-project-btn"
                     class="secondary"
                     label="View"
@@ -27,7 +27,7 @@
 
             {{-- Edit --}}
             <li class="table-row-actions__item">
-                <x-button.outline
+                <x-button.outlined
                     class="secondary"
                     label="Edit"
                     @click="editCompanyProject('{{ $item['uuid'] }}')"
@@ -38,7 +38,7 @@
 
             {{-- Delete --}}
             <li class="table-row-actions__item">
-                <x-button.outline
+                <x-button.outlined
                     class="danger secondary"
                     label="Delete"
                     @click="deleteCompanyProject('{{ $item['uuid'] }}')"

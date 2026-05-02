@@ -9,7 +9,7 @@
         <x-table.row-actions :index="$item['uuid']">
             {{-- View --}}
             <li class="table-row-actions__item">
-                <x-button.outline
+                <x-button.outlined
                     class="secondary"
                     label="View"
                     @click="viewCompanyService('{{ $item['uuid'] }}')"
@@ -20,7 +20,7 @@
 
             {{-- Edit --}}
             <li class="table-row-actions__item">
-                <x-button.outline
+                <x-button.outlined
                     class="secondary"
                     label="Edit"
                     @click="editCompanyService('{{ $item['uuid'] }}')"
@@ -31,8 +31,8 @@
 
             {{-- Delete --}}
             <li class="table-row-actions__item">
-                <x-button.outline
-                    class="danger secondary"
+                <x-button.outlined
+                    class="danger"
                     label="Delete"
                     @click="deleteCompanyService('{{ $item['uuid'] }}')"
                 >

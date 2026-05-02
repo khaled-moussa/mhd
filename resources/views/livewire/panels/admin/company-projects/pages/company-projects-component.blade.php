@@ -8,8 +8,8 @@
         <x-slot:header>
             <h6>Projects ({{ $paginator->total() }})</h6>
 
-            <x-button.main
-                class="header-btn"
+            <x-button.primary
+                class="header-btn sm"
                 label="Create Project"
                 :data-custom-open="$modalId['CREATE_COMPANY_PROJECT_MODAL']"
             />

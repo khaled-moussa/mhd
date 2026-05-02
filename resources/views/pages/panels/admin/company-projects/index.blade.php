@@ -14,7 +14,7 @@
 @section('component')
     {{-- Page header --}}
     <x-header.page title="Projects">
-        <x-button.main label="Create Project" :data-custom-open="$modalId['CREATE_COMPANY_PROJECT_MODAL']" />
+        <x-button.primary label="Create Project" :data-custom-open="$modalId['CREATE_COMPANY_PROJECT_MODAL']" />
     </x-header.page>
 
     <div x-data="projectsComponent" class="projects">

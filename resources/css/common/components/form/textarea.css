@@ -49,7 +49,8 @@ textarea:disabled {
 |-------------------------------
 */
 #char-counter {
-    @apply mt-1 ml-auto w-fit text-xs text-black/50;
+    @apply mt-1 ml-auto w-fit text-xs;
+    @apply text-foreground/50;
 }
 
 #char-counter.warning {

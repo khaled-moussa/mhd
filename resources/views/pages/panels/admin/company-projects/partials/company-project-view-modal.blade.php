@@ -27,7 +27,7 @@
                     {{ $modalTitle}}
                 </h2>
 
-                <x-button.outline
+                <x-button.outlined
                     class="modal-close"
                     data-custom-close="{{ $modalId }}"
                 />
@@ -135,12 +135,12 @@
 
                 {{-- Modal Actions --}}
                 <div class="projects__modal-actions">
-                    <x-button.main
+                    <x-button.primary
                         label="Download Brochure"
                         @click="downloadBrochure()"
                     />
 
-                    <x-button.outline
+                    <x-button.outlined
                         label="Close"
                         data-custom-close="projects-modal"
                     />

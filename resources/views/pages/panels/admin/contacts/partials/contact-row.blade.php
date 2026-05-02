@@ -10,7 +10,7 @@
         <x-table.row-actions :index="$item['uuid']">
             {{-- View --}}
             <li class="table-row-actions__item">
-                <x-button.outline
+                <x-button.outlined
                     class="secondary"
                     label="View"
                     @click="viewContact('{{ $item['uuid'] }}')"
@@ -21,7 +21,7 @@
 
             {{-- Delete --}}
             <li class="table-row-actions__item">
-                <x-button.outline
+                <x-button.outlined
                     class="danger secondary"
                     label="Delete"
                     @click="deleteContact('{{ $item['uuid'] }}')"

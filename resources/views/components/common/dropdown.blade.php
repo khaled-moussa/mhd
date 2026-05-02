@@ -4,7 +4,7 @@
         id="account-dropdown-btn"
         data-dropdown-toggle="account-dropdown-menu"
     >
-        <img src="{{ $currentUser['avatar'] }}" />
+        <img src="{{ $user->avatar }}" />
 
         <i class="fi fi-rs-angle-small-down"></i>
     </x-button.dropdown>
@@ -26,13 +26,13 @@
         <li>
             <x-button.link
                 label="Profile"
-                path="{{ route(name: $panel . '.settings.profile') }}"
+                path="{{ route($panel . '.settings.profile') }}"
             />
         </li>
         <li>
             <x-button.link
                 label="Security"
-                path="{{ route(name: $panel . '.settings.security') }}"
+                path="{{ route($panel . '.settings.security') }}"
             />
         </li>
     </ul>
@@ -44,11 +44,11 @@
                 method="POST"
             >
                 @csrf
-                <x-button.icon
+                {{-- <x-button.icon
                     class="link-btn danger"
                     type="submit"
                     label="Logout"
-                />
+                /> --}}
             </form>
         </li>
     </ul>

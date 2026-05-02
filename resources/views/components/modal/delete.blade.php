@@ -26,7 +26,7 @@
 					{{ $title }}
 				</h2>
 
-				<x-button.outline
+				<x-button.outlined
 					class="modal-close"
 					data-custom-close="{{ $id }}"
 				/>
@@ -49,12 +49,12 @@
 				@endif
 
 				<div class="modal-actions">
-					<x-button.outline
+					<x-button.outlined
 						label="Cancel"
 						data-custom-close="{{ $id }}"
 					/>
 
-					<x-button.main
+					<x-button.primary
 						class="danger"
 						label="Delete"
 						data-confirm

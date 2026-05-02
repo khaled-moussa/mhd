@@ -1,10 +1,45 @@
 /* 
 |-----------------------------
-| Drag and Drop Input
+| Toggle
 |-----------------------------
 */
-.drag-drop-input {
-    @apply flex w-full items-center justify-center;
+.toggle {
+    @apply relative flex w-fit flex-wrap items-center gap-y-2 mb-2;
+    @apply last-of-type:mb-0;
+}
+
+.toggle span {
+    @apply ml-3 cursor-pointer;
+}
+
+/* 
+|-----------------------------
+| Input (Hidden)
+|-----------------------------
+*/
+.toggle > input[type="radio"],
+.toggle > input[type="checkbox"] {
+    @apply sr-only;
+}
+
+/* 
+|-----------------------------
+| Toggle Circle
+|-----------------------------
+*/
+.toggle-circle {
+    @apply relative flex items-center shrink-0 cursor-pointer;
+    @apply w-10 h-[1.5rem] rounded-full bg-current/20;
+
+    @apply after:absolute after:left-[18px];
+    @apply after:w-[0.8rem] after:h-[0.7rem];
+    @apply after:rounded-full after:bg-current/80;
+    @apply after:shadow-md after:transition-all;
+    @apply after:content-[''];
+
+    @apply peer-checked:bg-primary/30;
+    @apply peer-focus:outline-none;
+    @apply peer-checked:after:translate-x-full;
 }
 
 /* 
@@ -12,182 +47,59 @@
 | Label
 |-----------------------------
 */
-.drag-drop-input__label {
-    @apply flex w-full cursor-pointer flex-col items-center justify-center gap-3;
-    @apply rounded-lg border-2 border-dashed border-current/10;
-    @apply bg-current/5 px-4 py-4;
-    @apply transition-all duration-150 ease-in-out;
-    @apply md:min-h-[300px] md:px-5;
-    @apply hover:border-current/50 hover:bg-current/20;
-}
-
-/* Avatar Variant */
-.drag-drop-input__label.avatar {
-    @apply h-26 w-26 min-h-26 rounded-full;
+.toggle-label {
+    @apply ml-3 text-sm font-medium leading-none;
+    @apply cursor-pointer text-foreground;
+    @apply first-letter:capitalize;
 }
 
 /* 
 |-----------------------------
-| Icon
+| Disabled State
 |-----------------------------
 */
-.drag-drop-input__label > i {
-    @apply text-2xl text-current/50;
-    @apply transition-all duration-150 ease-in-out;
+.toggle > input[type="radio"]:disabled ~ .toggle-circle,
+.toggle > input[type="checkbox"]:disabled ~ .toggle-circle,
+.toggle > input[type="radio"]:disabled ~ .toggle-label,
+.toggle > input[type="checkbox"]:disabled ~ .toggle-label {
+    @apply pointer-events-none;
+}
+
+/* Disabled (unchecked) */
+.toggle > input[type="radio"]:disabled ~ .toggle-circle,
+.toggle > input[type="checkbox"]:disabled ~ .toggle-circle {
+    @apply bg-foreground/10 after:shadow-none;
+}
+
+.toggle > input[type="radio"]:disabled ~ .toggle-label,
+.toggle > input[type="checkbox"]:disabled ~ .toggle-label {
+    @apply text-foreground/40;
+}
+
+/* Checked + Disabled */
+.toggle > input[type="radio"]:checked:disabled ~ .toggle-circle,
+.toggle > input[type="checkbox"]:checked:disabled ~ .toggle-circle {
+    @apply bg-background/50 after:shadow-none;
 }
 
 /* 
 |-----------------------------
-| Label Content
+| Description
 |-----------------------------
 */
-.drag-drop-input__label > div {
-    @apply flex flex-col items-center gap-3;
-    @apply child:text-center;
-    @apply md:gap-2;
-}
-
-.drag-drop-input__label p:first-of-type {
-    @apply font-poppins text-base font-medium text-black;
-}
-
-.drag-drop-input__label p:last-of-type {
-    @apply text-sm font-normal text-black/40;
+.toggle > p {
+    @apply w-full text-sm text-foreground/50;
 }
 
 /* 
 |-----------------------------
-| Focus & Hover
+| Wrapper
 |-----------------------------
 */
-.drag-drop-input.focus .drag-drop-input__label > i,
-.drag-drop-input__label:hover > i {
-    @apply text-foreground;
+.toggle-wrapper {
+    @apply flex gap-3 !mt-4;
 }
 
-.drag-drop-input.focus .drag-drop-input__label {
-    @apply border-[#cbe5ff] bg-[#f7fbff];
-}
-
-/* 
-|-----------------------------
-| Text
-|-----------------------------
-*/
-.drag-drop-input__text {
-    @apply text-center text-current/75!;
-}
-
-/* 
-|-----------------------------
-| States
-|-----------------------------
-*/
-.drag-drop-input.has-files {
-    @apply hidden;
-}
-
-.drag-drop-input.has-files .drag-drop-input__label > div {
-    @apply items-start child:text-left;
-}
-
-.drag-drop-input ~ button[type="submit"] {
-    @apply hidden;
-}
-
-.drag-drop-input.has-files ~ button[type="submit"] {
-    @apply flex;
-}
-
-.drag-drop-input:not(.has-files) ~ .uploaded-files {
-    @apply hidden;
-}
-
-/* Invalid State */
-.drag-drop-input__label.invalid {
-    @apply border-[#ffd1d1];
-}
-
-.drag-drop-input__label.invalid > i {
-    @apply text-red-500;
-}
-
-/* 
-|-----------------------------
-| File Upload Grid
-|-----------------------------
-*/
-.file-wrapper {
-    @apply grid grid-cols-1 gap-4;
-    @apply sm:grid-cols-2 lg:grid-cols-3;
-}
-
-/* 
-|-----------------------------
-| File Card
-|-----------------------------
-*/
-.file-upload {
-    @apply relative rounded-xl border border-current/10 bg-current/5 p-3;
-}
-
-.file-preview {
-    @apply mb-2 h-32 w-full rounded-lg object-cover;
-}
-
-/* 
-|-----------------------------
-| File Info
-|-----------------------------
-*/
-.file-info {
-    @apply flex flex-col gap-2;
-}
-
-.file-name {
-    @apply truncate text-sm font-medium;
-}
-
-/* 
-|-----------------------------
-| Progress Bar
-|-----------------------------
-*/
-.progress-text {
-    @apply text-end text-xs! font-bold;
-}
-
-.progress-text::after {
-    content: "%";
-}
-
-.progress-bar {
-    @apply relative h-2 w-full overflow-hidden rounded-full;
-    @apply bg-current/10;
-}
-
-.progress-bar .progress {
-    @apply absolute left-0 top-0 h-full;
-    @apply bg-current/50;
-    @apply transition-all duration-300 ease-linear;
-}
-
-.cancel-btn {
-    @apply self-end;
-}
-
-/* 
-|-----------------------------
-| Add More Files
-|-----------------------------
-*/
-.add-files {
-    @apply flex min-h-[250px] items-center justify-center gap-2;
-    @apply rounded-lg border-2 border-dashed border-current/30;
-    @apply bg-current/5;
-    @apply cursor-pointer hover:bg-current/3;
-}
-
-.add-files > * {
-    @apply text-base;
+.toggle-wrapper span {
+    @apply text-sm font-inter;
 }

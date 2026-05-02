@@ -75,7 +75,7 @@
                                     x-model="social.link"
                                 />
 
-                                <x-button.outline
+                                <x-button.outlined
                                     class="danger !w-full"
                                     label="Delete Link"
                                     @click="deleteLink('{{ $key }}', index)"
@@ -83,7 +83,7 @@
                             </div>
                         </template>
 
-                        <x-button.outline
+                        <x-button.outlined
                             class="!w-full"
                             label="Add Social Link"
                             @click="addLink('{{ $key }}')"
@@ -100,13 +100,13 @@
             @if (!empty($landingSectionsData))
                 {{-- Actions --}}
                 <div class="site-editor-actions">
-                    <x-button.main
+                    <x-button.primary
                         label="Update"
                         @click="submit"
                         wire:loading.class="spinner"
                         wire:target="submit"
                     />
-                    <x-button.outline
+                    <x-button.outlined
                         label="Preview"
                         @click="updatePreview"
                     />

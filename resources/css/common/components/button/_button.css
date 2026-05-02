@@ -1,91 +1,18 @@
 /* 
 |-----------------------------
-| Button Imports
+| Imports
 |-----------------------------
 */
-@import "./add-btn.css";
-@import "./primary-button.css";
-@import "./outline-button.css";
-@import "./floating-button.css";
-@import "./link-button.css";
+@import './primary-button.css';
+@import './outlined-button.css';
 
 /* 
 |-----------------------------
-| Base Interactive Elements
+| Default Button
 |-----------------------------
 */
-a,
-button,
-input[type="submit"],
-input[type="button"],
-input[type="reset"] {
-    @apply cursor-pointer transition-all duration-200;
-    @apply child:first-letter:capitalize;
-}
-
-/* 
-|-----------------------------
-| Icon + Text Spacing
-|-----------------------------
-*/
-a i + span,
-button i + span,
-input[type="submit"] i + span,
-input[type="button"] i + span,
-input[type="reset"] i + span {
-    @apply pr-1;
-}
-
-/* 
-|-----------------------------
-| Disabled State
-|-----------------------------
-*/
-button[disabled],
-input[type="button"][disabled],
-input[type="submit"][disabled],
-input[type="reset"][disabled] {
-    @apply pointer-events-none cursor-default;
-    @apply bg-background/15 text-foreground/40;
-}
-
-/* 
-|-----------------------------
-| Loading State (Spinner)
-|-----------------------------
-*/
-.auth-button.spinner,
-a.primary-btn.spinner,
-button.primary-btn.spinner,
-button.icon-btn.spinner {
-    @apply child:invisible !text-transparent;
-    @apply bg-current/5;
-    @apply focus:!text-transparent focus-visible:!text-transparent;
-    @apply focus-within:!text-transparent;
-}
-
-.auth-button.spinner::after,
-a.primary-btn.spinner::after,
-button.primary-btn.spinner::after,
-button.icon-btn.spinner::after {
-    @apply top-auto h-5 w-5;
-    filter: saturate(0) brightness(200);
-}
-
-/* Disabled spinner adjustment */
-.auth-button.spinner:disabled::after,
-a.primary-btn.spinner:disabled::after,
-button.primary-btn.spinner:disabled::after,
-button.icon-btn.spinner:disabled::after {
-    @apply top-auto h-5 w-5;
-    filter: saturate(0);
-}
-
-/* 
-|-----------------------------
-| Resend OTP Button
-|-----------------------------
-*/
-.resend-btn {
-    @apply ml-auto text-xs!;
+button {
+    @apply px-3 py-2 rounded-sm;
+    @apply font-medium;
+    @apply transition-colors hover:opacity-90;
 }

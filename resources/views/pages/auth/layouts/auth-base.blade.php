@@ -1,36 +1,12 @@
+{{-- Use main layout --}}
 @extends('layouts.guest')
 
-@section('title', 'Sign In')
-
+{{-- Page assets --}}
 @push('head')
-    {{ Vite::style('auth/_auth.css') }}
-    {{ Vite::script('auth/_auth.js') }}
+    @vite(['resources/css/pages/auth/_auth.css'])
 @endpush
 
+{{-- Content --}}
 @section('content')
-    <main class="auth-wrapper">
-        {{-- Auth Content --}}
-        <div class="auth-content">
-            <div
-                class="w-full"
-                x-data="authComponent"
-                x-cloak
-            >
-                {{-- Logo --}}
-                <x-button.link :path="route('landing')">
-                    <div class="logo"></div>
-                </x-button.link>
-
-                {{-- Page Header --}}
-                <div class="header">
-                    <h1>
-                        @yield('header')
-                    </h1>
-                </div>
-
-                {{-- Main Dynamic Component --}}
-                @yield('auth-component')
-            </div>
-        </div>
-    </main>
+    @include('pages.auth.partials.auth-wrapper')
 @endsection

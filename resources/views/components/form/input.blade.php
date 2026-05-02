@@ -1,40 +1,60 @@
 @props([
-    'type' => 'text',
+    'type'  => 'text',
     'label' => null,
     'error' => null,
 ])
 
-<div @class(['input-field', $attributes->get('class')])>
+<div
+    @class([
+        'input-field',
+        $attributes->get('class'),
+    ])
+>
 
+    {{-- Label + Description --}}
     <div>
-        {{-- Label --}}
+
         @if ($label)
-            <label for="{{ $attributes->whereStartsWith('id') }}">
+            <label for="{{ $attributes->get('id') }}">
                 {{ $label }}
             </label>
         @endif
 
-        {{-- Optional description --}}
         {{ $description ?? null }}
+
     </div>
 
+
+    {{-- Wrapper --}}
     <div class="input-wrapper">
+
         <input
             type="{{ $type }}"
-            {{ $attributes->whereStartsWith('id') }}
-            {{ $attributes->whereStartsWith('name') }}
-            {{ $attributes->whereStartsWith('value') }}
-            {{ $attributes->whereStartsWith('placeholder') }}
-            {{ $attributes->whereStartsWith('wire') }}
-            {{ $attributes->whereStartsWith('x-model') }}
-            {{ $attributes->whereStartsWith('disabled') }}
-            {{ $attributes->whereStartsWith('pattern') }}
+
+            {{-- Core Attributes --}}
+            id="{{ $attributes->get('id') }}"
+            name="{{ $attributes->get('name') }}"
+            value="{{ $attributes->get('value') }}"
+            placeholder="{{ $attributes->get('placeholder') }}"
+
+            {{-- State --}}
             {{ $attributes->whereStartsWith('required') }}
+            {{ $attributes->whereStartsWith('disabled') }}
+
+            {{-- Validation --}}
+            {{ $attributes->whereStartsWith('min') }}
+            {{ $attributes->whereStartsWith('max') }}
             {{ $attributes->whereStartsWith('minlength') }}
             {{ $attributes->whereStartsWith('maxlength') }}
+            {{ $attributes->whereStartsWith('pattern') }}
+
+            {{-- JS / Alpine / Livewire --}}
+            {{ $attributes->whereStartsWith('wire') }}
+            {{ $attributes->whereStartsWith('x-') }}
+            {{ $attributes->whereStartsWith('@') }}
         />
 
-        {{-- Slot element --}}
+        {{-- Slot (icons, buttons, etc.) --}}
         {{ $slot }}
     </div>
 

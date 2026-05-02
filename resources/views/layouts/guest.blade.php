@@ -5,18 +5,19 @@
     @include('layouts.partials.head')
 </head>
 
-<body class="loader">
+<body>
     {{-- Navbar --}}
     @yield('navbar')
 
-    {{-- Main --}}
-    <div class="guest-shell">
+    {{-- Main Content --}}
+    <main class="content">
         @yield('content')
-    </div>
+    </main>
 
     {{-- Footer --}}
     @yield('footer')
 
+    {{-- Scripts --}}
     @include('layouts.partials.scripts')
 </body>
 

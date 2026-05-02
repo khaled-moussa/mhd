@@ -1,15 +1,88 @@
-/* -------------------------------------------------
-   App Layout
--------------------------------------------------- */
+/* 
+|-------------------------------
+| App Shell Layout
+|-------------------------------
+*/
 .app-shell {
-    @apply grid grid-cols-1 lg:grid-cols-[70px_1fr] grid-rows-[65px_1fr];
-    @apply max-h-full transition-all duration-300 ease-in-out;
+    @apply grid min-h-screen;
+    @apply transition-[grid-template-columns] duration-250 ease-in-out;
+    @apply grid-cols-[0fr] grid-rows-[0fr];
+    @apply lg:grid-cols-[64px_1fr] lg:grid-rows-[65px_1fr];
 }
 
 .app-shell.collapsed {
-    @apply grid-cols-[1fr] lg:grid-cols-[235px_1fr];
+    grid-template-columns: 220px 1fr;
 }
 
+/* 
+|-------------------------------
+| Sidebar — Expanded State
+|-------------------------------
+*/
+.app-shell.collapsed .sidebar {
+    @apply px-3;
+}
+
+.app-shell.collapsed .sidebar-top {
+    @apply justify-start;
+}
+
+.app-shell.collapsed .sidebar-brand-text {
+    @apply opacity-100 w-auto ml-2.5;
+}
+
+/* 
+|-------------------------------
+| Sidebar Items — Expanded State
+|-------------------------------
+*/
+.app-shell.collapsed .sidebar-item {
+    @apply gap-3;
+}
+
+.app-shell.collapsed .sidebar-item i {
+    @apply mx-0;
+}
+
+.app-shell.collapsed .sidebar-item-label {
+    @apply opacity-100 w-auto ml-0;
+}
+
+.app-shell.collapsed .sidebar-item.active .sidebar-item-dot {
+    @apply block;
+}
+
+/* 
+|-------------------------------
+| Sidebar Section — Expanded State
+|-------------------------------
+*/
+.app-shell.collapsed .sidebar-section-label {
+    @apply opacity-100 h-5 mb-1.5;
+}
+
+/* 
+|-------------------------------
+| Sidebar User — Expanded State
+|-------------------------------
+*/
+.app-shell.collapsed .sidebar-user {
+    @apply gap-2.5;
+}
+
+.app-shell.collapsed .sidebar-user-info {
+    @apply opacity-100 w-auto ml-0;
+}
+
+/* 
+|-------------------------------
+| App Content
+|-------------------------------
+*/
 .app-content {
-    @apply max-h-full p-6;
+    @apply col-start-2 row-start-2;
+    @apply p-6;
+    @apply overflow-y-auto;
+
+    height: calc(100vh - 65px);
 }

@@ -26,7 +26,7 @@
                     {{ $modalTitle }}
                 </h2>
 
-                <x-button.outline
+                <x-button.outlined
                     class="modal-close"
                     :data-modal-id="$modalId['DELETE_ACCOUNT_MODAL']"
                 />

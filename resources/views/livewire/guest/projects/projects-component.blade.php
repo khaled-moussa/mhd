@@ -61,7 +61,7 @@
             {{-- Load More --}}
             @if (!$isProjectSection)
                 <div class="projects__load-more">
-                    <x-button.outline
+                    <x-button.outlined
                         label="Load more"
                         wire:click="loadMore"
                         wire:target="loadMore"

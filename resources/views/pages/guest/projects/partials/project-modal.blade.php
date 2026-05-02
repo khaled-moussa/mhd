@@ -31,7 +31,7 @@
 
                     {{-- Header --}}
                     <div class="modal-header">
-                        <x-button.outline
+                        <x-button.outlined
                             class="modal-close"
                             data-custom-close="{{ $modalId }}"
                         />
@@ -97,33 +97,30 @@
                                     referrerpolicy="no-referrer-when-downgrade"
                                     :src="{{ $project['location'] }}"
                                 >
-                                </iframe
-                            @else
-                                <div class="project-location-empty">
-                                    <p>No location added</p>
-                                </div>
-                            @endif
+                            </iframe @else <div class="project-location-empty">
+                                <p>No location added</p>
                         </div>
+                        @endif
                     </div>
+                </div>
 
-                    {{-- Actions --}}
-                    <div class="modal-actions">
-                        <x-button.main
-                            class="primary-btn"
-                            label="Download brochure"
-                        >
-                            <i class="fi fi-rr-download"></i>
+                {{-- Actions --}}
+                <div class="modal-actions">
+                    <x-button.primary
+                        class="primary-btn"
+                        label="Download brochure"
+                    >
+                        <i class="fi fi-rr-download"></i>
                         </x-button.main>
 
-                        <x-button.outline
+                        <x-button.outlined
                             class="outline-btn"
                             label="Close"
                             data-custom-close="{{ $modalId }}"
                         />
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

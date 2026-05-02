@@ -3,7 +3,7 @@
 namespace App\Support\Context;
 
 use App\Domain\Auth\Actions\LogoutUserAction;
-use App\Domain\User\Actions\ResolveCurrentUserAction;
+use App\Domain\Users\Actions\GetCurrentUserAction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +21,7 @@ class AuthContext
     private static function resolveUser(): ?Model
     {
         return self::$cachedUser
-            ??= app(ResolveCurrentUserAction::class)->execute();
+            ??= app(GetCurrentUserAction::class)->execute();
     }
 
     private static function resolveSettings(): mixed
@@ -88,7 +88,7 @@ class AuthContext
 
     public static function toResource()
     {
-        return self::resolveUser()?->toResource();
+        return (object) self::resolveUser()?->toResource()->resolve();
     }
 
     public static function toArray(): array
