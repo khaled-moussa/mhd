@@ -1,7 +1,6 @@
-<footer
-    id="footer"
-    class="footer"
->
+@props(['section'])
+
+<footer id="footer" class="footer">
     <div class="footer-container">
 
         {{-- Grid --}}
@@ -9,56 +8,29 @@
 
             {{-- Brand --}}
             <div class="footer-brand">
-
                 <x-global.branding />
 
                 <div class="footer-socials">
                     @foreach ($section['data']['socials'] as $social)
-                        <x-button.link
-                            class="footer-social-link"
-                            :path="$social['link']"
-                        >
+                        <x-button.link class="footer-social-link" :href="$social['link']">
                             <i class="{{ $social['icon'] }}"></i>
                         </x-button.link>
                     @endforeach
                 </div>
-
             </div>
 
             {{-- Company --}}
             <div>
-                <h4 class="footer-col-title">Company</h4>
+                <h4 class="footer-col-title">Explore</h4>
 
                 <ul class="footer-list">
                     @foreach ($section['data']['company'] as $item)
                         <li>
-                            <x-button.link
-                                class="footer-link"
-                                :label="$item['label']"
-                                :path="$item['link']"
-                            />
+                            <x-button.link class="footer-link" :label="$item['label']" :href="$item['link']" />
                         </li>
                     @endforeach
                 </ul>
             </div>
-
-            {{-- Social Links --}}
-            <div>
-                <h4 class="footer-col-title">Follow us</h4>
-
-                <ul class="footer-list">
-                    @foreach ($section['data']['socials'] as $social)
-                        <li>
-                            <x-button.link
-                                class="footer-link"
-                                :label="$social['label']"
-                                :path="$social['link']"
-                            />
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-
         </div>
 
         {{-- Bottom Bar --}}
@@ -69,14 +41,8 @@
             </p>
 
             <div class="footer-legal">
-                <x-button.link
-                    class="footer-legal-link"
-                    label="Terms of Service"
-                />
-                <x-button.link
-                    class="footer-legal-link"
-                    label="Privacy Policy"
-                />
+                <x-button.link class="footer-legal-link" label="Terms of Service" />
+                <x-button.link class="footer-legal-link" label="Privacy Policy" />
             </div>
 
         </div>

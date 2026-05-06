@@ -8,9 +8,9 @@
         <span>Site Editor</span>
 
         <x-button.link
-            class="outline-btn"
+            class="outlined-btn"
             label="Full Preview"
-            :path="route('landing')"
+            :href="route('landing')"
         />
     </header>
 
@@ -39,17 +39,17 @@
                         <div class="extra-data">
                             <x-form.input
                                 label="Light Text"
-                                x-model="sections['hero'].data.title.light"
+                                x-model="sections['{{ $key }}'].data.title.light"
                             />
 
                             <x-form.input
                                 label="Main Text"
-                                x-model="sections['hero'].data.title.main"
+                                x-model="sections['{{ $key }}'].data.title.main"
                             />
 
                             <x-form.input
                                 label="Accent Text"
-                                x-model="sections['hero'].data.title.accent"
+                                x-model="sections['{{ $key }}'].data.title.accent"
                             />
                         </div>
                     @else

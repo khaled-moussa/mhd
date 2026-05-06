@@ -21,7 +21,7 @@
 
         @if ($title)
             <h2
-                id="title"
+                id="section-title"
                 class="section-title"
             >
                 {{ $title }}
@@ -30,7 +30,7 @@
 
         @if ($description)
             <p
-                id="description"
+                id="section-description"
                 class="section-description"
             >
                 {{ $description }}

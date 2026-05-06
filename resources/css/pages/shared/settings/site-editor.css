@@ -13,7 +13,7 @@
 |-----------------------------
 */
 .site-editor-content {
-    @apply flex w-full flex-col items-start gap-3;
+    @apply flex flex-col items-start gap-3;
     @apply xl:flex-row;
 }
 
@@ -41,7 +41,7 @@
 |-----------------------------
 */
 .site-editor-inputs {
-    @apply order-2 flex-1 !space-y-10 overflow-scroll;
+    @apply w-full order-2 flex-1 !space-y-10 overflow-scroll;
     @apply xl:order-1 xl:overflow-visible xl:px-0;
 }
 

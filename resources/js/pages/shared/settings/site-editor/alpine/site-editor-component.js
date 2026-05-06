@@ -1,3 +1,6 @@
+import MessageToast from "@js/utils/message-toast";
+import { UI_EVENTS } from "@js/utils/enums";
+
 document.addEventListener("alpine:init", () => {
     Alpine.data("siteEditorComponent", () => ({
         /*
@@ -17,6 +20,7 @@ document.addEventListener("alpine:init", () => {
 
         init() {
             this.initState();
+            this.registerListeners();
         },
 
         initState() {
@@ -108,6 +112,25 @@ document.addEventListener("alpine:init", () => {
             if (!this.sections) return;
 
             this.$wire.call("submit", this.sections, this.order);
+        },
+
+        /*
+        |--------------------------------------------------------------------------
+        | Events
+        |--------------------------------------------------------------------------
+        */
+
+        registerListeners() {
+            this.onSideUpdatedEvent();
+        },
+
+        onSideUpdatedEvent() {
+            this.$el.addEventListener(
+                UI_EVENTS.SITE_UPDATED_EVENT,
+                () => {
+                    MessageToast("updated");
+                },
+            );
         },
     }));
 });

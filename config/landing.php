@@ -15,7 +15,13 @@ return [
             'url' => '#hero',
             'visible' => true,
             'order' => 1,
-            'data' => [],
+            'data' => [
+                'title' => [
+                    'light'   => 'Find Your',
+                    'main'    => 'Dream',
+                    'accent'  => 'Property',
+                ]
+            ],
         ],
 
         /*

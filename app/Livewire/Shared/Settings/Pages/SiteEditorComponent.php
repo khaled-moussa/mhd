@@ -53,8 +53,7 @@ class SiteEditorComponent extends Component
                 visible: $section['visible']     ?? true,
                 order: $section['order']       ?? 0,
                 data: $section['data']        ?? [],
-            ))
-            ->map->toArray();
+            ))->map->toArray();
 
         app(UpdateLandingSectionAction::class)->execute($dtos);
 

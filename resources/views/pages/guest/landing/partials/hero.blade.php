@@ -1,3 +1,7 @@
+@props([
+    'section' => [],
+])
+
 <section id="hero" class="hero-section">
 
     {{-- Full-bleed background --}}
@@ -13,17 +17,17 @@
             <div class="hero-left">
                 <div class="hero-tag">
                     <div class="hero-tag-line"></div>
-                    <span id="title" class="hero-tag-text">Real Estate · MHD Development</span>
+                    <span class="hero-tag-text">Real Estate · MHD Development</span>
                 </div>
 
                 <h1 class="hero-title">
-                    <span class="hero-title-light">Find Your</span>
-                    <span class="hero-title-main">Dream</span>
+                    <span class="hero-title-light"> {{ $section['data']['title']['light'] }} </span>
+                    <span class="hero-title-main">{{ $section['data']['title']['main'] }}</span>
                     <br>
-                    <span class="hero-title-accent">Property</span>
+                    <span class="hero-title-accent">{{ $section['data']['title']['accent'] }}</span>
                 </h1>
-                
-                <p id="description" class="hero-description">
+
+                <p id="section-description" class="hero-description">
                     {{ $section['description'] }}
                 </p>
 

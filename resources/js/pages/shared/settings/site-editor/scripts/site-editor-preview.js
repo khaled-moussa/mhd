@@ -46,8 +46,8 @@ function toggleVisibility(el, visible) {
  * Update generic title/description (safe)
  */
 function updateGenericContent(el, section) {
-    const title = el.querySelector(".section-title");
-    const description = el.querySelector(".section-description");
+    const title = el.querySelector("#section-title");
+    const description = el.querySelector("#section-description");
 
     if (title && section.title !== undefined) {
         title.textContent = section.title;
@@ -83,6 +83,8 @@ function handleSpecialSections(el, section) {
 */
 
 function updateHero(sectionEl, data = {}) {
+    const title = data['title'] ?? null;
+
     const light = sectionEl.querySelector(".hero-title-light");
     const main = sectionEl.querySelector(".hero-title-main");
     const accent = sectionEl.querySelector(".hero-title-accent");
@@ -113,12 +115,15 @@ function updateFooterSocials(sectionEl, socials) {
     container.innerHTML = "";
 
     socials
-        .filter((item) => item?.link && item?.icon)
+        .filter(item => item?.link && item?.icon)
         .forEach(({ link, icon }) => {
+
             const a = document.createElement("a");
             a.href = link;
             a.target = "_blank";
             a.rel = "noopener noreferrer";
+
+            a.className = "footer-social-link";
 
             const i = document.createElement("i");
             i.className = icon;
