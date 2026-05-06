@@ -10,9 +10,9 @@
 | Imports
 |-----------------------------
 */
-@import "@css/pages/_layouts/app-layouts.css";
-@import "@css_admin/dashboard/dashboard-cards.css";
-@import "@css_admin/projects/_projects.css";
+@import "../../../_layouts/app-layouts.css";
+@import "./dashboard-cards.css";
+@import "../projects/_projects.css";
 
 /* 
 |-----------------------------

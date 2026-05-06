@@ -1,18 +1,47 @@
-@import "./alert/_alert.css";
+/* 
+|-------------------------------
+| Base UI Elements
+|-------------------------------
+*/
 @import "./badge/_badge.css";
-@import "./card/_card.css";
-@import "./dropdown/_dropdown.css";
-@import "./button/_button.css";
-@import "./form/_form.css";
 @import "./label/_label.css";
-@import "./header/_header.css";
-@import "./modal/_modal.css";
-@import "./navbar/_navbar.css";
-@import "./sidebar/_sidebar.css";
-@import "./spinner/_spinner.css";
-@import "./progress/_progress.css";
-@import "./table/_table.css";
-@import "./tabs/_tabs.css";
+
+/* 
+|-------------------------------
+| Feedback & Status
+|-------------------------------
+*/
+@import "./alert/_alert.css";
 @import "./toast/_toast.css";
 @import "./tooltip/_tooltip.css";
+@import "./spinner/_spinner.css";
+@import "./progress/_progress.css";
 @import "./errors/_errors.css";
+
+/* 
+|-------------------------------
+| Form Elements
+|-------------------------------
+*/
+@import "./form/_form.css";
+@import "./button/_button.css";
+
+/* 
+|-------------------------------
+| Layout Components
+|-------------------------------
+*/
+@import "./card/_card.css";
+@import "./modal/_modal.css";
+@import "./dropdown/_dropdown.css";
+@import "./tabs/_tabs.css";
+@import "./table/_table.css";
+
+/* 
+|-------------------------------
+| App Structure
+|-------------------------------
+*/
+@import "./header/_header.css";
+@import "./navbar/_navbar.css";
+@import "./sidebar/_sidebar.css";

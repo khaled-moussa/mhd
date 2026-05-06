@@ -5,11 +5,11 @@
 | Imports
 |-----------------------------
 */
-@import "@css_pages/_layouts/app-layouts.css";
-@import "@css_pages/shared/settings/side-menu.css";
-@import "@css_pages/shared/settings/profile.css";
-@import "@css_pages/shared/settings/security.css";
-@import "@css_pages/shared/settings/site-editor.css";
+@import "../../_layouts/app-layouts.css";
+@import "./side-menu.css";
+@import "./profile.css";
+@import "./security.css";
+@import "./site-editor.css";
 
 /* 
 |-----------------------------

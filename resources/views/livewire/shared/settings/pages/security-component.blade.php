@@ -39,7 +39,7 @@
         </x-label.info>
 
         {{-- Two Step Verification --}}
-        <x-label.info
+        {{-- <x-label.info
             label="2-step verification"
             description="Add an extra layer of security by requiring a verification code when signing in."
         >
@@ -50,7 +50,7 @@
             >
                 <i class="fi fi-ts-shield-check"></i>
             </x-button.outline>
-        </x-label.info>
+        </x-label.info> --}}
 
         {{-- Delete Account --}}
         {{-- <x-label.info

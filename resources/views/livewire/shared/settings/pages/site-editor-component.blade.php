@@ -3,7 +3,7 @@
     class="site-editor"
 >
 
-    {{-- Content Header --}}
+    {{-- Header --}}
     <header class="content-header row">
         <span>Site Editor</span>
 
@@ -15,6 +15,7 @@
     </header>
 
     <div class="site-editor-content">
+
         {{-- Editor Inputs --}}
         <div
             class="site-editor-inputs"
@@ -22,41 +23,59 @@
             wire:ignore
         >
 
-            @foreach ($landingSectionsData as $key => $section)
+            @foreach ($sections as $key => $section)
                 <div
                     class="section-block"
                     :data-key="'{{ $key }}'"
                 >
 
-                    {{-- Section Label --}}
                     <x-label.info
                         :label="ucfirst($key)"
-                        description="Update the main description text shown at the top of your landing page."
+                        description="Update section content"
                     />
 
-                    {{-- Title --}}
-                    <x-form.textarea
-                        placeholder="Title"
-                        x-model="sections['{{ $key }}'].title"
-                    ></x-form.textarea>
+                    {{-- HERO DATA --}}
+                    @if ($key === 'hero')
+                        <div class="extra-data">
+                            <x-form.input
+                                label="Light Text"
+                                x-model="sections['hero'].data.title.light"
+                            />
 
-                    {{-- Description --}}
+                            <x-form.input
+                                label="Main Text"
+                                x-model="sections['hero'].data.title.main"
+                            />
+
+                            <x-form.input
+                                label="Accent Text"
+                                x-model="sections['hero'].data.title.accent"
+                            />
+                        </div>
+                    @else
+                        {{-- Generic Fields --}}
+                        <x-form.textarea
+                            placeholder="Title"
+                            x-model="sections['{{ $key }}'].title"
+                        />
+                    @endif
+
                     <x-form.textarea
                         placeholder="Description"
                         x-model="sections['{{ $key }}'].description"
-                    ></x-form.textarea>
+                    />
 
-                    {{-- Footer Properties --}}
+
+                    {{-- FOOTER SOCIALS --}}
                     @if ($key === 'footer')
                         <template
-                            x-for="(social, index) in sections['{{ $key }}'].data.socials"
+                            x-for="(social, index) in sections['footer'].data.socials"
                             :key="index"
                         >
                             <div class="extra-data">
 
                                 <x-form.select
                                     label="Icon"
-                                    placeholder="Select Icon"
                                     :options="[
                                         ['label' => 'Email', 'value' => 'fi-tr-envelope'],
                                         ['label' => 'Phone', 'value' => 'fi-tr-phone-call'],
@@ -64,67 +83,64 @@
                                         ['label' => 'Instagram', 'value' => 'fi-brands-instagram'],
                                         ['label' => 'LinkedIn', 'value' => 'fi-brands-linkedin'],
                                         ['label' => 'X', 'value' => 'fi-brands-twitter-alt-circle'],
-                                   
                                     ]"
                                     x-model="social.icon"
                                 />
 
                                 <x-form.input
                                     label="Link"
-                                    placeholder="https://example.com"
                                     x-model="social.link"
                                 />
 
                                 <x-button.outlined
                                     class="danger !w-full"
-                                    label="Delete Link"
-                                    @click="deleteLink('{{ $key }}', index)"
+                                    label="Delete"
+                                    @click="deleteLink('footer', index)"
                                 />
                             </div>
                         </template>
 
                         <x-button.outlined
                             class="!w-full"
-                            label="Add Social Link"
-                            @click="addLink('{{ $key }}')"
+                            label="Add Social"
+                            @click="addLink('footer')"
                         />
                     @endif
 
                     {{-- Visibility --}}
                     <x-label.info label="Visible">
-                        <x-form.toggle x-model="sections['{{ $key }}'].visible" />
+                        <x-form.checkbox x-model="sections['{{ $key }}'].visible" />
                     </x-label.info>
+
                 </div>
             @endforeach
 
-            @if (!empty($landingSectionsData))
-                {{-- Actions --}}
-                <div class="site-editor-actions">
-                    <x-button.primary
-                        label="Update"
-                        @click="submit"
-                        wire:loading.class="spinner"
-                        wire:target="submit"
-                    />
-                    <x-button.outlined
-                        label="Preview"
-                        @click="updatePreview"
-                    />
-                </div>
-            @endif
+            {{-- Actions --}}
+            <div class="site-editor-actions">
+                <x-button.primary
+                    label="Update"
+                    @click="submit"
+                    wire:loading.class="spinner"
+                />
+
+                <x-button.outlined
+                    label="Preview"
+                    @click="updatePreview"
+                />
+            </div>
         </div>
 
-        {{-- Preview Iframe --}}
+        {{-- Preview --}}
         <div
             class="site-editor-preview spinner"
             x-ref="iframeContainer"
             wire:ignore
         >
             <iframe
-                id="preview"
                 x-ref="iframPreview"
                 src="{{ route('admin.settings.site-preview') }}"
             ></iframe>
         </div>
+
     </div>
 </div>

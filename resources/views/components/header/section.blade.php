@@ -11,19 +11,28 @@
     <div>
 
         @if ($label)
-            <span class="section-label">
+            <span
+                id="label"
+                class="section-label"
+            >
                 {{ $label }}
             </span>
         @endif
 
         @if ($title)
-            <h2 class="section-title">
+            <h2
+                id="title"
+                class="section-title"
+            >
                 {{ $title }}
             </h2>
         @endif
 
         @if ($description)
-            <p class="section-description">
+            <p
+                id="description"
+                class="section-description"
+            >
                 {{ $description }}
             </p>
         @endif

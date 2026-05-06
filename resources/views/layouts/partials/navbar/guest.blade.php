@@ -1,5 +1,5 @@
 <nav
-    id="landing-navbar"
+    id="navbar-guest"
     class="navbar--guest"
 >
 
@@ -21,85 +21,60 @@
             id="nav-menu"
             aria-label="Primary"
         >
-            <li>
+           <li>
                 <x-button.link
                     class="navbar-link"
                     label="About"
-                    :path="url('#about')"
+                    :href="url('#about')"
                 />
             </li>
             <li>
                 <x-button.link
                     class="navbar-link"
                     label="Services"
-                    :path="url('#services')"
+                    :href="url('#services')"
                 />
             </li>
             <li>
                 <x-button.link
                     class="navbar-link"
                     label="Projects"
-                    :path="url('#projects')"
+                    :href="url('#projects')"
                 />
             </li>
             <li>
                 <x-button.link
                     class="navbar-link"
                     label="Contact"
-                    :path="url('#contact')"
+                    :href="url('#contact')"
                 />
             </li>
         </ul>
 
-        {{-- Desktop CTA + Mobile Toggle --}}
-        <div class="flex items-center gap-3">
-
-            <x-button.link
-                class="primary-btn white"
-                label="Get in touch"
-                :path="url('#contact')"
-            />
-
-            <label
-                class="navbar-toggle"
-                for="nav-toggle"
-                aria-label="Toggle navigation"
-                aria-controls="nav-menu"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-        </div>
-
     </div>
 
+    {{-- Desktop CTA + Mobile Toggle --}}
+    <div class="navbar-actions">
+        <label
+            class="navbar-toggle"
+            for="nav-toggle"
+            aria-label="Toggle navigation"
+            aria-controls="nav-menu"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </div>
+    
     {{-- Mobile Dropdown --}}
     <div
         class="navbar-mobile-menu"
         id="nav-menu-mobile"
     >
-        <x-button.link
-            class="navbar-mobile-link"
-            label="About"
-            :path="url('#about')"
-        />
-        <x-button.link
-            class="navbar-mobile-link"
-            label="Services"
-            :path="url('#services')"
-        />
-        <x-button.link
-            class="navbar-mobile-link"
-            label="Projects"
-            :path="url('#projects')"
-        />
-        <x-button.link
-            class="navbar-mobile-link"
-            label="Contact"
-            :path="url('#contact')"
-        />
-
-        <x-button.outlined label="Get in touch" />
+        <x-button.link class="navbar-mobile-link" label="About"    :href="url('#about')"    onclick="navLinkMobile()"/>
+        <x-button.link class="navbar-mobile-link" label="Services" :href="url('#services')" onclick="navLinkMobile()"/>
+        <x-button.link class="navbar-mobile-link" label="Projects" :href="url('#projects')" onclick="navLinkMobile()"/>
+        <x-button.link class="navbar-mobile-link" label="Contact"  :href="url('#contact')"  onclick="navLinkMobile()"/>
     </div>
 </nav>

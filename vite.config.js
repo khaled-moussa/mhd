@@ -20,7 +20,7 @@ export default defineConfig({
 
                 // Auth
                 "resources/css/pages/auth/_auth.css",
-                "resources/js/pages/auth/_auth.js",
+                // "resources/js/pages/auth/_auth.js",
 
                 // Landing
                 "resources/css/pages/guest/landing/_landing.css",

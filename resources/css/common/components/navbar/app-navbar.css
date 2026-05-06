@@ -4,11 +4,14 @@
 |-------------------------------
 */
 .navbar--app {
-    @apply col-span-2 row-start-1 sticky top-0 z-30;
-    @apply flex items-center justify-between h-[65px] px-5;
-    @apply bg-background/80 border-b border-foreground/10;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    @apply col-span-2 row-start-1;
+    @apply sticky top-0 z-30;
+
+    @apply flex items-center justify-between;
+    @apply h-[65px] px-5;
+
+    @apply bg-background/80 backdrop-blur-md;
+    @apply border-b border-foreground/10;
 }
 
 /* 
@@ -34,13 +37,19 @@
 |-------------------------------
 */
 .navbar--app-toggle {
-    @apply w-8 h-8 flex items-center justify-center rounded-lg;
-    @apply border border-foreground/10 bg-transparent cursor-pointer;
-    @apply transition-colors duration-150 hover:bg-foreground/5;
+    @apply flex items-center justify-center;
+    @apply w-8 h-8;
+    @apply rounded-lg;
+
+    @apply border border-foreground/10;
+    @apply bg-transparent cursor-pointer;
+
+    @apply transition-colors duration-150;
+    @apply hover:bg-foreground/5;
 }
 
 .navbar--app-toggle i {
-    @apply text-foreground/55 text-sm;
+    @apply text-sm text-foreground/55;
 }
 
 /* 
@@ -58,9 +67,12 @@
 |-------------------------------
 */
 .navbar--app-avatar {
-    @apply w-[30px] h-[30px] rounded-full bg-primary;
     @apply flex items-center justify-center;
-    @apply text-[11px] font-semibold text-background cursor-pointer;
+    @apply w-[30px] h-[30px];
+    @apply rounded-full bg-primary;
+
+    @apply text-[11px] font-semibold text-background;
+    @apply cursor-pointer;
 }
 
 /* 
@@ -69,15 +81,11 @@
 |-------------------------------
 */
 .account-dropdown-btn .dropdown-btn img {
-    @apply h-8 w-8 rounded-full;
+    @apply w-8 h-8 rounded-full;
 }
 
 .account-dropdown {
     @apply divide-y! divide-current/10!;
-}
-
-.account-dropdown form .link-btn {
-    @apply text-left! text-base;
 }
 
 .account-dropdown-info {
@@ -90,6 +98,12 @@
 }
 
 .account-dropdown-info p {
-    @apply max-w-[10rem] break-words whitespace-normal;
+    @apply max-w-[10rem];
+    @apply break-words whitespace-normal;
+
     @apply font-semibold text-current/50;
+}
+
+.account-dropdown form .link-btn {
+    @apply text-left! text-base;
 }

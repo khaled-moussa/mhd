@@ -74,16 +74,16 @@
     @apply text-[17px] font-semibold text-foreground leading-tight my-0;
 }
 
-.modal-close {
+.modal-close-btn {
     @apply w-7 h-7 p-1 flex items-center justify-center shrink-0 mt-0.5;
     @apply rounded-lg border border-foreground/20 bg-transparent cursor-pointer;
     @apply transition-colors duration-150 hover:bg-foreground/20;
     @apply ml-auto;
 }
 
-.modal-close::before {
+.modal-close-btn::before {
     content: '✕';
-    @apply text-[11px] text-foreground/50;
+    @apply text-sm text-foreground/50;
 }
 
 /* 

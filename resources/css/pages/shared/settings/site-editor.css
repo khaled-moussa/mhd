@@ -32,7 +32,7 @@
 |-----------------------------
 */
 .section-block {
-    @apply !space-y-5 py-5 px-3 rounded-md bg-current/2;
+    @apply py-5 px-3 !space-y-5 rounded-md bg-foreground/3;
 }
 
 /* 
@@ -53,12 +53,12 @@
 .site-editor-preview {
     @apply order-1 mb-10 h-[350px] w-full;
     @apply rounded-xl border border-current/10;
-    @apply xl:sticky xl:top-[75px];
+    @apply sticky xl:top-[75px];
     @apply xl:order-2 xl:h-[500px] xl:w-1/2;
 }
 
 .site-editor-preview iframe {
-    @apply h-full w-full;
+    @apply  w-full h-full rounded-xl;
 }
 
 /* 

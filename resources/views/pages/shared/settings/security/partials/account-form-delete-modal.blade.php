@@ -1,4 +1,8 @@
-@props(['modalId', 'modalTitle', 'description' => null])
+@props([
+	'modalId', 
+	'modalTitle', 
+	'description' => null
+])
 
 <div
     class="modal"
@@ -26,9 +30,9 @@
                     {{ $modalTitle }}
                 </h2>
 
-                <x-button.outlined
-                    class="modal-close"
-                    :data-modal-id="$modalId['DELETE_ACCOUNT_MODAL']"
+                <x-button.icon
+                    class="modal-close-btn"
+                    :data-custom-close="$modalId"
                 />
             </header>
 
@@ -38,6 +42,8 @@
                     {{ $description }}
                 </p>
             @endif
+
+            <div class="modal-divider"></div>
 
             {{-- Modal content --}}
             <main

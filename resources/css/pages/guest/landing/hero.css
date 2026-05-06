@@ -1,10 +1,13 @@
+@reference "@css/reference.css";
+
 /* 
 |-------------------------------
 | Hero Section
 |-------------------------------
 */
 .hero-section {
-    @apply relative flex flex-col min-h-screen overflow-hidden;
+    @apply relative flex flex-col min-h-screen;
+    @apply overflow-hidden;
 }
 
 /* 
@@ -14,17 +17,13 @@
 */
 .hero-bg {
     @apply absolute inset-0 z-0;
+    @apply after:content-[''] after:absolute after:inset-0 after:pointer-events-none;
+    @apply after:bg-gradient-to-r after:from-foreground/85 after:to-foreground/40;
 }
 
 .hero-bg video,
 .hero-bg img {
     @apply block w-full min-h-screen object-cover;
-}
-
-.hero-bg::after {
-    content: '';
-    @apply absolute inset-0 pointer-events-none;
-    @apply bg-gradient-to-r from-foreground/85 to-foreground/40;
 }
 
 /* 
@@ -33,13 +32,16 @@
 |-------------------------------
 */
 .hero-container {
-    @apply relative z-10 flex-1 container mx-auto;
+    @apply relative z-10 flex-1;
+    @apply container mx-auto;
 }
 
 .hero-inner {
     @apply grid grid-cols-1 items-end gap-12;
     @apply pt-28 pb-14;
-    @apply lg:grid-cols-2 lg:gap-10;
+
+    @apply lg:grid-cols-2;
+    @apply lg:gap-10;
 }
 
 /* 
@@ -52,24 +54,30 @@
 }
 
 .hero-tag {
-    @apply inline-flex items-center gap-2.5 mb-7;
+    @apply inline-flex items-center gap-2.5;
+    @apply mb-7;
 }
 
 .hero-tag-line {
-    @apply w-7 h-px bg-background/30;
+    @apply w-7 h-px;
+    @apply bg-background/30;
 }
 
 .hero-tag-text {
-    @apply text-[11px] font-medium text-background/45 tracking-wider uppercase;
+    @apply text-[11px] font-medium uppercase tracking-wider;
+    @apply text-background/45;
 }
 
 .hero-title {
-    @apply mb-6 font-bold leading-[1.0] tracking-wider text-background;
+    @apply mb-6 font-bold;
+    @apply leading-[1.0] tracking-wider;
+    @apply text-background;
     @apply text-[clamp(44px,6vw,78px)];
 }
 
 .hero-title-light {
-    @apply block mb-1 font-light text-background/45;
+    @apply block mb-1;
+    @apply font-light text-background/45;
     @apply text-[0.6em] tracking-wide;
 }
 
@@ -78,7 +86,9 @@
 }
 
 .hero-description {
-    @apply mb-8 max-w-[360px] text-sm leading-10 text-background/50;
+    @apply mb-8 max-w-[360px];
+    @apply text-sm leading-5;
+    @apply text-background/50;
 }
 
 /* 
@@ -92,40 +102,13 @@
 
 /* 
 |-------------------------------
-| Right Stats
-|-------------------------------
-*/
-.hero-right {
-    @apply w-1/2 flex flex-col gap-3 self-end;
-}
-
-.hero-stat-card {
-    @apply flex items-center gap-3.5 px-5 py-4 rounded-2xl;
-    @apply border border-background/10;
-    @apply bg-foreground/10 backdrop-blur-xs;
-}
-
-.hero-stat-accent {
-    @apply w-[3px] h-9 shrink-0 rounded-sm;
-    @apply bg-gradient-to-b from-primary-300 to-primary-500;
-}
-
-.hero-stat-num {
-    @apply text-xl font-bold leading-none tracking-wide text-background;
-}
-
-.hero-stat-label {
-    @apply mt-1 text-xs text-background/45;
-}
-
-/* 
-|-------------------------------
 | Bottom Bar
 |-------------------------------
 */
 .hero-bar {
     @apply relative z-10 flex items-center gap-5;
     @apply px-8 py-4;
+
     @apply border-t border-background/10;
     @apply bg-foreground/10 backdrop-blur-xl;
 }
@@ -134,24 +117,29 @@
     @apply flex items-center gap-2;
 }
 
-.hero-bar-dot {
-    @apply w-[7px] h-[7px] rounded-full shrink-0;
-}
-
 .hero-bar-label {
-    @apply text-[12px] text-background/40 whitespace-nowrap;
+    @apply text-xs;
+    @apply lg:text-sm;
+    @apply text-background/40;
 }
 
 .hero-bar-value {
-    @apply text-[12px] font-semibold text-background whitespace-nowrap;
+    @apply text-xs font-semibold whitespace-nowrap;
+    @apply lg:text-sm;
+    @apply text-background;
 }
 
 .hero-bar-sep {
-    @apply w-px h-5 shrink-0 bg-background/[0.1];
+    @apply w-px h-5 shrink-0;
+    @apply bg-background/[0.1];
 }
 
 .hero-scroll-hint {
-    @apply hidden items-center gap-2 lg:flex ml-auto;
-    @apply text-xs text-background/30 tracking-wider;
-    @apply before:content-['——']
+    @apply hidden lg:flex items-center gap-2;
+    @apply ml-auto;
+
+    @apply text-xs tracking-wider;
+    @apply text-background/30;
+
+    @apply before:content-['——'];
 }

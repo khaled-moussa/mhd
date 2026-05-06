@@ -1,3 +1,5 @@
+@reference "@css/reference.css";
+
 /* 
 |-------------------------------
 | App Shell Layout
@@ -5,13 +7,13 @@
 */
 .app-shell {
     @apply grid min-h-screen;
-    @apply transition-[grid-template-columns] duration-250 ease-in-out;
-    @apply grid-cols-[0fr] grid-rows-[0fr];
-    @apply lg:grid-cols-[64px_1fr] lg:grid-rows-[65px_1fr];
-}
 
-.app-shell.collapsed {
-    grid-template-columns: 220px 1fr;
+    /* base (mobile) */
+    @apply grid-cols-[0fr] grid-rows-[0fr];
+
+    /* desktop */
+    @apply lg:grid-cols-[64px_1fr] lg:grid-rows-[65px_1fr];
+    @apply transition-[grid-template-columns] duration-250 ease-in-out;
 }
 
 /* 
@@ -19,10 +21,19 @@
 | Sidebar — Expanded State
 |-------------------------------
 */
-.app-shell.collapsed .sidebar {
-    @apply px-3;
+.app-shell.collapsed {
+    @apply grid-cols-[220px_1fr];
 }
 
+.app-shell.collapsed .sidebar {
+    @apply block w-[220px] px-3;
+}
+
+/* 
+|-------------------------------
+| Sidebar Top — Expanded
+|-------------------------------
+*/
 .app-shell.collapsed .sidebar-top {
     @apply justify-start;
 }
@@ -33,7 +44,7 @@
 
 /* 
 |-------------------------------
-| Sidebar Items — Expanded State
+| Sidebar Items — Expanded
 |-------------------------------
 */
 .app-shell.collapsed .sidebar-item {
@@ -54,7 +65,7 @@
 
 /* 
 |-------------------------------
-| Sidebar Section — Expanded State
+| Sidebar Section — Expanded
 |-------------------------------
 */
 .app-shell.collapsed .sidebar-section-label {
@@ -63,7 +74,7 @@
 
 /* 
 |-------------------------------
-| Sidebar User — Expanded State
+| Sidebar User — Expanded
 |-------------------------------
 */
 .app-shell.collapsed .sidebar-user {
@@ -82,7 +93,4 @@
 .app-content {
     @apply col-start-2 row-start-2;
     @apply p-6;
-    @apply overflow-y-auto;
-
-    height: calc(100vh - 65px);
 }

@@ -82,4 +82,11 @@ enum EventsEnum: string
     case CONTACT_DELETED_EVENT = 'contact-deleted-event';
     case CONTACT_LOADED_EVENT = 'contact-loaded-event';
     case CONTACT_ERROR_EVENT = 'contact-error-event';
+    
+    /*
+    |-------------------------------
+    | Site Editor
+    |-------------------------------
+    */
+    case SITE_UPDATED_EVENT = 'site-updated-event';
 }

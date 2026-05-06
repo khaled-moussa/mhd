@@ -19,7 +19,8 @@
 
             {{-- Text --}}
             <div class="about-content">
-                <p>
+                <p id="description">
+
                     {{ $section['description'] }}
                 </p>
             </div>

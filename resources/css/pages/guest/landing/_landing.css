@@ -2,7 +2,7 @@
 
 /* 
 |-----------------------------
-| Landing Imports
+| Landing Sections Imports
 |-----------------------------
 */
 @import "./hero.css";
@@ -14,7 +14,7 @@
 
 /* 
 |-----------------------------
-| Global Utilities
+| Base Styles
 |-----------------------------
 */
 body {
@@ -23,26 +23,16 @@ body {
 
 /* 
 |-----------------------------
-| Landing Content
+| Landing Layout
 |-----------------------------
 */
 .guest-shell {
     @apply relative overflow-hidden;
+
     @apply bg-[url(@img/backgrounds/bg-main.png)];
     @apply bg-cover bg-center bg-repeat-y bg-fixed;
 }
 
 .guest-shell > * {
     @apply relative z-10;
-}
-
-/* 
-|-----------------------------
-| Text Gradient
-|-----------------------------
-*/
-.text-gradient {
-    @apply font-semibold text-transparent;
-    @apply bg-gradient-to-r from-red-300/85 via-primary-400/75 to-primary-500/60;
-    @apply bg-clip-text;
 }
