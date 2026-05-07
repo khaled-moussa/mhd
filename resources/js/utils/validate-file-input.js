@@ -1,5 +1,5 @@
 /**
- * Validate image files.
+ * Validate file input.
  */
 export default function validateFileInput(
     filesInput,
@@ -8,49 +8,68 @@ export default function validateFileInput(
         maxSizeInMB = null,
     } = {},
 ) {
-    let files = [];
+    /*
+    |------------------------------------------------------------------
+    | Normalize Files
+    |------------------------------------------------------------------
+    */
+    const files =
+        filesInput instanceof HTMLInputElement
+            ? Array.from(filesInput.files || [])
+            : Array.from(filesInput || []);
 
-    // Normalize input
-    if (filesInput instanceof HTMLInputElement) {
-        files = Array.from(filesInput.files || []);
-    } else {
-        files = Array.from(filesInput);
-    }
-
+    /*
+    |------------------------------------------------------------------
+    | State
+    |------------------------------------------------------------------
+    */
     const validFiles = [];
-    const invalidFiles = [];
+    const errors = [];
 
-    let invalidType = 0;
-    let oversize = 0;
-
+    /*
+    |------------------------------------------------------------------
+    | Validate Files
+    |------------------------------------------------------------------
+    */
     files.forEach((file) => {
-        const extension = file.name.split(".").pop().toLowerCase();
-        const isValidType = allowedExtensions.includes(extension);
+        const extension = file.name.split(".").pop()?.toLowerCase();
+
+        const isValidExtension = allowedExtensions.includes(extension);
+
         const isValidSize = maxSizeInMB
             ? file.size <= maxSizeInMB * 1024 * 1024
             : true;
 
-        if (!isValidType) {
-            invalidType++;
-            invalidFiles.push(file);
+        // Invalid extension
+        if (!isValidExtension) {
+            errors.push(
+                `"${file.name}" has an invalid file type. Allowed: ${allowedExtensions.join(", ")}`,
+            );
+
             return;
         }
 
+        // Invalid size
         if (!isValidSize) {
-            oversize++;
-            invalidFiles.push(file);
+            errors.push(
+                `"${file.name}" exceeds the maximum size of ${maxSizeInMB}MB.`,
+            );
+
             return;
         }
 
         validFiles.push(file);
     });
 
+    /*
+    |------------------------------------------------------------------
+    | Response
+    |------------------------------------------------------------------
+    */
     return {
         validFiles,
-        invalidFiles,
-        errors: {
-            invalidType,
-            oversize,
-        },
+        isValid: errors.length === 0,
+        errorMessage: errors[0] || null,
+        errors,
     };
 }

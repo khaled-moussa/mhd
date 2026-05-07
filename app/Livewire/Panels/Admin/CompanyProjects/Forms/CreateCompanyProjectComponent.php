@@ -17,38 +17,36 @@ class CreateCompanyProjectComponent extends Component
     use WithFileUploads;
 
     /*
-    |-----------------------------
+    |--------------------------------------------------------------------------
     | Properties
-    |-----------------------------
+    |--------------------------------------------------------------------------
     */
+
     public CompanyProjectFormComponent $form;
 
     /*
-    |-----------------------------
+    |--------------------------------------------------------------------------
     | Lifecycle
-    |-----------------------------
+    |--------------------------------------------------------------------------
     */
+
     public function render()
     {
         return view('admin_livewire::company-projects.forms.create-company-project-component');
     }
 
     /*
-    |-----------------------------
+    |--------------------------------------------------------------------------
     | Actions
-    |-----------------------------
+    |--------------------------------------------------------------------------
     */
+
     public function handleSubmit(): void
     {
         if (empty($this->form->images)) {
             return;
         }
 
-        $this->submit();
-    }
-
-    public function submit(): void
-    {
         $this->form->validate();
 
         $project = app(CreateCompanyProjectAction::class)->execute(
@@ -62,61 +60,40 @@ class CreateCompanyProjectComponent extends Component
             )
         );
 
-        $this->uploadProjectFiles($project);
-
-        $this->resetForm();
-        $this->dispatchCompanyProjectCreatedEvent();
+        $this->dispatchFiles($project);
+        $this->form->resetForm();
+        $this->dispatch(EventsEnum::COMPANY_PROJECT_CREATED_EVENT);
     }
 
     /*
-    |-----------------------------
+    |--------------------------------------------------------------------------
     | Helpers
-    |-----------------------------
+    |--------------------------------------------------------------------------
     */
-    private function uploadProjectFiles(CompanyProject $project): void
+
+    private function dispatchFiles(CompanyProject $project): void
     {
-        $tempImagesPaths = [];
-        $tempFileData = null;
+        $imagePaths = collect($this->form->images)
+            ->map(fn($image) => $image->getRealPath())
+            ->filter()
+            ->values()
+            ->all();
 
-        // Multiple images
-        if (!empty($this->form->images)) {
-            $tempImagesPaths = collect($this->form->images)
-                ->map(fn($image) => $image->getRealPath())
-                ->all();
-        }
-
-        // Single file
-        if (!empty($this->form->file)) {
-            $tempFileData = [
+        $fileData = $this->form->file
+            ? [
                 'name' => $this->form->file->getClientOriginalName(),
                 'path' => $this->form->file->getRealPath(),
-            ];
-        }
+            ]
+            : null;
 
-        // Nothing to upload
-        if (empty($tempImagesPaths) && is_null($tempFileData)) {
+        if (empty($imagePaths) && is_null($fileData)) {
             return;
         }
 
         dispatch(new StoreCompanyProjectFilesJob(
             companyProject: $project,
-            tempImagesPaths: $tempImagesPaths,
-            tempFileData: $tempFileData,
+            tempImagesPaths: $imagePaths,
+            tempFileData: $fileData,
         ));
-    }
-
-    private function resetForm(): void
-    {
-        $this->form->resetForm();
-    }
-
-    /*
-    |-----------------------------
-    | Events
-    |-----------------------------
-    */
-    private function dispatchCompanyProjectCreatedEvent(): void
-    {
-        $this->dispatch(EventsEnum::COMPANY_PROJECT_CREATED_EVENT);
     }
 }

@@ -1,6 +1,6 @@
 <form
-    x-data="projectFormCreateComponent"
     id="{{ $formId['CREATE_COMPANY_PROJECT_FORM'] }}"
+    x-data="projectFormCreateComponent"
     @submit.prevent="submit"
 >
     {{-- Form --}}
@@ -8,6 +8,7 @@
 
     <div class="modal-actions">
         <x-button.outlined
+            class="modal-close"
             label="Cancel"
             :data-modal-id="$modalId['CREATE_COMPANY_PROJECT_MODAL']"
         />

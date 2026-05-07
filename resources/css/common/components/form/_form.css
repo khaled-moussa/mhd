@@ -61,3 +61,12 @@
     @apply transition-colors duration-300;
     @apply hover:text-primary;
 }
+
+/* 
+|--------------------------------
+| Label
+|--------------------------------
+*/
+.input-field label {
+    @apply text-sm text-foreground/90 font-semibold;
+}

@@ -163,11 +163,12 @@
                         </div>
                     </div>
 
+                    {{-- File Actions --}}
                     <div class="file-actions">
                         <x-button.outlined
                             class="sm icon danger"
                             x-show="!isEditing"
-                            @click="cancelFile(image.id)"
+                            @click="cancelFile()"
                         >
                             <i class="fi fi-rr-cross-small"></i>
                         </x-button.outlined>
@@ -175,7 +176,7 @@
                         <x-button.outlined
                             class="sm icon"
                             x-show="isEditing"
-                            @click="removeFile(image.id)"
+                            @click="removeFile()"
                         >
                             <i class="fi fi-rr-trash"></i>
                         </x-button.outlined>
@@ -205,7 +206,6 @@
     minlength="10"
 />
 
-
 {{-- Row --}}
 <div class="project-form-row">
     <x-form.input
@@ -222,7 +222,6 @@
         required
     />
 </div>
-
 
 {{-- Row --}}
 <div class="project-form-row">
