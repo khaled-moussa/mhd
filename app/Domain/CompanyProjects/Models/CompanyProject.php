@@ -6,7 +6,6 @@ use App\App\Web\Resources\CompanyProjects\CompanyProjectsResource;
 use App\Domain\CompanyProjects\QueryBuilders\CompanyProjectBuilder;
 use App\Domain\CompanyProjects\States\VisibilityStates\VisibilityStates;
 use App\Domain\Landing\VisibilityStates\VisibleState;
-use App\Support\Traits\HasFormattedTimestamps;
 use App\Support\Traits\HasUuid;
 use Spatie\ModelStates\HasStates;
 use Spatie\MediaLibrary\HasMedia;
@@ -14,8 +13,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
-use Carbon\Carbon;
 
 #[UseResource(CompanyProjectsResource::class)]
 class CompanyProject extends Model implements HasMedia
@@ -35,7 +32,7 @@ class CompanyProject extends Model implements HasMedia
     protected $casts = [
         'images'           => 'array',
         'visibility_state' => VisibilityStates::class,
-        'delivered_at' => 'datetime',
+        'delivered_at' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -156,7 +153,7 @@ class CompanyProject extends Model implements HasMedia
 
     public function getDeliveredAt(): ?string
     {
-        return $this->delivered_at->format('M d, Y');
+        return $this->delivered_at?->format('Y-m-d');
     }
 
     public function getCreatedAt(): ?string

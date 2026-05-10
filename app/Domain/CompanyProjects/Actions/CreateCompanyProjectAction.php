@@ -19,7 +19,7 @@ class CreateCompanyProjectAction
     {
         $project = CompanyProject::create($dto->toArray());
 
-        $this->ensureProjectsSectionVisible();
+        $this->ensureProjectsSectionIsVisible();
 
         return $project;
     }
@@ -29,13 +29,15 @@ class CreateCompanyProjectAction
     | Ensure Projects Section Visible
     |-------------------------------
     */
-    private function ensureProjectsSectionVisible(): void
+    private function ensureProjectsSectionIsVisible(): void
     {
         $section = app(GetSectionByKeyAction::class)->execute('projects');
 
-        // Only change if not already visible
-        if (! $section->isVisible()) {
-            app(ChangeLandingSectionVisibilityAction::class)->execute($section, VisibleState::class);
+        if ($section->isVisible()) {
+            return;
         }
+
+        app(ChangeLandingSectionVisibilityAction::class)
+            ->execute($section, VisibleState::class);
     }
 }

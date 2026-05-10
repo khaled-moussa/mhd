@@ -6,6 +6,6 @@ class ProjectController
 {
     public function __invoke()
     {
-        return view('pages.guest.projects.index');
+        return view('pages.landing.projects.index');
     }
 }

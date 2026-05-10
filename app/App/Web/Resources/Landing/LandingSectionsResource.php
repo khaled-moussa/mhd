@@ -16,7 +16,7 @@ class LandingSectionsResource extends JsonResource
             'key'         => $this->key,
             'title'       => $this->title,
             'description' => $this->description,
-            'visible'     => $this->visible,
+            'visible'     => $this->getVisibility()->value(),
             'order'       => $this->order,
             'data'        => $this->data,
         ];

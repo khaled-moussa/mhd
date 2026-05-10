@@ -3,7 +3,9 @@
 namespace App\Support\Context;
 
 use App\Domain\CompanyProjects\Actions\GetCompanyProjectsAction;
-use Illuminate\Support\Collection;
+use App\Domain\CompanyServices\Actions\GetCompanyServicesAction;
+use App\Domain\Landing\Actions\GetLandingSectionsAction;
+use App\Domain\Landing\Models\LandingSection;
 
 class SectionContext
 {
@@ -13,6 +15,7 @@ class SectionContext
     |--------------------------------------------------------------------------
     */
     private static mixed $cachedSections = null;
+    private static ?object $cachedMapping = null;
 
     /*
     |--------------------------------------------------------------------------
@@ -21,12 +24,13 @@ class SectionContext
     */
     private static function resolve(): mixed
     {
-        return self::$cachedSections ??= app('sections');
+        return self::$cachedSections ??= app(GetLandingSectionsAction::class)->execute();
     }
 
     public static function clear(): void
     {
         self::$cachedSections = null;
+        self::$cachedMapping = null;
     }
 
     /*
@@ -36,17 +40,15 @@ class SectionContext
     */
     public static function toMapping(): object
     {
-        return (object) collect(self::resolve())
+        return self::$cachedMapping ??= (object) collect(self::resolve())
             ->filter(fn($section) => self::isValidSection($section))
             ->mapWithKeys(function ($section) {
 
-                if ($section->key === 'projects') {
-                    $section->data = self::getProjectsData();
-                }
-
-                // if ($section->key === 'services') {
-                //     $data['data'] = self::getServicesData();
-                // }
+                match ($section->key) {
+                    'projects' => $section->data = self::getProjectsData(limit: 6, visible: true),
+                    'services' => $section->data = self::getServicesData(visible: true),
+                    default => null,
+                };
 
                 return [
                     $section->key => (object) $section,
@@ -59,9 +61,21 @@ class SectionContext
         return self::resolve()->toResourceCollection();
     }
 
-    public static function toArray(): array
+    public static function all(): mixed
     {
-        return self::toCollection()->all();
+        return self::$cachedMapping ??= (object) collect(self::resolve())
+            ->mapWithKeys(function ($section) {
+
+                match ($section->key) {
+                    'projects' => $section->data = self::getProjectsData(limit: 6, visible: true),
+                    'services' => $section->data = self::getServicesData(visible: true),
+                    default => null,
+                };
+
+                return [
+                    $section->key => (object) $section,
+                ];
+            })->all();
     }
 
     /*
@@ -71,46 +85,42 @@ class SectionContext
     */
     public static function get(string $key, mixed $default = null): mixed
     {
-        return self::toCollection()->get($key, $default);
+        return self::toMapping()->{$key} ?? $default;
+    }
+
+    public static function getCompanyLinks()
+    {
+        return self::get('footer', []);
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Helpers
+    | Validation
     |--------------------------------------------------------------------------
     */
     private static function isValidSection(mixed $section): bool
     {
-        if (! $section->isVisible()) {
-            return false;
-        }
-
-        if (! isset($section->key)) {
-            return false;
-        }
-
-        return true;
+        return $section->isVisible() && isset($section->key);
     }
 
-    private static function getProjectsData()
+    /*
+    |--------------------------------------------------------------------------
+    | Data Resolvers
+    |--------------------------------------------------------------------------
+    */
+    private static function getProjectsData(?int $limit = null, ?bool $visible = null): array
     {
-        $projects =  app(GetCompanyProjectsAction::class)->execute(visible: true);
+        $projects = app(GetCompanyProjectsAction::class)
+            ->execute(limit: $limit, visible: $visible);
 
-        if ($projects->isEmpty()) {
-            return [];
-        }
-
-        return $projects->toResourceCollection()->resolve();
+        return $projects->isEmpty() ? [] : $projects->toResourceCollection()->resolve();
     }
 
-    //    private static function getServicesData()
-    // {
-    //     $projects =  app(GetCompanyProjectsAction::class)->execute(visible: true);
+    private static function getServicesData(?bool $visible = null): array
+    {
+        $services = app(GetCompanyServicesAction::class)
+            ->execute(visible: $visible);
 
-    //     if ($projects->isEmpty()) {
-    //         return [];
-    //     }
-
-    //     $projects->toResourceCollection()->resolve();
-    // }
+        return $services->isEmpty() ? [] : $services->toResourceCollection()->resolve();
+    }
 }

@@ -1,6 +1,7 @@
-@props(['section'])
-
-<footer id="footer" class="footer">
+<footer
+    id="footer"
+    class="footer"
+>
     <div class="footer-container">
 
         {{-- Grid --}}
@@ -11,8 +12,11 @@
                 <x-global.branding />
 
                 <div class="footer-socials">
-                    @foreach ($section['data']['socials'] as $social)
-                        <x-button.link class="footer-social-link" :href="$social['link']">
+                    @foreach ($company['data']['socials'] as $social)
+                        <x-button.link
+                            class="footer-social-link"
+                            :href="$social['link']"
+                        >
                             <i class="{{ $social['icon'] }}"></i>
                         </x-button.link>
                     @endforeach
@@ -24,11 +28,34 @@
                 <h4 class="footer-col-title">Explore</h4>
 
                 <ul class="footer-list">
-                    @foreach ($section['data']['company'] as $item)
-                        <li>
-                            <x-button.link class="footer-link" :label="$item['label']" :href="$item['link']" />
-                        </li>
-                    @endforeach
+                    <li>
+                        <x-button.link
+                            class="footer-link"
+                            label="About"
+                            :href="url('/#about')"
+                        />
+                    </li>
+                    <li>
+                        <x-button.link
+                            class="footer-link"
+                            label="Services"
+                            :href="url('/#services')"
+                        />
+                    </li>
+                    <li>
+                        <x-button.link
+                            class="footer-link"
+                            label="Projects"
+                            :href="url('/#projects')"
+                        />
+                    </li>
+                    <li>
+                        <x-button.link
+                            class="footer-link"
+                            label="Contact"
+                            :href="url('/#contact')"
+                        />
+                    </li>
                 </ul>
             </div>
         </div>
@@ -41,8 +68,14 @@
             </p>
 
             <div class="footer-legal">
-                <x-button.link class="footer-legal-link" label="Terms of Service" />
-                <x-button.link class="footer-legal-link" label="Privacy Policy" />
+                <x-button.link
+                    class="footer-legal-link"
+                    label="Terms of Service"
+                />
+                <x-button.link
+                    class="footer-legal-link"
+                    label="Privacy Policy"
+                />
             </div>
 
         </div>

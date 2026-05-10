@@ -8,7 +8,6 @@ use App\Domain\CompanyProjects\DTOs\UpdateCompanyProjectDto;
 use App\Domain\CompanyProjects\Jobs\RemoveCompanyProjectImagesJob;
 use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectFilesJob;
 use App\Domain\CompanyProjects\Models\CompanyProject;
-use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
@@ -17,77 +16,85 @@ use Livewire\WithFileUploads;
 
 class UpdateCompanyProjectComponent extends Component
 {
-    use WithLivewireExceptionHandling;
     use WithFileUploads;
 
     /*
-    |-----------------------------
+    |--------------------------------------------------------------------------
     | Properties
-    |-----------------------------
+    |--------------------------------------------------------------------------
     */
+
     #[Locked]
     public string $companyProjectUuid;
 
     public CompanyProjectFormComponent $form;
 
     public array $removedImageIds = [];
+    public ?string $removedFileId = null;
 
     /*
-    |-----------------------------
+    |--------------------------------------------------------------------------
     | Lifecycle
-    |-----------------------------
+    |--------------------------------------------------------------------------
     */
+
     public function render()
     {
         return view('admin_livewire::company-projects.forms.update-company-project-component');
     }
 
     /*
-    |-----------------------------
-    | Loading Data
-    |-----------------------------
+    |--------------------------------------------------------------------------
+    | Load Data
+    |--------------------------------------------------------------------------
     */
+
     public function editCompanyProject(string $companyProjectUuid): void
     {
         $this->companyProjectUuid = $companyProjectUuid;
 
         if ($this->companyProject) {
-            $this->form->fillCompanyProject(companyProject: $this->companyProject);
+            $this->form->fillCompanyProject(
+                companyProject: $this->companyProject
+            );
         }
     }
 
     /*
-    |-----------------------------
-    | Actions
-    |-----------------------------
+    |--------------------------------------------------------------------------
+    | Submit Flow
+    |--------------------------------------------------------------------------
     */
-    public function handleSubmit(array $removedImageIds = [])
+
+    public function handleSubmit(array $removedImageIds = [], ?string $removedFileId = null)
     {
-        if (!empty($removedImageIds)) {
-            $this->removedImageIds = $removedImageIds;
-            $this->removeProjectImages();
-        }
+        $this->removedImageIds = $removedImageIds;
+        $this->removedFileId   = $removedFileId;
 
         $this->submit();
+
+        if (!empty($this->removedImageIds)) {
+            $this->removeProjectImages();
+        }
     }
 
     public function submit(): void
     {
         $this->validate();
 
-        $updateDto = new UpdateCompanyProjectDto(
-            uuid: $this->companyProjectUuid,
-            title: $this->form->title,
-            description: $this->form->description,
-            deliveredAt: $this->form->deliveredAt,
-            priceStart: $this->form->priceStart,
-            address: $this->form->address,
-            location: $this->form->resolveEmbedUrl($this->form->location),
-        );
-
         app(UpdateCompanyProjectAction::class)->execute(
             $this->companyProject,
-            $updateDto
+            
+            new UpdateCompanyProjectDto(
+                uuid: $this->companyProjectUuid,
+                title: $this->form->title,
+                description: $this->form->description,
+                deliveredAt: $this->form->deliveredAt,
+                priceStart: $this->form->priceStart,
+                address: $this->form->address,
+                location: $this->form->resolveEmbedUrl($this->form->location),
+                visible: $this->form->visible,
+            )
         );
 
         $this->uploadProjectFiles();
@@ -97,31 +104,28 @@ class UpdateCompanyProjectComponent extends Component
     }
 
     /*
-    |-----------------------------
-    | Helpers
-    |-----------------------------
+    |--------------------------------------------------------------------------
+    | File Handling
+    |--------------------------------------------------------------------------
     */
+
     private function uploadProjectFiles(): void
     {
-        $tempImagesPaths = [];
+        $tempImagesPaths = collect($this->form->images)
+            ->filter(fn ($image) => $image instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile)
+            ->map(fn ($image) => $image->getRealPath())
+            ->values()
+            ->all();
+
         $tempFileData = null;
 
-        // Multiple images
-        if (!empty($this->form->images)) {
-            $tempImagesPaths = collect($this->form->images)
-                ->map(fn($image) => $image->getRealPath())
-                ->all();
-        }
-
-        // Single file
-        if (!empty($this->form->file)) {
+        if ($this->form->file instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
             $tempFileData = [
                 'name' => $this->form->file->getClientOriginalName(),
                 'path' => $this->form->file->getRealPath(),
             ];
         }
 
-        // Nothing to upload
         if (empty($tempImagesPaths) && is_null($tempFileData)) {
             return;
         }
@@ -133,7 +137,6 @@ class UpdateCompanyProjectComponent extends Component
         ));
     }
 
-
     private function removeProjectImages(): void
     {
         dispatch(new RemoveCompanyProjectImagesJob(
@@ -142,16 +145,28 @@ class UpdateCompanyProjectComponent extends Component
         ));
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
+
     private function resetForm(): void
     {
         $this->form->resetForm();
     }
 
+    private function dispatchCompanyProjectUpdatedEvent(): void
+    {
+        $this->dispatch(EventsEnum::COMPANY_PROJECT_UPDATED_EVENT);
+    }
+
     /*
-    |-----------------------------
+    |--------------------------------------------------------------------------
     | Computed
-    |-----------------------------
+    |--------------------------------------------------------------------------
     */
+
     #[Computed]
     public function companyProject(): ?CompanyProject
     {
@@ -159,16 +174,7 @@ class UpdateCompanyProjectComponent extends Component
             return null;
         }
 
-        return app(GetCompanyProjectByUuidAction::class)->execute($this->companyProjectUuid);
-    }
-
-    /*
-    |-----------------------------
-    | Events
-    |-----------------------------
-    */
-    private function dispatchCompanyProjectUpdatedEvent(): void
-    {
-        $this->dispatch(EventsEnum::COMPANY_PROJECT_UPDATED_EVENT);
+        return app(GetCompanyProjectByUuidAction::class)
+            ->execute($this->companyProjectUuid);
     }
 }

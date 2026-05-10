@@ -7,10 +7,9 @@
             type="password"
             label="Password"
             placeholder="••••••••"
-            wire:model="password"
-            autocomplete="current-password"
+            wire:model="newPassword"
             required
-            :error="$errors->first('password')"
+            error="newPassword"
         />
 
         {{-- Confirm Password --}}
@@ -19,15 +18,21 @@
             type="password"
             label="Confirm Password"
             placeholder="••••••••"
-            wire:model="password_confirmation"
-            autocomplete="current-password"
+            wire:model="passwordConfirmation"
             required
-            :error="$errors->first('password_confirmation')"
+            error="passwordConfirmation"
         />
 
+        {{-- Failed --}}
+        <x-alert.validation-input error="reset_failed" />
+
+        {{-- Submit --}}
         <x-button.primary
             class="primary-btn-full"
             label="Reset password"
+            wire:loading.class="spinner"
+            wire:target="submit"
+            wire:loading.attr="disabled"
         />
     </form>
 

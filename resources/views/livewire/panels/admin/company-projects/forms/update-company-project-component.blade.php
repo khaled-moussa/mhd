@@ -5,10 +5,13 @@
 >
 
     {{-- Form --}}
-    @include('admin::company-projects.partials.company-project-form')
+    @include('admin::company-projects.partials.company-project-form', [
+        'prefix' => 'update',
+    ])
 
     <div class="modal-actions">
         <x-button.outlined
+            class="modal-close"
             label="Cancel"
             :data-modal-id="$modalId['UPDATE_COMPANY_PROJECT_MODAL']"
         />

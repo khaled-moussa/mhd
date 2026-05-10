@@ -6,8 +6,8 @@
 
 {{-- Page assets --}}
 @push('head')
-    {{ Vite::adminStyle('services/_services.css') }}
-    {{ Vite::adminScript('services/_services.js') }}
+    {{ Vite::style('panels/admin/services/_services.css') }}
+    {{ Vite::script('panels/admin/services/_services.js') }}
 @endpush
 
 {{-- Content --}}

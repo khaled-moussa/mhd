@@ -25,28 +25,28 @@
                 <x-button.link
                     class="navbar-link"
                     label="About"
-                    :href="url('#about')"
+                    :href="url('/#about')"
                 />
             </li>
             <li>
                 <x-button.link
                     class="navbar-link"
                     label="Services"
-                    :href="url('#services')"
+                    :href="url('/#services')"
                 />
             </li>
             <li>
                 <x-button.link
                     class="navbar-link"
                     label="Projects"
-                    :href="url('#projects')"
+                    :href="url('/#projects')"
                 />
             </li>
             <li>
                 <x-button.link
                     class="navbar-link"
                     label="Contact"
-                    :href="url('#contact')"
+                    :href="url('/#contact')"
                 />
             </li>
         </ul>

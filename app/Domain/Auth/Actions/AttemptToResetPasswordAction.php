@@ -4,6 +4,7 @@ namespace App\Domain\Auth\Actions;
 
 use App\Domain\Auth\Exceptions\FailedToForgetPasswordException;
 use App\Domain\Users\Actions\GetUserByEmailAction;
+use App\Domain\Users\Services\UserEmailRequestService;
 
 class AttemptToResetPasswordAction
 {
@@ -14,5 +15,9 @@ class AttemptToResetPasswordAction
         if (! $user) {
             throw new FailedToForgetPasswordException;
         }
+
+        // Fired reset password email
+        app(UserEmailRequestService::class)
+            ->resetPasswordRequest($user);
     }
 }

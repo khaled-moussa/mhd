@@ -41,11 +41,11 @@ body.scroll-none {
 }
 
 .brand-name {
-    @apply text-[13px] font-semibold text-background leading-tight tracking-tight;
+    @apply text-sm font-semibold text-background leading-tight tracking-tight;
 }
 
-.brand-name span {
-    @apply block font-normal text-sm text-background/40 tracking-wide;
+.brand-name span:last-child {
+    @apply block font-light text-sm text-background/60 tracking-wide;
 }
 
 .brand-description {

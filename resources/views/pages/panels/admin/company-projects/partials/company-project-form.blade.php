@@ -1,9 +1,11 @@
+@props(['prefix'])
+
 {{-- Uploaded Images --}}
 <div class="upload-section upload-section-images">
 
     <x-form.upload
-        input-id="image-input"
-        drag-id="image-drag-area"
+        input-id="{{ $prefix }}-image-input"
+        drag-id="{{ $prefix }}-image-drag-area"
         description="Drag & drop images here, or click to select images"
         accept="jpg,jpeg,png,webp,gif"
         :multiple="true"
@@ -13,6 +15,7 @@
 
     <div class="uploaded-files">
         <div class="file-wrapper">
+
             <template
                 x-for="image in images"
                 :key="image.id"
@@ -48,6 +51,7 @@
                                 :class="image.status"
                             >
                                 <div class="file-status-dot"></div>
+
                                 <span x-text="image.status"></span>
                             </span>
                         </div>
@@ -56,17 +60,20 @@
                         <span
                             class="progress-text"
                             x-text="`${image.progress}%`"
-                        ></span>
+                        >
+                        </span>
 
                         <div class="progress-bar">
                             <div
                                 class="progress"
                                 :style="`width: ${image.progress}%`"
-                            ></div>
+                            >
+                            </div>
                         </div>
                     </div>
 
                     <div class="file-actions">
+
                         <x-button.outlined
                             class="sm icon danger"
                             x-show="!isEditing"
@@ -82,6 +89,7 @@
                         >
                             <i class="fi fi-rr-trash"></i>
                         </x-button.outlined>
+
                     </div>
 
                 </div>
@@ -96,8 +104,10 @@
                 <div class="add-files-icon">
                     <i class="fi fi-rr-cloud-upload"></i>
                 </div>
+
                 <p>Add more images</p>
             </div>
+
         </div>
     </div>
 </div>
@@ -107,8 +117,8 @@
 <div class="upload-section upload-section-file">
 
     <x-form.upload
-        input-id="file-input"
-        drag-id="file-drag-area"
+        input-id="{{ $prefix }}-file-input"
+        drag-id="{{ $prefix }}-file-drag-area"
         description="Drag & drop brochure here, or click to select brochure"
         accept="pdf,doc,docx"
         :multiple="false"
@@ -130,41 +140,52 @@
                     <i class="fi fi-rr-document file-preview-icon"></i>
 
                     <div class="file-info">
+
                         <p
                             class="file-name"
                             x-text="file.name"
-                        ></p>
+                        >
+                        </p>
 
                         <div class="file-meta">
+
                             <span
                                 class="file-size"
                                 x-text="file.size"
-                            ></span>
+                            >
+                            </span>
+
                             <span
                                 class="file-status"
                                 :class="file.status"
                             >
                                 <div class="file-status-dot"></div>
+
                                 <span x-text="file.status"></span>
                             </span>
+
                         </div>
 
                         {{-- Progress --}}
                         <span
                             class="progress-text"
                             x-text="`${file.progress}%`"
-                        ></span>
+                        >
+                        </span>
 
                         <div class="progress-bar">
                             <div
                                 class="progress"
                                 :style="`width: ${file.progress}%`"
-                            ></div>
+                            >
+                            </div>
                         </div>
+
                     </div>
 
                     {{-- File Actions --}}
                     <div class="file-actions">
+
                         <x-button.outlined
                             class="sm icon danger"
                             x-show="!isEditing"
@@ -180,9 +201,13 @@
                         >
                             <i class="fi fi-rr-trash"></i>
                         </x-button.outlined>
+
                     </div>
+
                 </div>
+
             </template>
+
         </div>
     </div>
 </div>
@@ -239,7 +264,6 @@
         error="form.location"
     />
 </div>
-
 
 {{-- Checkbox --}}
 <x-form.checkbox

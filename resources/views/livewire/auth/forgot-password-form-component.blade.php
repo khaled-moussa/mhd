@@ -16,6 +16,9 @@
         <x-button.primary
             class="primary-btn-full"
             label="Forgot password"
+            wire:loading.class="spinner"
+            wire:target="submit"
+            wire:loading.attr="disabled"
         />
     </form>
 

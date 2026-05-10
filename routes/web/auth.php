@@ -22,7 +22,7 @@ Route::prefix('auth')
         Route::get('/login', LoginController::class)->name('login');
         Route::get('/register', RegisterController::class)->name('register');
         Route::get('/forgot-password', ForgotPasswordController::class)->name('forgot-password');
-        Route::get('/reset-password', ResetPasswordController::class)->name('reset-password');
+        Route::get('reset-password', ResetPasswordController::class)->name('reset-password');
     });
 
 

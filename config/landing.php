@@ -238,29 +238,6 @@ return [
                         'link' => 'https://x.com/',
                     ],
                 ],
-
-                'company' => [
-                    [
-                        'label' => 'Facebook',
-                        'icon' => 'fi-brands-facebook',
-                        'link' => 'https://facebook.com/',
-                    ],
-                    [
-                        'label' => 'Instagram',
-                        'icon' => 'fi-brands-instagram',
-                        'link' => 'https://instagram.com/',
-                    ],
-                    [
-                        'label' => 'LinkedIn',
-                        'icon' => 'fi-brands-linkedin',
-                        'link' => 'https://linkedin.com/in/',
-                    ],
-                    [
-                        'label' => 'X',
-                        'icon' => 'fi-brands-twitter-alt-circle',
-                        'link' => 'https://x.com/',
-                    ],
-                ],
             ],
         ],
     ],

@@ -48,6 +48,10 @@ class CompanyServiceFormComponent extends Form
                 'min:10',
                 'max:255'
             ],
+
+            'visible' => [
+                'boolean'
+            ],
         ];
     }
 

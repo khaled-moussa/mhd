@@ -11,5 +11,8 @@
 
 {{-- Auth Form --}}
 @section('form')
-    @livewire('auth.reset-password-form-component')
+    @livewire('auth.reset-password-form-component', [
+        'email' => $email,
+        'token' => $token,
+    ])
 @endsection

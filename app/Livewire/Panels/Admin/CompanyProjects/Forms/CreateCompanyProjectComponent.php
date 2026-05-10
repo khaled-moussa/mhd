@@ -57,6 +57,7 @@ class CreateCompanyProjectComponent extends Component
                 priceStart: $this->form->priceStart,
                 address: $this->form->address,
                 location: $this->form->resolveEmbedUrl($this->form->location),
+                visible: $this->form->visible,
             )
         );
 

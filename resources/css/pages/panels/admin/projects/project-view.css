@@ -119,7 +119,7 @@
 
 .project-location-empty {
     @apply h-40;
-    @apply flex items-center justify-center gap-2;
+    @apply hidden items-center justify-center gap-2;
     @apply rounded-xl border border-foreground/10;
     @apply bg-foreground/10;
     @apply text-sm text-foreground/40;

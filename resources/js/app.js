@@ -37,20 +37,16 @@ const initUIComponents = () => {
 
 /* 
 |------------------------------- 
-| Init App
-|------------------------------- 
-*/
-const initApp = () => {
-    initCommonScripts();
-    initSidebarScripts();
-    initUIComponents();
-};
-
-/* 
-|------------------------------- 
 | Events 
 |------------------------------- 
 */
-window.addEventListener("DOMContentLoaded", initApp);
+window.addEventListener("DOMContentLoaded", () => {
+    initCommonScripts();
+    initUIComponents();
+});
 
-// document.addEventListener("livewire:navigated", initApp);
+document.addEventListener("livewire:navigated", () => {
+    initSidebarScripts();
+    initCommonScripts();
+    initUIComponents();
+});

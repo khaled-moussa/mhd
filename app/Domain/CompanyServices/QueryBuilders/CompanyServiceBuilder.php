@@ -18,12 +18,10 @@ class CompanyServiceBuilder extends Builder
 
     /**
      * Filter by a specific visibility state class.
-     *
-     * @param class-string $stateClass
      */
-    public function whereVisibility(string $stateClass): self
+    public function whereVisibility(bool $visible): self
     {
-        return $this->where('visibility_state', $stateClass);
+        return $visible ? $this->visible() : $this->notVisible();
     }
 
     /**

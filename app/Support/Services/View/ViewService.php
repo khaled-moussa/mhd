@@ -27,8 +27,8 @@ class ViewService
 
     public static function boot(): void
     {
-        self::registerSharedEnums();
-        self::registerSectionsComposers();
+        self::registerShared();
+        self::registerComposers();
     }
 
     /*
@@ -37,7 +37,7 @@ class ViewService
     |--------------------------------------------------------------------------
     */
 
-    public static function registerSharedEnums(): void
+    public static function registerShared(): void
     {
         self::shareEnums();
         self::shareModalIds();
@@ -45,9 +45,10 @@ class ViewService
         self::shareAuthUser();
     }
 
-    public static function registerSectionsComposers(): void
+    public static function registerComposers(): void
     {
-        self::composeSections();
+        self::shareAuthUser();
+        self::shareCompanyLinks();
     }
 
     /*
@@ -93,6 +94,11 @@ class ViewService
         );
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | View Composers
+    |--------------------------------------------------------------------------
+    */
     private static function shareAuthUser(): void
     {
         ViewFacade::composer('layouts.app', function ($view) {
@@ -102,19 +108,8 @@ class ViewService
         });
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | View Composers
-    |--------------------------------------------------------------------------
-    */
-
-    private static function composeSections(): void
+    private static function shareCompanyLinks(): void
     {
-        ViewFacade::composer(
-            'pages.guest.landing.*',
-            function (View $view) {
-                $view->with('sections', SectionContext::toMapping());
-            }
-        );
+        ViewFacade::composer('layouts.partials.footer.guest', fn(View $view) =>  $view->with('company', SectionContext::getCompanyLinks()));
     }
 }

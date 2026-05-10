@@ -4,7 +4,7 @@
 |--------------------------------
 */
 .checkbox-field {
-    @apply flex items-center;
+    @apply w-fit flex items-center;
     @apply gap-2.5;
     @apply text-current;
     @apply cursor-pointer;

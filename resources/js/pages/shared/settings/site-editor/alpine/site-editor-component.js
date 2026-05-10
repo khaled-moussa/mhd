@@ -49,16 +49,39 @@ document.addEventListener("alpine:init", () => {
         initIframe() {
             this.$refs.iframPreview.addEventListener("load", () => {
                 this.updatePreviewDebounced();
-                setTimeout(
-                    () =>
-                        this.$refs.iframeContainer.classList.remove("spinner"),
-                    1000,
-                );
+
+                setTimeout(() => {
+                    this.$refs.iframeContainer.classList.remove("spinner");
+                }, 1000);
             });
         },
 
         initWatch() {
             this.$watch("sections", () => this.updatePreviewDebounced());
+        },
+
+        /*
+        |--------------------------------------------------------------------------
+        | Helpers
+        |--------------------------------------------------------------------------
+        */
+
+        normalizeLink(value) {
+            if (!value) return "";
+
+            value = value.trim();
+
+            // Email → mailto:
+            if (value.includes("@") && !value.startsWith("mailto:")) {
+                return `mailto:${value}`;
+            }
+
+            // Phone → tel:
+            if (/^[0-9+\s()-]+$/.test(value) && !value.startsWith("tel:")) {
+                return `tel:${value.replace(/\s/g, "")}`;
+            }
+
+            return value;
         },
 
         /*
@@ -74,6 +97,7 @@ document.addEventListener("alpine:init", () => {
                 ...socials,
                 { icon: "", link: "" },
             ];
+
             this.sections = { ...this.sections };
         },
 
@@ -86,13 +110,19 @@ document.addEventListener("alpine:init", () => {
             this.sections = { ...this.sections };
         },
 
+        /*
+        |--------------------------------------------------------------------------
+        | Preview
+        |--------------------------------------------------------------------------
+        */
+
         updatePreview() {
             const data = JSON.parse(JSON.stringify(this.sections));
 
             this.$refs.iframPreview.contentWindow.postMessage(
                 {
                     type: "site-editor-preview",
-                    data: data,
+                    data,
                 },
                 "*",
             );
@@ -111,7 +141,21 @@ document.addEventListener("alpine:init", () => {
         submit() {
             if (!this.sections) return;
 
-            this.$wire.call("submit", this.sections, this.order);
+            const data = JSON.parse(JSON.stringify(this.sections));
+
+            // normalize links before sending to backend
+            Object.keys(data).forEach((sectionKey) => {
+                const section = data[sectionKey];
+
+                if (!section?.data?.socials) return;
+
+                section.data.socials = section.data.socials.map((social) => ({
+                    ...social,
+                    link: this.normalizeLink(social.link),
+                }));
+            });
+
+            this.$wire.call("submit", data, this.order);
         },
 
         /*
@@ -125,12 +169,9 @@ document.addEventListener("alpine:init", () => {
         },
 
         onSideUpdatedEvent() {
-            this.$el.addEventListener(
-                UI_EVENTS.SITE_UPDATED_EVENT,
-                () => {
-                    MessageToast("updated");
-                },
-            );
+            this.$el.addEventListener(UI_EVENTS.SITE_UPDATED_EVENT, () => {
+                MessageToast("updated");
+            });
         },
     }));
 });

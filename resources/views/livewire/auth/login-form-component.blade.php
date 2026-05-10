@@ -42,7 +42,7 @@
             />
         </div>
 
-        {{-- Form validation --}}
+        {{-- Failed --}}
         <x-alert.validation-input error="login_failed" />
 
         {{-- Submit --}}

@@ -14,9 +14,7 @@ class UpdateCompanyProjectAction
     */
     public function execute(CompanyProject $companyProject, UpdateCompanyProjectDto $dto): CompanyProject
     {
-        $companyProject->update(
-            $dto->toArray()
-        );
+        $companyProject->update($dto->toArray());
 
         return $companyProject->refresh();
     }

@@ -1,6 +1,6 @@
 <form
     id="{{ $formId['CREATE_CONTACT_FORM'] }}"
-    x-data="contactFormCreateComponent"
+    x-data="createContactComponent"
     wire:submit.prevent="submit"
 >
     <div class="input-field">

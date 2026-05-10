@@ -18,8 +18,6 @@ class CompanyProjectBuilder extends Builder
 
     /**
      * Filter by a specific visibility state class.
-     *
-     * @param class-string $stateClass
      */
     public function whereVisibility(bool $visible): self
     {

@@ -6,8 +6,8 @@
 
 {{-- Page assets --}}
 @push('head')
-    {{ Vite::adminStyle('contacts/_contacts.css') }}
-    {{ Vite::adminScript('contacts/_contacts.js') }}
+    {{ Vite::style('panels/admin/contacts/_contacts.css') }}
+    {{ Vite::script('panels/admin/contacts/_contacts.js') }}
 @endpush
 
 {{-- Content --}}

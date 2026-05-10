@@ -5,8 +5,8 @@
 */
 
 @import "./input.css";
-@import "./select.css";
 @import "./textarea.css";
+@import "./select.css";
 @import "./checkbox.css";
 @import "./password.css";
 @import "./otp.css";

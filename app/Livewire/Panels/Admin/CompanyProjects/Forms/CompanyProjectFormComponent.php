@@ -19,7 +19,7 @@ class CompanyProjectFormComponent extends Form
     public string $title = '';
     public string $description = '';
     public ?string $deliveredAt = null;
-    public float $priceStart = 0;
+    public $priceStart = 0;
     public string $address = '';
     public ?string $location = null;
     public array $images = [];
@@ -86,7 +86,6 @@ class CompanyProjectFormComponent extends Form
             ],
 
             'visible' => [
-                'nullable',
                 'boolean'
             ],
         ];
@@ -123,35 +122,48 @@ class CompanyProjectFormComponent extends Form
 
     public static function resolveEmbedUrl(?string $input = null): ?string
     {
-        if (!$input) {
+        if (blank($input)) {
             return null;
         }
 
         $input = trim($input);
 
-        // iframe pasted → extract src
+        // Extract iframe src
         if (preg_match('/src="([^"]+)"/i', $input, $match)) {
-            $input = $match[1];
+            return $match[1];
         }
 
-        // Already embed URL
-        if (str_contains($input, '/maps/embed')) {
+        // Already resolved embed URL
+        if (
+            str_contains($input, '/maps/embed') ||
+            str_contains($input, 'output=embed')
+        ) {
             return $input;
         }
 
-        // Short URL (maps.app.goo.gl)
+        // Google short URL
         if (str_contains($input, 'maps.app.goo.gl')) {
             $expanded = self::expandShortUrl($input);
+
             return self::resolveEmbedUrl($expanded);
         }
 
-        // Extract coordinates
+        // Coordinates
         if (preg_match('/@(-?\d+\.\d+),(-?\d+\.\d+)/', $input, $match)) {
-            return "https://www.google.com/maps?q={$match[1]},{$match[2]}&output=embed";
+            return sprintf(
+                'https://www.google.com/maps?q=%s,%s&output=embed',
+                $match[1],
+                $match[2]
+            );
         }
 
-        // Fallback search
-        return "https://www.google.com/maps?q=" . urlencode($input) . "&output=embed";
+        // Plain Google Maps URL
+        if (filter_var($input, FILTER_VALIDATE_URL)) {
+            return $input;
+        }
+
+        // Plain text address 
+        return 'https://www.google.com/maps?q=' . urlencode($input) . '&output=embed';
     }
 
     private static function expandShortUrl(string $url): string

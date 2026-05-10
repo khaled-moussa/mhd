@@ -1,32 +1,31 @@
-import MessageToast          from '@js/utils/message-toast';
-import generateUuid          from '@js/utils/generate-uuid';
-import validateFileInput     from '@js/utils/validate-file-input';
-import { closeModal }        from '@js/components/modal/_modal';
-import { MODALS, FORMS, UI_EVENTS } from '@js/utils/enums';
-import { DragFiles }         from '@js/utils/drag-files';
-import { MODALS_EVENT }      from '@js/utils/events';
-import resetFormValidation   from '@js/utils/reset-form-validation';
+import MessageToast from "@js/utils/message-toast";
+import generateUuid from "@js/utils/generate-uuid";
+import validateFileInput from "@js/utils/validate-file-input";
+import { closeModal } from "@js/components/modal/_modal";
+import { MODALS, FORMS, UI_EVENTS } from "@js/utils/enums";
+import { DragFiles } from "@js/utils/drag-files";
+import { MODALS_EVENT } from "@js/utils/events";
+import resetFormValidation from "@js/utils/reset-form-validation";
 
-document.addEventListener('alpine:init', () => {
-    Alpine.data('projectFormCreateComponent', () => ({
-
+document.addEventListener("alpine:init", () => {
+    Alpine.data("projectFormCreateComponent", () => ({
         /*
         |--------------------------------------------------------------------------
         | State
         |--------------------------------------------------------------------------
         */
 
-        images:   [],
-        file:     null,
+        images: [],
+        file: null,
         isEditing: false,
 
         maxConcurrentUploads: 5,
-        activeUploads:        0,
+        activeUploads: 0,
 
         dragImagesAreaElement: null,
-        imageInputElement:     null,
-        dragFileAreaElement:   null,
-        fileInputElement:      null,
+        imageInputElement: null,
+        dragFileAreaElement: null,
+        fileInputElement: null,
 
         /*
         |--------------------------------------------------------------------------
@@ -40,21 +39,29 @@ document.addEventListener('alpine:init', () => {
         },
 
         initDragAreas() {
-            this.dragImagesAreaElement = this.$el.querySelector('#image-drag-area');
-            this.imageInputElement     = this.$el.querySelector('#image-input');
-            this.dragFileAreaElement   = this.$el.querySelector('#file-drag-area');
-            this.fileInputElement      = this.$el.querySelector('#file-input');
+            this.dragImagesAreaElement = this.$el.querySelector(
+                "#create-image-drag-area",
+            );
+            this.imageInputElement = this.$el.querySelector(
+                "#create-image-input",
+            );
+
+            this.dragFileAreaElement = this.$el.querySelector(
+                "#create-file-drag-area",
+            );
+            this.fileInputElement =
+                this.$el.querySelector("#create-file-input");
 
             new DragFiles({
-                dragArea:  this.dragImagesAreaElement,
+                dragArea: this.dragImagesAreaElement,
                 fileInput: this.imageInputElement,
-                onDrop:    (images) => this.validateImages(images),
+                onDrop: (images) => this.validateImages(images),
             });
 
             new DragFiles({
-                dragArea:  this.dragFileAreaElement,
+                dragArea: this.dragFileAreaElement,
                 fileInput: this.fileInputElement,
-                onDrop:    (file) => this.validateFile(file),
+                onDrop: (file) => this.validateFile(file),
             });
         },
 
@@ -65,68 +72,71 @@ document.addEventListener('alpine:init', () => {
         */
 
         resetFileBeforeUpload(event) {
-            event.target.value = '';
+            event.target.value = "";
         },
 
         validateImages(images) {
-            console.log(images, 'CREATE');
-            
+            console.log(images, "CREATE");
+
             const result = validateFileInput(images, {
-                allowedExtensions: ['jpg', 'jpeg', 'png', 'webp', 'gif'],
+                allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif"],
                 maxSizeInMB: 5,
             });
 
-            if (! result.isValid) {
-                MessageToast('error', result.errorMessage);
+            if (!result.isValid) {
+                MessageToast("error", result.errorMessage);
                 return;
             }
 
             this.images.push(...this.prepareImages(result.validFiles));
-            this.dragImagesAreaElement.classList.add('has-files');
+            this.dragImagesAreaElement.classList.add("has-files");
             this.processQueue();
         },
 
         prepareImages(rawImages) {
-            return Array.from(rawImages).map(image => ({
-                id:       generateUuid(),
+            return Array.from(rawImages).map((image) => ({
+                id: generateUuid(),
                 image,
-                name:     image.name,
-                size:     image.size,
-                preview:  URL.createObjectURL(image),
+                name: image.name,
+                size: image.size,
+                preview: URL.createObjectURL(image),
                 progress: 0,
-                status:   'pending',
-                upload:   null,
+                status: "pending",
+                upload: null,
                 livewireIndex: null,
             }));
         },
 
         processQueue() {
-            while (this.activeUploads < this.maxConcurrentUploads && this.hasPendingImages()) {
+            while (
+                this.activeUploads < this.maxConcurrentUploads &&
+                this.hasPendingImages()
+            ) {
                 const next = this.getNextPendingImage();
-                if (! next) break;
+                if (!next) break;
                 this.uploadImage(next);
             }
         },
 
         uploadImage(imageItem) {
             this.activeUploads++;
-            imageItem.status = 'uploading';
+            imageItem.status = "uploading";
 
             imageItem.upload = this.$wire.upload(
-                'form.images',
+                "form.images",
                 imageItem.image,
 
                 // Success
                 () => {
                     imageItem.progress = 100;
-                    imageItem.status   = 'completed';
+                    imageItem.status = "completed";
                     this.activeUploads--;
                     this.processQueue();
                 },
 
                 // Error
                 () => {
-                    imageItem.status = 'error';
+                    imageItem.status = "error";
                     this.activeUploads--;
                     this.processQueue();
                 },
@@ -138,7 +148,7 @@ document.addEventListener('alpine:init', () => {
 
                 // Cancelled
                 () => {
-                    imageItem.status = 'cancelled';
+                    imageItem.status = "cancelled";
                     this.activeUploads--;
                     this.processQueue();
                 },
@@ -146,49 +156,60 @@ document.addEventListener('alpine:init', () => {
         },
 
         cancelImage(imageId) {
-            const imageItem = this.images.find(img => img.id === imageId);
-            if (! imageItem) return;
+            const imageItem = this.images.find((img) => img.id === imageId);
+            if (!imageItem) return;
 
             // Cancel active upload
-            if (imageItem.status === 'uploading' && imageItem.upload) {
+            if (imageItem.status === "uploading" && imageItem.upload) {
                 imageItem.upload.cancel();
                 this.activeUploads--;
             }
 
             // Remove from Livewire's form.images to avoid submitting cancelled files
-            if (imageItem.status === 'completed' || imageItem.status === 'uploading') {
-                const currentImages = this.$wire.get('form.images') || [];
-                const updatedImages = currentImages.filter((_, index) => index !== this.images
-                        .filter(img => img.status === 'completed' || img.status === 'uploading')
-                        .findIndex(img => img.id === imageId));
+            if (
+                imageItem.status === "completed" ||
+                imageItem.status === "uploading"
+            ) {
+                const currentImages = this.$wire.get("form.images") || [];
+                const updatedImages = currentImages.filter(
+                    (_, index) =>
+                        index !==
+                        this.images
+                            .filter(
+                                (img) =>
+                                    img.status === "completed" ||
+                                    img.status === "uploading",
+                            )
+                            .findIndex((img) => img.id === imageId),
+                );
 
-                this.$wire.set('form.images', updatedImages);
+                this.$wire.set("form.images", updatedImages);
             }
 
             URL.revokeObjectURL(imageItem.preview);
-            this.images = this.images.filter(img => img.id !== imageId);
+            this.images = this.images.filter((img) => img.id !== imageId);
 
             if (this.images.length === 0) {
-                this.dragImagesAreaElement.classList.remove('has-files');
+                this.dragImagesAreaElement.classList.remove("has-files");
             }
 
             this.processQueue();
         },
 
         resetImages() {
-            this.images.forEach(img => URL.revokeObjectURL(img.preview));
-            this.images       = [];
+            this.images.forEach((img) => URL.revokeObjectURL(img.preview));
+            this.images = [];
             this.activeUploads = 0;
-            this.$wire.set('form.images', []);
-            this.dragImagesAreaElement?.classList.remove('has-files');
+            this.$wire.set("form.images", []);
+            this.dragImagesAreaElement?.classList.remove("has-files");
         },
 
         hasPendingImages() {
-            return this.images.some(img => img.status === 'pending');
+            return this.images.some((img) => img.status === "pending");
         },
 
         getNextPendingImage() {
-            return this.images.find(img => img.status === 'pending');
+            return this.images.find((img) => img.status === "pending");
         },
 
         /*
@@ -199,48 +220,48 @@ document.addEventListener('alpine:init', () => {
 
         validateFile(file) {
             const result = validateFileInput(file, {
-                allowedExtensions: ['pdf', 'doc', 'docx'],
+                allowedExtensions: ["pdf", "doc", "docx"],
                 maxSizeInMB: 10,
             });
 
-            if (! result.isValid) {
-                MessageToast('error', result.errorMessage);
+            if (!result.isValid) {
+                MessageToast("error", result.errorMessage);
                 return;
             }
 
             this.file = this.prepareFile(result.validFiles[0]);
             this.uploadFile(this.file);
-            this.dragFileAreaElement.classList.add('has-files');
+            this.dragFileAreaElement.classList.add("has-files");
         },
 
         prepareFile(file) {
             return {
-                id:       generateUuid(),
+                id: generateUuid(),
                 file,
-                name:     file.name,
-                size:     file.size,
+                name: file.name,
+                size: file.size,
                 progress: 0,
-                status:   'pending',
-                upload:   null,
+                status: "pending",
+                upload: null,
             };
         },
 
         uploadFile(fileItem) {
-            fileItem.status = 'uploading';
+            fileItem.status = "uploading";
 
             fileItem.upload = this.$wire.upload(
-                'form.file',
+                "form.file",
                 fileItem.file,
 
                 // Success
                 () => {
                     fileItem.progress = 100;
-                    fileItem.status   = 'completed';
+                    fileItem.status = "completed";
                 },
 
                 // Error
                 () => {
-                    fileItem.status = 'error';
+                    fileItem.status = "error";
                 },
 
                 // Progress
@@ -250,31 +271,31 @@ document.addEventListener('alpine:init', () => {
 
                 // Cancelled
                 () => {
-                    fileItem.status = 'cancelled';
+                    fileItem.status = "cancelled";
                 },
             );
         },
 
         cancelFile() {
-            if (! this.file) return;
+            if (!this.file) return;
 
-            if (this.file.status === 'uploading' && this.file.upload) {
+            if (this.file.status === "uploading" && this.file.upload) {
                 this.file.upload.cancel();
             }
 
             // Remove from Livewire
-            this.$wire.set('form.file', null);
+            this.$wire.set("form.file", null);
 
             this.file = null;
-            this.dragFileAreaElement?.classList.remove('has-files');
+            this.dragFileAreaElement?.classList.remove("has-files");
         },
 
         resetFile() {
-            if (! this.file) return;
+            if (!this.file) return;
 
-            this.$wire.set('form.file', null);
+            this.$wire.set("form.file", null);
             this.file = null;
-            this.dragFileAreaElement?.classList.remove('has-files');
+            this.dragFileAreaElement?.classList.remove("has-files");
         },
 
         /*
@@ -284,19 +305,19 @@ document.addEventListener('alpine:init', () => {
         */
 
         submit() {
-            const completedImages = this.images.filter(img => img.status === 'completed');
+            const completedImages = this.images.filter((img) => img.status === "completed");
 
             if (completedImages.length === 0) {
-                MessageToast('warning', 'Images are required.');
+                MessageToast("warning", "Images are required.");
                 return;
             }
 
-            if (! this.file || this.file.status !== 'completed') {
-                MessageToast('warning', 'Brochure is required.');
+            if (!this.file || this.file.status !== "completed") {
+                MessageToast("warning", "Brochure is required.");
                 return;
             }
 
-            this.$wire.call('handleSubmit');
+            this.$wire.call("handleSubmit");
         },
 
         /*
@@ -306,23 +327,22 @@ document.addEventListener('alpine:init', () => {
         */
 
         registerListeners() {
-            window.addEventListener(
-                MODALS_EVENT.closed(MODALS.CREATE_COMPANY_PROJECT_MODAL),
-                () => {
+            window.addEventListener(MODALS_EVENT.closed(MODALS.CREATE_COMPANY_PROJECT_MODAL), () => {
                     this.resetImages();
                     this.resetFile();
+
                     resetFormValidation(FORMS.CREATE_COMPANY_PROJECT_FORM);
-                }
+                },
             );
 
-            this.$el.addEventListener(
-                UI_EVENTS.COMPANY_PROJECT_CREATED_EVENT,
-                () => {
-                    closeModal({ modalId: MODALS.CREATE_COMPANY_PROJECT_MODAL });
-                    MessageToast('created');
+            this.$el.addEventListener( UI_EVENTS.COMPANY_PROJECT_CREATED_EVENT, () => {
+                    closeModal({ modalId: MODALS.CREATE_COMPANY_PROJECT_MODAL});
+
+                    MessageToast("created");
+                    
                     this.resetImages();
                     this.resetFile();
-                }
+                },
             );
         },
     }));

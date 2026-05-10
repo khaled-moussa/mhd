@@ -2,6 +2,8 @@
 
 namespace App\App\Web\Controllers\Shared\Settings;
 
+use App\Support\Context\SectionContext;
+
 class SiteEditorController
 {
     public function index()
@@ -11,6 +13,8 @@ class SiteEditorController
 
     public function view()
     {
-        return view('pages.shared.settings.site-editor.view');
+        return view('pages.shared.settings.site-editor.view', [
+            'sections' => SectionContext::all()
+        ]);
     }
 }

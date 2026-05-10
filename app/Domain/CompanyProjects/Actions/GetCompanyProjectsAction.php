@@ -11,9 +11,9 @@ class GetCompanyProjectsAction
     | Execute
     |-------------------------------
     */
-    public function execute(array $with = [], ?bool $visible = null)
+    public function execute(array $with = [], ?int $limit = null, ?bool $visible = null)
     {
-        return $this->query($with, $visible)
+        return $this->query($with, $limit, $visible)
             ->get();
     }
 
@@ -30,14 +30,39 @@ class GetCompanyProjectsAction
 
     /*
     |-------------------------------
+    | Take
+    |-------------------------------
+    */
+    public function take(int $perPage = 15, array $with = [], ?bool $visible = null)
+    {
+        return $this->query($with, $visible)
+            ->take($perPage)
+            ->get();
+    }
+
+    /*
+    |-------------------------------
     | Query Builder
     |-------------------------------
     */
-    private function query(array $with = [],  ?bool $visible = null)
+    private function query(array $with = [], ?int $limit = null, ?bool $visible = null)
     {
         return CompanyProject::query()
-            ->with($with)
+            ->with($this->resolveRelations($with))
+            ->when($limit, fn($q) => $q->limit($limit))
             ->when(!is_null($visible), fn($q) => $q->whereVisibility($visible))
             ->latest();
+    }
+    /*
+    |-------------------------------
+    | Resolve Relations
+    |-------------------------------
+    */
+    private function resolveRelations(array $with = []): array
+    {
+        return array_unique([
+            'media',
+            ...$with,
+        ]);
     }
 }

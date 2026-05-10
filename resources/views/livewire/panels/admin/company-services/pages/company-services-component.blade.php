@@ -1,6 +1,6 @@
 <div class="table-container">
     <x-table
-        :headers="['#', 'Title', 'Description', 'Actions']"
+        :headers="['#', 'Title', 'Description', 'Visible', 'Actions']"
         :rows="$companyServicesData"
         view="admin::company-services.partials.company-service-row"
         row-name="item"

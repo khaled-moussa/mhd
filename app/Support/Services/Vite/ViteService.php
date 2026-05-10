@@ -69,57 +69,5 @@ class ViteService
             fn(string $path) =>
             Vite::withEntryPoints("resources/js/pages/{$path}")
         );
-
-
-        /*
-        |-----------------------------
-        | Guest: Landing
-        |-----------------------------
-        */
-        Vite::macro(
-            'landingStyle',
-            fn(string $path) =>
-            Vite::withEntryPoints("resources/css/pages/guest/{$path}")
-        );
-
-        Vite::macro(
-            'landingScript',
-            fn(string $path) =>
-            Vite::withEntryPoints("resources/js/pages/guest/{$path}")
-        );
-
-        /*
-        |-----------------------------
-        | Panel: Admin
-        |-----------------------------
-        */
-        Vite::macro(
-            'adminStyle',
-            fn(string $path) =>
-            Vite::withEntryPoints("resources/css/pages/panels/admin/{$path}")
-        );
-
-        Vite::macro(
-            'adminScript',
-            fn(string $path) =>
-            Vite::withEntryPoints("resources/js/pages/panels/admin/{$path}")
-        );
-
-        /*
-        |-----------------------------
-        | Panel: User
-        |-----------------------------
-        */
-        Vite::macro(
-            'userStyle',
-            fn(string $path) =>
-            Vite::withEntryPoints("resources/css/pages/panels/user/{$path}")
-        );
-
-        Vite::macro(
-            'userScript',
-            fn(string $path) =>
-            Vite::withEntryPoints("resources/js/pages/panels/user/{$path}")
-        );
     }
 }

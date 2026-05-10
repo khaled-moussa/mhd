@@ -1,18 +1,12 @@
 <div class="table-container">
     <x-table
-        :headers="['#', 'Title', 'Description', 'Visiblity State', 'Actions']"
+        :headers="['#', 'Title', 'Description', 'Visible', 'Actions']"
         :rows="$companyProjectsData"
         view="admin::company-projects.partials.company-project-row"
         row-name="item"
     >
         <x-slot:header>
             <h6>Projects ({{ $paginator->total() }})</h6>
-
-            <x-button.primary
-                class="header-btn sm"
-                label="Create Project"
-                :data-custom-open="$modalId['CREATE_COMPANY_PROJECT_MODAL']"
-            />
         </x-slot:header>
 
         <x-slot:pagination>
@@ -30,8 +24,5 @@
         :modalId="$modalId['DELETE_COMPANY_PROJECT_MODAL']"
         title="Delete project"
         description="Are you sure to delete the project!"
-        wire:ignore
-        wire:target="deleteProject"
-        wire:loading.class="spinner"
     />
 </div>

@@ -6,8 +6,8 @@
 .input-field input {
     @apply w-full h-11;
     @apply mt-1 px-3.5;
-    @apply rounded-sm border border-foreground/20;
-    @apply bg-foreground/3 text-sm text-foreground;
+    @apply rounded-sm border border-foreground/10;
+    @apply bg-foreground/2 text-sm text-foreground;
     @apply transition-colors duration-150;
     @apply outline-none;
 }

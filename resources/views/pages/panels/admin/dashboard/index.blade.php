@@ -6,8 +6,8 @@
 
 {{-- Page assets --}}
 @push('head')
-    {{ Vite::adminStyle('dashboard/_dashboard.css') }}
-    {{ Vite::adminScript('dashboard/_dashboard.js') }}
+    {{ Vite::style('panels/admin/dashboard/_dashboard.css') }}
+    {{ Vite::script('panels/admin/dashboard/_dashboard.js') }}
 @endpush
 
 {{-- Content --}}

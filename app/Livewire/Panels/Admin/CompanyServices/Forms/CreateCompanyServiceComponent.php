@@ -45,7 +45,7 @@ class CreateCompanyServiceComponent extends Component
             visible: $this->form->visible
         );
 
-        app(CreateCompanyServiceAction::class)->execute(dto: $createDto);
+        app(CreateCompanyServiceAction::class)->execute($createDto);
 
         $this->resetForm();
         $this->dispatchCompanyServiceCreatedEvent();

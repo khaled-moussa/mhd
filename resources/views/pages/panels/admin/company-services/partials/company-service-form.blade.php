@@ -6,7 +6,11 @@
 >
     <p class="description">
         Copy the icon tag from
-        <a href="https://www.flaticon.com/icon-fonts-most-downloaded" class="link-url" target="_blank">
+        <a
+            href="https://www.flaticon.com/icon-fonts-most-downloaded"
+            class="link-url"
+            target="_blank"
+        >
             Flaticon
         </a>
         and paste it here.

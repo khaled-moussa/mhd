@@ -4,7 +4,7 @@
 |-----------------------------
 */
 .validation-msg {
-    @apply mt-1 flex text-sm font-medium;
+    @apply my-1.5 flex text-sm font-medium;
     @apply text-[#E52A2A];
 }
 
@@ -30,7 +30,7 @@
 .input-field input:user-invalid:active,
 .input-field textarea:user-invalid:active,
 .input-field select:user-invalid:active {
-    @apply border-[#ff3838];
+    @apply border-red-300;
 }
 
 /* 

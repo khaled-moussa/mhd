@@ -15,7 +15,6 @@
     </header>
 
     <div class="site-editor-content">
-
         {{-- Editor Inputs --}}
         <div
             class="site-editor-inputs"
@@ -73,7 +72,6 @@
                             :key="index"
                         >
                             <div class="extra-data">
-
                                 <x-form.select
                                     label="Icon"
                                     :options="[
@@ -141,6 +139,5 @@
                 src="{{ route('admin.settings.site-preview') }}"
             ></iframe>
         </div>
-
     </div>
 </div>

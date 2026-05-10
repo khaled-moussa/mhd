@@ -8,75 +8,77 @@ import generateUuid from "@js/utils/generate-uuid";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("projectFormUpdateComponent", () => ({
-        /* 
-        |-------------------------------
+
+        /*
+        |--------------------------------------------------------------------------
         | State
-        |------------------------------- 
+        |--------------------------------------------------------------------------
         */
+
         images: [],
         existingImages: [],
         removedImageIds: [],
 
-        dragImagesAreaElement: null,
-        imageInputElement: null,
-
         file: null,
-        existingFile: [],
+        existingFile: null,
         removedFileId: null,
 
+        activeUploads: 0,
+        maxConcurrentUploads: 5,
+        isEditing: true,
+
+        dragImagesAreaElement: null,
+        imageInputElement: null,
         dragFileAreaElement: null,
         fileInputElement: null,
 
-        maxConcurrentUploads: 5,
-        activeUploads: 0,
-
-        isEditing: true,
-
-        /* 
-        |-------------------------------
+        /*
+        |--------------------------------------------------------------------------
         | Init
-        |------------------------------- 
+        |--------------------------------------------------------------------------
         */
+
         init() {
-            this.initState();
+            this.initDragAreas();
             this.registerListeners();
         },
 
-        initState() {
-            this.dragImagesAreaElement = this.$el.querySelector("#image-drag-area");
-            this.imageInputElement = this.$el.querySelector("#image-input");
+        initDragAreas() {
+            this.dragImagesAreaElement = this.$el.querySelector("#update-image-drag-area");
+            this.imageInputElement     = this.$el.querySelector("#update-image-input");
 
-            const imagesDrag = new DragFiles({
+            this.dragFileAreaElement   = this.$el.querySelector("#update-file-drag-area");
+            this.fileInputElement      = this.$el.querySelector("#update-file-input");
+
+            new DragFiles({
                 dragArea: this.dragImagesAreaElement,
                 fileInput: this.imageInputElement,
                 onDrop: (images) => this.validateImages(images),
             });
 
-            this.dragFileAreaElement =  this.$el.querySelector("#file-drag-area");
-            this.fileInputElement = this.$el.querySelector("#file-input");
-
-            const fileDrag = new DragFiles({
+            new DragFiles({
                 dragArea: this.dragFileAreaElement,
                 fileInput: this.fileInputElement,
                 onDrop: (file) => this.validateFile(file),
             });
         },
 
-        /* 
-        |-------------------------------
+        /*
+        |--------------------------------------------------------------------------
         | Edit Flow
-        |------------------------------- 
+        |--------------------------------------------------------------------------
         */
-        async editCompanyProject(projectUuid, triggerEl) {            
+
+        async editCompanyProject(projectUuid, triggerEl) {
             if (!projectUuid || !triggerEl) {
-                showError();
+                MessageToast("error");
                 return;
             }
 
             await this.$wire.call("editCompanyProject", projectUuid);
 
-            this.existingImages = this.$wire.get("form.existingImages");
-            this.existingFile = this.$wire.get("form.existingFile");
+            this.existingImages = this.$wire.get("form.existingImages") ?? [];
+            this.existingFile   = this.$wire.get("form.existingFile") ?? null;
 
             this.hydrateExistingImages();
             this.hydrateExistingFile();
@@ -88,28 +90,25 @@ document.addEventListener("alpine:init", () => {
         },
 
         hydrateExistingImages() {
-            this.images = [];
+            this.images = this.existingImages.map((image) => ({
+                id: generateUuid(),
+                name: image.name ?? "image",
+                preview: image.path,
+                progress: 100,
+                status: "completed",
+                isExisting: true,
+                serverId: image.id,
+                upload: null,
+            }));
 
-            this.existingImages.forEach((image) => {
-                this.images.push({
-                    id: generateUuid(),
-                    name: image.name ?? "image",
-                    preview: image.path,
-                    progress: 100,
-                    status: "completed",
-                    isExisting: true,
-                    serverId: image.id,
-                    upload: null,
-                });
-            });
-
-            if (this.images.length) {
-                this.dragImagesAreaElement.classList.add("has-files");
-            }
+            this.syncImagesAreaClass();
         },
 
         hydrateExistingFile() {
-            this.file = null;
+            if (!this.existingFile) {
+                this.file = null;
+                return;
+            }
 
             this.file = {
                 id: generateUuid(),
@@ -122,16 +121,15 @@ document.addEventListener("alpine:init", () => {
                 upload: null,
             };
 
-            if (this.file) {
-                this.dragFileAreaElement.classList.add("has-files");
-            }
+            this.syncFileAreaClass();
         },
 
-        /* 
-        |-------------------------------
-        | Upload Images Flow
-        |------------------------------- 
+        /*
+        |--------------------------------------------------------------------------
+        | Image Handling
+        |--------------------------------------------------------------------------
         */
+
         resetFileBeforeUpload(event) {
             event.target.value = "";
         },
@@ -142,31 +140,26 @@ document.addEventListener("alpine:init", () => {
                 maxSizeInMB: 5,
             });
 
-            if (result.errors.invalidType || result.errors.oversize) {                
-                showError();
+            if (!result.isValid) {
+                MessageToast("error", result.errorMessage);
                 return;
             }
 
-            const newImages = Array.from(result.validFiles).map(
-                (imageFile) => ({
-                    id: generateUuid(),
-                    file: imageFile,
-                    name: imageFile.name,
-                    preview: URL.createObjectURL(imageFile),
-                    progress: 0,
-                    status: "pending",
-                    isExisting: false,
-                    serverId: null,
-                    upload: null,
-                }),
-            );
+            const newImages = Array.from(result.validFiles).map((file) => ({
+                id: generateUuid(),
+                file,
+                name: file.name,
+                size: file.size,
+                preview: URL.createObjectURL(file),
+                progress: 0,
+                status: "pending",
+                isExisting: false,
+                serverId: null,
+                upload: null,
+            }));
 
             this.images.push(...newImages);
-
-            if (this.images.length) {
-                this.dragImagesAreaElement.classList.add("has-files");
-            }
-
+            this.syncImagesAreaClass();
             this.processQueue();
         },
 
@@ -175,12 +168,9 @@ document.addEventListener("alpine:init", () => {
                 this.activeUploads < this.maxConcurrentUploads &&
                 this.hasPendingImages()
             ) {
-                const nextImage = this.nextPendingImage();
-                if (!nextImage) {
-                    return;
-                }
-
-                this.uploadImage(nextImage);
+                const next = this.getNextPendingImage();
+                if (!next) break;
+                this.uploadImage(next);
             }
         },
 
@@ -205,8 +195,8 @@ document.addEventListener("alpine:init", () => {
                     this.processQueue();
                 },
 
-                (event) => {
-                    imageItem.progress = event.detail.progress;
+                (e) => {
+                    imageItem.progress = e.detail.progress;
                 },
 
                 () => {
@@ -219,110 +209,87 @@ document.addEventListener("alpine:init", () => {
 
         removeImage(imageId) {
             const image = this.images.find((i) => i.id === imageId);
+            if (!image) return;
 
-            if (!image) {
-                return;
+            if (image.isExisting && !this.removedImageIds.includes(image.serverId)) {
+                this.removedImageIds.push(image.serverId);
+                this.existingImages = this.existingImages.filter(
+                    (i) => i.id !== image.serverId,
+                );
             }
 
-            // Existing image → mark for deletion
-            if (image.isExisting) {
-                if (!this.removedImageIds.includes(image.serverId)) {
-                    this.removedImageIds.push(image.serverId);
-                    this.existingImages = this.existingImages.filter(
-                        (i) => i.id !== image.serverId,
-                    );
-                }
-            }
+            if (image.upload) image.upload.cancel();
 
-            // Cancel upload if active
-            if (image.upload) {
-                image.upload.cancel();
-            }
-
-            // Cleanup preview
             if (!image.isExisting) {
                 URL.revokeObjectURL(image.preview);
             }
 
-            // Remove from UI
             this.images = this.images.filter((i) => i.id !== imageId);
-
-            if (this.images.length === 0) {
-                this.dragImagesAreaElement.classList.remove("has-files");
-            }
-
+            this.syncImagesAreaClass();
             this.processQueue();
         },
 
         resetImages() {
             this.images.forEach((img) => {
-                if (!img.isExisting) {
-                    URL.revokeObjectURL(img.preview);
-                }
+                if (!img.isExisting) URL.revokeObjectURL(img.preview);
             });
 
             this.images = [];
+            this.existingImages = [];
             this.removedImageIds = [];
             this.activeUploads = 0;
 
-            this.dragAreaElement?.classList.remove("has-files");
+            this.$wire.set("form.images", []);
+            this.dragImagesAreaElement?.classList.remove("has-files");
         },
 
-        /* 
-        |-------------------------------
-        | Image Uploading Helpers
-        |-------------------------------
-        */
         hasPendingImages() {
             return this.images.some((i) => i.status === "pending");
         },
 
-        nextPendingImage() {
+        getNextPendingImage() {
             return this.images.find((i) => i.status === "pending");
         },
 
-        /* 
-        |-------------------------------
+        syncImagesAreaClass() {
+            this.images.length > 0
+                ? this.dragImagesAreaElement?.classList.add("has-files")
+                : this.dragImagesAreaElement?.classList.remove("has-files");
+        },
+
+        /*
+        |--------------------------------------------------------------------------
         | File Handling
-        |-------------------------------
+        |--------------------------------------------------------------------------
         */
+
         validateFile(file) {
             const result = validateFileInput(file, {
                 allowedExtensions: ["pdf", "doc", "docx"],
                 maxSizeInMB: 10,
             });
 
-            if (result.errors.invalidType || result.errors.oversize) {
-                showError();
+            if (!result.isValid) {
+                MessageToast("error", result.errorMessage);
                 return;
             }
 
-            // Remove existing file first
-            if (this.file) {
-                this.removeFile(this.file);
-            }
+            if (this.file) this.removeFile();
 
-            const validFile = result.validFiles[0];
-
-            this.file = this.prepareFile(validFile);
-
-            this.dragFileAreaElement.classList.add("has-files");
-
-            this.uploadFile(this.file);
-        },
-
-        prepareFile(file) {
-            return {
+            this.file = {
                 id: generateUuid(),
-                file: file,
-                name: file.name,
-                preview: null,
+                file: result.validFiles[0],
+                name: result.validFiles[0].name,
+                size: result.validFiles[0].size,
                 progress: 0,
                 status: "pending",
                 isExisting: false,
                 serverId: null,
                 upload: null,
             };
+
+            this.uploadFile(this.file);
+            this.syncFileAreaClass();
         },
 
         uploadFile(fileItem) {
@@ -332,104 +299,103 @@ document.addEventListener("alpine:init", () => {
                 "form.file",
                 fileItem.file,
 
-                // Success
                 () => {
                     fileItem.progress = 100;
                     fileItem.status = "completed";
                 },
 
-                // Error
                 () => {
                     fileItem.status = "error";
                 },
 
-                // Progress
-                (event) => {
-                    fileItem.progress = event.detail.progress;
+                (e) => {
+                    fileItem.progress = e.detail.progress;
                 },
 
-                // Cancelled
                 () => {
                     fileItem.status = "cancelled";
                 },
             );
         },
 
-        removeFile(fileItem) {
-            if (!fileItem) return;
+        removeFile() {
+            if (!this.file) return;
 
-            // Existing file → mark for deletion
-            if (fileItem.isExisting) {
-                this.removedFileId = fileItem.serverId;
-                this.existingFile = [];
+            if (this.file.isExisting) {
+                this.removedFileId = this.file.serverId;
+                this.existingFile = null;
             }
 
-            // Cancel upload if active
-            if (fileItem.upload) {
-                fileItem.upload.cancel();
-            }
+            if (this.file.upload) this.file.upload.cancel();
+
+            this.$wire.set("form.file", null);
 
             this.file = null;
-
-            this.dragFileAreaElement.classList.remove("has-files");
+            this.syncFileAreaClass();
         },
 
         resetFile() {
-            URL.revokeObjectURL(this.file.preview);
+            this.$wire.set("form.file", null);
             this.file = null;
             this.removedFileId = null;
-            this.existingFile = [];
+            this.existingFile = null;
 
-            if (this.dragFileAreaElement) {
-                this.dragFileAreaElement.classList.remove("has-files");
-            }
+            this.dragFileAreaElement?.classList.remove("has-files");
         },
 
-        /* 
-        |-------------------------------
+        syncFileAreaClass() {
+            this.file
+                ? this.dragFileAreaElement?.classList.add("has-files")
+                : this.dragFileAreaElement?.classList.remove("has-files");
+        },
+
+        /*
+        |--------------------------------------------------------------------------
         | Submit
-        |------------------------------- 
+        |--------------------------------------------------------------------------
         */
+
         submit() {
-            if (this.existingImages.length === 0 && this.images.length === 0) {
-                MessageToast("warning", "Images are required");
+            const hasImages =
+                this.existingImages.length > 0 ||
+                this.images.some((i) => i.status === "completed");
+
+            const hasFile =
+                this.existingFile ||
+                (this.file && this.file.status === "completed");
+
+            if (!hasImages) {
+                MessageToast("warning", "Images are required.");
                 return;
             }
 
-            if (this.existingFile.length === 0 && !this.file) {
-                MessageToast("warning", "Borchure are required");
+            if (!hasFile) {
+                MessageToast("warning", "Brochure is required.");
                 return;
             }
 
-            this.$wire.call("handleSubmit", this.removedImageIds);
-        },
-
-        /* 
-        |-------------------------------
-        | Events
-        |------------------------------- 
-        */
-        registerListeners() {
-            this.onModalOpenEvent();
-            this.onProjectUpdatedEvent();
-        },
-
-        onModalOpenEvent() {
-            window.addEventListener(
-                MODALS_EVENT.opened(MODALS.UPDATE_COMPANY_PROJECT_MODAL),
-                ({ detail }) => {
-                    this.editCompanyProject(
-                        detail.companyProjectUuid,
-                        detail.triggerEl,
-                    );
-                },
+            this.$wire.call(
+                "handleSubmit",
+                this.removedImageIds,
+                this.removedFileId,
             );
         },
 
-        onProjectUpdatedEvent() {
-            this.$el.addEventListener(
-                UI_EVENTS.COMPANY_PROJECT_UPDATED_EVENT,
-                () => {
+        /*
+        |--------------------------------------------------------------------------
+        | Listeners
+        |--------------------------------------------------------------------------
+        */
+
+        registerListeners() {
+            window.addEventListener( MODALS_EVENT.opened(MODALS.UPDATE_COMPANY_PROJECT_MODAL), ({ detail }) =>
+                    this.editCompanyProject(
+                        detail.companyProjectUuid,
+                        detail.triggerEl,
+                    ),
+            );
+
+            this.$el.addEventListener( UI_EVENTS.COMPANY_PROJECT_UPDATED_EVENT, () => {
                     closeModal({
                         modalId: MODALS.UPDATE_COMPANY_PROJECT_MODAL,
                     });
@@ -440,16 +406,6 @@ document.addEventListener("alpine:init", () => {
                     this.resetFile();
                 },
             );
-        },
-
-        /* 
-        |-------------------------------
-        | Helpers
-        |------------------------------- 
-        */
-
-        showError() {
-            showError();
         },
     }));
 });

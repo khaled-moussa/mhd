@@ -1,24 +1,25 @@
-import { showModal } from "@js/components/modal/_modal";
-import { UI_EVENTS } from "@js/utils/enums";
-import { MODALS } from "@js/utils/enums";
-import initSplideCarousel   from "@js/common/carousel/_splide-carousel";
-import MessageToast from "@js/utils/message-toast";
+import { showModal }          from "@js/components/modal/_modal";
+import { MODALS, UI_EVENTS }  from "@js/utils/enums";
+import initSplideCarousel     from "@js/common/carousel/_splide-carousel";
+import MessageToast           from "@js/utils/message-toast";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("projectViewComponent", () => ({
-        /* 
-        |-------------------------------
-        | Init
-        |------------------------------- 
+        /*
+        |--------------------------------------------------------------------------
+        | State
+        |--------------------------------------------------------------------------
         */
-        projectData: [],
+
+        projectData: null,
         splideElementId: "#project-modal-splide",
 
-        /* 
-        |-------------------------------
+        /*
+        |--------------------------------------------------------------------------
         | Init
-        |------------------------------- 
+        |--------------------------------------------------------------------------
         */
+
         init() {
             this.registerListeners();
         },
@@ -28,14 +29,48 @@ document.addEventListener("alpine:init", () => {
         | Public
         |--------------------------------------------------------------------------
         */
+
         async openProject(projectData) {
             if (!projectData) {
-                return showError();
+                return this.showError();
             }
+
+            this.projectData = projectData;
 
             this.updateModalContent(projectData);
             this.initImages(projectData.images ?? []);
-            showModal({ modalId: MODALS.VIEW_COMPANY_PROJECT_MODAL });
+
+            showModal({
+                modalId: MODALS.VIEW_COMPANY_PROJECT_MODAL,
+            });
+        },
+
+        downloadBrochure(buttonElement) {
+            const brochure = this.projectData?.brochure;
+
+            if (!brochure?.url) {
+                return this.showError();
+            }
+
+            // Loading state
+            buttonElement.classList.add("spinner");
+            buttonElement.disabled = true;
+
+            const link = document.createElement("a");
+
+            link.href = brochure.url;
+            link.download = brochure.name ?? "brochure";
+            link.rel = "noopener";
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Restore button state
+            setTimeout(() => {
+                buttonElement.classList.remove("spinner");
+                buttonElement.disabled = false;
+            }, 500);
         },
 
         /*
@@ -45,12 +80,35 @@ document.addEventListener("alpine:init", () => {
         */
 
         updateModalContent(project) {
-            this.setText("#projects-modal-title", project.title);
-            this.setText("#projects-modal-description", project.description);
-            this.setText("#project-delivered", project.delivered_at);
-            this.setText("#project-price", project.price_start);
-            this.setText("#project-address", project.address);
-            this.setIframeSrc("#project-location", project.location);
+            this.setText(
+                "#projects-modal-title",
+                project.title,
+            );
+
+            this.setText(
+                "#projects-modal-description",
+                project.description,
+            );
+
+            this.setText(
+                "#project-delivered",
+                project.delivered_at,
+            );
+
+            this.setText(
+                "#project-price",
+                project.price_start,
+            );
+
+            this.setText(
+                "#project-address",
+                project.address,
+            );
+
+            this.setIframeSrc(
+                "#project-location",
+                project.location,
+            );
         },
 
         /*
@@ -60,19 +118,30 @@ document.addEventListener("alpine:init", () => {
         */
 
         initImages(images = []) {
-            const splide = document.getElementById("project-modal-splide");
+            const splide = document.getElementById(
+                "project-modal-splide",
+            );
 
-            if (!splide) return;
+            if (!splide) {
+                return;
+            }
 
             splide.innerHTML = `
                 <div class="splide__track">
-                    <ul class="splide__list" id="projects-modal-carousel-list"></ul>
+                    <ul
+                        class="splide__list"
+                        id="projects-modal-carousel-list"
+                    ></ul>
                 </div>
             `;
 
-            const list = document.getElementById("projects-modal-carousel-list",);
+            const list = document.getElementById(
+                "projects-modal-carousel-list",
+            );
 
-            if (!list) return;
+            if (!list) {
+                return;
+            }
 
             images.forEach((image) => {
                 list.insertAdjacentHTML(
@@ -80,20 +149,25 @@ document.addEventListener("alpine:init", () => {
                     `
                         <li class="splide__slide">
                             <div class="projects-modal-image">
-                                <img src="${image.path}" alt="Project">
+                                <img
+                                    src="${image.path}"
+                                    alt="Project"
+                                >
                             </div>
                         </li>
                     `,
                 );
             });
 
-            initSplideCarousel({ splideElementId: "#project-modal-splide" });
+            initSplideCarousel({
+                splideElementId: this.splideElementId,
+            });
         },
 
-        /* 
+        /*
         |--------------------------------------------------------------------------
         | Events
-        |-------------------------------------------------------------------------- 
+        |--------------------------------------------------------------------------
         */
 
         registerListeners() {
@@ -102,7 +176,8 @@ document.addEventListener("alpine:init", () => {
 
         onProjectDataLoadedEvent() {
             window.addEventListener(
-                UI_EVENTS.COMPANY_PROJECT_LOADED_EVENT, ({ detail }) => {
+                UI_EVENTS.COMPANY_PROJECT_LOADED_EVENT,
+                ({ detail }) => {
                     this.openProject(detail.data);
                 },
             );
@@ -115,47 +190,47 @@ document.addEventListener("alpine:init", () => {
         */
 
         setText(selector, value = "") {
-            const el = document.querySelector(selector);
-            if (el) el.textContent = value;
+            const element = document.querySelector(selector);
+
+            if (!element) {
+                return;
+            }
+
+            element.textContent = value;
         },
 
         setIframeSrc(selector, value = "") {
-            const el = document.querySelector(selector);
-            if (el && value) el.src = value;
+            const iframe = document.querySelector(selector);
+
+            const emptyState = document.querySelector(
+                "#project-location-empty",
+            );
+
+            if (!iframe) {
+                return;
+            }
+
+            if (!value) {
+                iframe.removeAttribute("src");
+                iframe.style.display = "none";
+
+                if (emptyState) {
+                    emptyState.style.display = "flex";
+                }
+
+                return;
+            }
+
+            iframe.src = value;
+            iframe.style.display = "block";
+
+            if (emptyState) {
+                emptyState.style.display = "none";
+            }
         },
 
         showError() {
             MessageToast("error");
         },
-
-        // downloadBrochure() {
-        //     const brochure = this.projectData.brochure;
-
-        //     if (!brochure || !brochure.url) {
-        //         this.showError();
-        //         return;
-        //     }
-
-        //     const button = this.$el;
-
-        //     // UI state
-        //     button.classList.add("spinner");
-        //     button.disabled = true;
-
-        //     const link = document.createElement("a");
-        //     link.href = brochure.url;
-        //     link.download = brochure.name;
-        //     link.rel = "noopener";
-
-        //     document.body.appendChild(link);
-        //     link.click();
-        //     document.body.removeChild(link);
-
-        //     // Restore UI
-        //     setTimeout(() => {
-        //         button.classList.remove("spinner");
-        //         button.disabled = false;
-        //     }, 500);
-        // },
     }));
 });

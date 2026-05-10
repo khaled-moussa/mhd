@@ -27,7 +27,6 @@ document.addEventListener("alpine:init", () => {
         |------------------------------- 
         */
         async viewCompanyProject(companyProjectUuid) {
-            
             if (!this.isValidUuid(companyProjectUuid)) {
                 return this.showError();
             }
@@ -55,6 +54,8 @@ document.addEventListener("alpine:init", () => {
                 return MessageToast("warning");
             }
 
+            this.toggleSpinner(true);
+
             deleteModal({
                 modalId: MODALS.DELETE_COMPANY_PROJECT_MODAL,
                 closeAfterConfirm: true,
@@ -70,6 +71,8 @@ document.addEventListener("alpine:init", () => {
             this.canDelete = false;
 
             await this.$wire.call("deleteCompanyProject", companyProjectUuid);
+
+            this.toggleSpinner(false);
         },
 
         /* 

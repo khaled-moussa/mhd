@@ -6,8 +6,8 @@
 
 {{-- Page assets --}}
 @push('head')
-    {{ Vite::adminStyle('projects/_projects.css') }}
-    {{ Vite::adminScript('projects/_projects.js') }}
+    {{ Vite::style('panels/admin/projects/_projects.css') }}
+    {{ Vite::script('panels/admin/projects/_projects.js') }}
 @endpush
 
 {{-- Content --}}

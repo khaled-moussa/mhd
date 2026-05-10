@@ -4,7 +4,9 @@
     @submit.prevent="submit"
 >
     {{-- Form --}}
-    @include('admin::company-projects.partials.company-project-form')
+    @include('admin::company-projects.partials.company-project-form', [
+        'prefix' => 'create'
+    ])
 
     <div class="modal-actions">
         <x-button.outlined

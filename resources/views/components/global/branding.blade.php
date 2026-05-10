@@ -1,10 +1,11 @@
-<div class="branding">
+<a href="{{ url('/#') }}" class="branding">
     <div class="brand-icon">
         <i class="fi fi-sr-home"></i>
     </div>
 
     <div class="brand-name">
-        MHD
+        <span>MHD</span>
+        <br />
         <span>Development</span>
     </div>
-</div>
+</a>

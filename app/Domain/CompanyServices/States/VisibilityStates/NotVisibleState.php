@@ -14,8 +14,18 @@ class NotVisibleState extends VisibilityStates
         return false;
     }
 
-    public function colorClass(): string
+    public function badge(): string
     {
         return 'danger';
+    }
+
+    public function textColor(): string
+    {
+        return "text-red-500";
+    }
+
+    public function icon(): string
+    {
+        return 'fi-rr-circle-xmark';
     }
 }

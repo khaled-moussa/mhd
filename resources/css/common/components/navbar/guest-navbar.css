@@ -133,7 +133,6 @@
     @apply absolute top-[60px] left-0 right-0;
 
     @apply bg-foreground;
-    @apply border-t border-background/5;
 
     @apply lg:hidden!;
     @apply overflow-hidden;
@@ -144,8 +143,8 @@
     @apply px-6 py-3.5;
     
     @apply text-sm text-background/65;
-    @apply border-b border-background/5;
+    @apply rounded-sm border-b border-background/7;
 
     /* @apply transition-colors duration-150; */
-    @apply hover:bg-background/5 hover:text-background;
+    @apply hover:bg-background/7 hover:text-background hover:border-transparent;
 }
