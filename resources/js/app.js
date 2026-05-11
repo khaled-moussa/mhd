@@ -1,54 +1,65 @@
 import "./bootstrap";
 
-// Components
+/* 
+|-------------------------------
+| Components
+|-------------------------------
+*/
 import initSidebarCollapse from "./components/sidebar/sidebar-collapse.js";
 import { initMicroModal } from "./components/modal/_modal.js";
 import { initFlowbite } from "flowbite";
 
-// Common
+/* 
+|-------------------------------
+| Common
+|-------------------------------
+*/
 import "@js/common/form/password.js";
 import resetFormValidation from "@js/common/form/reset-form-validation.js";
 import globalException from "./exceptions/global-exception.js";
 import initPageOnLoad from "./common/loader/_loader.js";
 
 /* 
-|------------------------------- 
-| Meta Glob 
-|------------------------------- 
+|-------------------------------
+| Assets
+|-------------------------------
 */
-import.meta.glob(["../assets/images/**", "../assets/videos/**"]);
+import.meta.glob([
+    "../assets/images/**",
+    "../assets/videos/**",
+]);
 
 /* 
-|------------------------------- 
-| Helpers 
-|------------------------------- 
+|-------------------------------
+| Initializers
+|-------------------------------
 */
-const initCommonScripts = () => {
-    initPageOnLoad();
+const initCommon = () => {
     initMicroModal();
 };
 
-const initSidebarScripts = () => {
-    initSidebarCollapse();
-    resetFormValidation();
-};
-
-const initUIComponents = () => {
+const initUI = () => {
     initFlowbite();
 };
 
+const initCommonScripts = () => {
+    initSidebarCollapse();
+    initPageOnLoad();
+    resetFormValidation();
+};
+
 /* 
-|------------------------------- 
-| Events 
-|------------------------------- 
+|-------------------------------
+| Bootstrap Events
+|-------------------------------
 */
 window.addEventListener("DOMContentLoaded", () => {
-    initCommonScripts();
-    initUIComponents();
+    initCommon();
+    initUI();
 });
 
 document.addEventListener("livewire:navigated", () => {
-    initSidebarScripts();
+    initCommon();
+    initUI();
     initCommonScripts();
-    initUIComponents();
 });
