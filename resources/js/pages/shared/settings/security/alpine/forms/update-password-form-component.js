@@ -1,8 +1,8 @@
-import MessageToast from "@js/utils/message-toast";
-import resetFormValidation from "@js/utils/reset-form-validation";
 import { FORMS, MODALS, UI_EVENTS } from "@js/utils/enums";
-import { closeModal } from "@js/components/modal/_modal";
 import { MODALS_EVENT } from "@js/utils/events";
+import { closeModal } from "@js/components/modal/_modal";
+import MessageToast from "@js/utils/message-toast";
+import resetFormValidation from "@js/common/form/reset-form-validation.js";
 
 /* 
 |-----------------------------
@@ -39,25 +39,26 @@ document.addEventListener("alpine:init", () => {
         |----------------------------- 
         */
         registerListeners() {
-            this.listenToUserPasswordUpdatedEvent();
-            this.listenToModalClosedEvent();
+            this.onModalClosedEvent();
+            this.onPasswordUpdatedEvent();
         },
 
-        listenToUserPasswordUpdatedEvent() {
-            this.$el.addEventListener(
-                UI_EVENTS.USER_PASSWORD_UPDATED_EVENT,
-                ({ detail }) => {
-                    MessageToast("updated", detail?.message);
-                    closeModal({ modalId: MODALS.UPDATE_PASSWORD_MODAL });
+        onModalClosedEvent() {
+            window.addEventListener(
+                MODALS_EVENT.closed(MODALS.UPDATE_PASSWORD_MODAL),
+                () => {
                     resetFormValidation(FORMS.UPDATE_PASSWORD_FORM);
                 },
             );
         },
 
-        listenToModalClosedEvent() {
-            window.addEventListener(
-                MODALS_EVENT.closed(MODALS.UPDATE_PASSWORD_MODAL),
-                () => {
+        onPasswordUpdatedEvent() {
+            this.$el.addEventListener(
+                UI_EVENTS.USER_PASSWORD_UPDATED_EVENT,
+                ({ detail }) => {
+                    closeModal({ modalId: MODALS.UPDATE_PASSWORD_MODAL });
+
+                    MessageToast("updated", detail?.message);
                     resetFormValidation(FORMS.UPDATE_PASSWORD_FORM);
                 },
             );

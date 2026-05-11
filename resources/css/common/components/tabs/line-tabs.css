@@ -4,18 +4,18 @@
 }
 
 .line-tabs li button {
-  @apply text-dark/60 flex translate-y-px rounded-t-lg border-b-2 border-transparent py-3 pt-0 text-center text-sm font-normal first-letter:capitalize;
+  @apply text-foreground/60 flex translate-y-px rounded-t-lg border-b-2 border-transparent py-3 pt-0 text-center text-sm font-normal first-letter:capitalize;
 }
 
 .line-tabs li button:hover {
-  @apply text-dark/80 border-transparent;
+  @apply text-foreground/80 border-transparent;
 }
 
 .line-tabs li button[aria-selected="true"] {
-  @apply border-light text-dark font-medium;
+  @apply border-foreground text-foreground font-medium;
 }
 .line-tabs li button[aria-selected="true"]:hover {
-  @apply border-light text-dark;
+  @apply border-foreground text-foreground;
 }
 
 .line-tabs-content .value:last-of-type {

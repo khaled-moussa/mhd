@@ -6,14 +6,37 @@ use Illuminate\Support\Facades\Vite;
 
 class ViteService
 {
-    public function boot(): void
+    /*
+    |--------------------------------------------------------------------------
+    | Boot
+    |--------------------------------------------------------------------------
+    */
+
+    public static function boot(): void
     {
-        $this->ViteMacros();
+        self::registerMacros();
     }
 
-    private function ViteMacros(): void
+    /*
+    |--------------------------------------------------------------------------
+    | Macros
+    |--------------------------------------------------------------------------
+    */
+
+    private static function registerMacros(): void
     {
-        // Default image
+        self::registerAssetsMacros();
+        self::registerEntryMacros();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Asset Macros
+    |--------------------------------------------------------------------------
+    */
+
+    private static function registerAssetsMacros(): void
+    {
         Vite::macro(
             'image',
             fn(string $asset) =>
@@ -23,49 +46,28 @@ class ViteService
         Vite::macro(
             'video',
             fn(string $asset) =>
-            Vite::asset("resources/assets/videos{$asset}")
+            Vite::asset("resources/assets/videos/{$asset}")
         );
+    }
 
-        // Default style path
+    /*
+    |--------------------------------------------------------------------------
+    | Entry Point Macros
+    |--------------------------------------------------------------------------
+    */
+
+    private static function registerEntryMacros(): void
+    {
         Vite::macro(
             'style',
             fn(string $path) =>
             Vite::withEntryPoints("resources/css/pages/{$path}")
         );
 
-        // Default script path
         Vite::macro(
             'script',
             fn(string $path) =>
             Vite::withEntryPoints("resources/js/pages/{$path}")
-        );
-
-        // Admin style path
-        Vite::macro(
-            'adminStyle',
-            fn(string $path) =>
-            Vite::withEntryPoints("resources/css/pages/panels/admin/{$path}")
-        );
-
-        // Admin script path
-        Vite::macro(
-            'adminScript',
-            fn(string $path) =>
-            Vite::withEntryPoints("resources/js/pages/panels/admin/{$path}")
-        );
-
-        // User style path
-        Vite::macro(
-            'userStyle',
-            fn(string $path) =>
-            Vite::withEntryPoints("resources/css/pages/panels/user/{$path}")
-        );
-
-        // User script path
-        Vite::macro(
-            'userScript',
-            fn(string $path) =>
-            Vite::withEntryPoints("resources/js/pages/panels/user/{$path}")
         );
     }
 }

@@ -9,19 +9,14 @@ class UpdateLandingSectionAction
 {
     /**
      * Update existing landing sections only.
-     *
-     * @param array $data
-     * @param array $excludeColumns Columns that should NOT be updated
      */
-    public function execute(array $data, array $excludeColumns = []): void
+    public function execute( $data, array $excludeColumns = []): void
     {
         if (empty($data)) {
             return;
         }
 
-        foreach ($data as $row) {
-            $key = $row['key'];
-
+        foreach ($data as $key => $row) {
             // Remove key + excluded columns
             $updateData = Arr::except(
                 $row,

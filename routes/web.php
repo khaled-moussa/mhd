@@ -17,6 +17,3 @@ require base_path('routes/web/auth.php');
 
 // Admin panel routes
 require base_path('routes/web/admin.php');
-
-// User panel routes
-require base_path('routes/web/user.php');

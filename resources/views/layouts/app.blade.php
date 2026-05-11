@@ -1,22 +1,34 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.partials.layout-base')
 
-	<head>
-		@include('layouts.partials.head')
-	</head>
+{{-- Head --}}
+@push('head')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-	<body class="loader">
-		<div class="app-shell">
-			{{-- Navigation --}}
-			<x-navigation.sidebar.app />
-			<x-navigation.navbar.app />
+    @livewireStyles
+@endpush
 
-			{{-- Main Content --}}
-			<main class="app-content">
-				@yield('component')
-			</main>
-		</div>
+{{-- Body --}}
+@section('body')
+    <div class="app-shell">
+        {{-- Sidebar --}}
+        @include('layouts.partials.sidebar.app')
 
-		@include('layouts.partials.scripts')
-	</body>
-</html>
+        {{-- Navbar --}}
+        @include('layouts.partials.navbar.app')
+
+        {{-- Main Content --}}
+        <main class="app-content">
+            @yield('content')
+        </main>
+    </div>
+@endsection
+
+{{-- Script --}}
+@push('script')
+    @livewireScripts
+
+    <script>
+        window.__ENUMS__ = @json($enums ?? []);
+        window.__USER__ = @json($currentUser ?? null);
+    </script>
+@endpush

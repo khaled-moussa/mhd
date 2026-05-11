@@ -2,35 +2,32 @@
 
 namespace App\Livewire\Shared\Settings\Pages;
 
-use App\App\Web\Resources\SiteEditors\SiteEditorsResource;
 use App\Domain\Landing\Actions\GetLandingSectionsAction;
 use App\Domain\Landing\Actions\UpdateLandingSectionAction;
-use App\Domain\Landing\Actions\UpsertLandingSectionsAction;
 use App\Domain\Landing\DTOs\UpdateLandingSectionDto;
-use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
-use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class SiteEditorComponent extends Component
 {
-    use WithLivewireExceptionHandling;
-
     /*
-    |-----------------------------
-    | Properties
-    |-----------------------------
+    |--------------------------------------------------------------------------
+    | State
+    |--------------------------------------------------------------------------
     */
-    public array $landingSectionsData = [];
+
+    public array $sections = [];
 
     /*
-    |-----------------------------
+    |--------------------------------------------------------------------------
     | Lifecycle
-    |-----------------------------
+    |--------------------------------------------------------------------------
     */
+
     public function mount(): void
     {
-        $this->landingSectionsData = $this->landingSectionsData();
+        $this->sections = app(GetLandingSectionsAction::class)
+            ->mapWithKeys();
     }
 
     public function render()
@@ -38,65 +35,28 @@ class SiteEditorComponent extends Component
         return view('livewire.shared.settings.pages.site-editor-component');
     }
 
-    /* 
-    |-----------------------------
-    | Computed Properties
-    |----------------------------- 
-    */
-    #[Computed]
-    public function landingSections()
-    {
-        return app(GetLandingSectionsAction::class)->execute();
-    }
-
-
-    #[Computed]
-    public function landingSectionsData(): array
-    {
-        return SiteEditorsResource::collection(
-            $this->landingSections
-        )->resolve();
-    }
-
     /*
-    |-----------------------------
+    |--------------------------------------------------------------------------
     | Actions
-    |-----------------------------
+    |--------------------------------------------------------------------------
     */
-    public function submit(array $sections): void
+
+    public function submit(array $sections, array $order = []): void
     {
-        $dtos = [];
+        if (empty($sections)) return;
 
-        if (empty($sections)) {
-            return;
-        }
-
-        foreach ($sections as $section) {
-            $dto = new UpdateLandingSectionDto(
+        $dtos = collect($sections)
+            ->map(fn($section) => new UpdateLandingSectionDto(
                 key: $section['key'],
-                title: $section['title'] ?? null,
+                title: $section['title']       ?? null,
                 description: $section['description'] ?? null,
-                visible: $section['visible'],
-                order: $section['order'] ?? null,
-                data: $section['data'] ?? [],
-            );
+                visible: $section['visible']     ?? true,
+                order: $section['order']       ?? 0,
+                data: $section['data']        ?? [],
+            ))->map->toArray();
 
-            $dtos[] = $dto->toArray();
-        }
+        app(UpdateLandingSectionAction::class)->execute($dtos);
 
-        app(UpdateLandingSectionAction::class)
-            ->execute($dtos);
-
-        $this->dispatchSiteUpdatedEvent();
-    }
-
-    /*
-    |-----------------------------
-    | Events
-    |-----------------------------
-    */
-    private function dispatchSiteUpdatedEvent(): void
-    {
         $this->dispatch(EventsEnum::SITE_UPDATED_EVENT);
     }
 }

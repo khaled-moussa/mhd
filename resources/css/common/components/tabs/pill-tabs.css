@@ -5,17 +5,17 @@
 }
 
 .pill-tabs li button {
-  @apply xs:w-fit text-dark/60 font-inter flex w-full items-center gap-2 rounded-md px-5 py-2.5 text-sm leading-none transition-all duration-150 ease-in-out;
-  @apply hover:text-dark/80;
+  @apply xs:w-fit text-foreground/60 font-inter flex w-full items-center gap-2 rounded-md px-5 py-2.5 text-sm leading-none transition-all duration-150 ease-in-out;
+  @apply hover:text-foreground/80;
 }
 .pill-tabs li button[aria-selected="true"],
 .pill-tabs li button[aria-selected="true"]:hover {
-  @apply text-dark font-medium;
+  @apply text-foreground font-medium;
   box-shadow: 2px 2px 16px 0px rgba(59, 59, 59, 0.08);
 }
 
 .pill-tabs li button::before {
-  @apply bg-light h-1 w-1 rounded-full opacity-0 transition-all duration-150 ease-in-out content-[''];
+  @apply bg-background h-1 w-1 rounded-full opacity-0 transition-all duration-150 ease-in-out content-[''];
 }
 
 .pill-tabs li button[aria-selected="true"]::before {

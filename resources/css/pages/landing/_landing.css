@@ -1,0 +1,22 @@
+@reference "@css/reference.css";
+
+/* 
+|-----------------------------
+| Landing Sections Imports
+|-----------------------------
+*/
+@import "./hero.css";
+@import "./about.css";
+@import "./services.css";
+@import "./projects.css";
+@import "./contact.css";
+@import "./footer.css";
+
+/* 
+|-----------------------------
+| Base Styles
+|-----------------------------
+*/
+body {
+    @apply bg-background;
+}

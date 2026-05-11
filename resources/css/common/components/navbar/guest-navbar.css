@@ -1,0 +1,150 @@
+/* 
+|-----------------------------
+| Navbar
+|-----------------------------
+*/
+.navbar--guest {
+    @apply fixed top-0 left-0 z-50;
+    @apply w-full h-[60px];
+    @apply flex items-center justify-between;
+    @apply px-6;
+
+    @apply bg-foreground/1;
+    @apply transition-all duration-200 ease-linear;
+}
+
+/* 
+|-----------------------------
+| Scrolled State
+|-----------------------------
+*/
+.navbar-scrolled {
+    @apply bg-foreground/50 backdrop-blur-2xl;
+}
+
+/* 
+|-----------------------------
+| Container
+|-----------------------------
+*/
+.navbar-container {
+    @apply flex items-center justify-between;
+    @apply w-full max-w-7xl mx-auto;
+}
+
+/* 
+|-----------------------------
+| Desktop Menu
+|-----------------------------
+*/
+.navbar-menu {
+    @apply hidden lg:flex items-center gap-0.5;
+}
+
+.navbar-link {
+    @apply px-3 py-1.5 rounded-lg;
+    @apply text-sm text-background;
+    @apply whitespace-nowrap;
+
+    @apply transition-colors duration-200;
+    @apply hover:bg-background/90 hover:text-foreground;
+}
+
+.navbar-link.active {
+    @apply bg-foreground/5 text-dark;
+}
+
+/* 
+|-----------------------------
+| Actions Wrapper
+|-----------------------------
+*/
+.navbar-actions {
+    @apply flex items-center gap-3;
+}
+
+.navbar-actions .outlined-btn {
+    @apply hidden lg:inline-flex;
+    @apply hover:bg-primary-300!;
+}
+
+/* 
+|-----------------------------
+| Mobile Toggle
+|-----------------------------
+*/
+.navbar-toggle {
+    @apply lg:hidden!;
+    @apply flex flex-col items-center justify-center gap-[5px];
+
+    @apply w-8 h-8;
+    @apply rounded-lg;
+
+    @apply border border-background/10;
+    @apply cursor-pointer;
+
+    @apply transition-all duration-200;
+    @apply hover:bg-background/10;
+}
+
+.navbar-toggle span {
+    @apply block h-[1.5px] w-[14px];
+    @apply bg-background/55 rounded-sm;
+}
+
+.navbar-toggle span:nth-child(2) {
+    @apply w-[10px];
+}
+
+/* Animate to X when open */
+.navbar-checkbox:checked ~ * .navbar-toggle span:nth-child(1) {
+    @apply translate-y-[6.5px] rotate-45;
+}
+
+.navbar-checkbox:checked ~ * .navbar-toggle span:nth-child(2) {
+    @apply opacity-0;
+}
+
+.navbar-checkbox:checked ~ * .navbar-toggle span:nth-child(3) {
+    @apply -translate-y-[6.5px] -rotate-45;
+}
+
+.navbar-checkbox:checked ~ .navbar-mobile-menu {
+    @apply flex;
+}
+
+.navbar--guest:has(> .navbar-checkbox:checked) {
+    @apply bg-foreground;
+}
+
+/* 
+|-----------------------------
+| Mobile Menu
+|-----------------------------
+*/
+.navbar-checkbox {
+    @apply hidden;
+}
+
+.navbar-mobile-menu {
+    @apply hidden;
+
+    @apply min-h-screen flex-col gap-5 p-3;
+    @apply absolute top-[60px] left-0 right-0;
+
+    @apply bg-foreground;
+
+    @apply lg:hidden!;
+    @apply overflow-hidden;
+}
+
+.navbar-mobile-link {
+    @apply block;
+    @apply px-6 py-3.5;
+    
+    @apply text-sm text-background/65;
+    @apply rounded-sm border-b border-background/7;
+
+    /* @apply transition-colors duration-150; */
+    @apply hover:bg-background/7 hover:text-background hover:border-transparent;
+}

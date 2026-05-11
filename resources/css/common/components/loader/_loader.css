@@ -1,7 +1,7 @@
 .loader::before {
-  @apply fixed inset-0 z-[1000] block items-center justify-center bg-white/50 backdrop-blur-md content-[''];
+  @apply fixed inset-0 z-[1000] block items-center justify-center bg-foreground/50 backdrop-blur-xl content-[''];
 }
 
 .loader::after {
-  @apply fixed inset-0 z-[1001] mx-auto w-12 origin-center animate-pulse bg-[url(@img/branding/logo-icon.png)] bg-contain bg-center bg-no-repeat content-[''];
+  @apply fixed inset-0 z-[1001] mx-auto w-12 origin-center bg-[url(@img/icon/spinner.svg)] bg-contain bg-center bg-no-repeat content-[''];
 }

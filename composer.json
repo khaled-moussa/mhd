@@ -11,7 +11,7 @@
         "laravel/framework": "^12.0",
         "laravel/socialite": "^5.24",
         "laravel/tinker": "^2.10.1",
-        "livewire/livewire": "^3.6",
+        "livewire/livewire": "^3.0",
         "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-medialibrary": "^11.17",
         "spatie/laravel-model-states": "^2.12",

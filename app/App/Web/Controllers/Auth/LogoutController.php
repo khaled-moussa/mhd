@@ -2,14 +2,15 @@
 
 namespace App\App\Web\Controllers\Auth;
 
-use App\Domain\Auth\Actions\LogoutCurrentUserAction;
 use App\Http\Controllers\Controller;
+use App\Support\Context\AuthContext;
 
 class LogoutController extends Controller
 {
     public function __invoke()
     {
-        app(LogoutCurrentUserAction::class)->execute();
+        AuthContext::logout();
+        
         return redirect()->route('auth.login');
     }
 }

@@ -10,7 +10,6 @@ use Livewire\Component;
 
 class ForgotPasswordFormComponent extends Component
 {
-    use WithLivewireExceptionHandling;
 
     /*
     |-------------------------------
@@ -27,16 +26,6 @@ class ForgotPasswordFormComponent extends Component
     public function render()
     {
         return view('livewire.auth.forgot-password-form-component');
-    }
-
-    public function handleKnownExceptions($e, $stopPropagation): bool
-    {
-        if ($e instanceof FailedToForgetPasswordException) {
-            $this->handleForgetPasswordException($e, $stopPropagation);
-            return true;
-        }
-
-        return false;
     }
 
     /*
@@ -56,14 +45,13 @@ class ForgotPasswordFormComponent extends Component
     | Actions
     |-------------------------------
     */
-    public function attemptForgetPassword(): void
+    public function submit(): void
     {
         $this->validate();
 
-        app(AttemptToResetPasswordAction::class)
-            ->execute(
-                email: $this->email,
-            );
+        app(AttemptToResetPasswordAction::class)->execute(
+            email: $this->email,
+        );
 
         $this->resetForm();
         $this->dispatchForgetPasswordSuccessEvent();
@@ -81,19 +69,6 @@ class ForgotPasswordFormComponent extends Component
         $this->reset(['email']);
         $this->resetValidation();
         $this->resetErrorBag();
-    }
-
-    /* 
-    |-------------------------------
-    | Exception Handlers
-    |------------------------------- 
-    */
-    private function handleForgetPasswordException(FailedToForgetPasswordException $e, callable $stop): void
-    {
-        $this->redirectRoute('auth.login');
-        $this->dispatchForgetPasswordSuccessEvent();
-
-        $stop();
     }
 
     /*

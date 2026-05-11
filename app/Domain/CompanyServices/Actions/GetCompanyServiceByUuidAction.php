@@ -6,11 +6,15 @@ use App\Domain\CompanyServices\Models\CompanyService;
 
 class GetCompanyServiceByUuidAction
 {
-    /**
-     * Get specific company service by uuid.
-     */
-    public function execute(string $companyServiceUuid): CompanyService
+    /*
+    |-------------------------------
+    | Get Company Service by UUID
+    |-------------------------------
+    */
+    public function execute(string $uuid): CompanyService
     {
-        return CompanyService::whereUuid($companyServiceUuid)->firstOrFail();
+        return CompanyService::query()
+            ->where('uuid', $uuid)
+            ->firstOrFail();
     }
 }

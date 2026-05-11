@@ -36,7 +36,7 @@
     maxlength="255"
 />
 
-<x-form.toggle
+<x-form.checkbox
     label="Visible"
     wire:model="form.visible"
     error="form.visible"

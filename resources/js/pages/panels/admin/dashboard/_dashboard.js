@@ -1,2 +1,2 @@
 // External scripts
-import "@js_admin/projects/_projects.js";
+import "@js/pages/panels/admin/projects/_projects.js";

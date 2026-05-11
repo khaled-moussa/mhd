@@ -1,0 +1,145 @@
+@reference "@css/reference.css";
+
+/* 
+|-------------------------------
+| Hero Section
+|-------------------------------
+*/
+.hero-section {
+    @apply relative flex flex-col min-h-screen;
+    @apply overflow-hidden;
+}
+
+/* 
+|-------------------------------
+| Background
+|-------------------------------
+*/
+.hero-bg {
+    @apply absolute inset-0 z-0;
+    @apply after:content-[''] after:absolute after:inset-0 after:pointer-events-none;
+    @apply after:bg-gradient-to-r after:from-foreground/85 after:to-foreground/40;
+}
+
+.hero-bg video,
+.hero-bg img {
+    @apply block w-full min-h-screen object-cover;
+}
+
+/* 
+|-------------------------------
+| Container
+|-------------------------------
+*/
+.hero-container {
+    @apply relative z-10 flex-1;
+    @apply container mx-auto;
+}
+
+.hero-inner {
+    @apply grid grid-cols-1 gap-12;
+    @apply py-32 pb-14;
+
+    @apply lg:grid-cols-2;
+    @apply lg:gap-10;
+}
+
+/* 
+|-------------------------------
+| Left Content
+|-------------------------------
+*/
+.hero-left {
+    @apply flex flex-col;
+}
+
+.hero-tag {
+    @apply inline-flex items-center gap-2.5;
+    @apply mb-7;
+}
+
+.hero-tag-line {
+    @apply w-7 h-px;
+    @apply bg-background/30;
+}
+
+.hero-tag-text {
+    @apply text-[11px] font-medium uppercase tracking-wider;
+    @apply text-background/45;
+}
+
+.hero-title {
+    @apply mb-6 font-bold;
+    @apply leading-[1.0] tracking-wider;
+    @apply text-background;
+    @apply text-[clamp(44px,6vw,78px)];
+}
+
+.hero-title-light {
+    @apply block mb-1;
+    @apply font-light text-background/45;
+    @apply text-[0.6em] tracking-wide;
+}
+
+.hero-title-accent {
+    @apply text-primary-300;
+}
+
+.hero-description {
+    @apply mb-8 max-w-[360px];
+    @apply text-sm leading-5;
+    @apply text-background/50;
+}
+
+/* 
+|-------------------------------
+| Actions
+|-------------------------------
+*/
+.hero-actions {
+    @apply flex items-center gap-2.5;
+}
+
+/* 
+|-------------------------------
+| Bottom Bar
+|-------------------------------
+*/
+.hero-bar {
+    @apply relative z-10 flex items-center gap-5;
+    @apply px-8 py-4;
+
+    @apply border-t border-background/10;
+    @apply bg-foreground/10 backdrop-blur-xl;
+}
+
+.hero-bar-item {
+    @apply flex items-center gap-2;
+}
+
+.hero-bar-label {
+    @apply text-xs;
+    @apply lg:text-sm;
+    @apply text-background/40;
+}
+
+.hero-bar-value {
+    @apply text-xs font-semibold whitespace-nowrap;
+    @apply lg:text-sm;
+    @apply text-background;
+}
+
+.hero-bar-sep {
+    @apply w-px h-5 shrink-0;
+    @apply bg-background/[0.1];
+}
+
+.hero-scroll-hint {
+    @apply hidden lg:flex items-center gap-2;
+    @apply ml-auto;
+
+    @apply text-xs tracking-wider;
+    @apply text-background/30;
+
+    @apply before:content-['——'];
+}

@@ -1,80 +1,51 @@
-<div>
-	<form
-		class="auth-form"
-		id="login-form"
-		wire:submit.prevent="attemptLogin"
-	>
-		{{-- Email --}}
-		<x-form.input
-			type="email"
-			id="login-email"
-			placeholder="Ex. username@example.com"
-			label="Email"
-			wire:model="email"
-			required
-			error="email"
-		/>
+<form
+    id="{{ $formId['LOGIN_FORM'] }}"
+    class="form-layout"
+    wire:submit.prevent="submit"
+>
 
-		{{-- Password --}}
-		<x-form.input
-			type="password"
-			id="login-password"
-			minlength="8"
-			placeholder="********"
-			label="Password"
-			wire:model="password"
-			required
-			error="password"
-		>
-			<x-button.icon
-				class="show-password"
-				icon="fi fi-tc-eye-crossed"
-			/>
-		</x-form.input>
+    {{-- Email --}}
+    <x-form.input
+        id="email"
+        type="email"
+        label="Email address"
+        placeholder="you@example.com"
+        wire:model="email"
+        autocomplete="email"
+        required
+        error="email"
+    />
 
-		<div class="row">
-			{{-- Remember checkbox --}}
-			<x-form.checkbox
-				label="Remember login"
-				wire:model="remember"
-				error="remember"
-			/>
+    {{-- Password --}}
+    <x-form.password
+        id="password"
+        wire:model="password"
+        error="password"
+    />
 
-			{{-- Forgot password link --}}
-			<x-button.link
-				class="link-btn forget-password"
-				label="Forgot password?"
-				:path="route('auth.forgot-password')"
-				wire:navigate.hover
-				wire:current="active"
-			/>
-		</div>
+    {{-- Remember + Forgot --}}
+    <div class="input-field-row-between">
+        <x-form.checkbox
+            label="Remember me"
+            wire:model="remember"
+            error="remember"
+        />
 
-		{{-- Form validation --}}
-		<x-alert.validation-input error="login_failed" />
+        <x-form.link
+            label="Forget password"
+            :href="route('auth.forgot-password')"
+        />
+    </div>
 
-		{{-- Form actions --}}
-		<div class="form-actions">
-			<x-button.main
-				type="submit"
-				id="login-button"
-				label="Sign In"
-				wire:loading.class="spinner"
-				wire:target="attemptLogin"
-				wire:loading.attr="disabled"
-			>
-				<i class="fi fi-tr-entrance"></i>
-			</x-button.main>
-{{-- 
-			<x-button.link
-				class="link-btn"
-				label="No account?"
-				:path="route('auth.register')"
-				wire:navigate.hover
-				wire:current="active"
-			>
-				<span class="underline">Create an account</span>
-			</x-button.link> --}}
-		</div>
-	</form>
-</div>
+    {{-- Failed --}}
+    <x-alert.validation-input error="login_failed" />
+
+    {{-- Submit --}}
+    <x-button.primary
+        class="primary-btn-full"
+        label="Login"
+        wire:loading.class="spinner"
+        wire:target="submit"
+        wire:loading.attr="disabled"
+    />
+</form>

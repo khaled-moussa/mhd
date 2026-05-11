@@ -47,6 +47,6 @@ div:where(.swal2-container) .swal2-html-container {
 }
 
 .swal2-input.swal-input {
-  @apply !text-dark !mx-0 !w-full !gap-1 !rounded-lg !border !border-solid !border-[#ECECEC] !bg-white !p-3 !text-sm !shadow-none !ring-0 transition-all duration-150 ease-in-out !outline-none;
-  @apply placeholder:!text-dark/30;
+  @apply text-foreground !mx-0 !w-full !gap-1 !rounded-lg !border !border-solid !border-[#ECECEC] !bg-white !p-3 !text-sm !shadow-none !ring-0 transition-all duration-150 ease-in-out !outline-none;
+  @apply placeholder:text-foreground/30;
 }

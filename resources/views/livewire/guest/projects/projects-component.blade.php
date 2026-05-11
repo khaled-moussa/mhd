@@ -1,52 +1,54 @@
- {{-- Projects Grid --}}
- <div x-data="projectsComponent">
-     <div class="projects__grid">
-         @forelse ($projectsData as $project)
-             <div
-                 class="projects__card"
-                 wire:target="viewProject('{{ $project['uuid'] }}')"
-                 wire:loading.class="spinner"
-                 @click="viewProject(`{{ $project['uuid'] }}`)"
-             >
-                 <img
-                     src="{{ $project['image_cover'] }}"
-                     class="projects__image"
-                 />
+<div class="projects-wrapper">
 
-                 <div class="projects__content">
-                     <h3 class="projects__title">{{ $project['title'] }}</h3>
-                     <p class="projects__desc">{{ $project['delivered_at'] }}</p>
-                     <p class="projects__desc">{{ $project['address'] }}</p>
-                 </div>
-             </div>
-         @empty
-             <div class="empty">
-                 No projects found
-             </div>
-         @endforelse
-     </div>
+    {{-- Projects Grid --}}
+    <div class="projects-grid">
+        @foreach ($projects as $project)
+            <div
+                class="projects-card"
+                onclick='openProject(@json($project))'
+            >
+                {{-- Image --}}
+                <div class="projects-image">
+                    <img
+                        src="{{ $project['image_cover'] }}"
+                        alt="{{ $project['title'] }}"
+                    />
 
-     {{-- Load More Button --}}
-     @if (!$isProjectSection)
-         <div class="projects__load-more">
-             <x-button.outline
-                 label="Load more"
-                 wire:click="loadMore"
-                 wire:target="loadMore"
-                 wire:loading.class="spinner"
-                 :disabled="!$hasMoreProjects"
-             />
-         </div>
-     @endif
+                    <div class="projects-overlay">
+                        <div class="projects-overlay-btn">
+                            <i class="fi fi-rr-arrow-up-right text-primary text-sm"></i>
+                        </div>
+                    </div>
+                </div>
 
-     {{-- View All Projects Button --}}
-     @if ($isProjectSection && !empty($projectsData))
-         <div class="projects__load-more">
-             <x-button.link
-                 class="outline-btn"
-                 label="View all projects"
-                 :path="route('projects')"
-             />
-         </div>
-     @endif
- </div>
+                {{-- Content --}}
+                <div class="projects-content">
+                    <div class="projects-meta">
+                        <div class="projects-meta-dot"></div>
+
+                        <span class="projects-address">
+                            {{ $project['address'] }}
+                        </span>
+                    </div>
+
+                    <h3 class="projects-title">
+                        {{ $project['title'] }}
+                    </h3>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+    {{-- Load More --}}
+    @if ($hasMoreProjects)
+        <div class="projects-load-more">
+            <x-button.primary
+                label="Load More"
+                wire:click="loadMore"
+                wire:loading.attr="disabled"
+                wire:target="loadMore"
+                wire:loading.class="spinner"
+            />
+        </div>
+    @endif
+</div>

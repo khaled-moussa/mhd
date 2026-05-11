@@ -2,15 +2,114 @@
 
 namespace App\Support\Services\View;
 
+use App\Domain\Otp\Enums\OtpEventsEnum;
+use App\Domain\Otp\Enums\OtpExceptionsEnum;
+use App\Domain\Otp\Enums\OtpTimerEnum;
+use App\Support\Cache\EnumCache;
+use App\Support\Context\AuthContext;
+use App\Support\Context\SectionContext;
+use App\Support\Enums\EventsEnum;
+use App\Support\Enums\FormEnum;
+use App\Support\Enums\FormStepEnum;
+use App\Support\Enums\LabelEnum;
+use App\Support\Enums\ModalEnum;
+use App\Support\Helpers\EnumExporter;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\View as ViewFacade;
+
 class ViewService
 {
-    public function boot(): void
-    {
-        app(EnumViewService::class)->boot();
-        app(PanelViewService::class)->boot();
-        app(UserViewService::class)->boot();
-        app(ViewNamespaceRegistrarService::class)->boot();
-        app(LandingSectionViewService::class)->boot();
+    /*
+    |--------------------------------------------------------------------------
+    | Boot
+    |--------------------------------------------------------------------------
+    */
 
+    public static function boot(): void
+    {
+        self::registerShared();
+        self::registerComposers();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Registerers
+    |--------------------------------------------------------------------------
+    */
+
+    public static function registerShared(): void
+    {
+        self::shareEnums();
+        self::shareModalIds();
+        self::shareFormIds();
+        self::shareAuthUser();
+    }
+
+    public static function registerComposers(): void
+    {
+        self::shareAuthUser();
+        self::shareCompanyLinks();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Shared Enums
+    |--------------------------------------------------------------------------
+    */
+
+    private static function shareEnums(): void
+    {
+        ViewFacade::share(
+            'enums',
+            EnumCache::remember('js', fn() => [
+                'OTP' => [
+                    'EVENTS' => EnumExporter::export(OtpEventsEnum::class),
+                    'ERRORS' => EnumExporter::export(OtpExceptionsEnum::class),
+                    'TIMER'  => EnumExporter::export(OtpTimerEnum::class),
+                ],
+                'UI' => [
+                    'FORMS'  => EnumExporter::export(FormEnum::class),
+                    'MODALS' => EnumExporter::export(ModalEnum::class),
+                    'EVENTS' => EnumExporter::export(EventsEnum::class),
+                    'LABELS' => EnumExporter::export(LabelEnum::class),
+                    'STEPS'  => EnumExporter::export(FormStepEnum::class),
+                ],
+            ])
+        );
+    }
+
+    private static function shareModalIds(): void
+    {
+        ViewFacade::share(
+            'modalId',
+            EnumCache::remember('modalId', fn() => EnumExporter::export(ModalEnum::class))
+        );
+    }
+
+    private static function shareFormIds(): void
+    {
+        ViewFacade::share(
+            'formId',
+            EnumCache::remember('form', fn() => EnumExporter::export(FormEnum::class))
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | View Composers
+    |--------------------------------------------------------------------------
+    */
+    private static function shareAuthUser(): void
+    {
+        ViewFacade::composer('layouts.app', function ($view) {
+            $view->with([
+                'user' => AuthContext::toResource(),
+            ]);
+        });
+    }
+
+    private static function shareCompanyLinks(): void
+    {
+        ViewFacade::composer('layouts.partials.footer.guest', fn(View $view) =>  $view->with('company', SectionContext::getCompanyLinks()));
     }
 }

@@ -8,9 +8,9 @@ use Monolog\Processor\PsrLogMessageProcessor;
 return [
 
     /*
-    |----------------------------------------
+    |--------------------------------------------------------------------------
     | Default Log Channel
-    |----------------------------------------
+    |--------------------------------------------------------------------------
     |
     | This option defines the default log channel that is utilized to write
     | messages to your logs. The value provided here should match one of
@@ -21,9 +21,9 @@ return [
     'default' => env('LOG_CHANNEL', 'stack'),
 
     /*
-    |----------------------------------------
+    |--------------------------------------------------------------------------
     | Deprecations Log Channel
-    |----------------------------------------
+    |--------------------------------------------------------------------------
     |
     | This option controls the log channel that should be used to log warnings
     | regarding deprecated PHP and library features. This allows you to get
@@ -37,9 +37,9 @@ return [
     ],
 
     /*
-    |----------------------------------------
+    |--------------------------------------------------------------------------
     | Log Channels
-    |----------------------------------------
+    |--------------------------------------------------------------------------
     |
     | Here you may configure the log channels for your application. Laravel
     | utilizes the Monolog PHP logging library, which includes a variety
@@ -54,32 +54,87 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => explode(',', (string) env('LOG_STACK', 'single')),
             'ignore_exceptions' => false,
         ],
 
         'single' => [
-            'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
+            'driver' => 'monolog',
+            'handler' => Monolog\Handler\FilterHandler::class,
+
+            'handler_with' => [
+                'handler' => new Monolog\Handler\StreamHandler(
+                    storage_path('logs/laravel.log')
+                ),
+
+                'minLevelOrList' => [
+                    Monolog\Level::Debug,
+                    Monolog\Level::Info,
+                    Monolog\Level::Notice,
+                ],
+
+                'maxLevel' => Monolog\Level::Notice,
+            ],
+
             'replace_placeholders' => true,
         ],
 
         'daily' => [
-            'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'days' => env('LOG_DAILY_DAYS', 14),
+            'driver' => 'monolog',
+
+            'handler' => Monolog\Handler\FilterHandler::class,
+
+            'handler_with' => [
+                'handler' => new Monolog\Handler\RotatingFileHandler(
+                    storage_path('logs/issues.log'),
+                    30
+                ),
+
+                'minLevelOrList' => [
+                    Monolog\Level::Warning,
+                    Monolog\Level::Error,
+                ],
+
+                'maxLevel' => Monolog\Level::Error,
+            ],
+
+            'tap' => [
+                \App\Support\Logging\ContextFormatter::class,
+            ],
+
+            'processors' => [
+                \App\Support\Logging\ContextProcessor::class,
+            ],
+
             'replace_placeholders' => true,
         ],
 
         'slack' => [
-            'driver' => 'slack',
-            'url' => env('LOG_SLACK_WEBHOOK_URL'),
-            'username' => env('LOG_SLACK_USERNAME', 'Laravel Log'),
-            'emoji' => env('LOG_SLACK_EMOJI', ':boom:'),
-            'level' => env('LOG_LEVEL', 'critical'),
-            'replace_placeholders' => true,
+            'driver'  => 'monolog',
+            'handler' => \Monolog\Handler\SlackWebhookHandler::class,
+
+            'handler_with' => [
+                'webhookUrl'   => env('LOG_SLACK_WEBHOOK_URL'),
+                'channel'      => env('LOG_SLACK_CHANNEL'),
+                'username'     => env('LOG_SLACK_USERNAME', 'Laravel Log'),
+                'useAttachment' => false,
+                'iconEmoji'    => ':boom:',
+
+                'minLevelOrList' => [
+                    Monolog\Level::Warning,
+                    Monolog\Level::Error,
+                ],
+
+                'maxLevel' => Monolog\Level::Error,
+            ],
+
+            'tap' => [
+                \App\Support\Logging\ContextFormatter::class,
+            ],
+
+            'processors' => [
+                \App\Support\Logging\ContextProcessor::class,
+            ],
         ],
 
         'papertrail' => [
@@ -89,7 +144,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
             'processors' => [PsrLogMessageProcessor::class],
         ],
@@ -126,7 +181,5 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
-
     ],
-
 ];

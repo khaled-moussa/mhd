@@ -1,9 +1,18 @@
-@extends('pages.auth.layouts.auth-base')
+{{-- Main layout --}}
+@extends('layouts.auth')
 
-{{-- Page Header --}}
-@section('header', 'Welcome Back')
+{{-- Page Title --}}
+@section('title', 'Sign In')
 
-{{-- Page Component --}}
-@section('auth-component')
-    <livewire:auth.login-form-component />
+{{-- Auth Form --}}
+@section('content')
+    <x-form.split-layout
+        eyebrow="Welcome back"
+        subtitle="Sign in to your account"
+        description="Enter your credentials to access your account"
+    >
+        <x-slot:form>
+            @livewire('auth.login-form-component')
+        </x-slot:form>
+    </x-form.split-layout>
 @endsection

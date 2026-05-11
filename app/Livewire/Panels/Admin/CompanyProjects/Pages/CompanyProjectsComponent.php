@@ -18,7 +18,7 @@ use Livewire\WithPagination;
 
 class CompanyProjectsComponent extends Component
 {
-    use WithLivewireExceptionHandling;
+    // use WithLivewireExceptionHandling;
     use WithPagination;
     use HandlePaginationButtons;
 
@@ -36,32 +36,30 @@ class CompanyProjectsComponent extends Component
     */
     public function render()
     {
-        $this->initPaginationButtons($this->companyProjects);
+
+        $companyProjects = $this->companyProjects();
+
+        $this->initPaginationButtons($companyProjects);
 
         return view('admin_livewire::company-projects.pages.company-projects-component', [
-            'paginator' => $this->companyProjects,
-            'companyProjectsData' => $this->companyProjectsData,
+            'paginator' => $companyProjects,
+            'companyProjectsData' => $this->companyProjectsData($companyProjects),
         ]);
     }
 
-    /* 
+    /*
     |-----------------------------
-    | Computed Properties
-    |----------------------------- 
+    | Data
+    |-----------------------------
     */
-    #[Computed]
     public function companyProjects()
     {
-        return app(GetCompanyProjectsAction::class)
-            ->execute();
+        return app(GetCompanyProjectsAction::class)->paginate();
     }
 
-    #[Computed]
-    public function companyProjectsData(): array
+    public function companyProjectsData($companyProjects): array
     {
-        return CompanyProjectsResource::collection(
-            $this->companyProjects->items()
-        )->resolve();
+        return CompanyProjectsResource::collection($companyProjects->items())->resolve();
     }
 
     /*
@@ -77,21 +75,22 @@ class CompanyProjectsComponent extends Component
             return;
         }
 
-        $companyProjectData = (new CompanyProjectsResource($companyProject))->resolve();
-
-        $this->dispatchCompanyProjectLoadedEvent(data: $companyProjectData);
+        $this->dispatchCompanyProjectLoadedEvent($companyProject->toResource()->resolve());
     }
 
     public function deleteCompanyProject(string $companyProjectUuid): void
     {
         $companyProject = $this->getCompanyProject($companyProjectUuid);
 
-        app(DeleteCompanyProjectAction::class)
-            ->execute(companyProject: $companyProject);
+        app(DeleteCompanyProjectAction::class)->execute($companyProject);
 
         // If current page becomes empty → go back
-        if ($this->companyProjects->count() === 0 && $this->currentPage > 1) {
+        if ($this->companyProjects()->count() === 0 && $this->currentPage > 1) {
             $this->previousPage();
+        }
+
+        if ($this->currentPage === 1) {
+            $this->resetPage();
         }
 
         $this->dispatchCompanyProjectDeletedEvent();
@@ -121,8 +120,7 @@ class CompanyProjectsComponent extends Component
     */
     private function getCompanyProject(string $companyProjectUuid): ?CompanyProject
     {
-        return app(GetCompanyProjectByUuidAction::class)
-            ->execute(companyProjectUuid: $companyProjectUuid);
+        return app(GetCompanyProjectByUuidAction::class)->execute($companyProjectUuid);
     }
 
     /* 
@@ -132,10 +130,7 @@ class CompanyProjectsComponent extends Component
     */
     private function dispatchCompanyProjectLoadedEvent(array $data)
     {
-        $this->dispatch(
-            EventsEnum::COMPANY_PROJECT_LOADED_EVENT,
-            data: $data
-        );
+        $this->dispatch(EventsEnum::COMPANY_PROJECT_LOADED_EVENT, data: $data);
     }
 
     private function dispatchCompanyProjectDeletedEvent()

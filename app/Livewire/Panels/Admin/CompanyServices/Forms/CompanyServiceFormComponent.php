@@ -3,7 +3,6 @@
 namespace App\Livewire\Panels\Admin\CompanyServices\Forms;
 
 use App\Domain\CompanyServices\Models\CompanyService;
-use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use Livewire\Attributes\Locked;
 use Livewire\Form;
 
@@ -17,7 +16,7 @@ class CompanyServiceFormComponent extends Form
     #[Locked]
     public string $companyServiceUuid = '';
 
-    public string $icon = '';
+    public ?string $icon = '';
     public string $title = '';
     public string $description = '';
     public bool $visible = true;
@@ -33,7 +32,8 @@ class CompanyServiceFormComponent extends Form
             'icon' => [
                 'nullable',
                 'string',
-                'max:255'
+                'max:255',
+                'regex:/^<i\s+class=["\']fi\sfi-(?:[a-z]{2}|brands)-[a-z0-9-]+["\']\s*><\/i>$/',
             ],
 
             'title' => [
@@ -48,6 +48,10 @@ class CompanyServiceFormComponent extends Form
                 'string',
                 'min:10',
                 'max:255'
+            ],
+
+            'visible' => [
+                'boolean'
             ],
         ];
     }

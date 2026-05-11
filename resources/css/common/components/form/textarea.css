@@ -1,7 +1,8 @@
-/* ---------------------------------------- */
-/* Textarea */
-/* ---------------------------------------- */
-
+/* 
+|-------------------------------
+| Textarea
+|-------------------------------
+*/
 textarea {
     @apply resize-y;
 }
@@ -10,30 +11,46 @@ textarea:disabled {
     @apply resize-none;
 }
 
+/* 
+|-------------------------------
+| Input Field — Textarea
+|-------------------------------
+*/
 .input-field textarea {
-    @apply font-inter w-full rounded-lg border border-solid border-current/5 bg-current/5 p-3 text-sm font-medium text-current/80 shadow-none ring-0 transition-all duration-150 ease-in-out outline-none;
-    @apply placeholder:text-current/40;
+    @apply w-full;
+    @apply m-1 py-1 px-3.5;
+    @apply rounded-sm border border-foreground/10;
+    @apply bg-foreground/2 text-sm text-foreground;
+    @apply transition-colors duration-150;
+    @apply outline-none;
 }
 
 .input-field:hover textarea {
     @apply border-current/20;
 }
 
-.input-field textarea:active,
-.input-field textarea:focus-within,
-.input-field textarea:focus-visible,
-.input-field textarea:focus {
+.input-field textarea:focus,
+.input-field textarea:active {
     @apply border-current/10;
 }
-.input-field textarea:active + label,
-.input-field textarea:focus-within + label,
-.input-field textarea:focus-visible + label,
+
+/* 
+|-------------------------------
+| Label Interaction
+|-------------------------------
+*/
 .input-field textarea:focus + label {
-    @apply text-light;
+    @apply text-foreground;
 }
 
+/* 
+|-------------------------------
+| Character Counter
+|-------------------------------
+*/
 #char-counter {
-    @apply mt-1 ml-auto w-fit text-xs text-black/50;
+    @apply mt-1 ml-auto w-fit text-xs;
+    @apply text-foreground/50;
 }
 
 #char-counter.warning {

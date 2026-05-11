@@ -38,7 +38,7 @@ export default function MessageToast(type, message) {
 
         case "error":
             flag = "danger";
-            msg = ERROR_MESSAGES.default;
+            msg = message ?? ERROR_MESSAGES.default;
             break;
     }
 

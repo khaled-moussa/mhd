@@ -30,7 +30,7 @@
 		</div>
 
 		{{-- Resend button --}}
-		<x-button.outline
+		<x-button.outlined
 			class="resend-btn"
 			id="resend-btn"
 			label="Resend"

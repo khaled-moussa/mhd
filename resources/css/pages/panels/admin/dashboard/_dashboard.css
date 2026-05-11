@@ -1,23 +1,34 @@
+/* 
+|-----------------------------
+| Reference
+|-----------------------------
+*/
 @reference "@css/reference.css";
 
-/* Impots */
-@import "@css/pages/_layouts/app-layouts.css";
-@import "@css_admin/dashboard/dashboard-cards.css";
-@import "@css_admin/projects/_projects.css";
+/* 
+|-----------------------------
+| Imports
+|-----------------------------
+*/
+@import "../../../_layouts/app-layouts.css";
+@import "./dashboard-cards.css";
+@import "../projects/_projects.css";
 
-/* -------------------------------------------------
-   Dashboard Grid
--------------------------------------------------- */
+/* 
+|-----------------------------
+| Dashboard Grid
+|-----------------------------
+*/
 .dashboard-grid {
-    @apply grid gap-5 lg:grid-cols-[1fr];
-    @apply h-full;
+    @apply grid h-full gap-5;
+    @apply lg:grid-cols-[1fr];
 }
 
 .dashboard-grid > div {
     @apply flex flex-col gap-5;
 }
 
-.dashboard-grid .projects .table-container .table-header .main-btn {
+.dashboard-grid .projects .table-container .table-header .primary-btn {
     @apply block!;
 }
 

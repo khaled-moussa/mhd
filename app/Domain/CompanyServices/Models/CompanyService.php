@@ -2,13 +2,16 @@
 
 namespace App\Domain\CompanyServices\Models;
 
+use App\App\Web\Resources\CompanyServices\CompanyServicesResource;
 use App\Domain\CompanyServices\QueryBuilders\CompanyServiceBuilder;
 use App\Domain\CompanyServices\States\VisibilityStates\VisibilityStates;
 use App\Support\Traits\HasUuid;
+use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\ModelStates\HasStates;
 
+#[UseResource(CompanyServicesResource::class)]
 class CompanyService extends Model
 {
     use HasFactory, HasStates, HasUuid;

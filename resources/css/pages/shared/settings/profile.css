@@ -1,57 +1,70 @@
-/* -------------------------------  
-   Profile Info  
--------------------------------- */
+/* 
+|-----------------------------
+| Profile Info
+|-----------------------------
+*/
 .profile {
-    @apply w-full h-full;
+    @apply h-full w-full;
 }
 
-/* -------------------------------  
-   Profile Form  
--------------------------------- */
+/* 
+|-----------------------------
+| Profile Form
+|-----------------------------
+*/
 .profile-form {
     @apply m-0 gap-0;
 }
 
-/* -------------------------------  
-   Card  
--------------------------------- */
+/* 
+|-----------------------------
+| Card
+|-----------------------------
+*/
 .profile .card {
-    @apply w-full h-fit p-4 px-5 rounded-xl border border-current/10 mb-4;
+    @apply mb-4 h-fit w-full rounded-xl bg-current/3 border border-background/10;
+    @apply p-4 px-5;
 }
 
 .profile .card > header {
     @apply text-base font-semibold;
 }
 
-/* -------------------------------  
-   Card Header (Profile Info)  
--------------------------------- */
+/* 
+|-----------------------------
+| Card Header (Profile Info)
+|-----------------------------
+*/
 .card-profile {
     @apply flex flex-col gap-5;
     @apply lg:flex-row lg:items-center;
 }
 
 .card-profile > div {
-    @apply flex-1 flex items-center gap-5;
+    @apply flex flex-1 items-center gap-5;
     @apply max-sm:flex-col max-sm:items-start;
 }
 
-/* -------------------------------  
-   Profile Image  
--------------------------------- */
+/* 
+|-----------------------------
+| Profile Image
+|-----------------------------
+*/
 .card-profile-img {
-    @apply relative w-12 h-12;
+    @apply relative h-12 w-12;
 }
 
 .card-profile-img img {
     @apply absolute rounded-full;
 }
 
-/* -------------------------------  
-   Profile Info Text  
--------------------------------- */
+/* 
+|-----------------------------
+| Profile Info Text
+|-----------------------------
+*/
 .card-profile-info {
-    @apply w-full flex flex-col;
+    @apply flex w-full flex-col;
 }
 
 .card-profile-info:has(.input-field) {
@@ -67,15 +80,18 @@
 }
 
 .card-profile-info .sub-description {
-    @apply text-xs font-light text-current/70;
+    @apply text-xs font-semibold text-current/50;
 }
 
 .card-profile .form-actions {
     @apply ml-auto flex-1 flex-row!;
 }
-/* -------------------------------  
-   Personal Info  
--------------------------------- */
+
+/* 
+|-----------------------------
+| Personal Info
+|-----------------------------
+*/
 .personal-info {
     @apply flex flex-col justify-center gap-5 py-5;
 }
@@ -87,5 +103,5 @@
 
 .personal-info .peronsal-content .label-info,
 .personal-info .peronsal-content .input-field {
-    @apply flex-1 w-full;
+    @apply w-full flex-1;
 }

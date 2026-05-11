@@ -7,14 +7,23 @@ use Illuminate\Support\Collection;
 
 class GetLandingSectionsAction
 {
-    /**
-     * Retrieve all landing sections by merging defaults with database overrides.
-     */
+    /*
+    |-------------------------------
+    | Get Landing Sections
+    |-------------------------------
+    */
     public function execute(): Collection
     {
         return LandingSection::query()
-            ->get()
-            ->keyBy('key')
-            ->sortBy('order');
+            ->orderBy('order')
+            ->get();
+    }
+
+    public function mapWithKeys(): array
+    {
+        return $this->execute()
+            ->mapWithKeys(fn($section) => [
+                $section->key => $section->toResource()->resolve(),
+            ])->toArray();
     }
 }

@@ -1,11 +1,23 @@
-// External import
+/*
+|----------------------------------
+| Local Modules
+|----------------------------------
+*/
+import "./alpine/_projects-component.js"; // Parent Component
+import "./alpine/view-project-component.js";
+import "./alpine/create-project-component.js";
+import "./alpine/update-project-component.js";
+
+/*
+|----------------------------------
+| External Modules
+|----------------------------------
+*/
 import ModalHandler from "@js/components/modal/modal-handler";
 
-// Alpine import
-import "./alpine/projects-component.js"; // Parent Component
-import "./alpine/project-view-component.js";
-import "./alpine/project-form-create-component.js";
-import "./alpine/project-form-update-component.js";
-
-// Run import
+/*
+|----------------------------------
+| Init
+|----------------------------------
+*/
 ModalHandler();

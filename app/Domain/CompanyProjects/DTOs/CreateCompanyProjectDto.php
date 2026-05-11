@@ -2,40 +2,44 @@
 
 namespace App\Domain\CompanyProjects\DTOs;
 
-use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
 use App\Domain\CompanyProjects\States\VisibilityStates\VisibleState;
+use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
+use Barryvdh\Debugbar\Twig\Extension\Dump;
 
 class CreateCompanyProjectDto
 {
-    /**
-     * Create a new DTO instance.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | DTO
+    |--------------------------------------------------------------------------
+    */
+
     public function __construct(
-        public string  $title,
-        public string  $description,
-        public float   $priceStart = 0,
-        public string  $address,
+        public string $title,
+        public string $description,
+        public string $address,
+        public float $priceStart = 0,
+        public bool $visible = true,
         public ?string $location = null,
         public ?string $deliveredAt = null,
-        public bool $visible = true,
     ) {}
 
-    /**
-     * Convert the DTO to an array.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | Transform to Array
+    |--------------------------------------------------------------------------
+    */
+
     public function toArray(): array
     {
-        return array_filter(
-            [
-                'title'            => $this->title,
-                'description'      => $this->description,
-                'delivered_at'     => $this->deliveredAt,
-                'price_start'      => $this->priceStart,
-                'address'          => $this->address,
-                'location'         => $this->location,
-                'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
-            ],
-            fn($value) => ! is_null($value) && $value !== ''
-        );
+        return array_filter([
+            'title'        => $this->title,
+            'description'  => $this->description,
+            'price_start'  => $this->priceStart,
+            'address'      => $this->address,
+            'location'     => $this->location,
+            'delivered_at' => $this->deliveredAt,
+            'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
+        ], fn($value) => $value !== null && $value !== "");
     }
 }

@@ -27,8 +27,7 @@
             {{ $attributes->whereStartsWith('required') }}
             {{ $attributes->whereStartsWith('minlength') }}
             {{ $attributes->whereStartsWith('maxlength') }}
-        >
-        </textarea>
+        ></textarea>
 
         {{-- Slot element --}}
         {{ $slot }}

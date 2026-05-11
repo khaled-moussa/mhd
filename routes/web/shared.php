@@ -4,6 +4,7 @@ use App\App\Web\Controllers\Shared\Settings\NotificationController;
 use App\App\Web\Controllers\Shared\Settings\ProfileController;
 use App\App\Web\Controllers\Shared\Settings\SecurityController;
 use App\App\Web\Controllers\Shared\Settings\SiteEditorController;
+use App\Support\Context\SectionContext;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,3 +46,8 @@ Route::prefix('settings')
         Route::get('site-preview', [SiteEditorController::class, 'view'])
             ->name('site-preview');
     });
+
+
+
+
+

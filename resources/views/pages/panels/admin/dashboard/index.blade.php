@@ -1,17 +1,17 @@
-{{-- Use main layout --}}
+{{-- Main Layout --}}
 @extends('layouts.app')
 
-{{-- Page title --}}
-@section('title', 'Dashboard | Home')
+{{-- Page Title --}}
+@section('title', 'Dashboard | Dashboard')
 
-{{-- Page assets --}}
+{{-- Page Assets --}}
 @push('head')
-    {{ Vite::adminStyle('dashboard/_dashboard.css') }}
-    {{ Vite::adminScript('dashboard/_dashboard.js') }}
+    {{ Vite::style('panels/admin/dashboard/_dashboard.css') }}
+    {{ Vite::script('panels/admin/dashboard/_dashboard.js') }}
 @endpush
 
 {{-- Content --}}
-@section('component')
+@section('content')
     <div class="dashboard-grid">
         <div>
             {{-- Page header --}}
@@ -20,8 +20,8 @@
             {{-- KPI cards section --}}
             @include('admin::dashboard.partials.cards')
 
-            {{-- Users table section --}}
-            @include('admin::dashboard.partials.company-projects-table')
+            {{-- Project section  --}}
+            @include('admin::company-projects.partials.company-project-body')
         </div>
     </div>
 @endsection

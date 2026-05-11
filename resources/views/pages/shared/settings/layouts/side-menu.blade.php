@@ -3,7 +3,7 @@
         <li>
             <x-button.link
                 label="My Profile"
-                path="{{ route(name: $panel . '.settings.profile') }}"
+                :href="route('admin.settings.profile')"
                 wire:navigate.hover
                 wire:current="active"
             />
@@ -12,7 +12,7 @@
         <li>
             <x-button.link
                 label="Security"
-                path="{{ route($panel . '.settings.security') }}"
+                :href="route('admin.settings.security')"
                 wire:navigate
                 wire:current="active"
             />
@@ -21,7 +21,7 @@
         <li>
             <x-button.link
                 label="Site Editor"
-                path="{{ route($panel . '.settings.site-editor') }}"
+                :href="route('admin.settings.site-editor')"
                 wire:navigate
                 wire:current="active"
             />

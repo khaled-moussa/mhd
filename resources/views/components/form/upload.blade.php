@@ -10,20 +10,20 @@
 
 <div
     id="{{ $dragId }}"
-    class="drag-drop-input"
+    class="drag-drop"
     wire:ignore
 >
     <label
-        id="{{ $inputId }}"
-        class="drag-drop-input__label"
+        for="{{ $inputId }}"
+        class="drag-drop-label"
     >
 
         <i class="fi fi-rr-cloud-upload"></i>
 
-        <div class="drag-drop-input__text">
+        <div class="drag-drop-text">
             <p>{{ $description }}</p>
 
-            <p class="drag-drop-input__hint">
+            <p class="drag-drop-hint">
                 Supported File Types: {{ $accept }}
             </p>
         </div>
