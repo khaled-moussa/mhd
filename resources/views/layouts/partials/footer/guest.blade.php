@@ -3,23 +3,22 @@
     class="footer"
 >
     <div class="footer-container">
-
-        {{-- Grid --}}
         <div class="footer-grid">
-
             {{-- Brand --}}
             <div class="footer-brand">
                 <x-global.branding />
 
                 <div class="footer-socials">
-                    @foreach ($company['data']['socials'] as $social)
-                        <x-button.link
-                            class="footer-social-link"
-                            :href="$social['link']"
-                        >
-                            <i class="{{ $social['icon'] }}"></i>
-                        </x-button.link>
-                    @endforeach
+                    @if (isset($company['data']['socials']))
+                        @foreach ($company['data']['socials'] as $social)
+                            <x-button.link
+                                class="footer-social-link"
+                                :href="$social['link']"
+                            >
+                                <i class="{{ $social['icon'] }}"></i>
+                            </x-button.link>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
@@ -62,7 +61,6 @@
 
         {{-- Bottom Bar --}}
         <div class="footer-bottom">
-
             <p class="footer-copy">
                 &copy; {{ date('Y') }} MHD. All rights reserved.
             </p>
@@ -77,8 +75,6 @@
                     label="Privacy Policy"
                 />
             </div>
-
         </div>
-
     </div>
 </footer>

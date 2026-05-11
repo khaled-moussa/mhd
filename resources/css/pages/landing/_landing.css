@@ -20,19 +20,3 @@
 body {
     @apply bg-background;
 }
-
-/* 
-|-----------------------------
-| Landing Layout
-|-----------------------------
-*/
-.guest-shell {
-    @apply relative overflow-hidden;
-
-    @apply bg-[url(@img/backgrounds/bg-main.png)];
-    @apply bg-cover bg-center bg-repeat-y bg-fixed;
-}
-
-.guest-shell > * {
-    @apply relative z-10;
-}

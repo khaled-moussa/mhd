@@ -5,6 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Domain\Auth\Middlewares\AuthMiddleware;
 use App\Domain\Auth\Middlewares\EmailVerifiedMiddleware;
+use App\Support\Exceptions\ExceptionHandler;
 
 return Application::configure(basePath: dirname(__DIR__))
     /*
@@ -14,9 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
     */
     ->withRouting(
         channels: __DIR__ . '/../routes/channels.php',
-        web      : __DIR__ . '/../routes/web.php',
-        commands : __DIR__ . '/../routes/console.php',
-        health   : '/up',
+        web: __DIR__ . '/../routes/web.php',
+        commands: __DIR__ . '/../routes/console.php',
+        health: '/up',
     )
 
     /*
@@ -37,7 +38,7 @@ return Application::configure(basePath: dirname(__DIR__))
     |--------------------------------------------------------------------------
     */
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        app(ExceptionHandler::class)->register($exceptions);
     })
 
     ->create();
