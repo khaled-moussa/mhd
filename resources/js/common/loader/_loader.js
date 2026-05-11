@@ -1,4 +1,4 @@
-import initializeReveal from "../animation/reveal";
+import initializeReveal from "@js/common/animation/reveal";
 
 export default function initPageOnLoad() {
     const body = document.body;
@@ -10,6 +10,6 @@ export default function initPageOnLoad() {
             body.classList.remove("overflow-hidden");
 
             initializeReveal();
-        }, 2500);
+        }, 1500);
     };
 }

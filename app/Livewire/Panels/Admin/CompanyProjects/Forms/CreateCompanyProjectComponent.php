@@ -13,7 +13,7 @@ use Livewire\WithFileUploads;
 
 class CreateCompanyProjectComponent extends Component
 {
-    use WithLivewireExceptionHandling;
+    // use WithLivewireExceptionHandling;
     use WithFileUploads;
 
     /*
@@ -62,7 +62,9 @@ class CreateCompanyProjectComponent extends Component
         );
 
         $this->dispatchFiles($project);
+
         $this->form->resetForm();
+
         $this->dispatch(EventsEnum::COMPANY_PROJECT_CREATED_EVENT);
     }
 

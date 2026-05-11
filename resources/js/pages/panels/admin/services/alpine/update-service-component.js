@@ -1,8 +1,8 @@
-import MessageToast from "@js/utils/message-toast";
-import resetFormValidation from "@js/utils/reset-form-validation";
-import { showModal, closeModal } from "@js/components/modal/_modal";
 import { MODALS, FORMS, UI_EVENTS } from "@js/utils/enums";
 import { MODALS_EVENT } from "@js/utils/events";
+import { showModal, closeModal } from "@js/components/modal/_modal";
+import MessageToast from "@js/utils/message-toast";
+import resetFormValidation from "@js/common/form/reset-form-validation.js";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("serviceFormUpdateComponent", () => ({
@@ -52,11 +52,11 @@ document.addEventListener("alpine:init", () => {
         |------------------------------- 
         */
         registerListeners() {
-            this.onModalOpened();
-            this.onServiceServiceUpdatedEvent();
+            this.onModalOpenedEvent();
+            this.onServiceUpdatedEvent();
         },
 
-        onModalOpened() {
+        onModalOpenedEvent() {
             window.addEventListener(
                 MODALS_EVENT.opened(MODALS.UPDATE_COMPANY_SERVICE_MODAL),
                 ({ detail }) => {
@@ -66,7 +66,7 @@ document.addEventListener("alpine:init", () => {
             );
         },
 
-        onServiceServiceUpdatedEvent() {
+        onServiceUpdatedEvent() {
             this.$el.addEventListener(
                 UI_EVENTS.COMPANY_SERVICE_UPDATED_EVENT,
                 () => {

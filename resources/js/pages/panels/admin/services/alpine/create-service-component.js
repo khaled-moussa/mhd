@@ -1,8 +1,8 @@
-import MessageToast from "@js/utils/message-toast";
-import resetFormValidation from "@js/utils/reset-form-validation";
-import { closeModal } from "@js/components/modal/_modal";
 import { MODALS, FORMS, UI_EVENTS } from "@js/utils/enums";
 import { MODALS_EVENT } from "@js/utils/events";
+import { closeModal } from "@js/components/modal/_modal";
+import MessageToast from "@js/utils/message-toast";
+import resetFormValidation from "@js/common/form/reset-form-validation.js";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("serviceFormCreateComponent", () => ({

@@ -10,5 +10,7 @@ class LogoutController extends Controller
     public function __invoke()
     {
         AuthContext::logout();
+        
+        return redirect()->route('auth.login');
     }
 }

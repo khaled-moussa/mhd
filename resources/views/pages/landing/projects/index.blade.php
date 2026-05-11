@@ -1,10 +1,16 @@
 {{-- Main Layout --}}
-@extends('pages.landing._layouts.landing-base')
+@extends('layouts.guest')
 
 {{-- Page Title --}}
 @section('title', 'Projects')
 
+{{-- Page Assets --}}
+@push('head')
+    {{ Vite::style('landing/_landing.css') }}
+    {{ Vite::script('landing/_landing.js') }}
+@endpush
+
 {{-- Content --}}
-@section('section')
-    @include('pages.landing.projects.partials.projects')
+@section('content')
+     @include('pages.landing.projects.partials.projects')
 @endsection

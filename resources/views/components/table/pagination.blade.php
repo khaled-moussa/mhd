@@ -48,7 +48,7 @@
             {{-- Always show Last Page --}}
             @if ($lastPage > 1)
                 <x-button.outlined 
-                    class="outline-btn {{ $currentPage == $lastPage ? 'active' : '' }}"
+                    class="outline-btn sm {{ $currentPage == $lastPage ? 'active' : '' }}"
                     wire:click="setPage({{ $lastPage }})"
                 >
                     {{ $lastPage }}

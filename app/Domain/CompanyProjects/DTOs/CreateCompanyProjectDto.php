@@ -4,6 +4,7 @@ namespace App\Domain\CompanyProjects\DTOs;
 
 use App\Domain\CompanyProjects\States\VisibilityStates\VisibleState;
 use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
+use Barryvdh\Debugbar\Twig\Extension\Dump;
 
 class CreateCompanyProjectDto
 {
@@ -39,6 +40,6 @@ class CreateCompanyProjectDto
             'location'     => $this->location,
             'delivered_at' => $this->deliveredAt,
             'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
-        ], fn($value) => $value !== null);
+        ], fn($value) => $value !== null && $value !== "");
     }
 }

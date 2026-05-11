@@ -1,17 +1,17 @@
-{{-- Use main layout --}}
+{{-- Main Layout --}}
 @extends('layouts.app')
 
-{{-- Page title --}}
+{{-- Page Title --}}
 @section('title', 'Dashboard | Services')
 
-{{-- Page assets --}}
+{{-- Page Assets --}}
 @push('head')
     {{ Vite::style('panels/admin/services/_services.css') }}
     {{ Vite::script('panels/admin/services/_services.js') }}
 @endpush
 
 {{-- Content --}}
-@section('component')
+@section('content')
     {{-- Page header --}}
     <x-header.page title="Services">
         <x-button.primary

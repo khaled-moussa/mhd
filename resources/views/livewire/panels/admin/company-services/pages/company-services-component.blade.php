@@ -25,13 +25,12 @@
         </x-slot:pagination>
     </x-table>
 
-    {{-- Company Service view modal --}}
+    {{-- Delete service --}}
     <x-modal.delete
         :modalId="$modalId['DELETE_COMPANY_SERVICE_MODAL']"
         title="Delete service"
         description="Are you sure to delete the service!"
-        wire:ignore
-        wire:target="deleteService"
+        wire:target="deleteCompanyService"
         wire:loading.class="spinner"
     />
 </div>

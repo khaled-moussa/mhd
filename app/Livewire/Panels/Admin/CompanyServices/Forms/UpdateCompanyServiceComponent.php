@@ -8,13 +8,16 @@ use App\Domain\CompanyServices\DTOs\UpdateCompanyServiceDto;
 use App\Domain\CompanyServices\Models\CompanyService;
 use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
+use function PHPUnit\Framework\stringStartsWith;
+
 class UpdateCompanyServiceComponent extends Component
 {
-    use WithLivewireExceptionHandling;
+    // use WithLivewireExceptionHandling;
 
     /*
     |-----------------------------
@@ -46,7 +49,7 @@ class UpdateCompanyServiceComponent extends Component
         $this->companyServiceUuid = $companyServiceUuid;
 
         if ($this->companyService) {
-            $this->form->fillCompanyService(companyService: $this->companyService);
+            $this->form->fillCompanyService($this->companyService);
         }
     }
 

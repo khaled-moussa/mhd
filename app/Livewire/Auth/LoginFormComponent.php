@@ -6,14 +6,16 @@ use App\Domain\Auth\Actions\AttemptToLoginAction;
 use App\Domain\Auth\Actions\LogoutUserAction;
 use App\Domain\Auth\Actions\PanelResolverAction;
 use App\Domain\Auth\Exceptions\FailedToLoginException;
+use App\Livewire\Support\Traits\ResetFormValidation;
 use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
-use App\Support\Enums\EventsEnum;
+use App\Support\Enums\FormEnum;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class LoginFormComponent extends Component
 {
-    use WithLivewireExceptionHandling;
+    // use WithLivewireExceptionHandling;
+    use ResetFormValidation;
 
     /*
     |-------------------------------
@@ -83,9 +85,7 @@ class LoginFormComponent extends Component
             Auth::login($user, $this->remember);
 
             $this->resetForm();
-            $this->dispatchLoginSuccessEvent();
-
-            $this->redirect(PanelResolverAction::panelRoute(user: $user));
+            $this->redirect(PanelResolverAction::panelRoute($user));
         } catch (FailedToLoginException $e) {
             $this->addError('login_failed', $e->getMessage());
         }
@@ -106,15 +106,6 @@ class LoginFormComponent extends Component
 
         $this->resetValidation();
         $this->resetErrorBag();
-    }
-
-    /*
-    |-------------------------------
-    | Dispatchers
-    |-------------------------------
-    */
-    private function dispatchLoginSuccessEvent(): void
-    {
-        $this->dispatch(EventsEnum::LOGIN_SUCCESS_EVENT);
+        $this->dispatchResetFormValidation(FormEnum::LOGIN_FORM->value);
     }
 }

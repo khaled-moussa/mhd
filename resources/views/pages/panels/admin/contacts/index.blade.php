@@ -1,24 +1,21 @@
-{{-- Use main layout --}}
+{{-- Main Layout --}}
 @extends('layouts.app')
 
-{{-- Page title --}}
+{{-- Page Title --}}
 @section('title', 'Dashboard | Contacts')
 
-{{-- Page assets --}}
+{{-- Page Assets --}}
 @push('head')
     {{ Vite::style('panels/admin/contacts/_contacts.css') }}
     {{ Vite::script('panels/admin/contacts/_contacts.js') }}
 @endpush
 
 {{-- Content --}}
-@section('component')
+@section('content')
     {{-- Page header --}}
     <x-header.page title="Contacts" />
 
-    <div
-        x-data="contactsComponent"
-        class="contacts"
-    >
+    <div x-data="contactsComponent" class="contacts">
         {{-- Contacts table livewire component --}}
         <livewire:panels.admin.contacts.pages.contacts-component />
 
@@ -27,6 +24,5 @@
             'modalId' => $modalId['VIEW_CONTACT_MODAL'],
             'modalTitle' => 'View Contact Info',
         ])
-
     </div>
 @endsection

@@ -11,7 +11,7 @@ class GetSectionByKeyAction
     | Get Landing Sections
     |-------------------------------
     */
-    public function execute(string $key): LandingSection
+    public function execute(string $key): ?LandingSection
     {
         return LandingSection::query()
             ->where('key', $key)

@@ -36,29 +36,30 @@ class CompanyProjectsComponent extends Component
     */
     public function render()
     {
-        $this->initPaginationButtons($this->companyProjects);
+
+        $companyProjects = $this->companyProjects();
+
+        $this->initPaginationButtons($companyProjects);
 
         return view('admin_livewire::company-projects.pages.company-projects-component', [
-            'paginator' => $this->companyProjects,
-            'companyProjectsData' => $this->companyProjectsData,
+            'paginator' => $companyProjects,
+            'companyProjectsData' => $this->companyProjectsData($companyProjects),
         ]);
     }
 
-    /* 
+    /*
     |-----------------------------
-    | Computed Properties
-    |----------------------------- 
+    | Data
+    |-----------------------------
     */
-    #[Computed]
     public function companyProjects()
     {
         return app(GetCompanyProjectsAction::class)->paginate();
     }
 
-    #[Computed]
-    public function companyProjectsData(): array
+    public function companyProjectsData($companyProjects): array
     {
-        return CompanyProjectsResource::collection($this->companyProjects->items())->resolve();
+        return CompanyProjectsResource::collection($companyProjects->items())->resolve();
     }
 
     /*
@@ -84,8 +85,12 @@ class CompanyProjectsComponent extends Component
         app(DeleteCompanyProjectAction::class)->execute($companyProject);
 
         // If current page becomes empty → go back
-        if ($this->companyProjects->count() === 0 && $this->currentPage > 1) {
+        if ($this->companyProjects()->count() === 0 && $this->currentPage > 1) {
             $this->previousPage();
+        }
+
+        if ($this->currentPage === 1) {
+            $this->resetPage();
         }
 
         $this->dispatchCompanyProjectDeletedEvent();

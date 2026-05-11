@@ -112,7 +112,6 @@
     </div>
 </div>
 
-
 {{-- Uploaded File --}}
 <div class="upload-section upload-section-file">
 

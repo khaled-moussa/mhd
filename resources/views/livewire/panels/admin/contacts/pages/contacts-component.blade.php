@@ -24,8 +24,5 @@
         :modalId="$modalId['DELETE_CONTACT_MODAL']"
         title="Delete contact"
         description="Are you sure to delete the contact!"
-        wire:ignore
-        wire:target="deleteContact"
-        wire:loading.class="spinner"
     />
 </div>

@@ -42,6 +42,10 @@ class DeleteCompanyProjectAction
     {
         $section = app(GetSectionByKeyAction::class)->execute('projects');
 
+        if (!$section) {
+            return;
+        }
+
         app(ChangeLandingSectionVisibilityAction::class)
             ->execute($section, NotVisibleState::class);
     }

@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.partials.layout-base')
 
-<head>
-    @include('layouts.partials.head')
-</head>
+{{-- Head --}}
+@push('head')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-<body class="loader">
+    @livewireStyles
+@endpush
+
+{{-- Body --}}
+@section('body')
     <div class="app-shell">
-
         {{-- Sidebar --}}
         @include('layouts.partials.sidebar.app')
 
@@ -16,12 +18,17 @@
 
         {{-- Main Content --}}
         <main class="app-content">
-            @yield('component')
+            @yield('content')
         </main>
-
-        {{-- Scripts --}}
-        @include('layouts.partials.scripts')
     </div>
-</body>
+@endsection
 
-</html>
+{{-- Script --}}
+@push('script')
+    @livewireScripts
+
+    <script>
+        window.__ENUMS__ = @json($enums ?? []);
+        window.__USER__ = @json($currentUser ?? null);
+    </script>
+@endpush

@@ -16,8 +16,8 @@ class DeleteCompanyServiceAction
     */
     public function execute(CompanyService $project): void
     {
-        if ($this->isLastProject()) {
-            $this->hideProjectsSection();
+        if ($this->isLastService()) {
+            $this->hideServicesSection();
         }
 
         $project->delete();
@@ -25,22 +25,26 @@ class DeleteCompanyServiceAction
 
     /*
     |-------------------------------
-    | Check Last Project
+    | Check Last Service
     |-------------------------------
     */
-    private function isLastProject(): bool
+    private function isLastService(): bool
     {
         return CompanyService::count() === 1;
     }
 
     /*
     |-------------------------------
-    | Hide Projects Section
+    | Hide Services Section
     |-------------------------------
     */
-    private function hideProjectsSection(): void
+    private function hideServicesSection(): void
     {
-        $section = app(GetSectionByKeyAction::class)->execute('projects');
+        $section = app(GetSectionByKeyAction::class)->execute('services');
+
+        if (!$section) {
+            return;
+        }
 
         app(ChangeLandingSectionVisibilityAction::class)
             ->execute($section, NotVisibleState::class);

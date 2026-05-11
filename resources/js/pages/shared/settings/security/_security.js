@@ -1,5 +1,4 @@
 // Extenral Scripts
-import showPassword from "@js/common/form/password.js";
 import ModalHandler from "@js/components/modal/modal-handler.js";
 
 // Alpine Scripts
@@ -12,5 +11,4 @@ import "./alpine/forms/delete-account-form-component.js";
 import '@js/components/otp/_otp.js';
 
 // Run Imports
-showPassword();
 ModalHandler();

@@ -37,13 +37,13 @@
 
 /* Default button */
 .table-pagination button:not(.active):not(:disabled) {
-    @apply bg-foreground/10 text-foreground;
+    @apply bg-foreground/5 text-foreground;
     @apply hover:bg-foreground/20;
 }
 
 /* Active button */
 .table-pagination button.active {
-    @apply bg-current/5 text-foreground;
+    @apply bg-primary-300 text-background;
 }
 
 /* Disabled button */

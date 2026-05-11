@@ -19,10 +19,12 @@
         </x-slot:pagination>
     </x-table>
 
-    {{-- Company Project view modal --}}
+    {{-- Delete project --}}
     <x-modal.delete
         :modalId="$modalId['DELETE_COMPANY_PROJECT_MODAL']"
         title="Delete project"
         description="Are you sure to delete the project!"
+        wire:target="deleteCompanyProject"
+        wire:loading.class="spinner"
     />
 </div>

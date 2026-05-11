@@ -12,8 +12,9 @@ enum EventsEnum: string
     case NOTIFICATION_SENT_EVENT = 'notification-sent-event';
     case SESSION_EXPIRED_EVENT = 'session-expired-event';
     case GLOBAL_ERROR_EVENT = 'global-error-exception';
+    case RESET_FORM_VALIDATION = 'reset-form-validation';
 
-    /*
+        /*
     |-------------------------------
     | Auth Events
     |-------------------------------
@@ -25,7 +26,7 @@ enum EventsEnum: string
     case TWO_FACTOR_SUCCESS_EVENT = 'two-factor-success-event';
     case AUTH_ERROR_EVENT = 'auth-error-event';
 
-    /*
+        /*
     |-------------------------------
     | Step Events
     |-------------------------------
@@ -34,7 +35,7 @@ enum EventsEnum: string
     case STEP_PREVIOUS_EVENT = 'step-previous-event';
     case STEP_COMPLETED_EVENT = 'step-completed-event';
 
-    /*
+        /*
     |-------------------------------
     | User Events
     |-------------------------------
@@ -50,7 +51,7 @@ enum EventsEnum: string
     case USER_TWO_FACTOR_UPDATED_EVENT = 'user-two-factor-updated-event';
     case USER_ACCOUNT_DELETED_EVENT = 'user-account-deleted-event';
 
-    /*
+        /*
     |-------------------------------
     | Company Services
     |-------------------------------
@@ -61,7 +62,7 @@ enum EventsEnum: string
     case COMPANY_SERVICE_LOADED_EVENT = 'company-service-loaded-event';
     case COMPANY_SERVICE_ERROR_EVENT = 'company-service-error-event';
 
-    /*
+        /*
     |-------------------------------
     | Company Projects
     |-------------------------------
@@ -72,7 +73,7 @@ enum EventsEnum: string
     case COMPANY_PROJECT_LOADED_EVENT = 'company-project-loaded-event';
     case COMPANY_PROJECT_ERROR_EVENT = 'company-project-error-event';
 
-    /*
+        /*
     |-------------------------------
     | Contacts
     |-------------------------------
@@ -82,8 +83,8 @@ enum EventsEnum: string
     case CONTACT_DELETED_EVENT = 'contact-deleted-event';
     case CONTACT_LOADED_EVENT = 'contact-loaded-event';
     case CONTACT_ERROR_EVENT = 'contact-error-event';
-    
-    /*
+
+        /*
     |-------------------------------
     | Site Editor
     |-------------------------------

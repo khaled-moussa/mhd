@@ -2,6 +2,9 @@
 
 namespace App\Domain\CompanyProjects\DTOs;
 
+use App\Domain\CompanyProjects\States\VisibilityStates\VisibleState;
+use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
+
 class UpdateCompanyProjectDto
 {
     /*
@@ -39,6 +42,7 @@ class UpdateCompanyProjectDto
             'address'      => $this->address,
             'location'     => $this->location,
             'delivered_at' => $this->deliveredAt,
+            'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
         ];
     }
 

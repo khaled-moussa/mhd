@@ -51,18 +51,26 @@
                                 x-model="sections['{{ $key }}'].data.title.accent"
                             />
                         </div>
-                    @else
+                    @endif
+
+                    @if (!in_array($key, ['hero', 'footer']))
                         {{-- Generic Fields --}}
                         <x-form.textarea
+                            label="Title"
                             placeholder="Title"
                             x-model="sections['{{ $key }}'].title"
                         />
                     @endif
 
-                    <x-form.textarea
-                        placeholder="Description"
-                        x-model="sections['{{ $key }}'].description"
-                    />
+
+                    {{-- About Description --}}
+                    @if ($key === 'about')
+                        <x-form.textarea
+                            label="Description"
+                            placeholder="Description"
+                            x-model="sections['{{ $key }}'].description"
+                        />
+                    @endif
 
 
                     {{-- FOOTER SOCIALS --}}
@@ -119,11 +127,6 @@
                     label="Update"
                     @click="submit"
                     wire:loading.class="spinner"
-                />
-
-                <x-button.outlined
-                    label="Preview"
-                    @click="updatePreview"
                 />
             </div>
         </div>

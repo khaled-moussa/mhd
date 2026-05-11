@@ -1,15 +1,18 @@
-{{-- Use main layout --}}
-@extends('pages.auth.layouts.auth-base')
+{{-- Main layout --}}
+@extends('layouts.auth')
 
-{{-- Page title --}}
+{{-- Page Title --}}
 @section('title', 'Forgot Password')
 
-{{-- Auth Header --}}
-@section('eyebrow', 'Forgot password?')
-@section('subtitle', 'Reset your password')
-@section('description', 'Enter your email and we’ll send you a reset link.')
-
 {{-- Auth Form --}}
-@section('form')
-    @livewire('auth.forgot-password-form-component')
+@section('content')
+    <x-form.split-layout
+        eyebrow="Forgot password?"
+        subtitle="Reset your password"
+        description="Enter your email and we’ll send you a reset link."
+    >
+        <x-slot:form>
+            @livewire('auth.forgot-password-form-component')
+        </x-slot:form>
+    </x-form.split-layout>
 @endsection

@@ -26,7 +26,7 @@ class CompanyProjectFormComponent extends Form
     public array $removedImages = [];
     public array $existingImages = [];
     public $file;
-    public array $existingFile = [];
+    public ?array $existingFile = [];
     public bool $visible = true;
 
     /*
@@ -59,6 +59,7 @@ class CompanyProjectFormComponent extends Form
                 'required',
                 'numeric',
                 'min:1',
+                'max:10'
             ],
 
             'address' => [

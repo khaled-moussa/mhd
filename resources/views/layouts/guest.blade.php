@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.partials.layout-base')
 
-<head>
-    @include('layouts.partials.head')
-</head>
+{{-- Head --}}
+@push('head')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@endpush
 
-<body>
+{{-- Body --}}
+@section('body')
     {{-- Navbar --}}
-    @yield('navbar')
+    @include('layouts.partials.navbar.guest')
 
     {{-- Main Content --}}
     <main class="content">
@@ -15,10 +16,13 @@
     </main>
 
     {{-- Footer --}}
-    @yield('footer')
+    @include('layouts.partials.footer.guest')
+@endsection
 
-    {{-- Scripts --}}
-    @include('layouts.partials.scripts')
-</body>
-
-</html>
+{{-- Script --}}
+@push('script')
+    <script>
+        window.__ENUMS__ = @json($enums ?? []);
+        window.__USER__ = @json($currentUser ?? null);
+    </script>
+@endpush

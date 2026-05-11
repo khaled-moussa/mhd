@@ -11,6 +11,3 @@
 
 {{-- Pulse slot --}}
 @section('pulse', true)
-
-{{-- Button slot --}}
-@section('button', true)

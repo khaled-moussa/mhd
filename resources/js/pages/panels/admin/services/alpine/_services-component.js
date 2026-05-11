@@ -1,6 +1,6 @@
 import MessageToast from "@js/utils/message-toast";
 import { deleteModal } from "@js/components/modal/delete-modal";
-import { dispatchModalOpenedEvent, showModal,} from "@js/components/modal/_modal";
+import { dispatchModalOpenedEvent, showModal} from "@js/components/modal/_modal";
 import { MODALS, UI_EVENTS } from "@js/utils/enums";
 
 document.addEventListener("alpine:init", () => {
@@ -37,7 +37,6 @@ document.addEventListener("alpine:init", () => {
         },
 
         editCompanyService(companyServiceUuid) {
-            
             if (!this.isValidUuid(companyServiceUuid)) {
                 return this.showError();
             }
@@ -57,7 +56,7 @@ document.addEventListener("alpine:init", () => {
 
             deleteModal({
                 modalId: MODALS.DELETE_COMPANY_SERVICE_MODAL,
-                closeAfterConfirm: true,
+                closeAfterConfirm: false,
                 onConfirm: () => this.confirmDelete(companyServiceUuid),
             });
         },

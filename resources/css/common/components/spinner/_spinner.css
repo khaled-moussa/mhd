@@ -13,7 +13,7 @@
 
     @apply after:content-[''] after:absolute after:top-[45%] after:right-0 after:left-0 after:mx-auto after:h-6 after:w-6;
     @apply after:bg-[url(@img/icon/spinner.svg)];
-    @apply after:animate-spin after:place-self-center after:bg-contain after:bg-center after:bg-no-repeat after:opacity-100 z-100;
+    @apply after:place-self-center after:bg-contain after:bg-center after:bg-no-repeat after:opacity-100 z-100;
 }
 
 /* 

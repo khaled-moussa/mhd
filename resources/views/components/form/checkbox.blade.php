@@ -11,14 +11,17 @@
         {{-- Input --}}
         <input
             type="checkbox"
-            id="{{ $attributes->get('id') }}"
-            name="{{ $attributes->get('name') }}"
-            value="{{ $attributes->get('value') }}"
             class="peer hidden"
+            {{-- Core Attributes --}}
+            @if ($attributes->has('id')) id="{{ $attributes->get('id') }}" @endif
+            @if ($attributes->has('name')) name="{{ $attributes->get('name') }}" @endif
+            @if ($attributes->has('value')) value="{{ $attributes->get('value') }}" @endif
+
             {{-- State --}}
             {{ $attributes->whereStartsWith('checked') }}
             {{ $attributes->whereStartsWith('required') }}
             {{ $attributes->whereStartsWith('disabled') }}
+            
             {{-- JS / Alpine / Livewire --}}
             {{ $attributes->whereStartsWith('wire') }}
             {{ $attributes->whereStartsWith('x-') }}
@@ -48,8 +51,9 @@
                 {{ $label }}
             </span>
         @endif
+
     </div>
 </label>
 
 {{-- Validation --}}
-{{-- <x-alert.validation-input :error="$error" /> --}}
+<x-alert.validation-input :error="$error" />

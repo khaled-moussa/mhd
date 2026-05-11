@@ -1,37 +1,13 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.partials.layout-base')
 
-{{-- layouts/partials/head.blade.php --}}
-
-<head>
-    {{-- Meta --}}
-    <meta charset="utf-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1"
-    >
-
-    {{-- Title --}}
-    <title>
-        @yield('title', config('app.name'))
-    </title>
-
-    {{-- Favicon --}}
-    <link
-        rel="icon"
-        href="{{ asset('favicon.ico') }}"
-    >
-
-    {{-- Fonts --}}
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
-        rel="stylesheet"
-    >
-
+{{-- Head --}}
+@push('head')
     <style>
-        /* -------------------------------
-         | Global Reset
-         |------------------------------- */
+        /*
+                |-------------------------------
+                | Global Reset
+                |-------------------------------
+                */
         * {
             box-sizing: border-box;
             text-decoration: none;
@@ -43,9 +19,11 @@
             color: white !important;
         }
 
-        /* -------------------------------
-         | Wrapper
-         |------------------------------- */
+        /*
+                |-------------------------------
+                | Wrapper
+                |-------------------------------
+                */
         .email-wrapper {
             width: 100%;
             margin: auto;
@@ -54,9 +32,11 @@
             background-color: #000000 !important;
         }
 
-        /* -------------------------------
-         | Email Inner Container
-         |------------------------------- */
+        /*
+                |-------------------------------
+                | Email Inner Container
+                |-------------------------------
+                */
         .email-container {
             width: 100%;
             max-width: 650px;
@@ -71,9 +51,11 @@
             line-height: 1.8;
         }
 
-        /* -------------------------------
-         | Branding / Header
-         |------------------------------- */
+        /*
+                |-------------------------------
+                | Branding / Header
+                |-------------------------------
+                */
         .logo {
             max-width: 150px;
             height: auto;
@@ -93,9 +75,11 @@
             font-weight: bold;
         }
 
-        /* -------------------------------
-         | Code / OTP Box
-         |------------------------------- */
+        /*
+                |-------------------------------
+                | Code / OTP Box
+                |-------------------------------
+                */
         .code {
             display: inline-block;
             width: 100%;
@@ -108,9 +92,11 @@
             background-color: #36d7ac4f !important;
         }
 
-        /* -------------------------------
-         | Footer
-         |------------------------------- */
+        /*
+                |-------------------------------
+                | Footer
+                |-------------------------------
+                */
         .footer {
             max-width: 650px;
             margin: 25px auto !important;
@@ -118,9 +104,11 @@
             color: #bbb !important;
         }
 
-        /* -------------------------------
-         | Links & Buttons
-         |------------------------------- */
+        /*
+                |-------------------------------
+                | Links & Buttons
+                |-------------------------------
+                */
         .link {
             margin-top: 12px;
             font-size: 14px;
@@ -163,9 +151,11 @@
             background-color: #cbcbcb !important;
         }
 
-        /* -------------------------------
-         | Responsive Design
-         |------------------------------- */
+        /*
+                |-------------------------------
+                | Responsive Design
+                |-------------------------------
+                */
         @media (max-width: 768px) {
             .email-wrapper {
                 padding: 15px;
@@ -194,9 +184,10 @@
             }
         }
     </style>
-</head>
+@endpush
 
-<body>
+{{-- Body --}}
+@section('body')
     <div class="email-wrapper">
         <div class="email-container">
             {{-- Email Dynamic Content --}}
@@ -208,6 +199,14 @@
             &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
         </div>
     </div>
-</body>
+@endsection
 
-</html>
+{{-- Script --}}
+@push('script')
+    @livewireScripts
+
+    <script>
+        window.__ENUMS__ = @json($enums ?? []);
+        window.__USER__ = @json($currentUser ?? null);
+    </script>
+@endpush

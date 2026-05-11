@@ -8,24 +8,21 @@ use App\Domain\CompanyServices\Actions\GetCompanyServiceByUuidAction;
 use App\Domain\CompanyServices\Actions\GetCompanyServicesAction;
 use App\Domain\CompanyServices\Models\CompanyService;
 use App\Livewire\Panels\Admin\CompanyServices\Forms\CompanyServiceFormComponent;
-use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use App\Support\Traits\HandlePaginationButtons;
-use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class CompanyServicesComponent extends Component
 {
-    // use WithLivewireExceptionHandling;
     use WithPagination;
     use HandlePaginationButtons;
 
-    /* 
+    /*
     |-----------------------------
     | Properties
-    |----------------------------- 
+    |-----------------------------
     */
     public CompanyServiceFormComponent $form;
 
@@ -36,30 +33,29 @@ class CompanyServicesComponent extends Component
     */
     public function render()
     {
-        $this->initPaginationButtons($this->companyServices);
+        $companyServices = $this->companyServices();
+
+        $this->initPaginationButtons($companyServices);
 
         return view('admin_livewire::company-services.pages.company-services-component', [
-            'paginator' => $this->companyServices,
-            'companyServicesData' => $this->companyServicesData,
+            'paginator' => $companyServices,
+            'companyServicesData' => $this->companyServicesData($companyServices),
         ]);
     }
 
-    /* 
+    /*
     |-----------------------------
-    | Computed Properties
-    |----------------------------- 
+    | Data
+    |-----------------------------
     */
-    #[Computed]
     public function companyServices()
     {
         return app(GetCompanyServicesAction::class)->paginate();
     }
 
-
-    #[Computed]
-    public function companyServicesData(): array
+    public function companyServicesData($companyServices): array
     {
-        return CompanyServicesResource::collection($this->companyServices->items())->resolve();
+        return CompanyServicesResource::collection($companyServices->items())->resolve();
     }
 
     /*
@@ -67,7 +63,6 @@ class CompanyServicesComponent extends Component
     | Actions
     |-----------------------------
     */
-
     public function viewCompanyService(string $companyServiceUuid): void
     {
         $companyService = $this->getCompanyService($companyServiceUuid);
@@ -76,9 +71,10 @@ class CompanyServicesComponent extends Component
             return;
         }
 
-        $this->dispatchCompanyServiceLoadedEvent($companyService->toResource()->resolve());
+        $this->dispatchCompanyServiceLoadedEvent(
+            $companyService->toResource()->resolve()
+        );
     }
-
 
     public function deleteCompanyService(string $companyServiceUuid): void
     {
@@ -87,17 +83,21 @@ class CompanyServicesComponent extends Component
         app(DeleteCompanyServiceAction::class)->execute($companyService);
 
         // If current page becomes empty → go back
-        if ($this->companyServices->count() === 0 && $this->currentPage > 1) {
+        if ($this->companyServices()->count() === 0 && $this->currentPage > 1) {
             $this->previousPage();
+        }
+
+        if ($this->currentPage === 1) {
+            $this->resetPage();
         }
 
         $this->dispatchCompanyServiceDeletedEvent();
     }
 
-    /* 
+    /*
     |-----------------------------
-    | Event Listeners
-    |----------------------------- 
+    | Events
+    |-----------------------------
     */
     #[On(EventsEnum::COMPANY_SERVICE_CREATED_EVENT->value)]
     public function handleCompanyServiceCreated(): void
@@ -108,32 +108,37 @@ class CompanyServicesComponent extends Component
     #[On(EventsEnum::COMPANY_SERVICE_UPDATED_EVENT->value)]
     public function handleCompanyServiceUpdated(): void
     {
-        // simply re-render
+        // no action needed (auto re-render)
     }
 
-    /* 
+    /*
     |-----------------------------
     | Helpers
-    |----------------------------- 
+    |-----------------------------
     */
     private function getCompanyService(string $companyServiceUuid): ?CompanyService
     {
-        return app(GetCompanyServiceByUuidAction::class)->execute($companyServiceUuid);
+        return app(GetCompanyServiceByUuidAction::class)
+            ->execute($companyServiceUuid);
     }
 
-    /* 
+    /*
     |-----------------------------
     | Dispatchers
-    |----------------------------- 
+    |-----------------------------
     */
-
-    private function dispatchCompanyServiceLoadedEvent(array $data)
+    private function dispatchCompanyServiceLoadedEvent(array $data): void
     {
-        $this->dispatch(EventsEnum::COMPANY_SERVICE_LOADED_EVENT, data: $data);
+        $this->dispatch(
+            EventsEnum::COMPANY_SERVICE_LOADED_EVENT,
+            data: $data
+        );
     }
 
-    private function dispatchCompanyServiceDeletedEvent()
+    private function dispatchCompanyServiceDeletedEvent(): void
     {
-        $this->dispatch(EventsEnum::COMPANY_SERVICE_DELETED_EVENT);
+        $this->dispatch(
+            EventsEnum::COMPANY_SERVICE_DELETED_EVENT
+        );
     }
 }

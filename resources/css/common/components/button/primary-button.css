@@ -53,9 +53,17 @@
     @apply ring-2 ring-primary ring-offset-2;
 }
 
-
 /* Disabled */
 .primary-btn:disabled {
     @apply opacity-50;
     @apply pointer-events-none;
+}
+
+/* Spinner */
+.primary-btn.spinner {
+    @apply bg-foreground/10;
+}
+
+.primary-btn.danger.spinner{
+    @apply text-transparent! bg-primary-300!;
 }

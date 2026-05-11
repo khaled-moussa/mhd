@@ -19,7 +19,7 @@ class CreateCompanyServiceAction
     {
         $project = CompanyService::create($dto->toArray());
 
-        $this->ensureProjectsSectionIsVisible();
+        $this->ensureServicesSectionIsVisible();
 
         return $project;
     }
@@ -29,11 +29,11 @@ class CreateCompanyServiceAction
     | Ensure Projects Section Visible
     |-------------------------------
     */
-    private function ensureProjectsSectionIsVisible(): void
+    private function ensureServicesSectionIsVisible(): void
     {
-        $section = app(GetSectionByKeyAction::class)->execute('projects');
+        $section = app(GetSectionByKeyAction::class)->execute('services');
 
-        if ($section->isVisible()) {
+        if (!$section || $section->isVisible()) {
             return;
         }
 

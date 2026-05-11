@@ -33,7 +33,7 @@ class CreateCompanyProjectAction
     {
         $section = app(GetSectionByKeyAction::class)->execute('projects');
 
-        if ($section->isVisible()) {
+        if (!$section || $section->isVisible()) {
             return;
         }
 

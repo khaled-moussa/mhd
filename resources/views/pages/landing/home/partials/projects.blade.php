@@ -9,7 +9,7 @@
         {{-- Header --}}
         <x-header.section
             label="What we've built"
-            title="Our Projects"
+            :title="$section['title']"
         >
             <x-button.link
                 class="projects-view-all"

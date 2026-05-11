@@ -30,7 +30,7 @@
                     {{-- Icon --}}
                     @if ($service['icon'])
                         <div class="services-icon">
-                            {!! $service['icon'] !!}
+                            <i class="{{ $service['icon'] }}"></i>
                         </div>
                     @endif
 

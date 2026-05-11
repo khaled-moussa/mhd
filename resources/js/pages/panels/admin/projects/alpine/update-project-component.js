@@ -1,10 +1,10 @@
-import MessageToast from "@js/utils/message-toast";
-import { closeModal, showModal } from "@js/components/modal/_modal";
 import { MODALS, UI_EVENTS } from "@js/utils/enums";
 import { MODALS_EVENT } from "@js/utils/events";
-import { DragFiles } from "@js/utils/drag-files";
-import validateFileInput from "@js/utils/validate-file-input";
+import { closeModal, showModal } from "@js/components/modal/_modal";
+import { DragFiles } from "@js/common/form/drag-files";
 import generateUuid from "@js/utils/generate-uuid";
+import MessageToast from "@js/utils/message-toast";
+import validateFileInput from "@js/common/form/validate-file-input"; 
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("projectFormUpdateComponent", () => ({

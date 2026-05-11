@@ -1,6 +1,6 @@
-import MessageToast from "@js/utils/message-toast";
-import resetFormValidation from "@js/utils/reset-form-validation";
 import { FORMS, UI_EVENTS } from "@js/utils/enums";
+import MessageToast from "@js/utils/message-toast";
+import resetFormValidation from "@js/common/form/reset-form-validation.js";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("createContactComponent", () => ({
@@ -23,9 +23,7 @@ document.addEventListener("alpine:init", () => {
         },
 
         onContactCreatedEvent() {
-            this.$el.addEventListener(
-                UI_EVENTS.CONTACT_CREATED_EVENT,
-                ({ detail }) => {
+            this.$el.addEventListener(UI_EVENTS.CONTACT_CREATED_EVENT, ({ detail }) => {
                     MessageToast("created", detail.message);
                     resetFormValidation(FORMS.CREATE_CONTACT_FORM);
                 },

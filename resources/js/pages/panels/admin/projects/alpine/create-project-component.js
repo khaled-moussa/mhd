@@ -1,11 +1,11 @@
+import { MODALS, FORMS, UI_EVENTS } from "@js/utils/enums";
+import { MODALS_EVENT } from "@js/utils/events";
+import { closeModal } from "@js/components/modal/_modal";
+import { DragFiles } from "@js/common/form/drag-files";
 import MessageToast from "@js/utils/message-toast";
 import generateUuid from "@js/utils/generate-uuid";
-import validateFileInput from "@js/utils/validate-file-input";
-import { closeModal } from "@js/components/modal/_modal";
-import { MODALS, FORMS, UI_EVENTS } from "@js/utils/enums";
-import { DragFiles } from "@js/utils/drag-files";
-import { MODALS_EVENT } from "@js/utils/events";
-import resetFormValidation from "@js/utils/reset-form-validation";
+import validateFileInput from "@js/common/form/validate-file-input"; 
+import resetFormValidation from "@js/common/form/reset-form-validation.js";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("projectFormCreateComponent", () => ({
@@ -305,7 +305,9 @@ document.addEventListener("alpine:init", () => {
         */
 
         submit() {
-            const completedImages = this.images.filter((img) => img.status === "completed");
+            const completedImages = this.images.filter(
+                (img) => img.status === "completed",
+            );
 
             if (completedImages.length === 0) {
                 MessageToast("warning", "Images are required.");
@@ -327,19 +329,34 @@ document.addEventListener("alpine:init", () => {
         */
 
         registerListeners() {
-            window.addEventListener(MODALS_EVENT.closed(MODALS.CREATE_COMPANY_PROJECT_MODAL), () => {
+            this.onModalClosedEvent();
+            this.onProjectCreatedEvent();
+        },
+
+        onModalClosedEvent() {
+            window.addEventListener(
+                MODALS_EVENT.closed(MODALS.CREATE_COMPANY_PROJECT_MODAL),
+                () => {
                     this.resetImages();
                     this.resetFile();
 
                     resetFormValidation(FORMS.CREATE_COMPANY_PROJECT_FORM);
                 },
             );
+        },
 
-            this.$el.addEventListener( UI_EVENTS.COMPANY_PROJECT_CREATED_EVENT, () => {
-                    closeModal({ modalId: MODALS.CREATE_COMPANY_PROJECT_MODAL});
-
+        onProjectCreatedEvent() {
+            this.$el.addEventListener(
+                UI_EVENTS.COMPANY_PROJECT_CREATED_EVENT,
+                () => {
                     MessageToast("created");
-                    
+
+                    closeModal({
+                        modalId: MODALS.CREATE_COMPANY_PROJECT_MODAL,
+                    });
+
+                    resetFormValidation(FORMS.CREATE_COMPANY_PROJECT_FORM);
+
                     this.resetImages();
                     this.resetFile();
                 },

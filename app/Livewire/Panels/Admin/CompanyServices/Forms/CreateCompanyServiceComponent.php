@@ -39,8 +39,8 @@ class CreateCompanyServiceComponent extends Component
         $this->form->validate();
 
         $createDto = new CreateCompanyServiceDto(
-            title: $this->form->title,
             icon: $this->form->icon,
+            title: $this->form->title,
             description: $this->form->description,
             visible: $this->form->visible
         );
