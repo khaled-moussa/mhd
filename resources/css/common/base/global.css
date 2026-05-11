@@ -1,72 +1,108 @@
-/**
-  Global Styles
-  - Shared utilities and resets applied across the project
+/* 
+|-----------------------------
+| Global
+|-----------------------------
 */
 
-/* ================================
-   Reset & Base
-================================ */
 * {
-    @apply m-0 p-0 box-border scroll-smooth;
-    -webkit-tap-highlight-color: transparent;
-
-    /* Firefox Scrollbar */
-    scrollbar-width: 0.3rem;
-    scrollbar-color: theme("colors.gray.200");
+    scrollbar-width: none !important;
 }
 
-/* Chrome, Edge, Safari Scrollbar */
-*::-webkit-scrollbar {
-    @apply h-[0.3rem] w-[0.4rem] rounded-lg scroll-smooth;
+/* 
+|-----------------------------
+| Body
+|-----------------------------
+*/
+body {
+    @apply m-0 box-border min-h-fit min-w-[320px] scroll-smooth font-poppins;
+    @apply bg-background text-foreground;
 }
 
-*::-webkit-scrollbar-track {
-    @apply bg-transparent rounded-lg;
+body.modal-open {
+    @apply overflow-hidden;
 }
 
-*::-webkit-scrollbar-thumb {
-    @apply bg-gray-200 rounded-lg transition-all duration-150 ease-in-out;
+body.scroll-none {
+    @apply overflow-hidden;
 }
 
-/* RTL */
-*[dir="rtl"] {
-    @apply text-[0.95rem] font-normal;
+/* 
+|-----------------------------
+| Branding
+|-----------------------------
+*/
+.branding {
+    @apply flex items-center gap-2 shrink-0;
 }
 
-/* ================================
-   Elements
-================================ */
-img {
-    @apply select-none pointer-events-none;
+.brand-icon {
+    @apply w-[34px] h-[34px] rounded-lg flex items-center justify-center shrink-0;
+    @apply bg-background text-primary text-sm;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a {
-    @apply my-0;
+.brand-name {
+    @apply text-sm font-semibold text-background leading-tight tracking-tight;
 }
 
-p {
-    @apply leading-normal;
+.brand-name span:last-child {
+    @apply block font-light text-sm text-background/60 tracking-wide;
 }
 
-a:hover {
-    @apply no-underline;
+.brand-description {
+    @apply max-w-72 mb-7 my-3 text-base text-muted-foreground leading-1;
 }
 
-i {
-    @apply flex h-fit;
+/* 
+|-----------------------------
+| Sextion Header
+|-----------------------------
+*/
+
+.section-header {
+    @apply mb-4 flex flex-row items-center justify-between gap-8;
 }
 
-strong {
-    @apply font-semibold;
+.section-label {
+    @apply inline-flex items-center gap-1.5 mb-3;
+    @apply text-xs font-medium uppercase tracking-[0.08em] text-primary;
+    @apply before:content-['—'] before:block before:text-primary;
 }
 
-hr {
-    @apply text-dark/12 dark:text-light/12;
+.section-title {
+    @apply text-[clamp(28px,4vw,42px)] font-medium tracking-tight;
+    @apply leading-tight text-foreground;
+}
+
+.section-description {
+    @apply max-w-lg text-[15px] leading-relaxed text-foreground/50;
+}
+
+/* 
+|-----------------------------
+| Classes
+|-----------------------------
+*/
+.description {
+    @apply my-2.5 text-sm font-medium font-inter;
+    @apply text-current/60;
+}
+
+.empty {
+    @apply absolute left-1/2 mx-auto! p-3 text-base;
+    @apply -translate-x-1/2 transform rounded-xl;
+    @apply bg-current/5 backdrop-blur-xl;
+}
+
+.row {
+    @apply flex items-center justify-between gap-3;
+}
+
+.link-url {
+    @apply text-current/85 underline;
+}
+
+.text-gradient {
+    @apply font-semibold text-transparent;
+    @apply bg-gradient-to-r from-red-300/85 via-primary-400/75 to-primary-500/60;
+    @apply bg-clip-text;
 }

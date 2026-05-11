@@ -1,134 +1,128 @@
+import MessageToast from "@js/utils/message-toast";
+import { UI_EVENTS } from "@js/utils/enums";
+
 document.addEventListener("alpine:init", () => {
     Alpine.data("siteEditorComponent", () => ({
-        /* 
-        |-----------------------------
+        /*
+        |--------------------------------------------------------------------------
         | State
-        |----------------------------- 
+        |--------------------------------------------------------------------------
         */
+
         sections: {},
         order: [],
 
-        /* 
-        |-----------------------------
+        /*
+        |--------------------------------------------------------------------------
         | Init
-        |----------------------------- 
+        |--------------------------------------------------------------------------
         */
+
         init() {
             this.initState();
+            this.registerListeners();
         },
 
         initState() {
-            const allSections = this.$wire.get("landingSectionsData") || {};
+            const raw = this.$wire.get("sections") || {};
 
-            // Only keep safe editable keys
             this.sections = Object.fromEntries(
-                Object.entries(allSections).map(([key, section]) => {
-                    return [
-                        key,
-                        {
-                            key: key,
-                            title: section.title ?? "",
-                            description: section.description ?? "",
-                            visible: section.visible ?? true,
-                            order: section.order ?? 0,
-                            data: section.data ?? {},
-                        },
-                    ];
-                }),
+                Object.entries(raw).map(([key, section]) => [
+                    key,
+                    {
+                        key: section.key,
+                        title: section.title ?? "",
+                        description: section.description ?? "",
+                        visible: section.visible ?? true,
+                        order: section.order ?? 0,
+                        data: section.data ?? {},
+                    },
+                ]),
             );
 
-            // Set section order based on keys
             this.order = Object.keys(this.sections);
 
             this.initIframe();
-            this.initSortable();
-
-            // Watch for changes and update preview
-            this.$watch("sections", () => this.updatePreviewDebounced());
+            this.initWatch();
         },
 
-        // Iframe Previe
         initIframe() {
             this.$refs.iframPreview.addEventListener("load", () => {
                 this.updatePreviewDebounced();
+
                 setTimeout(() => {
                     this.$refs.iframeContainer.classList.remove("spinner");
                 }, 1000);
             });
         },
 
-        //  Drag & Drop
-        initSortable() {
-            const el = this.$refs.sectionsContainer;
-
-            Sortable.create(el, {
-                animation: 150,
-                handle: ".site-editor-inputs",
-                onStart: (evt) => evt.item.classList.add("dragging"),
-                onEnd: (evt) => {
-                    const newOrder = Array.from(el.children)
-                        .map((child) => child.dataset.key)
-                        .filter(Boolean);
-
-                    this.order = newOrder;
-
-                    const reordered = {};
-                    newOrder.forEach((key, index) => {
-                        reordered[key] = this.sections[key];
-                        reordered[key].order = index + 1;
-                    });
-
-                    this.sections = reordered;
-                    evt.item.classList.remove("dragging");
-                },
-            });
+        initWatch() {
+            this.$watch("sections", () => this.updatePreviewDebounced());
         },
 
-        /* 
-        |-------------------------------
-        |   Actions
-        |------------------------------- 
+        /*
+        |--------------------------------------------------------------------------
+        | Helpers
+        |--------------------------------------------------------------------------
         */
+
+        normalizeLink(value) {
+            if (!value) return "";
+
+            value = value.trim();
+
+            // Email → mailto:
+            if (value.includes("@") && !value.startsWith("mailto:")) {
+                return `mailto:${value}`;
+            }
+
+            // Phone → tel:
+            if (/^[0-9+\s()-]+$/.test(value) && !value.startsWith("tel:")) {
+                return `tel:${value.replace(/\s/g, "")}`;
+            }
+
+            return value;
+        },
+
+        /*
+        |--------------------------------------------------------------------------
+        | Actions
+        |--------------------------------------------------------------------------
+        */
+
         addLink(sectionKey) {
-            const socials = this.sections?.[sectionKey]?.data?.socials || [];
+            const socials = this.sections[sectionKey]?.data?.socials ?? [];
 
             this.sections[sectionKey].data.socials = [
                 ...socials,
-                { title: "", link: "" },
+                { icon: "", link: "" },
             ];
 
-            this.sections = JSON.parse(JSON.stringify(this.sections));
+            this.sections = { ...this.sections };
         },
 
-        // Delete link from footer
         deleteLink(sectionKey, index) {
             const socials = this.sections[sectionKey]?.data?.socials;
 
-            if (!Array.isArray(socials)) {
-                return;
-            }
+            if (!Array.isArray(socials)) return;
 
             socials.splice(index, 1);
-
-            this.sections = JSON.parse(JSON.stringify(this.sections));
+            this.sections = { ...this.sections };
         },
 
-        // Save and update landing sections
-        submit() {
-            if (!this.sections) {
-                return;
-            }
+        /*
+        |--------------------------------------------------------------------------
+        | Preview
+        |--------------------------------------------------------------------------
+        */
 
-            this.$wire.call("submit", this.sections, this.order);
-        },
-
-        // Realtime landing preview
         updatePreview() {
             const data = JSON.parse(JSON.stringify(this.sections));
+
             this.$refs.iframPreview.contentWindow.postMessage(
                 {
                     type: "site-editor-preview",
-                    data: data,
+                    data,
                 },
                 "*",
             );
@@ -137,5 +131,47 @@ document.addEventListener("alpine:init", () => {
         updatePreviewDebounced: Alpine.debounce(function () {
             this.updatePreview();
         }, 400),
+
+        /*
+        |--------------------------------------------------------------------------
+        | Submit
+        |--------------------------------------------------------------------------
+        */
+
+        submit() {
+            if (!this.sections) return;
+
+            const data = JSON.parse(JSON.stringify(this.sections));
+
+            // normalize links before sending to backend
+            Object.keys(data).forEach((sectionKey) => {
+                const section = data[sectionKey];
+
+                if (!section?.data?.socials) return;
+
+                section.data.socials = section.data.socials.map((social) => ({
+                    ...social,
+                    link: this.normalizeLink(social.link),
+                }));
+            });
+
+            this.$wire.call("submit", data, this.order);
+        },
+
+        /*
+        |--------------------------------------------------------------------------
+        | Events
+        |--------------------------------------------------------------------------
+        */
+
+        registerListeners() {
+            this.onSideUpdatedEvent();
+        },
+
+        onSideUpdatedEvent() {
+            this.$el.addEventListener(UI_EVENTS.SITE_UPDATED_EVENT, () => {
+                MessageToast("updated");
+            });
+        },
     }));
 });

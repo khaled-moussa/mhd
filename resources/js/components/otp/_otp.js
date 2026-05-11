@@ -1,7 +1,7 @@
-import { OTP_EVENTS, OTP_EXCEPTION, OTP_TIMER } from "../../utils/enums";
-import MessageToast from "../../utils/message-toast";
-import resetFormValidation from "../../utils/reset-form-validation";
+import { OTP_EVENTS, OTP_EXCEPTION, OTP_TIMER } from "@js/utils/enums";
 import { closeModal } from "../modal/_modal";
+import MessageToast from "@js/utils/message-toast";
+import resetFormValidation from "@js/common/form/reset-form-validation.js";
 import otpInput from "@js/common/form/otp.js";
 
 /* 
@@ -92,12 +92,14 @@ document.addEventListener("alpine:init", () => {
             }
 
             this.otpCodeInputElement.value = this.otpCode;
-            this.otpCodeInputElement.dispatchEvent(new Event("input", { bubbles: true }));
+            this.otpCodeInputElement.dispatchEvent(
+                new Event("input", { bubbles: true }),
+            );
         },
 
         destroy() {
             this.clearTimer();
-            
+
             this.resendLocked = false;
             this.otpCode = "";
 
@@ -145,43 +147,57 @@ document.addEventListener("alpine:init", () => {
         |----------------------------- 
         */
         listenToStartTimerEvent() {
-            window.addEventListener(OTP_EVENTS.START_TIMER_EVENT, ({ detail }) => {
-                this.modalId = detail?.modalId ?? null;
-                this.formId = detail?.formId ?? null;
-                this.startTimer(detail?.initialSeconds);
-            });
+            window.addEventListener(
+                OTP_EVENTS.START_TIMER_EVENT,
+                ({ detail }) => {
+                    this.modalId = detail?.modalId ?? null;
+                    this.formId = detail?.formId ?? null;
+                    this.startTimer(detail?.initialSeconds);
+                },
+            );
         },
 
         listenToDestroyTimerEvent() {
-            window.addEventListener(OTP_EVENTS.DESTROY_TIMER_EVENT, () => this.destroy());
+            window.addEventListener(OTP_EVENTS.DESTROY_TIMER_EVENT, () =>
+                this.destroy(),
+            );
         },
 
         listenToOtpInputEvent() {
-            window.addEventListener(OTP_EVENTS.OTP_INPUT_EVENT, ({ detail }) => {
-                this.otpCode = detail?.otp?.trim() ?? "";
-                this.setOtpCode();
-            });
+            window.addEventListener(
+                OTP_EVENTS.OTP_INPUT_EVENT,
+                ({ detail }) => {
+                    this.otpCode = detail?.otp?.trim() ?? "";
+                    this.setOtpCode();
+                },
+            );
         },
 
         listenToOtpErrorEvent() {
-            window.addEventListener(OTP_EVENTS.OTP_ERROR_EVENT, ({ detail }) => {
-                const exception = detail?.exception;
-                const message = detail?.message;
+            window.addEventListener(
+                OTP_EVENTS.OTP_ERROR_EVENT,
+                ({ detail }) => {
+                    const exception = detail?.exception;
+                    const message = detail?.message;
 
-                switch (exception) {
-                    case OTP_EXCEPTION.RESEND_LIMIT:
-                        this.resendLimitExceed();
-                        break;
+                    switch (exception) {
+                        case OTP_EXCEPTION.RESEND_LIMIT:
+                            this.resendLimitExceed();
+                            break;
 
-                    case OTP_EXCEPTION.VERIFY_LIMIT:
-                        MessageToast("warning", message);
-                        closeModal({ modalId: this.modalId, withEvent: true });
-                        break;
+                        case OTP_EXCEPTION.VERIFY_LIMIT:
+                            MessageToast("warning", message);
+                            closeModal({
+                                modalId: this.modalId,
+                                withEvent: true,
+                            });
+                            break;
 
-                    default:
-                        break;
-                }
-            });
+                        default:
+                            break;
+                    }
+                },
+            );
         },
 
         /* 
@@ -194,7 +210,9 @@ document.addEventListener("alpine:init", () => {
         },
 
         dispatchResetOtpInput() {
-            window.dispatchEvent(new CustomEvent(OTP_EVENTS.RESET_OTP_INPUT_EVENT));
+            window.dispatchEvent(
+                new CustomEvent(OTP_EVENTS.RESET_OTP_INPUT_EVENT),
+            );
         },
     }));
 });

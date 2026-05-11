@@ -10,14 +10,13 @@ use App\Domain\Contacts\Models\Contact;
 use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
 use App\Support\Enums\EventsEnum;
 use App\Support\Traits\HandlePaginationButtons;
-use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ContactsComponent extends Component
 {
-    use WithLivewireExceptionHandling;
+    // use WithLivewireExceptionHandling;
     use WithPagination;
     use HandlePaginationButtons;
 
@@ -28,11 +27,13 @@ class ContactsComponent extends Component
     */
     public function render()
     {
-        $this->initPaginationButtons($this->contacts);
+        $contacts = $this->contacts();
+
+        $this->initPaginationButtons($contacts);
 
         return view('admin_livewire::contacts.pages.contacts-component', [
-            'paginator'    => $this->contacts,
-            'contactsData' => $this->contactsData,
+            'paginator'    => $contacts,
+            'contactsData' => $this->contactsData($contacts),
         ]);
     }
 
@@ -41,18 +42,14 @@ class ContactsComponent extends Component
     | Computed Properties
     |-----------------------------
     */
-    #[Computed]
     public function contacts()
     {
         return app(GetContactsAction::class)->execute();
     }
 
-    #[Computed]
-    public function contactsData(): array
+    public function contactsData($contacts): array
     {
-        return ContactsResource::collection(
-            $this->contacts->items()
-        )->resolve();
+        return ContactsResource::collection($contacts->items())->resolve();
     }
 
     /*
@@ -63,10 +60,10 @@ class ContactsComponent extends Component
     public function viewContact(string $contactUuid): void
     {
         $contact = $this->getContact($contactUuid);
-        
+
         $contactData = (new ContactsResource($contact))->resolve();
 
-        $this->dispatchContactDataLoaded(data: $contactData);
+        $this->dispatchContactLoadedEvent($contactData);
     }
 
     public function deleteContact(string $contactUuid): void
@@ -76,11 +73,15 @@ class ContactsComponent extends Component
         app(DeleteContactAction::class)->execute($contact);
 
         // If current page becomes empty → go back
-        if ($this->contacts->count() === 0 && $this->currentPage > 1) {
+        if ($this->contacts()->count() === 0 && $this->currentPage > 1) {
             $this->previousPage();
         }
 
-        $this->dispatchContactDeleted();
+        if ($this->currentPage === 1) {
+            $this->resetPage();
+        }
+
+        $this->dispatchContactDeletedEvent();
     }
 
     /*
@@ -101,8 +102,7 @@ class ContactsComponent extends Component
     */
     private function getContact(string $contactUuid): ?Contact
     {
-        return app(GetContactByUuidAction::class)
-            ->execute($contactUuid);
+        return app(GetContactByUuidAction::class)->execute($contactUuid);
     }
 
     /*
@@ -110,12 +110,12 @@ class ContactsComponent extends Component
     | Dispatchers
     |-----------------------------
     */
-    private function dispatchContactDataLoaded(array $data): void
+    private function dispatchContactLoadedEvent(array $data): void
     {
         $this->dispatch(EventsEnum::CONTACT_LOADED_EVENT, data: $data);
     }
 
-    private function dispatchContactDeleted(): void
+    private function dispatchContactDeletedEvent(): void
     {
         $this->dispatch(EventsEnum::CONTACT_DELETED_EVENT);
     }

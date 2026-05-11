@@ -2,39 +2,58 @@
 
 namespace App\Domain\CompanyProjects\DTOs;
 
-use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
 use App\Domain\CompanyProjects\States\VisibilityStates\VisibleState;
+use App\Domain\CompanyProjects\States\VisibilityStates\NotVisibleState;
 
 class UpdateCompanyProjectDto
 {
-    /**
-     * Create a new DTO instance.
-     */
-    public function __construct(
-        public string  $uuid,
-        public string  $title,
-        public ?string $description = null,
-        public ?string $deliveredAt = null,
-        public ?float  $priceStart = null,
-        public ?string $address = null,
-        public ?string $location = null,
-        public bool  $visible = true,
-    ) {}
+    /*
+    |--------------------------------------------------------------------------
+    | DTO
+    |--------------------------------------------------------------------------
+    */
 
-    /**
-     * Convert the DTO to an array.
-     */
+    public function __construct(
+        public string $uuid,
+        public string $title,
+        public string $description,
+        public float $priceStart,
+        public string $address,
+        public bool $visible = true,
+        public ?string $location = null,
+        public ?string $deliveredAt = null,
+    ) {
+        $this->location    = $this->resolveNullable($this->location);
+        $this->deliveredAt = $this->resolveNullable($this->deliveredAt);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Transform to Array
+    |--------------------------------------------------------------------------
+    */
+
     public function toArray(): array
     {
-        return
-            [
-                'title'            => $this->title,
-                'description'      => $this->description,
-                'delivered_at'     => $this->deliveredAt,
-                'price_start'      => $this->priceStart,
-                'address'          => $this->address,
-                'location'         => $this->location,
-                'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
-            ];
+        return [
+            'title'        => $this->title,
+            'description'  => $this->description,
+            'price_start'  => $this->priceStart,
+            'address'      => $this->address,
+            'location'     => $this->location,
+            'delivered_at' => $this->deliveredAt,
+            'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
+        ];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
+
+    private function resolveNullable(?string $value): ?string
+    {
+        return blank($value) ? null : $value;
     }
 }

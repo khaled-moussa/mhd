@@ -1,21 +1,27 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.partials.layout-base')
 
-	<head>
-		@include('layouts.partials.head')
-	</head>
+{{-- Head --}}
+@push('head')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@endpush
 
-	<body class="loader">
-		{{-- Navbar --}}
-		@yield('navbar')
+{{-- Body --}}
+@section('body')
+    {{-- Navbar --}}
+    @include('layouts.partials.navbar.guest')
 
-		{{-- Main Content --}}
-		@yield('content')
+    {{-- Main Content --}}
+    <main class="content">
+        @yield('content')
+    </main>
 
-		{{-- Footer --}}
-		@yield('footer')
+    {{-- Footer --}}
+    @include('layouts.partials.footer.guest')
+@endsection
 
-		@include('layouts.partials.scripts')
-	</body>
-
-</html>
+{{-- Script --}}
+@push('script')
+    <script>
+        window.__ENUMS__ = @json($enums ?? []);
+    </script>
+@endpush

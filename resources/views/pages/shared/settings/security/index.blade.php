@@ -10,8 +10,7 @@
     @include('pages.shared.settings.security.partials.email-form-update-modal', [
         'modalId' => $modalId['UPDATE_EMAIL_MODAL'],
         'modalTitle' => 'Change email address',
-        'description' =>
-            'Enter a new email address for your account. You will receive a verification email to your current email address with a link to finalize the change.',
+        'description' => 'Enter a new email address for your account. You will receive a verification email to your current email address with a link to finalize the change.',
     ])
 @endpush
 
@@ -25,13 +24,13 @@
 @endpush
 
 {{-- Update two factor form modal --}}
-@push('setting-component')
+{{-- @push('setting-component')
     @include('pages.shared.settings.security.partials.two-factor-form-update-modal', [
         'modalId' => $modalId['UPDATE_TWO_FACTOR_MODAL'],
         'modalTitle' => 'Turn on 2-Step Verification',
         'description' => 'Prevent hackers from accessing your account with an additional layer of security.',
     ])
-@endpush
+@endpush --}}
 
 {{-- Delete account form modal --}}
 {{-- @push('setting-component')

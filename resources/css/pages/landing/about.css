@@ -1,0 +1,71 @@
+/* 
+|-----------------------------
+| About Section
+|-----------------------------
+*/
+.about-section {
+    @apply py-24;
+}
+
+.about-container {
+    @apply container mx-auto;
+}
+
+/* 
+|-----------------------------
+| About Layout
+|-----------------------------
+*/
+.about-layout {
+    @apply grid grid-cols-1 items-center gap-16 mt-14;
+    @apply lg:grid-cols-2 lg:gap-20;
+}
+
+/* 
+|-----------------------------
+| About Text
+|-----------------------------
+*/
+.about-content {
+    @apply flex flex-col gap-5;
+}
+
+.about-content p {
+    @apply text-[15px] leading-[1.85] text-foreground/55;
+}
+
+/* 
+|-----------------------------
+| About Stats
+|-----------------------------
+*/
+.about-stats {
+    @apply flex flex-col gap-4;
+}
+
+.about-card {
+    @apply flex items-center gap-5 p-6;
+    @apply bg-background rounded-2xl border border-foreground/10;
+}
+
+.about-number {
+    @apply min-w-[80px];
+    @apply text-[36px] font-medium tracking-tight leading-none text-primary;
+    @apply after:content-['+'];
+}
+
+.about-divider {
+    @apply w-px h-9 shrink-0 bg-foreground/10;
+}
+
+.about-info {
+    @apply flex flex-col;
+}
+
+.about-info strong {
+    @apply mb-0.5 text-[14px] font-medium text-foreground;
+}
+
+.about-info p {
+    @apply text-[13px] leading-snug text-foreground/50;
+}

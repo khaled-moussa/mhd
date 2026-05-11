@@ -10,7 +10,8 @@ class EnumExporter
     {
         return collect($enum::cases())
             ->mapWithKeys(
-                fn(BackedEnum $case) => [
+                fn(BackedEnum $case) =>
+                [
                     $case->name => $case->value,
                 ]
             )

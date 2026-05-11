@@ -1,0 +1,83 @@
+/* 
+|--------------------------------
+| Outlined Button
+|--------------------------------
+*/
+
+/* Base */
+.outlined-btn {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply h-9 px-4;
+    @apply rounded-sm;
+    @apply text-xs font-bold uppercase tracking-wider;
+    @apply bg-foreground/5 text-foreground/80;
+    @apply border border-foreground/10;
+    @apply cursor-pointer;
+    @apply transition-all! duration-300 ease-in-out;
+    @apply hover:bg-foreground/10;
+}
+
+/* Sizes */
+.outlined-btn.sm {
+    @apply h-9 px-3 text-xs;
+}
+
+.outlined-btn.md {
+    @apply h-10 px-4 text-sm;
+}
+
+.outlined-btn.lg {
+    @apply h-11 px-6 text-base;
+}
+
+.outlined-btn.xl {
+    @apply h-12 px-10 text-lg;
+    @apply max-w-72;
+}
+
+/* Layout */
+.outlined-btn.full {
+    @apply w-full;
+}
+
+.outlined-btn.left {
+    @apply me-auto my-5;
+}
+
+/* Variants */
+.outlined-btn.white {
+    @apply text-background border border-background/20;
+    @apply hover:bg-foreground/50;
+}
+
+.outlined-btn.danger {
+    @apply bg-primary-300 text-background!;
+    @apply hover:bg-primary-500;
+}
+
+.outlined-btn.icon {
+    @apply h-6 w-6 p-1;
+    @apply bg-background border  text-red-400! border-red-300;
+    @apply hover:bg-primary-300 hover:text-background!;
+}
+
+/* Focus */
+.outlined-btn:focus-visible {
+    @apply outline-none;
+    @apply ring-2 ring-primary ring-offset-2;
+}
+
+/* Disabled */
+.outlined-btn:disabled {
+    @apply opacity-50;
+    @apply pointer-events-none;
+}
+
+/* Spinner */
+.outlined-btn.spinner {
+    @apply bg-foreground/10;
+}
+
+.outlined-btn.danger.spinner{
+    @apply text-transparent! bg-primary-300!;
+}

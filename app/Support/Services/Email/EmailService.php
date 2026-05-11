@@ -2,41 +2,71 @@
 
 namespace App\Support\Services\Email;
 
-use App\Domain\Auth\Emails\VerifyEmailLinkRequestMail;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\URL;
+use App\Domain\Auth\Emails\VerifyEmailLinkRequestMail;
 
 class EmailService
 {
-    public function boot(): void
+    /*
+    |--------------------------------------------------------------------------
+    | Boot
+    |--------------------------------------------------------------------------
+    */
+
+    public static function boot(): void
     {
-        $this->customizeVerificationEmail();
-        $this->customizeVerificationUrl();
+        self::registerVerificationMail();
+        self::registerVerificationUrl();
     }
 
-    private function customizeVerificationEmail(): void
+    /*
+    |--------------------------------------------------------------------------
+    | Verification Mail
+    |--------------------------------------------------------------------------
+    */
+
+    private static function registerVerificationMail(): void
     {
         VerifyEmail::toMailUsing(
-            fn(object $notifiable, string $url) => (
-                new VerifyEmailLinkRequestMail(
-                    name: $notifiable->getFullName(),
-                    verificationLink: $url
-                ))->to($notifiable->getEmail())
+            fn (object $notifiable, string $url) =>
+                self::buildVerificationMail($notifiable, $url)
         );
     }
 
-    private function customizeVerificationUrl(): void
+    private static function buildVerificationMail(
+        object $notifiable,
+        string $url
+    ): VerifyEmailLinkRequestMail {
+        return (new VerifyEmailLinkRequestMail(
+            name: $notifiable->getFullName(),
+            verificationLink: $url,
+        ))->to($notifiable->getEmail());
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Verification URL
+    |--------------------------------------------------------------------------
+    */
+
+    private static function registerVerificationUrl(): void
     {
         VerifyEmail::createUrlUsing(
-            fn($notifiable) =>
-            URL::temporarySignedRoute(
-                'auth.verification.verify',
-                now()->addMinutes(60),
-                [
-                    'id'   => $notifiable->getUuid(),
-                    'hash' => sha1($notifiable->getEmailForVerification()),
-                ]
-            )
+            fn (object $notifiable): string =>
+                self::buildVerificationUrl($notifiable)
+        );
+    }
+
+    private static function buildVerificationUrl(object $notifiable): string
+    {
+        return URL::temporarySignedRoute(
+            'auth.verification.verify',
+            now()->addMinutes(60),
+            [
+                'id'   => $notifiable->getUuid(),
+                'hash' => sha1($notifiable->getEmailForVerification()),
+            ]
         );
     }
 }

@@ -1,6 +1,6 @@
 <form
     id="{{ $formId['CREATE_CONTACT_FORM'] }}"
-    x-data="contactFormCreateComponent"
+    x-data="createContactComponent"
     wire:submit.prevent="submit"
 >
     <div class="input-field">
@@ -46,9 +46,9 @@
         />
     </div>
 
-    <x-button.main
+    <x-button.primary
         label="Send Message"
-        class="form-button"
+        class="primary-btn-full"
         wire:target="submit"
         wire:loading.class="spinner"
     />

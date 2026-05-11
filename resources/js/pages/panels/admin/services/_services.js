@@ -1,10 +1,24 @@
-// External import
+/*
+|----------------------------------
+| External Modules
+|----------------------------------
+*/
 import ModalHandler from "@js/components/modal/modal-handler";
 
-// Alpine import
-import "./alpine/services-component.js"; // Parent Component
-import "./alpine/service-form-create-component.js";
-import "./alpine/service-form-update-component.js";
+/*
+|----------------------------------
+| Local Modules
+|----------------------------------
+*/
 
-// Run import
+import "./alpine/_services-component.js"; // Parent Component
+import "./alpine/view-service-component.js";
+import "./alpine/create-service-component.js";
+import "./alpine/update-service-component.js";
+
+/*
+|----------------------------------
+| Init
+|----------------------------------
+*/
 ModalHandler();

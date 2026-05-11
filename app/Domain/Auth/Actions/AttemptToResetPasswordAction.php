@@ -18,6 +18,6 @@ class AttemptToResetPasswordAction
 
         // Fired reset password email
         app(UserEmailRequestService::class)
-            ->resetPasswordRequest(user: $user);
+            ->resetPasswordRequest($user);
     }
 }

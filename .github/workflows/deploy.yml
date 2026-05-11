@@ -1,4 +1,4 @@
-name: Deploy MHD Project
+name: Deploy MHD to Production Server
 
 on:
   push:

@@ -2,8 +2,8 @@
 
 namespace App\Domain\CompanyProjects\Jobs;
 
-use App\Domain\CompanyProjects\Actions\AttemptToStoreBrochureAction;
-use App\Domain\CompanyProjects\Actions\AttemptToStoreImagesAction;
+use App\Domain\CompanyProjects\Actions\StoreCompanyProjectBrochureAction;
+use App\Domain\CompanyProjects\Actions\StoreCompanyProjectImagesAction;
 use App\Domain\CompanyProjects\Models\CompanyProject;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -25,17 +25,17 @@ class StoreCompanyProjectFilesJob implements ShouldQueue
     {
         // Store images
         if (!empty($this->tempImagesPaths)) {
-            app(AttemptToStoreImagesAction::class)->execute(
-                project: $this->companyProject,
-                tempImagesPaths: $this->tempImagesPaths
+            app(StoreCompanyProjectImagesAction::class)->execute(
+                $this->companyProject,
+                $this->tempImagesPaths
             );
         }
 
         // Store brochure (single file)
         if (!is_null($this->tempFileData)) {
-            app(AttemptToStoreBrochureAction::class)->execute(
-                project: $this->companyProject,
-                tempFileData: $this->tempFileData
+            app(StoreCompanyProjectBrochureAction::class)->execute(
+                $this->companyProject,
+                $this->tempFileData
             );
         }
     }

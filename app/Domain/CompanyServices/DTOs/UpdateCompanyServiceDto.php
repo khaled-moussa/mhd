@@ -26,12 +26,20 @@ class UpdateCompanyServiceDto
         return array_filter(
             [
                 'uuid'        => $this->uuid,
-                'icon'       => $this->icon,
+                'icon'        => $this->resolveIcon(),
                 'title'       => $this->title,
                 'description' => $this->description,
                 'visibility_state' => $this->visible ? VisibleState::class : NotVisibleState::class,
             ],
             fn($value) => ! is_null($value) && $value !== ''
         );
+    }
+
+
+    // Resolve icon
+    private function resolveIcon()
+    {
+        preg_match('/class=["\']([^"\']+)["\']/', $this->icon, $matches);
+        return $matches[1] ?? null;
     }
 }

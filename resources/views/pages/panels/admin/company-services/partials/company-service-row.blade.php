@@ -4,12 +4,18 @@
     <td data-label="Title">{{ $item['title'] }}</td>
     <td data-label="Description"> {{ $item['description'] }} </td>
 
+    <td data-label="Visible">
+        <div class="{{ $item['visible_text_color'] }}">
+            <i class="fi {{ $item['visible_icon'] }}"></i>
+        </div>
+    </td>
+
     {{-- Table row actions --}}
     <td data-label="Actions">
         <x-table.row-actions :index="$item['uuid']">
             {{-- View --}}
             <li class="table-row-actions__item">
-                <x-button.outline
+                <x-button.outlined
                     class="secondary"
                     label="View"
                     @click="viewCompanyService('{{ $item['uuid'] }}')"
@@ -20,7 +26,7 @@
 
             {{-- Edit --}}
             <li class="table-row-actions__item">
-                <x-button.outline
+                <x-button.outlined
                     class="secondary"
                     label="Edit"
                     @click="editCompanyService('{{ $item['uuid'] }}')"
@@ -31,8 +37,8 @@
 
             {{-- Delete --}}
             <li class="table-row-actions__item">
-                <x-button.outline
-                    class="danger secondary"
+                <x-button.outlined
+                    class="danger"
                     label="Delete"
                     @click="deleteCompanyService('{{ $item['uuid'] }}')"
                 >

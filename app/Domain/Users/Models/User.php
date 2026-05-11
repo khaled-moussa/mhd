@@ -2,6 +2,7 @@
 
 namespace App\Domain\Users\Models;
 
+use App\App\Web\Resources\Users\UsersResource;
 use App\Domain\Settings\Models\Setting;
 use App\Domain\Users\Observers\UserObserver;
 use App\Domain\Users\QueryBuilders\UserQueryBuilder;
@@ -14,7 +15,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\OneTimePasswords\Models\Concerns\HasOneTimePasswords;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\UseResource;
 
+#[UseResource(UsersResource::class)]
 #[ObservedBy([UserObserver::class])]
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -169,12 +172,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return PanelEnum::from($this->getPanelId());
     }
 
-    public function isAdmin(): bool
+    public function isAdminPanel(): bool
     {
         return $this->panel() === PanelEnum::ADMIN;
     }
 
-    public function isUser(): bool
+    public function isUserPanel(): bool
     {
         return $this->panel() === PanelEnum::USER;
     }

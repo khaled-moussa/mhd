@@ -1,88 +1,156 @@
-/* -------------------------------  
-   Dashboard Cards Grid Layout  
--------------------------------- */
+/* 
+|-------------------------------
+| Dashboard Cards Grid Layout
+|-------------------------------
+*/
 .dashboard-cards {
     @apply grid gap-5;
     @apply grid-cols-1 md:grid-cols-3;
 }
 
-/* -------------------------------  
-   Individual Dashboard Card  
--------------------------------- */
+
+/* 
+|-------------------------------
+| Individual Dashboard Card
+|-------------------------------
+*/
 .dashboard-card {
-    @apply w-full h-32 relative flex items-center gap-5;
-    @apply p-4 rounded-4xl border border-current/5 bg-main-dark;
+    @apply relative flex items-start gap-3;
+    @apply h-22 w-full p-5;
+    @apply rounded-md;
+    @apply border-1 border-foreground/8;
+    @apply bg-background;
+    @apply transition-all duration-200 ease-in-out;
+    @apply hover:-translate-y-0.5;
 }
 
-/* -------------------------------  
-   Card Icon  
--------------------------------- */
+
+/* 
+|-------------------------------
+| Card Icon
+|-------------------------------
+*/
 .dashboard-card-icon {
-    @apply grid place-items-center w-18 h-18 text-3xl;
-    @apply rounded-full bg-current/10;
+    @apply grid place-items-center;
+    @apply w-10 h-10;
+    @apply rounded-md;
+    @apply bg-primary/10;
+    @apply text-xl text-foreground;
 }
 
-/* -------------------------------  
-   Card Content  
--------------------------------- */
+
+/* 
+|-------------------------------
+| Card Content
+|-------------------------------
+*/
 .dashboard-card-content {
-    @apply flex items-center;
-    @apply text-[14px] font-medium text-current/75;
+    @apply flex flex-col justify-center;
+    @apply text-sm font-medium;
+    @apply text-current/70;
 }
 
 .dashboard-card-content h4 {
-    @apply text-base font-medium text-current/60;
+    @apply text-sm font-medium;
+    @apply text-current/50;
 }
 
-/* -------------------------------  
-   Card Main Value  
--------------------------------- */
+
+/* 
+|-------------------------------
+| Card Main Value
+|-------------------------------
+*/
 .dashboard-card-value {
-    @apply mt-2 text-xl font-bold text-current;
+    @apply mt-1;
+    @apply text-xl font-bold;
+    @apply text-current;
     @apply xl:text-2xl;
 }
 
-/* -------------------------------  
-   Overview Section  
--------------------------------- */
+
+/* 
+|-------------------------------
+| Overview Section
+|-------------------------------
+*/
 .overview {
-    @apply w-full h-fit my-5 lg:my-0 p-5 sticky top-[70px];
-    @apply rounded-xl bg-current/5 backdrop-blur-2xl;
+    @apply sticky top-[70px];
+    @apply w-full h-fit;
+    @apply p-5 my-5 lg:my-0;
+    @apply rounded-2xl;
+    @apply bg-current/5;
+    @apply backdrop-blur-2xl;
 }
 
 .overview-title {
-    @apply text-[16px] font-semibold mb-3;
+    @apply mb-4;
+    @apply text-base font-semibold;
 }
 
+
+/* 
+|-------------------------------
+| Overview Chart
+|-------------------------------
+*/
 .overview .chart-card {
-    @apply !bg-transparent border-b border-current/10 rounded-none !shadow-none;
+    @apply border-b border-current/10;
+    @apply rounded-none;
+    @apply !bg-transparent !shadow-none;
 }
 
 .overview .chart-wrapper {
-    @apply relative max-w-[250px] h-[320px] !mx-auto;
-    @apply md:max-w-[300px] lg:max-w-full;
+    @apply relative h-[320px];
+    @apply max-w-[250px] md:max-w-[300px] lg:max-w-full;
+    @apply !mx-auto;
 }
 
-/* -------------------------------  
-   Overview Cards  
--------------------------------- */
+
+/* 
+|-------------------------------
+| Overview Cards
+|-------------------------------
+*/
 .overview-cards {
-    @apply flex flex-col gap-10 my-8;
+    @apply flex flex-col gap-6;
+    @apply my-8;
 }
 
 .overview-card {
-    @apply flex items-center gap-3 w-full h-fit rounded-2xl;
+    @apply flex items-center gap-3;
+    @apply w-full;
+    @apply p-3;
+    @apply rounded-xl;
+    @apply transition-all duration-200 ease-in-out;
+    @apply hover:bg-current/5;
 }
 
+
+/* 
+|-------------------------------
+| Overview Card Icon
+|-------------------------------
+*/
 .overview-card-icon {
-    @apply grid place-items-center w-11 h-11 text-xl;
-    @apply rounded-xl bg-current/10;
+    @apply grid place-items-center;
+    @apply w-10 h-10;
+    @apply rounded-lg;
+    @apply bg-primary/10;
+    @apply text-primary text-lg;
 }
 
+
+/* 
+|-------------------------------
+| Overview Card Content
+|-------------------------------
+*/
 .overview-card-title {
-    @apply text-base font-bold;
+    @apply text-sm font-semibold;
 }
 
 .overview-card-description {
-    @apply text-xs font-light;
+    @apply text-xs;
+    @apply text-current/60;
 }

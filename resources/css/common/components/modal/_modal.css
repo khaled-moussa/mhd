@@ -1,3 +1,8 @@
+/* 
+|-----------------------------
+| Base Modal
+|-----------------------------
+*/
 .modal {
     @apply hidden;
 }
@@ -7,122 +12,195 @@
 }
 
 .modal-overlay {
-    @apply fixed inset-0 z-[170] flex items-center justify-center bg-black/60;
+    @apply fixed inset-0 z-[170];
+    @apply flex items-center justify-center p-4;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
+/* 
+|-----------------------------
+| Container
+|-----------------------------
+*/
 .modal-container {
-    @apply box-border flex max-h-[98vh] max-w-lg min-w-[30%] flex-col gap-4 overflow-y-auto rounded p-8;
-    @apply bg-light dark:bg-main-dark;
-    @apply max-sm:min-w-[95%];
+    @apply relative flex flex-col w-full overflow-hidden;
+    @apply bg-background rounded-2xl drop-shadow-xl;
+    @apply max-h-[90vh] max-w-lg;
+    @apply max-sm:max-w-[95vw];
 }
 
+/* 
+|-----------------------------
+| Sizes
+|-----------------------------
+*/
 .modal-container.sm {
-    @apply max-w-[70vw];
-    @apply lg:max-w-[40vw];
-    @apply xl:max-w-[30vw];
+    @apply max-w-sm;
+}
+
+.modal-container.md {
+    @apply max-w-lg;
 }
 
 .modal-container.lg {
-    @apply max-w-[80vw];
-    @apply lg:max-w-[40vw];
-    @apply xl:max-w-[30vw];
+    @apply max-w-xl;
 }
 
 .modal-container.xl {
-    @apply w-[90vw] max-w-full;
-    @apply md:w-[60vw];
+    @apply max-w-[860px] w-full;
 }
 
+/* 
+|-----------------------------
+| Header
+|-----------------------------
+*/
 .modal-header {
-    @apply border-dark/5 flex items-center justify-between border-b border-solid pb-2;
+    @apply flex items-start justify-between;
+    @apply px-6 pt-5 pb-0;
+}
+
+.modal-header-left {
+    @apply flex flex-col;
+}
+
+.modal-eyebrow {
+    @apply text-[10px] font-medium text-foreground/35 tracking-[0.08em] uppercase mb-1;
 }
 
 .modal-title {
-    @apply my-0 text-base leading-none font-semibold;
-    @apply text-dark dark:text-light;
+    @apply text-[17px] font-semibold text-foreground leading-tight my-0;
 }
 
+.modal-close-btn {
+    @apply w-7 h-7 p-1 flex items-center justify-center shrink-0 mt-0.5;
+    @apply rounded-lg border border-foreground/20 bg-transparent cursor-pointer;
+    @apply transition-colors duration-150 hover:bg-foreground/20;
+    @apply ml-auto;
+}
+
+.modal-close-btn::before {
+    content: '✕';
+    @apply text-sm text-foreground/50;
+}
+
+/* 
+|-----------------------------
+| Divider
+|-----------------------------
+*/
+.modal-divider {
+    @apply h-px bg-foreground/5 mx-6 mt-4;
+}
+
+/* 
+|-----------------------------
+| Description
+|-----------------------------
+*/
 .modal-description {
-    @apply mb-5 !text-sm !font-light !text-current/70 !break-words !whitespace-pre-line;
-    @apply text-dark dark:text-light;
+    @apply px-6;
+    @apply text-sm text-foreground/45 leading-relaxed;
 }
 
-.modal-close {
-    @apply !p-2 !px-3;
-}
-
-.modal-header .modal-close:before {
-    @apply content-['\2715'];
-}
+/* 
+|-----------------------------
+| Content / Body
+|-----------------------------
+*/
 .modal-content {
-    @apply bg-light dark:bg-main-dark;
-}
-
-.modal-footer {
-    @apply flex items-center justify-end gap-2;
-}
-
-.modal[aria-hidden="false"] .modal-overlay {
-    animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
-}
-
-.modal[aria-hidden="false"] .modal-container {
-    animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
-}
-
-.modal[aria-hidden="true"] .modal-overlay {
-    animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
-}
-
-.modal[aria-hidden="true"] .modal-container {
-    animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
-}
-
-.modal .modal-container,
-.modal .modal-overlay {
-    will-change: transform;
+    @apply px-6 py-5 overflow-y-auto flex-1;
 }
 
 .modal-content > iframe {
     @apply min-h-[80vh];
 }
 
-.modal .modal-actions {
-    @apply flex items-center justify-end gap-2 mt-7;
+/* 
+|-----------------------------
+| Detail Grid (for view modals)
+|-----------------------------
+*/
+.modal-details {
+    @apply flex flex-col gap-3 flex-1;
 }
 
-@keyframes mmfadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+.modal-grid {
+    @apply grid grid-cols-2 gap-3;
 }
 
-@keyframes mmfadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+.modal-item {
+    @apply px-3 py-2.5 rounded-[10px];
+    @apply bg-foreground/10 border border-foreground/20;
 }
 
-@keyframes mmslideIn {
-    from {
-        transform: translateY(15%);
-    }
-    to {
-        transform: translateY(0);
-    }
+.modal-item.full {
+    @apply col-span-2;
 }
 
-@keyframes mmslideOut {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-10%);
-    }
+.modal-label {
+    @apply mb-1 text-[10px] font-medium uppercase tracking-[0.06em] text-foreground/40;
+}
+
+.modal-value {
+    @apply text-[13px] font-medium text-foreground;
+}
+
+/* 
+|-----------------------------
+| Footer / Actions
+|-----------------------------
+*/
+.modal-footer,
+.modal-actions {
+    @apply flex items-center justify-end gap-2;
+    @apply px-6 pb-5 pt-3;
+}
+
+/* 
+|-----------------------------
+| Animations
+|-----------------------------
+*/
+.modal .modal-container,
+.modal .modal-overlay {
+    will-change: transform;
+}
+
+.modal[aria-hidden="false"] .modal-overlay {
+    animation: modal-fade-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal[aria-hidden="false"] .modal-container {
+    animation: modal-slide-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal[aria-hidden="true"] .modal-overlay {
+    animation: modal-fade-out 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal[aria-hidden="true"] .modal-container {
+    animation: modal-slide-out 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modal-fade-in {
+    from { opacity: 0 }
+    to   { opacity: 1 }
+}
+
+@keyframes modal-fade-out {
+    from { opacity: 1 }
+    to   { opacity: 0 }
+}
+
+@keyframes modal-slide-in {
+    from { transform: translateY(12px); opacity: 0 }
+    to   { transform: translateY(0);    opacity: 1 }
+}
+
+@keyframes modal-slide-out {
+    from { transform: translateY(0);    opacity: 1 }
+    to   { transform: translateY(-8px); opacity: 0 }
 }

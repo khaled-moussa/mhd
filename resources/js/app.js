@@ -1,52 +1,65 @@
 import "./bootstrap";
 
-import initTheme from "./common/theme/_theme";
+/* 
+|-------------------------------
+| Components
+|-------------------------------
+*/
 import initSidebarCollapse from "./components/sidebar/sidebar-collapse.js";
-import globalException from "./exceptions/global-exception.js";
 import { initMicroModal } from "./components/modal/_modal.js";
 import { initFlowbite } from "flowbite";
 
 /* 
-|------------------------------- 
-| Meta Glob 
-|------------------------------- 
+|-------------------------------
+| Common
+|-------------------------------
+*/
+import "@js/common/form/password.js";
+import resetFormValidation from "@js/common/form/reset-form-validation.js";
+import globalException from "./exceptions/global-exception.js";
+import initPageOnLoad from "./common/loader/_loader.js";
+
+/* 
+|-------------------------------
+| Assets
+|-------------------------------
 */
 import.meta.glob([
-    "../assets/images/**", // include all images
-    "../assets/videos/**", // include all videos
+    "../assets/images/**",
+    "../assets/videos/**",
 ]);
 
 /* 
-|------------------------------- 
-| Helpers 
-|------------------------------- 
+|-------------------------------
+| Initializers
+|-------------------------------
 */
-const initCommonScripts = () => {
+const initCommon = () => {
     initMicroModal();
-    initTheme();
-    globalException();
 };
 
-const initSidebarScripts = () => {
-    initSidebarCollapse();
-};
-
-const initUIComponents = () => {
+const initUI = () => {
     initFlowbite();
 };
 
+const initCommonScripts = () => {
+    initSidebarCollapse();
+    initPageOnLoad();
+    resetFormValidation();
+};
+
 /* 
-|------------------------------- 
-| Events 
-|------------------------------- 
+|-------------------------------
+| Bootstrap Events
+|-------------------------------
 */
 window.addEventListener("DOMContentLoaded", () => {
-    initCommonScripts();
-    initUIComponents();
+    initCommon();
+    initUI();
 });
 
 document.addEventListener("livewire:navigated", () => {
+    initCommon();
+    initUI();
     initCommonScripts();
-    initSidebarScripts();
-    initUIComponents();
 });

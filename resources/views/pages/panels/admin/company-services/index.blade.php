@@ -1,44 +1,24 @@
-{{-- Use main layout --}}
+{{-- Main Layout --}}
 @extends('layouts.app')
 
-{{-- Page title --}}
+{{-- Page Title --}}
 @section('title', 'Dashboard | Services')
 
-{{-- Page assets --}}
+{{-- Page Assets --}}
 @push('head')
-    {{ Vite::adminStyle('services/_services.css') }}
-    {{ Vite::adminScript('services/_services.js') }}
+    {{ Vite::style('panels/admin/services/_services.css') }}
+    {{ Vite::script('panels/admin/services/_services.js') }}
 @endpush
 
 {{-- Content --}}
-@section('component')
+@section('content')
     {{-- Page header --}}
     <x-header.page title="Services">
-        <x-button.main
+        <x-button.primary
             label="Create Service"
             :data-custom-open="$modalId['CREATE_COMPANY_SERVICE_MODAL']"
         />
     </x-header.page>
 
-    <div
-        x-data="servicesComponent"
-        class="services"
-    >
-        {{-- Services table livewire component --}}
-        <livewire:panels.admin.company-services.pages.company-services-component />
-
-        {{-- Create service modal --}}
-        @include('admin::company-services.partials.company-service-form-create', [
-            'modalId' => $modalId['CREATE_COMPANY_SERVICE_MODAL'],
-            'modalTitle' => 'Create Service',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, rem!',
-        ])
-
-        {{-- Update service modal --}}
-        @include('admin::company-services.partials.company-service-form-update', [
-            'modalId' => $modalId['UPDATE_COMPANY_SERVICE_MODAL'],
-            'modalTitle' => 'Update Service',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, rem!',
-        ])
-    </div>
+    @include('admin::company-services.partials.company-service-body')
 @endsection

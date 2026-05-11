@@ -1,25 +1,12 @@
 export default function initSidebarCollapse() {
-    const sidebar = document.getElementById("sidebar");
+    const appShell   = document.querySelector('.app-shell');
+    const expandBtns = document.querySelectorAll('#sidebar-expand-btn, #navbar-side-expand-btn');
 
-    if (!sidebar) {
-        return;
-    }
+    if (!appShell) return;
 
-    const sidebarExpandBtn = document.getElementById("sidebar-expand-btn");
-
-    const navbarSideExpandBtn = document.getElementById(
-        "navbar-side-expand-btn",
-    );
-    
-    const appShell = document.querySelector(".app-shell");
-
-    sidebarExpandBtn.addEventListener("click", () => {
-        appShell.classList.toggle("collapsed");
-        sidebar.classList.toggle("collapsed");
-    });
-
-    navbarSideExpandBtn.addEventListener("click", () => {
-        appShell.classList.toggle("collapsed");
-        sidebar.classList.toggle("collapsed");
+    expandBtns.forEach(btn => {
+        btn?.addEventListener('click', () => {
+            appShell.classList.toggle('collapsed');
+        });
     });
 }

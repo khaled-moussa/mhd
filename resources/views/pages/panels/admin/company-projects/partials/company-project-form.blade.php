@@ -1,10 +1,13 @@
-{{-- Uploaded images --}}
-<div class="upload-section upload-section--images">
+@props(['prefix'])
+
+{{-- Uploaded Images --}}
+<div class="upload-section upload-section-images">
+
     <x-form.upload
-        input-id="image-input"
-        drag-id="image-drag-area"
-        description="'Drag & drop images here, or click to select images"
-        accept="jpg, jpeg, png, webp, jpeg, gif"
+        input-id="{{ $prefix }}-image-input"
+        drag-id="{{ $prefix }}-image-drag-area"
+        description="Drag & drop images here, or click to select images"
+        accept="jpg,jpeg,png,webp,gif"
         :multiple="true"
         error="form.images*"
         @click="resetFileBeforeUpload($event)"
@@ -12,12 +15,17 @@
 
     <div class="uploaded-files">
         <div class="file-wrapper">
+
             <template
                 x-for="image in images"
                 :key="image.id"
             >
-                <div class="file-upload">
-                    {{-- Image Preview --}}
+                <div
+                    class="file-upload"
+                    :class="image.status"
+                >
+
+                    {{-- Thumbnail --}}
                     <img
                         :src="image.preview"
                         class="file-preview"
@@ -28,66 +36,90 @@
                         <p
                             class="file-name"
                             x-text="image.name"
-                        ></p>
+                        >
+                        </p>
+
+                        <div class="file-meta">
+                            <span
+                                class="file-size"
+                                x-text="image.size"
+                            >
+                            </span>
+
+                            <span
+                                class="file-status"
+                                :class="image.status"
+                            >
+                                <div class="file-status-dot"></div>
+
+                                <span x-text="image.status"></span>
+                            </span>
+                        </div>
 
                         {{-- Progress --}}
                         <span
                             class="progress-text"
-                            x-text="image.progress"
-                        ></span>
+                            x-text="`${image.progress}%`"
+                        >
+                        </span>
 
                         <div class="progress-bar">
                             <div
                                 class="progress"
                                 :style="`width: ${image.progress}%`"
-                            ></div>
+                            >
+                            </div>
                         </div>
+                    </div>
 
-                        {{-- Status --}}
-                        <p
-                            class="badge"
-                            x-text="image.status"
-                        ></p>
+                    <div class="file-actions">
 
-                        {{-- Cancel --}}
-                        <x-button.outline
-                            class="cancel-btn danger"
-                            label="Cancel"
+                        <x-button.outlined
+                            class="sm icon danger"
                             x-show="!isEditing"
                             @click="cancelImage(image.id)"
-                        />
+                        >
+                            <i class="fi fi-rr-cross-small"></i>
+                        </x-button.outlined>
 
-                        {{-- Remove --}}
-                        <x-button.outline
-                            class="cancel-btn danger"
-                            label="Remove"
+                        <x-button.outlined
+                            class="sm icon"
                             x-show="isEditing"
                             @click="removeImage(image.id)"
-                        />
+                        >
+                            <i class="fi fi-rr-trash"></i>
+                        </x-button.outlined>
+
                     </div>
+
                 </div>
             </template>
 
-            {{-- Add more files --}}
+            {{-- Add more --}}
             <div
                 class="add-files"
                 x-show="images.length > 0"
                 @click="imageInputElement.click()"
             >
-                <i class="fi fi-rr-cloud-upload"></i>
-                <p class="description">Add more images</p>
+                <div class="add-files-icon">
+                    <i class="fi fi-rr-cloud-upload"></i>
+                </div>
+
+                <p>Add more images</p>
             </div>
+
         </div>
     </div>
 </div>
 
-{{-- Uploaded file --}}
-<div class="upload-section upload-section--file">
+{{-- Uploaded File --}}
+<div class="upload-section upload-section-file">
+
     <x-form.upload
-        input-id="file-input"
-        drag-id="file-drag-area"
-        description="'Drag & drop brochure here, or click to select brochure"
-        accept="pdf, doc, docx"
+        input-id="{{ $prefix }}-file-input"
+        drag-id="{{ $prefix }}-file-drag-area"
+        description="Drag & drop brochure here, or click to select brochure"
+        accept="pdf,doc,docx"
         :multiple="false"
         error="form.file"
         @click="resetFileBeforeUpload($event)"
@@ -95,62 +127,92 @@
 
     <div class="uploaded-files">
         <div class="file-wrapper">
+
             <template x-if="file">
-                <div class="file-upload">
-                    {{-- Image Preview --}}
-                    <a
-                        :href="file.preview"
-                        class="file-preview"
-                    >
-                    </a>
+
+                <div
+                    class="file-upload"
+                    :class="file.status"
+                >
+
+                    {{-- Thumbnail --}}
+                    <i class="fi fi-rr-document file-preview-icon"></i>
 
                     <div class="file-info">
+
                         <p
                             class="file-name"
                             x-text="file.name"
-                        ></p>
+                        >
+                        </p>
+
+                        <div class="file-meta">
+
+                            <span
+                                class="file-size"
+                                x-text="file.size"
+                            >
+                            </span>
+
+                            <span
+                                class="file-status"
+                                :class="file.status"
+                            >
+                                <div class="file-status-dot"></div>
+
+                                <span x-text="file.status"></span>
+                            </span>
+
+                        </div>
 
                         {{-- Progress --}}
                         <span
                             class="progress-text"
-                            x-text="file.progress"
-                        ></span>
+                            x-text="`${file.progress}%`"
+                        >
+                        </span>
 
                         <div class="progress-bar">
                             <div
                                 class="progress"
                                 :style="`width: ${file.progress}%`"
-                            ></div>
+                            >
+                            </div>
                         </div>
 
-                        {{-- Status --}}
-                        <p
-                            class="badge"
-                            x-text="file.status"
-                        ></p>
-
-                        {{-- Cancel --}}
-                        <x-button.outline
-                            class="cancel-btn danger"
-                            label="Cancel"
-                            x-show="!isEditing"
-                            @click="cancelFile(file)"
-                        />
-
-                        {{-- Remove --}}
-                        <x-button.outline
-                            class="cancel-btn danger"
-                            label="Remove"
-                            x-show="isEditing"
-                            @click="removeFile(file)"
-                        />
                     </div>
+
+                    {{-- File Actions --}}
+                    <div class="file-actions">
+
+                        <x-button.outlined
+                            class="sm icon danger"
+                            x-show="!isEditing"
+                            @click="cancelFile()"
+                        >
+                            <i class="fi fi-rr-cross-small"></i>
+                        </x-button.outlined>
+
+                        <x-button.outlined
+                            class="sm icon"
+                            x-show="isEditing"
+                            @click="removeFile()"
+                        >
+                            <i class="fi fi-rr-trash"></i>
+                        </x-button.outlined>
+
+                    </div>
+
                 </div>
+
             </template>
+
         </div>
     </div>
 </div>
 
+
+{{-- Inputs --}}
 <x-form.input
     type="text"
     label="Title"
@@ -168,7 +230,8 @@
     minlength="10"
 />
 
-<div class="project__form-row">
+{{-- Row --}}
+<div class="project-form-row">
     <x-form.input
         type="date"
         label="Delivered At"
@@ -184,7 +247,8 @@
     />
 </div>
 
-<div class="project__form-row">
+{{-- Row --}}
+<div class="project-form-row">
     <x-form.input
         label="Address"
         wire:model="form.address"
@@ -200,7 +264,8 @@
     />
 </div>
 
-<x-form.toggle
+{{-- Checkbox --}}
+<x-form.checkbox
     label="Visible"
     wire:model="form.visible"
     error="form.visible"

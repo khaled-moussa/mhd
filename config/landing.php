@@ -15,7 +15,13 @@ return [
             'url' => '#hero',
             'visible' => true,
             'order' => 1,
-            'data' => [],
+            'data' => [
+                'title' => [
+                    'light'   => 'Find Your',
+                    'main'    => 'Dream',
+                    'accent'  => 'Property',
+                ]
+            ],
         ],
 
         /*
@@ -52,7 +58,7 @@ return [
             'title' => 'Our Services',
             'description' => 'We provide professional real estate solutions to help you find, manage, and grow your investments with confidence..',
             'url' => '#services',
-            'visible' => true,
+            'visible' => false,
             'order' => 3,
             'data' => [
                 [
@@ -105,42 +111,81 @@ return [
             'title' => 'Our Projects',
             'description' => 'Explore some of our recent real estate developments — from modern apartments to commercial complexes.',
             'url' => '#projects',
-            'visible' => true,
+            'visible' => false,
             'order' => 4,
+
             'data' => [
                 [
                     'uuid' => 'pr-100',
-                    'img' => 'hero-bg.jpg',
+                    'cover' => 'https://picsum.photos/900/650?random=1',
+
+                    'images' => [
+                        'https://picsum.photos/900/650?random=1',
+                        'https://picsum.photos/900/650?random=2',
+                        'https://picsum.photos/900/650?random=3',
+                    ],
+
                     'title' => 'Luxury Apartments',
-                    'delivered' => 'Augest 2025',
-                    'address' => 'Egypt',
-                    'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero delectus, mollitia cupiditate beatae modi ratione consequuntur quis veritatis deleniti accusamus, incidunt, exercitationem architecto. Omnis dolor a veniam quibusdam voluptate modi sunt exercitationem magni totam voluptatem harum quisquam, voluptates consectetur. Nostrum dolorum assumenda, ullam non rem vitae nisi impedit officia nobis mollitia aliquid dolores obcaecati modi libero veritatis iusto saepe ratione dicta quisquam accusantium repellat distinctio quas? Maxime provident animi doloribus neque cum quod quo ratione, aperiam non. Eius unde ipsam ipsum saepe similique ex obcaecati culpa distinctio magni inventore, sed quasi sit nesciunt impedit error fugit nulla ab quia ut.',
+                    'price' => '25000',
+                    'delivered' => 'August 2025',
+                    'address' => 'New Cairo, Egypt',
+                    'location' => 'https://www.google.com/maps?q=New+Cairo,Egypt&output=embed',
+                    'description' => 'Vero delectus, mollitia cupiditate beatae modi ratione consequuntur quis veritatis deleniti accusamus, incidunt, exercitationem architecto.',
                 ],
+
                 [
                     'uuid' => 'pr-101',
-                    'img' => 'hero-bg.jpg',
+                    'cover' => 'https://picsum.photos/900/650?random=4',
+
+                    'images' => [
+                        'https://picsum.photos/900/650?random=4',
+                        'https://picsum.photos/900/650?random=5',
+                        'https://picsum.photos/900/650?random=6',
+                    ],
+
                     'title' => 'Downtown Offices',
-                    'delivered' => 'Augest 2025',
-                    'address' => 'Egypt',
+                    'price' => '30000',
+                    'delivered' => 'August 2025',
+                    'address' => 'Nasr City, Egypt',
+                    'location' => 'https://www.google.com/maps?q=Nasr+City,Egypt&output=embed',
                     'description' => 'A state-of-the-art business hub designed for growing enterprises and startups.',
                 ],
+
                 [
                     'uuid' => 'pr-102',
-                    'img' => 'hero-bg.jpg',
+                    'cover' => 'https://picsum.photos/900/650?random=7',
+                    'images' => [
+                        'https://picsum.photos/900/650?random=7',
+                        'https://picsum.photos/900/650?random=8',
+                        'https://picsum.photos/900/650?random=9',
+                    ],
+
                     'title' => 'Green Villas',
-                    'delivered' => 'Augest 2025',
-                    'address' => 'Egypt',
+                    'price' => '40000',
+                    'delivered' => 'August 2025',
+                    'address' => 'Sheikh Zayed, Egypt',
+                    'location' => 'https://www.google.com/maps?q=Sheikh+Zayed,Egypt&output=embed',
                     'description' => 'Eco-friendly luxury villas surrounded by landscaped gardens and open spaces.',
                 ],
+
                 [
-                    'id' => 'pr-103',
-                    'img' => 'hero-bg.jpg',
+                    'uuid' => 'pr-103',
+                    'cover' => 'https://picsum.photos/900/650?random=10',
+
+                    'images' => [
+                        'https://picsum.photos/900/650?random=11',
+                        'https://picsum.photos/900/650?random=12',
+                        'https://picsum.photos/900/650?random=13',
+                    ],
+
                     'title' => 'Skyline Tower',
-                    'delivered' => 'Augest 2025',
-                    'address' => 'Egypt',
+                    'price' => '50000',
+                    'delivered' => 'August 2025',
+                    'address' => '6th October, Egypt',
+                    'location' => 'https://www.google.com/maps?q=6th+October+City,Egypt&output=embed',
                     'description' => 'A high-rise residential tower redefining modern urban living with breathtaking views.',
                 ],
-            ]
+            ],
         ],
 
         /*
@@ -172,29 +217,6 @@ return [
             'order' => null,
             'data' => [
                 'socials' => [
-                    [
-                        'label' => 'Facebook',
-                        'icon' => 'fi-brands-facebook',
-                        'link' => 'https://facebook.com/',
-                    ],
-                    [
-                        'label' => 'Instagram',
-                        'icon' => 'fi-brands-instagram',
-                        'link' => 'https://instagram.com/',
-                    ],
-                    [
-                        'label' => 'LinkedIn',
-                        'icon' => 'fi-brands-linkedin',
-                        'link' => 'https://linkedin.com/in/',
-                    ],
-                    [
-                        'label' => 'X',
-                        'icon' => 'fi-brands-twitter-alt-circle',
-                        'link' => 'https://x.com/',
-                    ],
-                ],
-
-                'company' => [
                     [
                         'label' => 'Facebook',
                         'icon' => 'fi-brands-facebook',

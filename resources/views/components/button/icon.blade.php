@@ -1,22 +1,32 @@
 @props([
     'type' => 'button',
     'label' => null,
-    'icon' => null,
+    'disabled' => false,
 ])
 
 <button
     type="{{ $type }}"
-    {{ $attributes->whereStartsWith('id') }}
-    {{ $attributes->whereStartsWith('class') }}
-    {{ $attributes->whereStartsWith('@click') }}
->
-    {{-- Icon --}}
-    <i class="{{ $icon }}"></i>
 
+    {{-- Core Attributes --}}
+    id="{{ $attributes->get('id') }}"
+    @class(['', $attributes->get('class')])
+
+	{{-- JS / Alpine / Livewire --}}
+    {{ $attributes->whereStartsWith('data') }}
+    {{ $attributes->whereStartsWith('wire') }}
+    {{ $attributes->whereStartsWith('x-') }}
+    {{ $attributes->whereStartsWith('@click') }}
+    {{ $attributes->whereStartsWith('onclick') }}
+    
+    @disabled($disabled)
+>
     {{-- Label --}}
     @if ($label)
-        <span>
-            {{ $label }}
-        </span>
+        {{ $label }}
     @endif
+
+	{{-- Slot (icons, buttons, etc.) --}}
+    {{ $slot }}
 </button>
+
+

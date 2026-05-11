@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware([
     'auth',
     'verified',
-    'two-factor',
-    'panel:admin',
 ])
     ->prefix('admin')
     ->as('admin.')
@@ -29,7 +27,7 @@ Route::middleware([
         | Dashboard
         |--------------------------------------------------------------------------
         */
-        Route::get('dashboard', DashboardController::class)
+        Route::get('/', DashboardController::class)
             ->name('dashboard');
 
         /*
@@ -63,6 +61,7 @@ Route::middleware([
         */
         Route::get('contacts', ContactController::class)
             ->name('contacts.index');
+            
         /*
         |--------------------------------------------------------------------------
         | Shared Admin Routes

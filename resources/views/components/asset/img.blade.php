@@ -5,9 +5,9 @@
 ])
 
 <div {{ $attributes->whereStartsWith('class') }}>
-	<img
-		id="{{ $id }}"
-		src="{{ Vite::image("{$folder}/{$img}") }}"
-		alt="{{ $img }}"
-	>
+    <img
+        id="{{ $id }}"
+        src="{{ Vite::image("{$folder}/{$img}") }}"
+        alt="{{ $img }}"
+    >
 </div>

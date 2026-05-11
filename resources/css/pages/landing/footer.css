@@ -1,0 +1,96 @@
+/* 
+|-------------------------------
+| Footer
+|-------------------------------
+*/
+.footer {
+    @apply pt-10 pb-0 bg-foreground/90;
+}
+
+.footer-container {
+    @apply container mx-auto;
+}
+
+/* 
+|-------------------------------
+| Footer Grid
+|-------------------------------
+*/
+.footer-grid {
+    @apply grid grid-cols-1 gap-12 pb-10;
+    @apply border-b border-foreground/10;
+    @apply md:grid-cols-2;
+    @apply lg:grid-cols-[1.8fr_1fr_1fr];
+}
+
+/* 
+|-------------------------------
+| Branding
+|-------------------------------
+*/
+.footer-brand {
+    @apply flex flex-col gap-5;
+}
+
+/* 
+|-------------------------------
+| Socials
+|-------------------------------
+*/
+.footer-socials {
+    @apply flex gap-2;
+}
+
+.footer-social-link {
+    @apply flex items-center justify-center;
+    @apply w-10 h-10 rounded-lg;
+    @apply text-sm text-background/50;
+    @apply border border-background/10;
+    @apply transition-colors duration-150;
+    @apply hover:text-background/80 hover:border-background/25 hover:bg-background/20;
+}
+
+/* 
+|-------------------------------
+| Columns
+|-------------------------------
+*/
+.footer-col-title {
+    @apply mb-4;
+    @apply text-xs font-medium uppercase tracking-wider;
+    @apply text-background/80;
+}
+
+.footer-list {
+    @apply flex flex-col gap-2.5;
+}
+
+.footer-link {
+    @apply text-sm text-background/55;
+    @apply transition-colors duration-150;
+    @apply hover:text-background;
+}
+
+/* 
+|-------------------------------
+| Bottom Bar
+|-------------------------------
+*/
+.footer-bottom {
+    @apply flex flex-col items-center gap-3 py-5 border-t border-background/10;
+    @apply md:flex-row md:justify-between;
+}
+
+.footer-copy {
+    @apply text-[12px] text-background/40;
+}
+
+.footer-legal {
+    @apply flex items-center gap-6;
+}
+
+.footer-legal-link {
+    @apply text-[12px] text-background/40;
+    @apply transition-colors duration-150;
+    @apply hover:text-background/60;
+}

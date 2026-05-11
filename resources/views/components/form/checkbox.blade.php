@@ -3,48 +3,56 @@
     'error' => null,
 ])
 
-<label
-    {{ $attributes->whereStartsWith('id') }}
-    class="checkbox"
->
-    <input
-        {{ $attributes->whereStartsWith('id') }}
-        type="checkbox"
-        class="peer hidden"
-        {{ $attributes->whereStartsWith('id') }}
-        {{ $attributes->whereStartsWith('name') }}
-        {{ $attributes->whereStartsWith('value') }}
-        {{ $attributes->whereStartsWith('wire') }}
-        {{ $attributes->whereStartsWith('x-') }}
-        {{ $attributes->whereStartsWith('data') }}
-        {{ $attributes->whereStartsWith('@click') }}
-        {{ $attributes->whereStartsWith('required') }}
-    />
+<label @class(['checkbox-field', $attributes->get('class')])>
 
-    <div
-        {{ $attributes->whereStartsWith('id') }}
-        class="checkbox-icon"
-    >
-        <svg
-            fill="none"
-            viewBox="0 0 24 24"
-            class="checkbox-svg"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                d="M4 12.6111L8.92308 17.5L20 6.5"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            ></path>
-        </svg>
+    {{-- Wrapper --}}
+    <div class="checkbox-wrapper">
+
+        {{-- Input --}}
+        <input
+            type="checkbox"
+            class="peer hidden"
+            {{-- Core Attributes --}}
+            @if ($attributes->has('id')) id="{{ $attributes->get('id') }}" @endif
+            @if ($attributes->has('name')) name="{{ $attributes->get('name') }}" @endif
+            @if ($attributes->has('value')) value="{{ $attributes->get('value') }}" @endif
+
+            {{-- State --}}
+            {{ $attributes->whereStartsWith('checked') }}
+            {{ $attributes->whereStartsWith('required') }}
+            {{ $attributes->whereStartsWith('disabled') }}
+            
+            {{-- JS / Alpine / Livewire --}}
+            {{ $attributes->whereStartsWith('wire') }}
+            {{ $attributes->whereStartsWith('x-') }}
+            {{ $attributes->whereStartsWith('@') }}
+        />
+
+        {{-- Icon --}}
+        <div class="checkbox-icon">
+            <svg
+                class="checkbox-svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M4 12.6111L8.92308 17.5L20 6.5"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </div>
+
+        {{-- Label Text --}}
+        @if ($label)
+            <span class="checkbox-label">
+                {{ $label }}
+            </span>
+        @endif
+
     </div>
-
-    @if ($label)
-        <span>
-            {{ $label }}
-        </span>
-    @endif
 </label>
 
 {{-- Validation --}}

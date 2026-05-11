@@ -1,0 +1,111 @@
+/* 
+|-----------------------------
+| Contact Section
+|-----------------------------
+*/
+.contact-section {
+    @apply py-24;
+}
+
+.contact-container {
+    @apply container mx-auto;
+}
+
+/* 
+|-----------------------------
+| Contact Layout
+|-----------------------------
+*/
+.contact-layout {
+    @apply grid grid-cols-1 gap-5 items-start;
+    @apply lg:grid-cols-[1fr_1.6fr];
+}
+
+/* 
+|-----------------------------
+| Contact Info
+|-----------------------------
+*/
+.contact-info {
+    @apply flex flex-col gap-3;
+}
+
+.contact-item {
+    @apply flex items-center gap-3.5;
+    @apply px-5 py-4;
+    @apply bg-background/75 border border-foreground/8 rounded-2xl;
+}
+
+.contact-item-icon {
+    @apply w-10 h-10 shrink-0;
+    @apply flex items-center justify-center;
+    @apply rounded-sm bg-primary/10;
+}
+
+.contact-item-icon i {
+    @apply text-base text-primary;
+}
+
+.contact-item-text strong {
+    @apply block mb-0.5;
+    @apply text-xs font-medium text-foreground;
+}
+
+.contact-item-text a {
+    @apply text-xs text-foreground/50;
+}
+
+/* 
+|-----------------------------
+| Contact Note
+|-----------------------------
+*/
+.contact-note {
+    @apply mt-1 px-5 py-4;
+    @apply rounded-2xl border border-primary/10 bg-primary/10;
+}
+
+.contact-note p {
+    @apply text-[13px] leading-relaxed text-foreground/50;
+}
+
+.contact-note strong {
+    @apply font-medium text-primary;
+}
+
+/* 
+|-----------------------------
+| Contact Card
+|-----------------------------
+*/
+.contact-card {
+    @apply p-8 rounded-2xl;
+    @apply bg-background border border-foreground/10;
+}
+
+/* 
+|-----------------------------
+| Form
+|-----------------------------
+*/
+.contact-form-row {
+    @apply grid grid-cols-1 gap-3.5 mb-3.5;
+    @apply sm:grid-cols-2;
+}
+
+.contact-form-field {
+    @apply flex flex-col gap-1.5 mb-3.5;
+}
+
+.contact-form-field:last-of-type {
+    @apply mb-0;
+}
+
+.contact-form-field label {
+    @apply text-xs font-bold uppercase tracking-wide;
+    @apply text-foreground/55;
+}
+
+.contact-form-field label span {
+    @apply ml-0.5 text-primary;
+}

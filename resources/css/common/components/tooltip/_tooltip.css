@@ -9,7 +9,7 @@
   @apply mt-1 leading-none;
 }
 .tooltip-btn:hover {
-  @apply text-light;
+  @apply text-foreground;
 }
 
 .tooltip-body {

@@ -1,5 +1,5 @@
 .progress-info {
-  @apply text-dark/50 mb-2 flex justify-between gap-4 text-xs;
+  @apply text-foreground/50 mb-2 flex justify-between gap-4 text-xs;
 }
 .progress-base {
   @apply h-1 w-full rounded-full bg-[#EFEFEF];

@@ -4,7 +4,7 @@
 .swal2-popup.swal2-toast {
     @apply relative !px-5 !py-4 !shadow-xl;
     @apply border border-current/10 bg-current/5 backdrop-blur-2xl;
-    @apply text-dark dark:text-white;
+    @apply text-foreground;
 }
 
 /* -------------------------------  
@@ -39,6 +39,6 @@
 }
 
 .swal2-popup.swal2-toast .swal2-html-container a {
-    @apply font-semibold text-dark;
+    @apply font-semibold text-foreground;
     @apply hover:text-black;
 }

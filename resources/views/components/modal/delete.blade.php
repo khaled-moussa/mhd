@@ -1,67 +1,65 @@
-@props(['id', 'title', 'header', 'description' => null])
+@props(['modalId', 'title', 'description' => null])
 
 <div
-	class="modal"
-	id="{{ $id }}"
-	aria-hidden="true"
-	{{ $attributes->whereStartsWith('wire:ignore') }}
+    class="modal"
+    id="{{ $modalId }}"
+    aria-hidden="true"
 >
-	<div
-		class="modal-overlay"
-		tabindex="-1"
-		data-micromodal-close
-	>
-		<div
-			class="modal-container sm"
-			role="dialog"
-			aria-modal="true"
-			aria-labelledby="{{ $id }}-title"
-		>
-			<header class="modal-header">
-				{{-- Model title --}}
-				<h2
-					class="modal-title"
-					id="{{ $id }}-title"
-				>
-					{{ $title }}
-				</h2>
+    <div
+        class="modal-overlay"
+        tabindex="-1"
+        data-micromodal-close
+    >
+        <div
+            class="modal-container lg"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="{{ $modalId }}-title"
+        >
 
-				<x-button.outline
-					class="modal-close"
-					data-custom-close="{{ $id }}"
-				/>
-			</header>
+            <header class="modal-header">
+                {{-- Modal title --}}
+                <h2
+                    class="modal-title"
+                    id="{{ $modalId }}-title"
+                >
+                    {{ $title }}
+                </h2>
 
-			{{-- Modal content --}}
-			<main
-				class="modal-content"
-				id="{{ $id }}-content"
-			>
-				{{-- Modal header --}}
-				<header class="modal-header">
-					{{ $header }}
-				</header>
+                <x-button.outlined
+                    class="modal-close-btn"
+                    :data-custom-close="$modalId"
+                />
+            </header>
 
-				@if ($description)
-					<p class="modal-description">
-						{{ $description }}
-					</p>
-				@endif
+            {{-- Modal description --}}
+            @if ($description)
+                <p class="modal-description">
+                    {{ $description }}
+                </p>
+            @endif
 
-				<div class="modal-actions">
-					<x-button.outline
-						label="Cancel"
-						data-custom-close="{{ $id }}"
-					/>
+            <div class="modal-divider"></div>
 
-					<x-button.main
-						class="danger"
-						label="Delete"
-						data-confirm
-						:attributes="$attributes->only(['wire:loading.class', 'wire:target'])"
-					/>
-				</div>
-			</main>
-		</div>
-	</div>
+            {{-- Modal content --}}
+            <main
+                class="modal-content"
+                id="{{ $modalId }}-content"
+            >
+                <div class="modal-actions">
+                    <x-button.outlined
+                        label="Cancel"
+                        data-custom-close="{{ $modalId }}"
+                    />
+
+                    <x-button.primary
+                        class="danger"
+                        label="Delete"
+                        data-confirm
+                        :attributes="$attributes->only(['wire:loading.class', 'wire:target'])"
+                    />
+                </div>
+            </main>
+        </div>
+    </div>
 </div>

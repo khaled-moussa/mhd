@@ -1,17 +1,17 @@
-{{-- Use main layout --}}
+{{-- Main Layout --}}
 @extends('layouts.app')
 
-{{-- Page title --}}
+{{-- Page Title --}}
 @section('title', 'Dashboard | Settings')
 
-{{-- Page assets --}}
+{{-- Page Assets --}}
 @push('head')
     {{ Vite::style('shared/settings/_settings.css') }}
     {{ Vite::script('shared/settings/_settings.js') }}
 @endpush
 
 {{-- Content --}}
-@section('component')
+@section('content')
     {{-- Page header --}}
     <x-header.page title="Settings" />
 

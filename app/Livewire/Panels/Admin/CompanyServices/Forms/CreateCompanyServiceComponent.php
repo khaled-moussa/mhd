@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Livewire\Panels\Admin\CompanyServices\Forms;
+
+use App\Domain\CompanyServices\Actions\CreateCompanyServiceAction;
+use App\Domain\CompanyServices\DTOs\CreateCompanyServiceDto;
+use App\Livewire\Support\Traits\WithLivewireExceptionHandling;
+use App\Support\Enums\EventsEnum;
+use Livewire\Component;
+
+class CreateCompanyServiceComponent extends Component
+{
+    use WithLivewireExceptionHandling;
+
+    /*
+    |-----------------------------
+    | Properties
+    |-----------------------------
+    */
+    public CompanyServiceFormComponent $form;
+
+    /*
+    |-----------------------------
+    | Lifecycle
+    |-----------------------------
+    */
+    public function render()
+    {
+        return view('admin_livewire::company-services.forms.create-company-service-component');
+    }
+
+    /*
+    |-----------------------------
+    | Actions
+    |-----------------------------
+    */
+    public function submit(): void
+    {
+        $this->form->validate();
+
+        $createDto = new CreateCompanyServiceDto(
+            icon: $this->form->icon,
+            title: $this->form->title,
+            description: $this->form->description,
+            visible: $this->form->visible
+        );
+
+        app(CreateCompanyServiceAction::class)->execute($createDto);
+
+        $this->resetForm();
+        $this->dispatchCompanyServiceCreatedEvent();
+    }
+    /*
+    |-----------------------------
+    | Helpers
+    |-----------------------------
+    */
+    private function resetForm()
+    {
+        $this->form->resetForm();
+    }
+
+    /*
+    |-----------------------------
+    | Events
+    |-----------------------------
+    */
+    private function dispatchCompanyServiceCreatedEvent(): void
+    {
+        $this->dispatch(EventsEnum::COMPANY_SERVICE_CREATED_EVENT);
+    }
+}

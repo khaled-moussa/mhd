@@ -1,47 +1,52 @@
-/* -------------------------------------------------
-   Pagination Container
--------------------------------------------------- */
+/* 
+|-----------------------------
+| Pagination Container
+|-----------------------------
+*/
 .table-pagination {
-    @apply flex items-center justify-center relative p-2.5 gap-3;
+    @apply relative flex items-center justify-center gap-3 p-2.5;
     @apply max-sm:flex-col;
 }
 
 .table-pagination .pagination-elements {
-    @apply flex items-center justify-center gap-2 p-2 rounded-b-xl;
+    @apply flex items-center justify-center gap-2 rounded-b-xl p-2;
 }
 
 .table-pagination a {
-    @apply w-full h-full flex items-center justify-center;
+    @apply flex h-full w-full items-center justify-center;
 }
 
 .table-pagination .pagination-info {
-    @apply text-sm text-current/80;
+    @apply text-sm;
     @apply lg:absolute lg:left-10;
     @apply max-sm:order-2 max-sm:text-xs;
 }
 
-/* -------------------------------------------------
-   Pagination Buttons
--------------------------------------------------- */
+/* 
+|-----------------------------
+| Pagination Buttons
+|-----------------------------
+*/
 .table-pagination button {
-    @apply inline-flex w-8 h-5 p-0 rounded-lg;
+    @apply inline-flex h-5 w-8 p-0 rounded-lg;
 }
 
 .table-pagination .total-pages {
-    @apply flex items-center gap-3 flex-wrap;
+    @apply flex flex-wrap items-center gap-3;
 }
 
-/* Default button style (not active or disabled) */
+/* Default button */
 .table-pagination button:not(.active):not(:disabled) {
-    @apply bg-current/10 hover:bg-current/20 text-current;
+    @apply bg-foreground/5 text-foreground;
+    @apply hover:bg-foreground/20;
 }
 
-/* Active button (current page) */
+/* Active button */
 .table-pagination button.active {
-    @apply bg-current/5 text-white;
+    @apply bg-primary-300 text-background;
 }
 
-/* Disabled buttons */
+/* Disabled button */
 .table-pagination button:disabled {
-    @apply bg-current/7 cursor-not-allowed;
+    @apply cursor-not-allowed bg-foreground/7;
 }

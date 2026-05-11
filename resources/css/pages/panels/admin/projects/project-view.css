@@ -1,107 +1,136 @@
-/* -------------------------------
-   Project Modal
-------------------------------- */
-.projects__modal .modal-container {
-    @apply p-5;
+/* 
+|-----------------------------
+| Project Modal Container
+|-----------------------------
+*/
+.projects-modal .modal-container {
+    @apply p-0 overflow-hidden;
 }
 
-.projects__modal .modal-container.xl {
-    @apply w-full max-w-full xl:w-[60vw];
+.projects-modal .modal-container.xl {
+    @apply flex flex-col;
+    @apply w-full max-w-full xl:w-[860px];
+    @apply max-h-[90vh];
 }
 
-.projects__modal-body {
-    @apply flex flex-col gap-6 px-6 md:flex-row;
+/* 
+|-----------------------------
+| Modal Body
+|-----------------------------
+*/
+.projects-modal-body {
+    @apply min-h-[500px] grid grid-cols-1 flex-1 overflow-hidden;
+    @apply md:grid-cols-[1.1fr_1fr];
 }
 
-.projects__modal-carousel {
-    @apply w-full md:w-1/2 lg:max-h-[550px];
+/* 
+|-----------------------------
+| Gallery
+|-----------------------------
+*/
+.projects-modal-gallery {
+    @apply relative overflow-hidden bg-foreground;
+    @apply md:min-h-0;
 }
 
-.projects__modal-image {
-    @apply w-full h-fit aspect-[4/3];
+.projects-modal-gallery .splide,
+.projects-modal-gallery .splide__track,
+.projects-modal-gallery .splide__list,
+.projects-modal-gallery .splide__slide {
+    @apply h-full;
 }
 
-.projects__modal-image img {
-    @apply absolute w-full h-full object-cover;
+/* 
+|-----------------------------
+| Modal Image
+|-----------------------------
+*/
+.projects-modal-image {
+    @apply w-full h-full;
 }
 
-.projects__modal-info {
-    @apply flex-1 !space-y-5;
+.projects-modal-image img {
+    @apply block w-full h-full object-cover;
 }
 
-.projects__modal-info-title {
-    @apply text-2xl font-semibold;
+/* 
+|-----------------------------
+| Info Panel
+|-----------------------------
+*/
+.projects-modal-panel {
+    @apply flex flex-col overflow-y-auto;
 }
 
-.projects__modal-info-desc {
-    @apply text-current/70 text-sm;
+/* 
+|-----------------------------
+| Details
+|-----------------------------
+*/
+.projects-modal-details {
+    @apply flex-1 flex flex-col gap-3;
+    @apply px-6 py-5;
 }
 
-.projects__modal-footer {
-    @apply py-2 px-6 flex flex-col gap-3;
+.projects-modal-grid {
+    @apply grid grid-cols-2 gap-3;
 }
 
-.projects__modal-card {
-    @apply w-full h-fit mt-5 p-5 rounded-xl border border-current/10;
+.projects-modal-item {
+    @apply px-3 py-2.5 rounded-[10px];
+    @apply border border-foreground/10 bg-foreground/10;
 }
 
-.projects__modal-card > header {
-    @apply text-2xl font-semibold mb-5;
+.projects-modal-item.full {
+    @apply col-span-2;
 }
 
-.projects__modal-row {
-    @apply flex flex-col !p-0 sm:flex-row;
+.projects-modal-label {
+    @apply mb-1;
+    @apply text-[10px] font-medium uppercase tracking-wide;
+    @apply text-foreground/40;
 }
 
-.projects__modal-details .label-info {
-    @apply flex-1;
+.projects-modal-value {
+    @apply text-sm font-medium text-foreground;
 }
 
-.projects__modal-location {
-    @apply flex flex-col gap-3;
+/* 
+|-----------------------------
+| Location
+|-----------------------------
+*/
+.project-location {
+    @apply flex flex-col gap-2.5 mt-1;
 }
 
-.projects__modal-location-header {
-    @apply flex items-center gap-2 py-3 text-xl;
+.project-location-header {
+    @apply flex items-center gap-1.5;
 }
 
-.projects__modal-location-title {
-    @apply font-semibold;
+.project-location-title {
+    @apply text-xs font-medium uppercase tracking-[0.02em];
+    @apply text-foreground;
 }
 
-.projects__modal-location iframe {
-    @apply rounded-2xl;
+.project-location iframe {
+    @apply w-full h-40 rounded-xl border border-foreground/10;
 }
 
-.projects__modal-actions {
-    @apply flex justify-end gap-3 mt-5 border-t border-current/10 pt-4;
+.project-location-empty {
+    @apply h-40;
+    @apply hidden items-center justify-center gap-2;
+    @apply rounded-xl border border-foreground/10;
+    @apply bg-foreground/10;
+    @apply text-sm text-foreground/40;
 }
 
-/* Location */
-.project-view__location {
-    @apply flex flex-col gap-3;
-}
-
-.project-view__location-header {
-    @apply flex items-center gap-2 py-3 text-xl;
-}
-
-.project-view__location-title {
-    @apply font-semibold;
-}
-
-.project-view__location iframe {
-    @apply rounded-2xl;
-}
-
-.project-view__no-location {
-    @apply flex items-center justify-center gap-2;
-    @apply h-[300px] rounded-xl border border-current/10;
-    @apply text-sm text-current/60 bg-current/5;
-}
-
-/* Actions */
-.project-view__actions {
-    @apply flex justify-end gap-3 mt-5 pt-4;
-    @apply border-t border-current/10;
+/* 
+|-----------------------------
+| Actions
+|-----------------------------
+*/
+.projects-modal-actions {
+    @apply flex justify-start gap-2 py-2;
+    @apply border-t border-foreground/10;
 }

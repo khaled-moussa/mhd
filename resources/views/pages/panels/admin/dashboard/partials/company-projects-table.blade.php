@@ -3,7 +3,7 @@
       class="projects"
   >
       {{-- Projects table livewire component --}}
-      <livewire:panels.admin.company-projects.pages.company-projects-component />
+      @livewire('panels.admin.company-projects.pages.company-projects-component')
 
       {{-- View project modal --}}
       @include('admin::company-projects.partials.company-project-view-modal', [
