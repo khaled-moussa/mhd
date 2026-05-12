@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install NPM
+      - name: Install NPM & Build Assets
         run: |
           npm ci
           npm run build
@@ -49,8 +49,7 @@ jobs:
             git pull origin master
 
             echo "Installing PHP dependencies..."
-            composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
-            $(which composer) install --no-dev --optimize-autoloader --no-interaction --no-scripts
+            composer install --no-dev --optimize-autoloader --no-interaction
 
             echo "Running package discovery..."
             php artisan package:discover --ansi
@@ -64,4 +63,4 @@ jobs:
             php artisan route:clear
             php artisan view:clear
 
-            echo "Deployment completed."
+            echo "Deployment completed successfully."
