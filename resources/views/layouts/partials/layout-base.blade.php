@@ -16,14 +16,14 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}">
 
     {{-- Fonts --}}
-    <link rel="stylesheet" wire:click="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
 
     {{-- Extra --}}
     @stack('head')
 </head>
 
 {{-- BODY --}}
-<body class="loader">
+<body class="@stack('body-class')">
     @yield('body')
 
     @stack('script')
