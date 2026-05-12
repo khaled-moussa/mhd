@@ -23,6 +23,9 @@
     </div>
 @endsection
 
+{{-- Body class --}}
+@push('body-class', 'loader')
+
 {{-- Script --}}
 @push('script')
     @livewireScripts
