@@ -40,6 +40,9 @@ jobs:
           script: |
             cd /home/u2637-4ikru4wnhy56/www/mhd-egy.com/public_html
 
+            echo "Using PHP version:"
+            php -v
+
             echo "Pulling latest code..."
             git reset --hard
             git clean -fd
@@ -47,6 +50,7 @@ jobs:
 
             echo "Installing PHP dependencies..."
             composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+            $(which composer) install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
             echo "Running package discovery..."
             php artisan package:discover --ansi
