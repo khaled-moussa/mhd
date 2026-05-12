@@ -19,6 +19,9 @@
     @include('layouts.partials.footer.guest')
 @endsection
 
+{{-- Body class --}}
+@push('body-class', 'loader')
+
 {{-- Script --}}
 @push('script')
     <script>
