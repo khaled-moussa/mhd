@@ -14,7 +14,6 @@ class AuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        info(1);
         // Redirect guests to login
         if (! Auth::check()) {
             return redirect()->route('auth.login');
