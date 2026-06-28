@@ -233,10 +233,12 @@
 {{-- Row --}}
 <div class="project-form-row">
     <x-form.input
-        type="date"
+        type="number"
         label="Delivered At"
         wire:model="form.deliveredAt"
         error="form.deliveredAt"
+        min="1900"
+        placeholder="YYYY"
     />
 
     <x-form.input

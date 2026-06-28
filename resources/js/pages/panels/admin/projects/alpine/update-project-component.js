@@ -356,23 +356,19 @@ document.addEventListener("alpine:init", () => {
         */
 
         submit() {
-            const hasImages =
-                this.existingImages.length > 0 ||
-                this.images.some((i) => i.status === "completed");
+            const hasImages = this.existingImages.length > 0 || this.images.some((i) => i.status === "completed");
 
-            const hasFile =
-                this.existingFile ||
-                (this.file && this.file.status === "completed");
+            // const hasFile = this.existingFile || (this.file && this.file.status === "completed");
 
             if (!hasImages) {
                 MessageToast("warning", "Images are required.");
                 return;
             }
 
-            if (!hasFile) {
-                MessageToast("warning", "Brochure is required.");
-                return;
-            }
+            // if (!hasFile) {
+            //     MessageToast("warning", "Brochure is required.");
+            //     return;
+            // }
 
             this.$wire.call(
                 "handleSubmit",

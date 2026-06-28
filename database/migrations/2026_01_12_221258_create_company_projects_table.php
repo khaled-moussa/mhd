@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->longText('description');
 
-            $table->date('delivered_at')
+            $table->year('delivered_at')
                 ->nullable();
 
             $table->decimal('price_start', 12, 2)

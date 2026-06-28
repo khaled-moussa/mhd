@@ -50,21 +50,21 @@
     {{-- Stats --}}
     <div class="hero-bar">
         <div class="hero-bar-item">
-            <div id="projects-number" class="hero-bar-value">200</div>
+            <div id="projects-number" class="hero-bar-value"></div>
             <span class="hero-bar-label">Projects completed</span>
         </div>
 
         <div class="hero-bar-sep"></div>
 
         <div class="hero-bar-item">
-            <div id="customers-number" class="hero-bar-value">200</div>
+            <div id="customers-number" class="hero-bar-value"></div>
             <span class="hero-bar-label">Satisfied customers</span>
         </div>
 
         <div class="hero-bar-sep"></div>
 
         <div class="hero-bar-item">
-            <div id="years-of-experience-number" class="hero-bar-value">200</div>
+            <div id="years-of-experience-number" class="hero-bar-value"></div>
             <span class="hero-bar-label">Years of experience</span>
         </div>
 

@@ -32,7 +32,7 @@ class CompanyProject extends Model implements HasMedia
     protected $casts = [
         'images'           => 'array',
         'visibility_state' => VisibilityStates::class,
-        'delivered_at' => 'date',
+        'delivered_at' => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -151,9 +151,9 @@ class CompanyProject extends Model implements HasMedia
         return $this->visibility_state;
     }
 
-    public function getDeliveredAt(): ?string
+    public function getDeliveredAt(): ?int
     {
-        return $this->delivered_at?->format('Y-m-d');
+        return $this->delivered_at;
     }
 
     public function getCreatedAt(): ?string

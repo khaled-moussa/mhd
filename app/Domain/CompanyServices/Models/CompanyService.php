@@ -57,6 +57,13 @@ class CompanyService extends Model
         return $this->icon;
     }
 
+    public function getIconClass(): ?string
+    {
+        if (! $this->icon) return null;
+
+        return "<i class=\"{$this->icon}\"></i>";
+    }
+
     public function getTitle(): string
     {
         return $this->title;
