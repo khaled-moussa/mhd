@@ -46,10 +46,10 @@
                         <strong>Email</strong>
 
                         <a
-                            href="mailto:hello@mhd.dev"
+                            href="mailto:info@mhd-egy.com"
                             class="contact-item-link"
                         >
-                            hello@mhd.dev
+                            info@mhd-egy.com
                         </a>
                     </div>
                 </div>

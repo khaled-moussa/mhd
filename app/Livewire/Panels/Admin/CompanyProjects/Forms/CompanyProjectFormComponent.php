@@ -18,7 +18,7 @@ class CompanyProjectFormComponent extends Form
 
     public string $title = '';
     public string $description = '';
-    public ?string $deliveredAt = null;
+    public ?int $deliveredAt = null;
     public $priceStart = 0;
     public string $address = '';
     public ?string $location = null;
@@ -52,14 +52,14 @@ class CompanyProjectFormComponent extends Form
 
             'deliveredAt' => [
                 'nullable',
-                'date',
+                'integer',
             ],
 
             'priceStart' => [
                 'required',
                 'numeric',
                 'min:1',
-                'max:10'
+                'max:999999999999',
             ],
 
             'address' => [
@@ -111,7 +111,7 @@ class CompanyProjectFormComponent extends Form
         $this->location           = $companyProject->getLocation();
         $this->existingImages     = $companyProject->getImages();
         $this->removedImages      = [];
-        $this->existingFile       = $companyProject->getBrochure();
+        $this->existingFile       = $companyProject?->getBrochure();
         $this->visible            = $companyProject->getVisibility()->value();
     }
 

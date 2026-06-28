@@ -22,7 +22,7 @@ class CompanyProjectsResource extends JsonResource
             'image_cover'        => $this->getImageCover(),
             'images'             => $this->getImages(),
 
-            'brochure'           => $this->getBrochure(),
+            'brochure'           => $this?->getBrochure(),
 
             'price_start'        => $this->getPriceStart(),
             'address'            => $this->getAddress(),

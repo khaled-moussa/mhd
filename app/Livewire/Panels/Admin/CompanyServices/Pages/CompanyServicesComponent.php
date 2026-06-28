@@ -129,16 +129,11 @@ class CompanyServicesComponent extends Component
     */
     private function dispatchCompanyServiceLoadedEvent(array $data): void
     {
-        $this->dispatch(
-            EventsEnum::COMPANY_SERVICE_LOADED_EVENT,
-            data: $data
-        );
+        $this->dispatch(EventsEnum::COMPANY_SERVICE_LOADED_EVENT, data: $data);
     }
 
     private function dispatchCompanyServiceDeletedEvent(): void
     {
-        $this->dispatch(
-            EventsEnum::COMPANY_SERVICE_DELETED_EVENT
-        );
+        $this->dispatch(EventsEnum::COMPANY_SERVICE_DELETED_EVENT);
     }
 }

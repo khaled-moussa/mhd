@@ -67,7 +67,7 @@ class CompanyServiceFormComponent extends Form
         $this->resetForm();
 
         $this->companyServiceUuid  = $companyService->getUuid();
-        $this->icon = $companyService->getIcon();
+        $this->icon = $companyService->getIconClass();
         $this->title = $companyService->getTitle();
         $this->description  = $companyService->getDescription();
         $this->visible = $companyService->getVisibility()->value();

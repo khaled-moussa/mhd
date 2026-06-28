@@ -27,6 +27,13 @@ window.openProject = function (projectData) {
     updateModalContent(projectData);
     initImages(projectData.images ?? []);
 
+    // Hide/show download button based on brochure
+    const downloadBtn = document.getElementById("brochure-btn");
+
+    if (downloadBtn) {
+        downloadBtn.style.display = projectData.brochure?.url ? "flex" : "none";
+    }
+
     showModal({
         modalId: MODALS.VIEW_COMPANY_PROJECT_MODAL,
     });

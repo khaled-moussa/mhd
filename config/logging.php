@@ -9,163 +9,207 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Log Channel
+    | Default Channel
     |--------------------------------------------------------------------------
-    |
-    | This option defines the default log channel that is utilized to write
-    | messages to your logs. The value provided here should match one of
-    | the channels present in the list of "channels" configured below.
-    |
     */
 
     'default' => env('LOG_CHANNEL', 'stack'),
 
     /*
     |--------------------------------------------------------------------------
-    | Deprecations Log Channel
+    | Deprecations
     |--------------------------------------------------------------------------
-    |
-    | This option controls the log channel that should be used to log warnings
-    | regarding deprecated PHP and library features. This allows you to get
-    | your application ready for upcoming major versions of dependencies.
-    |
     */
 
     'deprecations' => [
         'channel' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
-        'trace' => env('LOG_DEPRECATIONS_TRACE', false),
+        'trace'   => env('LOG_DEPRECATIONS_TRACE', false),
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Log Channels
+    | Channels
     |--------------------------------------------------------------------------
-    |
-    | Here you may configure the log channels for your application. Laravel
-    | utilizes the Monolog PHP logging library, which includes a variety
-    | of powerful log handlers and formatters that you're free to use.
-    |
-    | Available drivers: "single", "daily", "slack", "syslog",
-    |                    "errorlog", "monolog", "custom", "stack"
-    |
     */
 
     'channels' => [
 
+        /*
+        |--------------------------------------------------------------------------
+        | Stack
+        |--------------------------------------------------------------------------
+        */
+
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', (string) env('LOG_STACK', 'single')),
+            'channels' => explode(
+                ',',
+                env('LOG_STACK', 'app,bugs,critical')
+            ),
             'ignore_exceptions' => false,
         ],
 
-        'single' => [
-            'driver' => 'monolog',
-            'handler' => Monolog\Handler\FilterHandler::class,
+        /*
+        |--------------------------------------------------------------------------
+        | Application Logs
+        |--------------------------------------------------------------------------
+        */
 
-            'handler_with' => [
-                'handler' => new Monolog\Handler\StreamHandler(
-                    storage_path('logs/laravel.log')
-                ),
-
-                'minLevelOrList' => [
-                    Monolog\Level::Debug,
-                    Monolog\Level::Info,
-                    Monolog\Level::Notice,
-                ],
-
-                'maxLevel' => Monolog\Level::Notice,
+        'app' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/app/app.log'),
+            'level' => 'debug',
+            'days' => env('LOG_DAILY_DAYS', 30),
+            'tap' => [
+                App\Support\Logging\CustomizeFormatter::class,
             ],
-
+            'processors' => [
+                App\Support\Logging\ContextProcessor::class,
+            ],
             'replace_placeholders' => true,
         ],
 
-        'daily' => [
-            'driver' => 'monolog',
+        /*
+        |--------------------------------------------------------------------------
+        | Bugs Logs
+        |--------------------------------------------------------------------------
+        */
 
-            'handler' => Monolog\Handler\FilterHandler::class,
-
-            'handler_with' => [
-                'handler' => new Monolog\Handler\RotatingFileHandler(
-                    storage_path('logs/issues.log'),
-                    30
-                ),
-
-                'minLevelOrList' => [
-                    Monolog\Level::Warning,
-                    Monolog\Level::Error,
-                ],
-
-                'maxLevel' => Monolog\Level::Error,
-            ],
+        'bugs' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/bugs/bugs.log'),
+            'level' => 'warning',
+            'days' => env('LOG_DAILY_DAYS', 30),
 
             'tap' => [
-                \App\Support\Logging\ContextFormatter::class,
+                App\Support\Logging\CustomizeFormatter::class,
             ],
 
             'processors' => [
-                \App\Support\Logging\ContextProcessor::class,
+                App\Support\Logging\ContextProcessor::class,
             ],
 
             'replace_placeholders' => true,
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Critical Logs
+        |--------------------------------------------------------------------------
+        */
+
+        'critical' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/critical/critical.log'),
+            'level' => 'critical',
+            'days' => 90,
+
+            'tap' => [
+                App\Support\Logging\CustomizeFormatter::class,
+            ],
+
+            'processors' => [
+                App\Support\Logging\ContextProcessor::class,
+            ],
+
+            'replace_placeholders' => true,
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Slack
+        |--------------------------------------------------------------------------
+        */
 
         'slack' => [
-            'driver'  => 'monolog',
-            'handler' => \Monolog\Handler\SlackWebhookHandler::class,
+            'driver' => 'slack',
+            'url' => env('LOG_SLACK_WEBHOOK_URL'),
 
-            'handler_with' => [
-                'webhookUrl'   => env('LOG_SLACK_WEBHOOK_URL'),
-                'channel'      => env('LOG_SLACK_CHANNEL'),
-                'username'     => env('LOG_SLACK_USERNAME', 'Laravel Log'),
-                'useAttachment' => false,
-                'iconEmoji'    => ':boom:',
+            'username' => env(
+                'LOG_SLACK_USERNAME',
+                'Application Monitor'
+            ),
 
-                'minLevelOrList' => [
-                    Monolog\Level::Warning,
-                    Monolog\Level::Error,
-                ],
+            'emoji' => env(
+                'LOG_SLACK_EMOJI',
+                ':boom:'
+            ),
 
-                'maxLevel' => Monolog\Level::Error,
-            ],
-
-            'tap' => [
-                \App\Support\Logging\ContextFormatter::class,
-            ],
-
-            'processors' => [
-                \App\Support\Logging\ContextProcessor::class,
-            ],
+            'level' => 'critical',
+            'replace_placeholders' => true,
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Papertrail
+        |--------------------------------------------------------------------------
+        */
 
         'papertrail' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
-            'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class),
+            'handler' => SyslogUdpHandler::class,
+
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
+                'connectionString' => sprintf(
+                    'tls://%s:%s',
+                    env('PAPERTRAIL_URL'),
+                    env('PAPERTRAIL_PORT')
+                ),
             ],
-            'processors' => [PsrLogMessageProcessor::class],
+
+            'processors' => [
+                PsrLogMessageProcessor::class,
+            ],
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Stderr
+        |--------------------------------------------------------------------------
+        */
 
         'stderr' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
             'handler' => StreamHandler::class,
+
             'handler_with' => [
                 'stream' => 'php://stderr',
             ],
+
             'formatter' => env('LOG_STDERR_FORMATTER'),
-            'processors' => [PsrLogMessageProcessor::class],
+
+            'processors' => [
+                PsrLogMessageProcessor::class,
+            ],
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Syslog
+        |--------------------------------------------------------------------------
+        */
 
         'syslog' => [
             'driver' => 'syslog',
             'level' => env('LOG_LEVEL', 'debug'),
-            'facility' => env('LOG_SYSLOG_FACILITY', LOG_USER),
+
+            'facility' => env(
+                'LOG_SYSLOG_FACILITY',
+                LOG_USER
+            ),
+            
             'replace_placeholders' => true,
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Error Log
+        |--------------------------------------------------------------------------
+        */
 
         'errorlog' => [
             'driver' => 'errorlog',
@@ -173,10 +217,22 @@ return [
             'replace_placeholders' => true,
         ],
 
+        /*
+        |--------------------------------------------------------------------------
+        | Null
+        |--------------------------------------------------------------------------
+        */
+
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Emergency
+        |--------------------------------------------------------------------------
+        */
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),

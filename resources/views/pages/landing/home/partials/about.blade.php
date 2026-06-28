@@ -28,7 +28,7 @@
             <div class="about-stats">
 
                 <div class="about-card">
-                    <h3 class="about-number">500</h3>
+                    <h3 class="about-number">87</h3>
 
                     <div class="about-divider"></div>
 
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="about-card">
-                    <h3 class="about-number">870</h3>
+                    <h3 class="about-number">10K</h3>
 
                     <div class="about-divider"></div>
 
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="about-card">
-                    <h3 class="about-number">10</h3>
+                    <h3 class="about-number">40</h3>
 
                     <div class="about-divider"></div>
 

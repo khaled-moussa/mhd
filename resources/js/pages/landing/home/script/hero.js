@@ -5,15 +5,15 @@ export default function initCountUp() {
     const ids = [
         {
             id: "projects-number",
-            count: 500,
+            count: 87,
         },
         {
             id: "customers-number",
-            count: 870,
+            count: 10,
         },
         {
             id: "years-of-experience-number",
-            count: 10,
+            count: 40,
         },
     ];
 

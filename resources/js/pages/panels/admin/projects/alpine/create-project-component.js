@@ -76,8 +76,6 @@ document.addEventListener("alpine:init", () => {
         },
 
         validateImages(images) {
-            console.log(images, "CREATE");
-
             const result = validateFileInput(images, {
                 allowedExtensions: ["jpg", "jpeg", "png", "webp", "gif"],
                 maxSizeInMB: 5,
@@ -305,19 +303,17 @@ document.addEventListener("alpine:init", () => {
         */
 
         submit() {
-            const completedImages = this.images.filter(
-                (img) => img.status === "completed",
-            );
+            const completedImages = this.images.filter((img) => img.status === "completed");
 
             if (completedImages.length === 0) {
                 MessageToast("warning", "Images are required.");
                 return;
             }
 
-            if (!this.file || this.file.status !== "completed") {
-                MessageToast("warning", "Brochure is required.");
-                return;
-            }
+            // if (!this.file || this.file.status !== "completed") {
+            //     MessageToast("warning", "Brochure is required.");
+            //     return;
+            // }
 
             this.$wire.call("handleSubmit");
         },

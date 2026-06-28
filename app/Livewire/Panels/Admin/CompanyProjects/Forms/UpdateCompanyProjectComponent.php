@@ -5,6 +5,7 @@ namespace App\Livewire\Panels\Admin\CompanyProjects\Forms;
 use App\Domain\CompanyProjects\Actions\GetCompanyProjectByUuidAction;
 use App\Domain\CompanyProjects\Actions\UpdateCompanyProjectAction;
 use App\Domain\CompanyProjects\DTOs\UpdateCompanyProjectDto;
+use App\Domain\CompanyProjects\Jobs\RemoveCompanyProjectBrochureJob;
 use App\Domain\CompanyProjects\Jobs\RemoveCompanyProjectImagesJob;
 use App\Domain\CompanyProjects\Jobs\StoreCompanyProjectFilesJob;
 use App\Domain\CompanyProjects\Models\CompanyProject;
@@ -76,6 +77,10 @@ class UpdateCompanyProjectComponent extends Component
         if (!empty($this->removedImageIds)) {
             $this->removeProjectImages();
         }
+
+        if (!empty($this->removedFileId)) {
+            $this->removedProjectBrochure();
+        }
     }
 
     public function submit(): void
@@ -84,7 +89,7 @@ class UpdateCompanyProjectComponent extends Component
 
         app(UpdateCompanyProjectAction::class)->execute(
             $this->companyProject,
-            
+
             new UpdateCompanyProjectDto(
                 uuid: $this->companyProjectUuid,
                 title: $this->form->title,
@@ -112,8 +117,8 @@ class UpdateCompanyProjectComponent extends Component
     private function uploadProjectFiles(): void
     {
         $tempImagesPaths = collect($this->form->images)
-            ->filter(fn ($image) => $image instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile)
-            ->map(fn ($image) => $image->getRealPath())
+            ->filter(fn($image) => $image instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile)
+            ->map(fn($image) => $image->getRealPath())
             ->values()
             ->all();
 
@@ -142,6 +147,14 @@ class UpdateCompanyProjectComponent extends Component
         dispatch(new RemoveCompanyProjectImagesJob(
             companyProject: $this->companyProject,
             removedImageIds: $this->removedImageIds
+        ));
+    }
+
+    private function removedProjectBrochure(): void
+    {
+        dispatch(new RemoveCompanyProjectBrochureJob(
+            companyProject: $this->companyProject,
+            removeFileId: $this->removedFileId
         ));
     }
 

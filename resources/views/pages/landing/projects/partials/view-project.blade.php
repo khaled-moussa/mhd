@@ -129,6 +129,7 @@
                         />
 
                         <x-button.primary
+                            id="brochure-btn"
                             class="primary-btn"
                             label="Download brochure"
                             onclick="downloadProjectBrochure(event)"
